@@ -6,3 +6,10 @@
 .registro-sesion {
     width: 20em;
 }
+
+.imagen-logo{
+    position: relative;
+    text-align: center;
+    top: 1em;
+    padding: 1em 1em;
+}
