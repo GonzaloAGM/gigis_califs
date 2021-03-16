@@ -13,3 +13,17 @@
     top: 1em;
     padding: 1em 1em;
 }
+
+.Pad_top{ 
+    padding-top:25px;
+}
+
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+    padding-left: 0;
+    }
+}
