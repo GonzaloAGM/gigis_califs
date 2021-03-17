@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var moveLeft = M.Carousel.getInstance(elems);
         moveLeft.prev(1);
     }
-
 // Para inicializar los seleccionadores
 document.addEventListener('DOMContentLoaded', function() {
 var elems = document.querySelectorAll('select');
