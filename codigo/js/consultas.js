@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var carouselElems = document.querySelector('.carousel.carousel-slider');
         var carouselInstance = M.Carousel.init(carouselElems, {
             fullWidth: true,
-            indicators: true
+            indicators: true,
+            numVisible:2
         });
     });
     function moveNextCarousel() {
@@ -20,3 +21,4 @@ document.addEventListener('DOMContentLoaded', function () {
         $('select').formSelect();
       });
 
+M.AutoInit();

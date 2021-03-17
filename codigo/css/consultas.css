@@ -34,3 +34,11 @@
 a.middle-indicator-text {
     color: black !important;
 }
+
+.wideBtn{
+    display: block;
+    width: 100%;
+    padding: 14px 28px;
+    cursor: pointer;
+    text-align: center;
+}
