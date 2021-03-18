@@ -33,3 +33,11 @@
 .nivel-programas {
     margin-left: 5em;
 }
+
+.participantes-programa {
+    text-transform: lowercase;
+}
+
+.btn-flat {
+    text-transform: none!important;
+}
