@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="./css/materialize.css">
     <link rel="stylesheet" href="./css/materialize.min.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/gestion.css">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
@@ -77,7 +78,7 @@
                     <div class="row">
                       <div class="input-field col s12">
                         <!-- Modal Trigger -->
-                         <a class="waves-effect waves-light btn-small modal-trigger light-green accent-4" href = "#modal"><i class="material-icons left">add_circle</i>Agregar</a>
+                         <a class="waves-effect waves-light btn-small modal-trigger light-green accent-4" href="#agregarUsuario"><i class="material-icons left">add_circle</i>Agregar</a>
                       </div>
                     </div>
                   </div>
@@ -89,7 +90,56 @@
                     </div>
                   </div>
                 </div>
-
+                <!-- Modal Structure -->
+                <div id="agregarUsuario" class="modal">
+                  <div class="modal-content">
+                    <form>
+                      <h3>Nuevo usuario</h3>
+                      <ul>
+                        <li><strong><br>Nombre</strong></li>
+                        <li>
+                          <div class="input">
+                            <input id="nombre" type="text" class="validate"  placeholder="Nombre(s)">
+                          </div>
+                        </li>
+                        <li><strong><br>Apellido paterno</strong></li>
+                        <li>
+                          <div class="input">
+                            <input id="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
+                          </div>
+                        </li>
+                        <li><strong><br>Apellido materno</strong></li>
+                        <li>
+                          <div class="input">
+                            <input id="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
+                          </div>
+                        </li>
+                        <li><strong><br>Correo</strong></li>
+                        <li>
+                          <div class="input">
+                            <input id="correo" type="email" class="validate"  placeholder="correo@mail.com">
+                          </div>
+                        </li>
+                        <li><strong><br>Roles</strong></li>
+                        <li>
+                          <div class="input-field">
+                            <select multiple>
+                              <option value="1">Terapeuta</option>
+                              <option value="2">Gestor</option>
+                              <option value="3">Administrador</option>
+                              <option value="4">Nuevo</option>
+                            </select>
+                            <label>Selecciona los roles que desees asignar.</label>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                    <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col s12 m12">
                           <table class="highlight">
@@ -163,6 +213,6 @@
     <script src="./js/materialize.js"></script>
     <script src="./js/materialize.min.js"></script>
     <script src="./js/main.js"></script>
-    <script src="./js/gestion.js"></script>
+    <script src="./js/gestion_usuario.js"></script>
 </body>
 </html>
