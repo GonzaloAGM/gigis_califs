@@ -85,7 +85,8 @@
                   <div class="col">
                     <div class="row">
                       <div class="input-field col s12">
-                         <a class="waves-effect waves-light btn-small light-green accent-4"><i class="material-icons left">personal_video</i>Modificar rol</a>
+                          <!-- Modal Trigger -->
+                         <a class="waves-effect waves-light btn-small  modal-trigger light-green accent-4" href="#modificarRol"><i class="material-icons left">personal_video</i>Modificar rol</a>
                       </div>
                     </div>
                   </div>
@@ -122,12 +123,13 @@
                         </li>
                         <li><strong><br>Roles</strong></li>
                         <li>
-                          <div class="input-field">
-                            <select multiple>
+                          <div class="input-field m4">
+                            <select name = "selRol" multiple>
                               <option value="1">Terapeuta</option>
-                              <option value="2">Gestor</option>
-                              <option value="3">Administrador</option>
-                              <option value="4">Nuevo</option>
+                              <option value="2">Participante</option>
+                              <option value="3">Gestor</option>
+                              <option value="4">Administrador</option>
+                              <option value="5">Nuevo</option>
                             </select>
                             <label>Selecciona los roles que desees asignar.</label>
                           </div>
@@ -137,7 +139,42 @@
                   </div>
                   <div class="modal-footer">
                     <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                    <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
+                    <a href="#"  class="modal-close waves-effect waves-green btn-flat validarRol">Agregar</a>
+                  </div>
+                </div>
+                <!-- Modal Structure -->
+                <div id="modificarRol" class="modal">
+                  <div class="modal-content">
+                    <form>
+                      <h3>Modificar rol</h3>
+                      <ul>
+                        <li><strong><br>Usuario</strong></li>
+                        <li>
+                          <div class="input-field" >
+                            <i class="material-icons prefix">search</i>
+                            <input type="text" id="autocomplete-input" class="autocomplete">
+                            <label for="autocomplete-input">Nombre del usuario</label>
+                          </div>
+                        </li>
+                        <li><strong><br>Roles</strong></li>
+                        <li>
+                          <div class="input-field m4">
+                            <select name = "camRol" multiple>
+                              <option value="1">Terapeuta</option>
+                              <option value="2">Participante</option>
+                              <option value="3">Gestor</option>
+                              <option value="4">Administrador</option>
+                              <option value="5">Nuevo</option>
+                            </select>
+                            <label>Selecciona los roles que desees asignar.</label>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                    <a href="#"  class="modal-close waves-effect waves-green btn-flat validarRol">Agregar</a>
                   </div>
                 </div>
                 <div class="row">
@@ -212,5 +249,8 @@
     <script src="./js/materialize.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/gestion_usuario.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
 </body>
 </html>
