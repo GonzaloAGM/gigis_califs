@@ -1,0 +1,17 @@
+.vl {
+    top: 2px;
+    border-left: 4px solid #e0e0e0;
+    height: 450px;
+  }
+
+.camposPerfil {
+    font-size:x-large;
+    padding-bottom: 4px;
+}
+
+#boton-aislado {
+    position: relative;
+    bottom: 20px; 
+    right: 10px;
+
+}
