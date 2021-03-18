@@ -48,17 +48,17 @@ function hacerConsulta(){
     console.log(document.getElementById('CalifOProg').checked);
     if(listaProg.length > 1){
         if(document.getElementById('CalifOProg').checked){
-            location.replace("./consultasResultados1.html");
+            location.replace("./consultasResultados3.html");
         }else{
-            location.replace("./consultasResultados2.html");
+            location.replace("./consultasResultados4.html");
         }
     }else if(listaProg.length === 0){
         window.alert("No seleccionó ningún programa")
     }else{
         if(document.getElementById('datosPart').checked){
-            location.replace("./consultasResultados3.html");
+            location.replace("./consultasResultados2.html");
         }else{
-            location.replace("./consultasResultados4.html");
+            location.replace("./consultasResultados1.html");
         }
     }
 }
