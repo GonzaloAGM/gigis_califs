@@ -2,8 +2,6 @@ function opcionesCalificacion() {
     //Obtener la referencia de campos
     let campos = document.getElementsByClassName("puntaje");
     console.log(campos)
-    let otors = document.getElementsByClassName("puntaje");
-    console.log(otors);
     let seleccion = document.createElement("select");
     let opciones = [1,2,3,4,5]
 
@@ -16,14 +14,11 @@ function opcionesCalificacion() {
     }
 
     for(let j = 0; j < campos.length; j++){
-        campos[3].appendChild(seleccion);
         campos[j].appendChild(seleccion)
     }
-   // otors.appendChild(seleccion);
 
 }
 
-opcionesCalificacion();
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
