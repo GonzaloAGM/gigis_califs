@@ -62,94 +62,191 @@
       </header>
     
     <main class="container">
-        <div class="row">
-            <div class="col s12 m12 l11 offset-l3 xl12 offset-xl2">
-              <div class="row">
-                  <div class="col m1">
-                      <h2></h2>
-                      <div class="vl"></div>
-                  </div>
-                  <div class="col s11 m3">
-                    <form>
-                      <ul>
-                        <li class = "camposPerfil"><strong><br>Título</strong></li>
-                        <li>
-                          <div class="input-field ">
-                            <input id="titulo" type="text" class="validate">
-                            <label for="titulo">Título</label>
-                          </div>
-                        </li>
-                        <li class = "camposPerfil"><strong><br>Correo</strong></li>
-                        <li>
-                          <div class="input-field ">
-                            <input id="correo" type="text" class="validate">
-                            <label for="correo">Correo</label>
-                          </div>
-                        </li>
-                        <li class = "camposPerfil"><strong><br>Estatus</strong></li>
-                        <li>
-                          <div class="input-field ">
-                            <input id="estatus" type="text" class="validate">
-                            <label for="estatus">Estatus</label>
-                          </div>
-                        </li>
-                      </ul>
-                    </form>
-                  </div>
-                  <div class="col s1 m1"></div>
-                  <div class="col s11 m3">
-                    <form>
-                      <ul>
-                        <li class = "camposPerfil"><strong><br>Currículum</strong></li>
-                        <li><a class="waves-effect waves-light btn-small white black-text"><i class="material-icons left">file_upload</i>Subir</a></li>
-                        <li class = "camposPerfil"><strong><br>Roles</strong></li>
-                        <li>
-                          <div class="input-field">
-                            <select multiple>
-                              <option value="1">Terapeuta</option>
-                              <option value="2">Gestor</option>
-                              <option value="3">Administrador</option>
-                            </select>
-                            <label>Selecciona los roles que desees asignar.</label>
-                          </div>
-                        </li>
-                      </ul>
-                    </form>
-                  </div>
-                  <div class="col m2 s12">
-                    <p></p>
+      <div class="row">
+        <div class="col s12 m12 l11 offset-l3 xl12 offset-xl2">
+          <div class="row">
+              <div class="col m1">
+                  <h2></h2>
+                  <div class="vl"></div>
+              </div>
+              <div class="col s11 m3">
+                <form>
+                  <ul>
+                    <li class = "camposPerfil"><strong><br>Título</strong></li>
+                    <li>
+                      <div class="input-field ">
+                        <input id="titulo" type="text" class="validate">
+                        <label for="titulo">Título</label>
+                      </div>
+                    </li>
+                    <li class = "camposPerfil"><strong><br>Correo</strong></li>
+                    <li>
+                      <div class="input-field ">
+                        <input id="correo" type="text" class="validate">
+                        <label for="correo">Correo</label>
+                      </div>
+                    </li>
+                    <li class = "camposPerfil"><strong><br>Estatus</strong></li>
+                    <li>
+                      <div class="input-field ">
+                        <input id="estatus" type="text" class="validate">
+                        <label for="estatus">Estatus</label>
+                      </div>
+                    </li>
+                    
+                  </ul>
+                </form>
+              </div>
+              <div class="col s1 m1"></div>
+              <div class="col s11 m2">
+                <form>
+                  <ul>
+                    <li class = "camposPerfil"><strong><br>Currículum</strong></li>
+                    <li><a class="waves-effect waves-light btn-small white black-text"><i class="material-icons left">file_upload</i>Subir</a></li>
+                    <li class = "camposPerfil"><strong><br>Roles</strong></li>
+                    <li>
+                      <div class="input-field">
+                        <select multiple>
+                          <option value="1">Terapeuta</option>
+                          <option value="2">Gestor</option>
+                          <option value="3">Administrador</option>
+                        </select>
+                        <label>Selecciona los roles que desees asignar.</label>
+                      </div>
+                    </li>
                     <!-- Modal Trigger -->
-                    <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" href = "#modalEliminarT"><i class="material-icons left">delete</i>Eliminar</a>
-                    <!-- Modal Structure -->
-                    <div id="modalEliminarT" class="modal">
-                      <div class="modal-content">
-                        <h4>Eliminar terapeuta</h4>
-                        <p>¿Está seguro de eliminar al terapeuta?</p>
-                      </div>
-                      <div class="modal-footer">
-                        <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Sí</a>
-                        <a href="./editar_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                      </div>
-                    </div>
+                    <a class="waves-effect waves-light modal-trigger btn-small white black-text" href = "#modalNuevoRol"><i class="material-icons left">delete</i>Nuevo rol</a>
+                  </ul>
+              </div>
+              <div class="col m2 s12">
+                <p></p>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" href = "#modalEliminarT"><i class="material-icons left">delete</i>Eliminar</a>
+                <!-- Modal Structure -->
+                <div id="modalEliminarT" class="modal">
+                  <div class="modal-content">
+                    <h4>Eliminar terapeuta</h4>
+                    <p>¿Está seguro de eliminar al terapeuta?</p>
                   </div>
-                  <div class="col m2">
-                    <p></p>
-                    <!-- Modal Trigger -->
-                    <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" href = "#modalGuardarT"><i class="material-icons left">save</i>Guardar</a>
-                    <!-- Modal Structure -->
-                    <div id="modalGuardarT" class="modal">
-                      <div class="modal-content">
-                        <h4>Cambios guardados</h4>
-                        <p>Los cambios se han realizado con éxito.</p>
-                      </div>
-                      <div class="modal-footer">
-                        <a href="./perfil_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
-                      </div>
-                    </div>
+                  <div class="modal-footer">
+                    <a href="./gestion_usuarios.html" class="modal-close waves-effect waves-green btn-flat">Sí</a>
+                    <a href="./editar_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
                   </div>
-                  
-            </div>  
+                </div>
+              </div>
+              <div class="col m2">
+                <p></p>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" href = "#modalGuardarT"><i class="material-icons left">save</i>Guardar</a>
+                <!-- Modal Structure -->
+                <div id="modalGuardarT" class="modal">
+                  <div class="modal-content">
+                    <h4>Cambios guardados</h4>
+                    <p>Los cambios se han realizado con éxito.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="./perfil_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+                  </div>
+                </div>
+              </div>  
+          </div>
         </div>
+      </div>
+      <!-- Modal Structure -->
+          <div id="modalNuevoRol" class="modal">
+            <div class="modal-content">
+              <form>
+                <h3>Nuevo rol</h3>
+                <ul>
+                  <li><strong><br>Nombre del nuevo rol</strong></li>
+                  <li>
+                    <div class="input">
+                      <input id="nombre-rol" type="text" class="validate"  placeholder="Rol">
+                    </div>
+                  </li>
+                  <li><strong><br>Permisos</strong></li>
+                  <li>
+                    <table class="highlight">
+                      <thead>
+                        <tr>
+                            <th data-field="admin">Administrador</th>
+                            <th data-field="gestor">Gestor</th>
+                            <th data-field="terapeuta">Terapeuta</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función1</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función2</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función3</span>
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función4</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función5</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función6</span>
+                            </label>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función7</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función8</span>
+                            </label>
+                          </td>
+                          <td>
+                            <label>
+                              <input type="checkbox" />
+                              <span>Función9</span>
+                            </label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </li>
+                </ul>
+              </form>
+            </div>
+            <div class="modal-footer">
+                  <a href="./editar_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                  <a href="./editar_terapeuta.html" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
+                </div>
+            </div>
+          </div>
     </main>
     
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

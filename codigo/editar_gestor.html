@@ -97,6 +97,8 @@
                             <label>Selecciona los roles que desees asignar.</label>
                           </div>
                         </li>
+                        <!-- Modal Trigger -->
+                        <a class="waves-effect waves-light modal-trigger btn-small white black-text" href = "#modalNuevoRol"><i class="material-icons left">delete</i>Nuevo rol</a>
                       </ul>
                     </form>
                   </div>
@@ -134,8 +136,103 @@
                       </div>
                     </div>
                   </div>
-                  
+              </div>    
             </div>  
+        </div>
+        <!-- Modal Structure -->
+        <div id="modalNuevoRol" class="modal">
+          <div class="modal-content">
+            <form>
+              <h3>Nuevo rol</h3>
+              <ul>
+                <li><strong><br>Nombre del nuevo rol</strong></li>
+                <li>
+                  <div class="input">
+                    <input id="nombre-rol" type="text" class="validate"  placeholder="Rol">
+                  </div>
+                </li>
+                <li><strong><br>Permisos</strong></li>
+                <li>
+                  <table class="highlight">
+                    <thead>
+                      <tr>
+                          <th data-field="admin">Administrador</th>
+                          <th data-field="gestor">Gestor</th>
+                          <th data-field="terapeuta">Terapeuta</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función1</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función2</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función3</span>
+                          </label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función4</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función5</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función6</span>
+                          </label>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función7</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función8</span>
+                          </label>
+                        </td>
+                        <td>
+                          <label>
+                            <input type="checkbox" />
+                            <span>Función9</span>
+                          </label>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+              </ul>
+            </form>
+          </div>
+          <div class="modal-footer">
+                <a href="./editar_gestor.html" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                <a href="./editar_gestor.html" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
+              </div>
+          </div>
         </div>
     </main>
     
@@ -143,6 +240,6 @@
     <script src="./js/materialize.js"></script>
     <script src="./js/materialize.min.js"></script>
     <script src="./js/main.js"></script>
-    <script src="./js/gestion_usuarios.js"></script>
+    <script src="./js/gestion_usuario.js"></script>
 </body>
 </html>
