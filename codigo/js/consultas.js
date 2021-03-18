@@ -48,9 +48,9 @@ function hacerConsulta(){
     console.log(document.getElementById('CalifOProg').checked);
     if(listaProg.length > 1){
         if(document.getElementById('CalifOProg').checked){
-            location.replace("./consultasResultados3.html");
-        }else{
             location.replace("./consultasResultados4.html");
+        }else{
+            location.replace("./consultasResultados3.html");
         }
     }else if(listaProg.length === 0){
         window.alert("No seleccionó ningún programa")
