@@ -52,6 +52,8 @@ function hacerConsulta(){
         }else{
             location.replace("./consultasResultados2.html");
         }
+    }else if(listaProg.length === 0){
+        window.alert("No seleccionó ningún programa")
     }else{
         if(document.getElementById('datosPart').checked){
             location.replace("./consultasResultados3.html");
@@ -59,4 +61,15 @@ function hacerConsulta(){
             location.replace("./consultasResultados4.html");
         }
     }
+}
+
+function todosProg(){
+    tarjetProg = document.getElementsByClassName("card");
+    for (i = 0; i < tarjetProg.length; i++) {
+        if(tarjetProg[i].className.includes("blue-grey")){
+            tarjetProg[i].className = tarjetProg[i].className.replace(" blue-grey", " light-blue");
+            listaProg.push(tarjetProg[i].id);
+        }
+    }
+    console.table(listaProg);
 }
