@@ -73,3 +73,14 @@ function todosProg(){
     }
     console.table(listaProg);
 }
+
+function ningunProg(){
+    tarjetProg = document.getElementsByClassName("card");
+    for (i = 0; i < tarjetProg.length; i++) {
+        if(tarjetProg[i].className.includes("light-blue")){
+            tarjetProg[i].className = tarjetProg[i].className.replace(" light-blue", " blue-grey");
+            listaProg.pop();
+        }
+    }
+    console.table(listaProg);
+}

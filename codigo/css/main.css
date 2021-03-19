@@ -34,6 +34,14 @@
     margin-left: 5em;
 }
 
+.nivel-programas-consultas {
+    margin-left: 4em;
+}
+
+.descr-programas-consultas {
+    margin-left: 1em;
+}
+
 .participantes-programa {
     text-transform: lowercase;
 }
