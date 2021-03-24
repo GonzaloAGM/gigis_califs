@@ -16,7 +16,7 @@ GROUP BY nombre
 
 SELECT nomestudio, SUM(presupuesto) as 'Monto Total de presupuesto'
 FROM Pelicula P
-WHERE P.año between 1980 AND 1989
+WHERE P.año >= 1980 AND P.año <= 1989
 GROUP BY nomestudio
 
 --Nombre y sueldo promedio de los actores (sólo hombres) que reciben en promedio un pago superior a 5 
@@ -24,20 +24,32 @@ GROUP BY nomestudio
 
 SELECT nombre, AVG(sueldo) as 'Promedio de sueldo'
 FROM Elenco E, Actor A
-WHERE E.nombre = A.nombre AND A.sexo = 'Hombre'
+WHERE E.nombre = A.nombre 
+AND A.sexo = 'M'
 GROUP BY nombre 
-HAVING AVG(sueldo) > 5
+HAVING AVG(sueldo) > 5000000
 
 --Título y año de producción de las películas con menor presupuesto. (Por ejemplo, la película de 
---Titanic se ha producido en varias veces entre la lista de películas estaría la producción de Titanic 
+--Titanic se ha producido varias veces. Entre la lista de películas estaría la producción de Titanic 
 --y el año que fue filmada con menor presupuesto).
 
 SELECT título, MIN(presupuesto) as 'Presupuesto mínimo'
 FROM Película P
-GROUP BY título
+GROUP BY título --No se puede poner con título y año con lo que hemos visto hasta ahorita
 
 --Mostrar el sueldo de la actriz mejor pagada.
 
 SELECT MAX(sueldo) as 'Mejor sueldo'
 FROM Elenco E, Actor A
-WHERE E.nombre = A.nombre AND A.sexo = 'Mujer'
+WHERE E.nombre = A.nombre AND A.sexo = 'F'
+
+--Mostrar el nombre y sueldo de la actriz mejor pagada
+
+/*
+SELECT nombre
+FROM Actor A
+WHERE A.sueldo = ( SELECT MAX(sueldo) as 'Mejor sueldo'
+                FROM Elenco E, Actor A
+                WHERE E.nombre = A.nombre AND A.sexo = 'F')
+    AND A.sexo = 'F'
+*/
