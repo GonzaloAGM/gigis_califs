@@ -5,6 +5,15 @@ const path = require('path');
 
 const bodyParser = require('body-parser');
 
+router.use(bodyParser.urlencoded({ extended: false }))
+
+router.use(express.static(path.join(__dirname,'..', 'public')));
+
+const arrows = [
+    {display: 'none', link: ''}, //Backward arrow
+    {display: 'none', link: ''}  //Forward  arrow
+];
+
 const programasConsutas = [
     {
         nombre: 'Lectura 1',
@@ -194,7 +203,7 @@ let estadoConsulta = false;
 let mostrarSexEdad = true;
 
 // parse application/x-www-form-urlencoded
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({ extended: false }));
 
 //Enviar archivos estáticos en carpeta public
 router.use(express.static(path.join(__dirname,'..', 'public')));
@@ -206,7 +215,9 @@ router.get('/Resultados', (request, response, next) => {
         estadoConsulta: estadoConsulta,
         mostrarSexEdad: mostrarSexEdad,
         consultaGen: consultaGen,
-        programasResultados: programasResultados
+        programasResultados: programasResultados,
+        backArrow: {display: 'block', link: '/consultas'},
+        forwArrow: arrows[1]
     });
 
     console.log("Consultas Resultados");
@@ -215,25 +226,27 @@ router.get('/Resultados', (request, response, next) => {
 
 router.post('/Resultados', (request, response, next) => {
     console.log("Accion post en resultados");
-    response.redirect('Consultas/Resultados');
     response.status(302);
+    response.redirect('consultas/Resultados');
 });
 
-router.get('/Resultados/ProgramaN', (request, response, next) => {
+router.get('/ProgramaN', (request, response, next) => {
     response.render('consultas_Programa', {
         tituloDeHeader: "Resultados Programa N",
         tituloBarra: "Resultados - Programa 1 - Ciclo EM 2020",
         estadoConsulta: estadoConsulta,
-        mostrarSexEdad: mostrarSexEdad
+        mostrarSexEdad: mostrarSexEdad,
+        backArrow: {display: 'block', link: '/consultas/Resultados'},
+        forwArrow: arrows[1]
     });
     console.log("Consultas Resultados por programa");
     response.status(201);
 });
 
-router.post('/Resultados/ProgramaN', (request, response, next) => {
+router.post('/ProgramaN', (request, response, next) => {
     console.log("Accion post en resultados por programa");
-    response.redirect('Consultas/Resultados');
     response.status(302);
+    response.redirect('consultas/Resultados');
 });
 
 router.get('/', (request, response, next) => {
@@ -242,7 +255,9 @@ router.get('/', (request, response, next) => {
         tituloBarra: "Consultas",
         carrouselTarj: carrouselTarj,
         programasConsutas: programasConsutas,
-        numProg: programasConsutas.length
+        numProg: programasConsutas.length,
+        backArrow: arrows[0],
+        forwArrow: arrows[1]
     });
     console.log("Consultas");
     response.status(201);
@@ -257,10 +272,18 @@ router.post('/', (request, response, next) => {
 */
 
 //Este POST es para filtrar los resultados de los programas existentes
-router.post('/', (request, response, next) => {
+router.post('/consultas', (request, response, next) => {
+    if(request.body.numProg > 1){
+        estadoConsulta = true;
+    } else {
+        estadoConsulta = false;
+    }
+    mostrarSexEdad = request.body.numProg;
+    numProg = request.body.datosPart;
     console.log("Accion post en consultas");
-    response.redirect('Consultas/Resultados');
     response.status(302);
+    response.redirect('/consultas/Resultados');
+    response.end();
 });
 
 module.exports = router;

@@ -14,7 +14,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//Middleware
+const arrows = [
+    {display: 'none', link: ''}, //Backward arrow
+    {display: 'none', link: ''}  //Forward  arrow
+];
 
 app.use('/consultas', rutasConsultas);
 
@@ -22,9 +25,11 @@ app.use('/programas', rutasProgramas);
 
 app.use('/gestionAdmin', rutasGestionAdmin);
 
-app.use('/', (request, response, next) => {
-    response.redirect('/gestionAdmin');
+app.get('/', (request, response, next) => {
+    console.log('Prueba home');
+    //response.redirect('/gestionAdmin');
     response.status(200);
+    response.send('No hay home');
 });
 
 app.use((request, response, next) => {

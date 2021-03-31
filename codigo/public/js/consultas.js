@@ -27,11 +27,13 @@ var listaProg = [];
 
 function selCard(evt) {
     if(evt.currentTarget.className.includes("blue-grey")){
+        //Seleccionar programa
         evt.currentTarget.className = evt.currentTarget.className.replace(" blue-grey", " light-blue");
         listaProg.push(evt.currentTarget.id);
         console.table(listaProg);
     }
     else if(evt.currentTarget.className.includes("light-blue")){
+        //Des-seleccionar programa
         evt.currentTarget.className = evt.currentTarget.className.replace(" light-blue", " blue-grey");
         let pos = listaProg.indexOf(evt.currentTarget.id);
         listaProg.splice(pos, 1);
@@ -42,25 +44,7 @@ function selCard(evt) {
     }else{
         document.getElementById('CalifOProg').setAttribute("disabled",null);
     }
-}
-
-function hacerConsulta(){
-    console.log(document.getElementById('CalifOProg').checked);
-    if(listaProg.length > 1){
-        if(document.getElementById('CalifOProg').checked){
-            location.replace("./consultasResultados4.html");
-        }else{
-            location.replace("./consultasResultados3.html");
-        }
-    }else if(listaProg.length === 0){
-        window.alert("No seleccionó ningún programa")
-    }else{
-        if(document.getElementById('datosPart').checked){
-            location.replace("./consultasResultados2.html");
-        }else{
-            location.replace("./consultasResultados1.html");
-        }
-    }
+    document.getElementsByName(numProg).value=listaProg.length;
 }
 
 function todosProg(){
@@ -72,6 +56,7 @@ function todosProg(){
         }
     }
     console.table(listaProg);
+    document.getElementsByName(numProg).value=listaProg.length;
 }
 
 function ningunProg(){
@@ -83,4 +68,5 @@ function ningunProg(){
         }
     }
     console.table(listaProg);
+    document.getElementsByName(numProg).value=listaProg.length;
 }
