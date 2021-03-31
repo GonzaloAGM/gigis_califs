@@ -6,7 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 router.use('/', (request, response, next) => {
-    response.redirect('/gestionAdmin');
+    response.send('En construcción');
     response.status(200);
 });
 

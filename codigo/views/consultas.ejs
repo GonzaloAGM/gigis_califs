@@ -83,16 +83,8 @@
             </div>
 
             <!-- Paneles y trajetas -->
-            <% for (let i = 0; i< Math.floor(numProg/4); i++) { %>
-                <div class="carousel-item <%= carrouselTarj[i].color %>" href="<%= carrouselTarj[i].numlink %>">
-                    <div class="row">
-                        <div class="col s12"><br><br><br><br><br></div>
-                        <% for (let j = 0; j< 4 && (i*4+j < numProg); i++) { %>
-                            <%- include('includesConsultas/tarjetasProg_consult.ejs') %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
+            <%- include('includesConsultas/tarjetaProg_consult.ejs') %>
+            
         </div>
     </div>
 

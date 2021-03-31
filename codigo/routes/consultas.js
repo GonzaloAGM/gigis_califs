@@ -190,7 +190,7 @@ let consultaGen = {
     avanceGen: 25 
 };
 
-let estadoConsulta = true;
+let estadoConsulta = false;
 let mostrarSexEdad = true;
 
 // parse application/x-www-form-urlencoded
@@ -244,7 +244,7 @@ router.get('/', (request, response, next) => {
         programasConsutas: programasConsutas,
         numProg: programasConsutas.length
     });
-    console.log("Consultas Resultados por programa");
+    console.log("Consultas");
     response.status(201);
 });
 
