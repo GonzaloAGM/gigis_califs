@@ -1,0 +1,197 @@
+<%- include('include/head.ejs') %>
+<%- include('include/titleBar.ejs') %>
+<%- include('include/sideNavBar.ejs') %>
+
+    <!-- Titulo elegir programa y selección de ciclo-->
+    <div class="row">
+            
+        <!-- Elegir ciclo de inicio y final-->
+        <div class="col s8 push-s4 "><br>
+            <div class="row">
+                <div class="input-field col s4 m3 l3 xl3">
+                    <form action="/consultas" method="post">
+                        <select>
+                            <optgroup label="2020">
+                                <option value="1">Enero-Marzo</option>
+                                <option value="2">Abril-Junio</option>
+                                <option value="3">Julio-Octubre</option>                                
+                                <option value="4">Octubre-Diciembre</option>
+                            </optgroup>
+                            <optgroup label="2021">
+                                <option value="5">Enero-Marzo</option>
+                                <option value="6">Abril-Junio</option>
+                                <option value="7">Julio-Octubre</option>                                
+                                <option value="8">Octubre-Diciembre</option>
+                            </optgroup>
+                        <label>Desde Ciclo</label>
+                        </select>
+                    </form>
+                </div>
+                <div class="col s2 m3 l3 xl3">
+                    <label>
+                        <input type="checkbox" checked="checked" />
+                        <span>hasta</span>
+                    </label>
+                </div>
+                <div class="input-field col s4 m3 l3 xl3">
+                    <select>
+                        <label>Hasta Ciclo</label>
+                        <optgroup label="2020">
+                            <option value="1">Enero-Marzo</option>
+                            <option value="2">Abril-Junio</option>
+                            <option value="3">Julio-Octubre</option>                                
+                            <option value="3">Octubre-Diciembre</option>
+                        </optgroup>
+                        <optgroup label="2021">
+                            <option value="1">Enero-Marzo</option>
+                            <option value="2">Abril-Junio</option>
+                            <option value="3">Julio-Octubre</option>                                
+                            <option value="3">Octubre-Diciembre</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="col s2 m3 l3 xl3">
+                    <label>
+                        <input type="checkbox" checked="checked" />
+                        <span>Solo ciclos activos</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+
+         <!-- Título-->
+        <div class="col s4 pull-s8">
+            <h3>Elegir Programa:</h3>
+        </div>
+    </div>
+
+    <!-- Carrousel de tarjetas -->
+    <div id="carouselContainer black-text">
+        <div class="carousel carousel-slider center black-text" data-indicators="true">
+
+            <!-- Flechas a los lados -->
+            <div class="carousel-fixed-item center middle-indicator">
+                <div class="left">
+                    <a onclick="movePrevCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                            class="material-icons left black-text middle-indicator-text">chevron_left</i></a>
+                </div>
+    
+                <div class="right">
+                    <a onclick="moveNextCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                            class="material-icons right black-text middle-indicator-text">chevron_right</i></a>
+                </div>
+            </div>
+
+            <!-- Paneles y trajetas -->
+            <% for (let i = 0; i< Math.floor(numProg/4); i++) { %>
+                <div class="carousel-item <%= carrouselTarj[i].color %>" href="<%= carrouselTarj[i].numlink %>">
+                    <div class="row">
+                        <div class="col s12"><br><br><br><br><br></div>
+                        <% for (let j = 0; j< 4 && (i*4+j < numProg); i++) { %>
+                            <%- include('includesConsultas/tarjetasProg_consult.ejs') %>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <form action="/consultas" method="post">
+        <!--Filtros-->
+        <div class="row">
+        <h4>Filtros:</h4>
+            <div class="col s6">
+                <div>
+                    <br>
+                    <label>
+                        <input type="checkbox" checked="checked"/>
+                        <span class="flow-text"> <strong class="flow-text black-text">Solo participantes activos</strong></span>
+                    </label>
+                    
+                </div>
+                <div>
+                    <br>
+                    <button class="waves-effect waves-light btn-large" onclick="todosProg()"> &nbsp &nbsp Todos los programas &nbsp &nbsp</button>
+                    
+                </div>
+                <div>
+                    <br>
+                    <button class="waves-effect waves-light btn-large" onclick="ningunProg()"> Deseleccionar programas </button>
+                    
+                </div>
+            </div>
+            <div class="col s6">
+                <h5>Edad:</h5>
+                <div class="row">
+                    <div class="col s5">
+                        <label>
+                            <input type="number" value="1" min="0"/>
+                            <span class="flow-text"> <strong class="flow-text black-text"></strong></span>
+                        </label>
+                    </div>
+                    <div class="col s2">
+                        <label>
+                            <input type="checkbox" checked="checked"/>
+                            <span class="flow-text"> hasta </span>
+                        </label>
+                        
+                    </div>
+                    <div class="col s5">
+                        <label>
+                            <input type="number" value="18" min="0"/>
+                            <span class="flow-text"> <strong class="flow-text black-text"></strong></span>
+                        </label>
+                    </div>
+                </div>
+                <h5>Sexo:</h5>
+                <div class="row">
+                    <div class="col s6">
+                        <label>
+                            <a class="waves-effect waves-teal btn wideBtn">Mujeres</a>
+                        </label>
+                    </div>
+                    <div class="col s6">
+                        <label>
+                            <a class="waves-effect waves-teal btn wideBtn">Hombres</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--Por mostrar y consultar-->
+        <div class="row ">
+            <!--Por mostrar-->
+            <div class="col s8">
+                <div class="row">
+                    <h4>Por mostrar:</h4>
+                    <div class="switch" >
+                        <p class="flow-text">
+                            calificaciones
+                            <label>
+                                <input disabled type="checkbox" id="CalifOProg">
+                                <span class="lever"></span>
+                            </label>
+                            Porcentaje de avance
+                        </p>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" id="datosPart"/>
+                            <span class="flow-text"> <strong class="flow-text black-text">Mostrar datos de participantes</strong> </span>
+                        </label>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--Boton consultar-->
+            <div class="col s4">
+                <div class="row center">
+                    <h4>Realizar consulta</h4><br>
+                    <button type="submit" class="waves-effect  waves-light btn-large"> Consulta </button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+<%- include('include/footer.ejs') %>

@@ -1,0 +1,243 @@
+<div>
+    <% if(estadoConsulta) { %> <!-- Tabla de un solo programa -->
+        <table class="striped highlight responsive-table">
+            <thead>
+            <tr>
+                    <th data-field="Participante">Participante</th>
+                    <% if(mostrarSexEdad) { %>
+                    <th data-field="Edad">Edad</th>
+                    <th data-field="Sexo">Sexo</th>
+                    <% } %>
+                    <th data-field="Ciclo1">EM-2020</th>
+                    <th data-field="Ciclo2">AJ-2020</th>
+                    <th data-field="Ciclo3">JO-2020</th>
+                    <th data-field="Ciclo4">OD-2020</th>
+                    <th data-field="Nota inicial">Nota inicial</th>
+                    <th data-field="Nota Final">Nota Final</th>
+                    <th data-field="Promedio">Promedio</th>
+                    <th data-field="Progreso">Progreso</th>
+            </tr>
+            </thead>
+    
+            <tbody>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+                <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>2.6</td>
+                <td>3.2</td>
+                <td>3.2</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>2.7</td>
+                <td>22%</td>
+                </tr>
+            </tbody>
+        </table>
+    <% } else { %> <!-- Tabla de varios programas -->
+        <table class="striped highlight responsive-table">
+            <thead>
+              <tr>
+                  <th data-field="Participante">Participante</th>
+                  <% if(mostrarSexEdad) { %>
+                  <th data-field="Edad">Edad</th>
+                  <th data-field="Sexo">Sexo</th>
+                  <% } %>
+                  <th data-field="Programa1">P1-EM2020</th>
+                  <th data-field="Programa2">P2-EM2020</th>
+                  <th data-field="Programa3">P3-EM2020</th>
+                  <th data-field="Programa1">P1-AJ2020</th>
+                  <th data-field="Programa2">P2-AJ2020</th>
+                  <th data-field="Programa3">P3-AJ2020</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+              <tr>
+                <td>Participante 1</td>
+                <% if(mostrarSexEdad) { %>
+                <td>7</td>
+                <td>M</td>
+                <% } %>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+                <td>2.1</td>
+                <td>3.2</td>
+                <td>x</td>
+              </tr>
+            </tbody>
+        </table> 
+    <% } %>                
+</div>
