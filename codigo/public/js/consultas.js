@@ -44,7 +44,7 @@ function selCard(evt) {
     }else{
         document.getElementById('CalifOProg').setAttribute("disabled",null);
     }
-    document.getElementsByName(numProg).value=listaProg.length;
+    document.getElementById('cantProg').value=listaProg.length;
 }
 
 function todosProg(){
@@ -56,7 +56,7 @@ function todosProg(){
         }
     }
     console.table(listaProg);
-    document.getElementsByName(numProg).value=listaProg.length;
+    document.getElementById('cantProg').value=listaProg.length;
 }
 
 function ningunProg(){
@@ -68,5 +68,5 @@ function ningunProg(){
         }
     }
     console.table(listaProg);
-    document.getElementsByName(numProg).value=listaProg.length;
+    document.getElementById('cantProg').value=listaProg.length;
 }

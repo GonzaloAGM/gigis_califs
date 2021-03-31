@@ -227,7 +227,7 @@ router.get('/Resultados', (request, response, next) => {
 router.post('/Resultados', (request, response, next) => {
     console.log("Accion post en resultados");
     response.status(302);
-    response.redirect('consultas/Resultados');
+    response.redirect('/consultas');
 });
 
 router.get('/ProgramaN', (request, response, next) => {
@@ -246,7 +246,7 @@ router.get('/ProgramaN', (request, response, next) => {
 router.post('/ProgramaN', (request, response, next) => {
     console.log("Accion post en resultados por programa");
     response.status(302);
-    response.redirect('consultas/Resultados');
+    response.redirect('/consultas/Resultados');
 });
 
 router.get('/', (request, response, next) => {
@@ -272,18 +272,24 @@ router.post('/', (request, response, next) => {
 */
 
 //Este POST es para filtrar los resultados de los programas existentes
-router.post('/consultas', (request, response, next) => {
-    if(request.body.numProg > 1){
-        estadoConsulta = true;
+router.post('/', (request, response, next) => {
+    if(request.body.cantProg < 1){
+        console.log("Accion post en consultas INCORRECTA");
+        response.status(304);
+        response.redirect('/consultas');
+        response.end();
     } else {
-        estadoConsulta = false;
+        estadoConsulta = request.body.cantProg > 1 ? false : true;
+        mostrarSexEdad = request.body.datosPart === "on" ? true : false;
+
+        //console.log("Tipo de consulta: " + estadoConsulta);
+        mostrarSexEdad = request.body.datosPart;
+        //console.log("Mostr Datos: " + mostrarSexEdad);
+        console.log("Accion post en consultas");
+        response.status(302);
+        response.redirect('/consultas/Resultados');
+        response.end();
     }
-    mostrarSexEdad = request.body.numProg;
-    numProg = request.body.datosPart;
-    console.log("Accion post en consultas");
-    response.status(302);
-    response.redirect('/consultas/Resultados');
-    response.end();
 });
 
 module.exports = router;

@@ -9,7 +9,6 @@
         <div class="col s8 push-s4 "><br>
             <div class="row">
                 <div class="input-field col s4 m3 l3 xl3">
-                    <form action="/consultas" method="post">
                         <select>
                             <optgroup label="2020">
                                 <option value="1">Enero-Marzo</option>
@@ -25,7 +24,6 @@
                             </optgroup>
                         <label>Desde Ciclo</label>
                         </select>
-                    </form>
                 </div>
                 <div class="col s2 m3 l3 xl3">
                     <label>
@@ -88,7 +86,7 @@
         </div>
     </div>
 
-        <form action="/consultas" method="POST"></form>
+        <form action="/consultas" method="POST">
         <!--Filtros-->
         <div class="row">
         <h4>Filtros:</h4>
@@ -181,9 +179,12 @@
                 <div class="col s4">
                     <div class="row center">
                         <h4>Realizar consulta</h4><br>
-                            <input type="hidden" name="numProg" value="0" min="0" max="<%= numProg %>">
+                        <div style="display: none;">
+                            <input type="number" id="cantProg" name="cantProg" value="0" min="0">
+                        </div>
+                        <div>
                             <button type="submit" class="waves-effect  waves-light btn-large"> Consulta </button>
-                        
+                        </div>
                     </div>
                 </div>
             </div>

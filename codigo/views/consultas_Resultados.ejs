@@ -18,19 +18,18 @@
                     <div class="col s12">
                         <p class="flow-text">Promedio general: <%= consultaGen.promTotal %></p>
                         <p class="flow-text">Total de resultados: <%= consultaGen.totalCoincid %></p>
-                        <br><br>
                     </div>
                     <% if(estadoConsulta) { %>
+                        <div class="white-text"><p>. <br>.</p></div>
                         <div>
                             <p class="col s8 offset-s1 flow-text">Avance General</p>
                             <p class="col s2 right-align flow-text"><%= consultaGen.avanceGen %>%</p>
                             <div class="progress col s10 offset-s1">
-                            <div class="determinate" style="width: <%= consultaGen.avanceGen %>%"></div>
+                                <div class="determinate" style="width: <%= consultaGen.avanceGen %>%"></div>
                             </div>
                         </div>
                     <% } %>
                     </div>
-                    <br>
                 </div>
             </div>
         </div>
@@ -38,9 +37,11 @@
         <%- include('includesConsultas/tabla_ejemplo.ejs') %>
 
         <br><br>
-        <div class="row">
-            <button type="submit" class="waves-effect right waves-light btn-large"> Descargar archivo </button>
-        </div>
+        <form action="/consultas/Resultados" method="post">
+            <div class="row">
+                <button type="submit" class="waves-effect right waves-light btn-large"> Descargar archivo </button>
+            </div>
+        </form>
     </div>
 
 <%- include('include/footer.ejs') %>
