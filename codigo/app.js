@@ -1,4 +1,5 @@
 const { request, response } = require('express');
+
 //Estructura básica de una aplicación con express
 const express = require('express');
 const app = express();
@@ -23,3 +24,11 @@ app.use('/programas', rutasProgramas);
 
 app.use('/gestionAdmin', rutasGestionAdmin);
 
+app.use((request, response, next) => {
+    console.log('Error 404');
+    response.status(404);
+    response.send('Lo sentimos, este sitio no existe');
+});
+
+app.listen(3000);
+                         
