@@ -36,32 +36,32 @@ const usuarios = [
     {
         nombre:     'Marcela',
         rol:        'Terapeuta',
-        rutaEditar: 'gestion-usuarios/editar-terapeuta',
-        ruta:       'gestion-usuarios/perfil-terapeuta'
+        rutaEditar: './editar-terapeuta',
+        ruta:       './perfil-terapeuta'
     },
     {
         nombre:     'Eva',
         rol:        'Gestor',
-        rutaEditar: 'gestion-usuarios/editar-gestor',
-        ruta:       'gestion-usuarios/perfil-gestor'
+        rutaEditar: './editar-gestor',
+        ruta:       './perfil-gestor'
     },
     {
         nombre:     'Maye',
         rol:        'Administrador',
-        rutaEditar: 'gestion-usuarios/editar-administrador',
-        ruta:       'gestion-usuarios/perfil-administrador'
+        rutaEditar: './editar-administrador',
+        ruta:       './perfil-administrador'
     },
     {
         nombre:     'Gabriela',
         rol:        'Terapeuta',
-        rutaEditar: 'gestion-usuarios/editar-terapeuta',
-        ruta:       'gestion-usuarios/perfil-terapeuta'
+        rutaEditar: './editar-terapeuta',
+        ruta:       './perfil-terapeuta'
     },
     {
         nombre:     'Valentina',
         rol:        'Terapeuta',
-        rutaEditar: 'gestion-usuarios/perfil-terapeuta',
-        ruta:       'gestion-usuarios/gestion-usuarios'
+        rutaEditar: './perfil-terapeuta',
+        ruta:       './gestion-usuarios'
     }
 ];
 
@@ -87,7 +87,7 @@ router.get('/perfil-terapeuta', (request,response,next) => {
     response.render('perfil_terapeuta', {
         usuarios: usuarios, 
         tituloDeHeader: "Perfil terapeuta",
-        tituloBarra: "Terapeuta",
+        tituloBarra: "Marcela",
         backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios'},
         forwArrow: arrows[1]
     });
@@ -96,6 +96,7 @@ router.get('/perfil-terapeuta', (request,response,next) => {
 router.get('/editar-terapeuta', (request,response,next) => {
     response.render('editar_terapeuta', {
         usuarios: usuarios, 
+        roles: roles, 
         tituloDeHeader: "Editar terapeuta",
         tituloBarra: "Terapeuta",
         backArrow: {display: 'block', link: '/gestionAdmin/perfil-terapeuta'},
