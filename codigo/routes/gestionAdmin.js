@@ -126,6 +126,7 @@ router.get('/perfil-gestor', (request,response,next) => {
 router.get('/editar-gestor', (request,response,next) => {
     response.render('editar_usuario', {
         usuarios: usuarios, 
+        roles: roles, 
         tituloDeHeader: "Editar gestor",
         tituloBarra: "Gestor",
         backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios/perfil-gestor'},
@@ -146,6 +147,7 @@ router.get('/perfil-administrador', (request,response,next) => {
 router.get('/editar-administrador', (request,response,next) => {
     response.render('editar_usuario', {
         usuarios: usuarios, 
+        roles: roles, 
         tituloDeHeader: "Editar administrador",
         tituloBarra: "Administrador",
         backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios/perfil-administrador'},
