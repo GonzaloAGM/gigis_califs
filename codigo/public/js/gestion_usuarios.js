@@ -14,15 +14,11 @@ $(document).ready(function(){
 $(document).ready(() => {
   $(".validarRol").on("click", () => {
     const val = ($('select[name^="selRol"]').val());
-    if (val.find(element => element > 3)){
-      console.log("nuevo");
-      location.replace("./crear-rol");
-    }
-    else if (val.find(element => element < 2)){
+    if (val.find(element => element < 2)){
       console.log("terapeuta");
-      location.replace("./crear-terapeuta");
+      location.replace("./gestion-usuarios/crear-terapeuta");
     }
-    else if(val.find(element => element >  0)){
+    else if(val.find(element => element >  1)){
       console.log("gestor o admin");
       location.replace("./gestion-usuarios");
       window.alert("Se guardó correctamente el usuario.");
@@ -32,21 +28,9 @@ $(document).ready(() => {
 
 // Cambiar rol de usuario existente
 $(document).ready(() => {
-  $(".cambiarRol").on("click", () => {
-    const val = ($('select[name^="camRol"]').val());
-    if (val.find(element => element > 3)){
-      console.log("nuevo");
-      location.replace("./crear-rol");
-    }
-    else if (val.find(element => element < 2)){
-      console.log("terapeuta");
-      location.replace("./crear-terapeuta");
-    }
-    else if(val.find(element => element >  0)){
-      console.log("gestor o admin");
-      location.replace("./gestion-usuarios");
-      window.alert("Se guardó correctamente el usuario.");
-    }
+  $(".crearRol").on("click", () => {
+    location.replace("./gestion-usuarios");
+    window.alert("Se registró correctamente el rol.");
   });
 });
 
