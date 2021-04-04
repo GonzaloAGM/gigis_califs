@@ -10,6 +10,40 @@ const arrows = [
     {display: 'none', link: ''}  //Forward  arrow
 ];
 
+const programas = [
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2]
+    },
+    {
+        nombre: 'Sensorial',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2]
+    },
+    {
+        nombre: 'Escritura',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2,3]
+    },
+    {
+        nombre: 'Ballet',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel: [1]
+    },
+    {
+        nombre: 'Matemáticas',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel: [1,2,3,4]
+    }
+
+];
+
 router.use(bodyParser.urlencoded({ extended: false }))
 
 router.use(express.static(path.join(__dirname,'..', 'public')));
@@ -27,6 +61,7 @@ router.get('/', (request,response,next) => {
     response.render('programas', {
         tituloDeHeader: "Programas",
         tituloBarra: "Programas",
+        programas: programas,
         backArrow: arrows[0],
         forwArrow: arrows[1]
     });

@@ -1,148 +1,36 @@
 <%- include('include/head.ejs') %>
 <%- include('include/titleBar.ejs') %>
-<%- include('include/sideNavBar.ejs') %>
-           
-              <div class="row"><!------------------Fila 1 ------------------------>
-                <div class="col s12 m6 l4"><!------------------Programa 1 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas/programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div class="nivel-programas">
-                            <i class="material-icons red-text medium right">looks_one</i>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
+<%- include('include/sideNavBar.ejs') %>        
+    <div class="row"><!------------------Fila 1 ------------------------>
+      <% for (programa of programas) { %>
+        <div class="col s12 m6 l4"><!------------------Programa 1 ------------------------>
+          <div class="card">
+            <div class="card-image">
+              <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
+            </div>
+            <div class="card-content">
+              <a href="/programas/programa1">
+                <span class="card-title"><%= programa.nombre%></span>
+              </a>
+              <p>Ciclo: <%= programa.ciclo%></p>
+              <p>Promedio: <%= programa.promedio%></p>
+              <br>
+              <div class="row">
+                <div class="col s12">
+                  <div class="nivel-programas">
+                    <% for (nivel of programa.nivel) { %>
+                      <!--<i class="material-icons red-text medium "><%= nivel%></i>
+                      <i class="material-icons white-text medium"><%= nivel%></i>
+                      -->
+                      <a class="btn-large halfway-fab waves-effect waves-light red"><%= nivel%></a>
+                    <% } %>
                   </div>
-                </div><!------------------Fin Programa 1 -------------------------------->
-                <div class="col s12 m6 l4"><!------------------Programa 2 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas/programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div class="nivel-programas">
-                            <i class="material-icons red-text medium right">looks_one</i>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-                </div><!------------------Fin Programa 2 -------------------------------->
-                <div class="col s12 m6 l4"><!------------------Programa 3 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas/programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div>
-                            <div class="nivel-programas">
-                              <i class="material-icons red-text medium right">looks_two</i>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-                </div><!------------------Fin Programa 3 -------------------------------->
-                <div class="col s12 m6 l4"><!------------------Programa 4 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas_programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div class="nivel-programas">
-                            <i class="material-icons red-text medium right">looks_one</i>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-                </div><!------------------Fin Programa 4 -------------------------------->
-                <div class="col s12 m6 l4"><!------------------Programa 5 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas_programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div class="nivel-programas">
-                            <i class="material-icons red-text medium right">looks_3</i>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-                </div><!------------------Fin Programa 5 -------------------------------->
-                <div class="col s12 m6 l4"><!------------------Programa 6 ------------------------>
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-                    </div>
-                    <div class="card-content">
-                      <div class="row">
-                        <div class="col s12 m6">
-                          <a href="/programas_programa1">
-                            <span class="card-title">Programa 1</span>
-                          </a>
-                          <p>Promedio: X</p>
-                        </div>
-                        <div class="col s12 m6 l4">
-                          <div class="nivel-programas">
-                            <i class="material-icons red-text medium right">looks_4</i>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                    </div>
-                  </div>
-                </div><!------------------Fin Programa 6 -------------------------------->
-              </div><!------------------Fin Fila 1 -------------------------------->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!------------------Fin Programa 1 -------------------------------->
+      <% } %>
+    </div><!------------------Fin Fila 1 -------------------------------->
 
 <%- include('include/footer.ejs') %>
