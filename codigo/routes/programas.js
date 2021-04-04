@@ -15,25 +15,29 @@ const programas = [
         nombre: 'Lectura 1',
         ciclo: 'EM2020',
         promedio: 'X',
-        nivel:  [1,2]
+        nivel:  [1,2],
+        referencia: '/programas/programa1'
     },
     {
         nombre: 'Sensorial',
         ciclo: 'EM2020',
         promedio: 'X',
-        nivel:  [1,2]
+        nivel:  [1,2],
+        referencia: '/programas/programa1'
     },
     {
         nombre: 'Escritura',
         ciclo: 'EM2020',
         promedio: 'X',
-        nivel:  [1,2,3]
+        nivel:  [1,2,3],
+        referencia: '/programas/programa1'
     },
     {
         nombre: 'Ballet',
         ciclo: 'EM2020',
         promedio: 'X',
-        nivel: [1]
+        nivel: [1],
+        referencia: '/programas/programa1'
     },
     {
         nombre: 'Matemáticas',
