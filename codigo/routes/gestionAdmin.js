@@ -32,11 +32,45 @@ const tabGestion = [
     }
 ];
 
+const usuarios = [
+    {
+        nombre:     'Marcela',
+        rol:        'Terapeuta',
+        rutaEditar: 'editar-terapeuta',
+        ruta:       'perfil-terapeuta'
+    },
+    {
+        nombre:     'Eva',
+        rol:        'Gestor',
+        rutaEditar: 'editar-gestor',
+        ruta:       'perfil-gestor'
+    },
+    {
+        nombre:     'Maye',
+        rol:        'Administrador',
+        rutaEditar: 'editar-administrador',
+        ruta:       'perfil-administrador'
+    },
+    {
+        nombre:     'Gabriela',
+        rol:        'Terapeuta',
+        rutaEditar: 'editar-terapeuta',
+        ruta:       'perfil-terapeuta'
+    },
+    {
+        nombre:     'Valentina',
+        rol:        'Terapeuta',
+        rutaEditar: 'perfil-terapeuta',
+        ruta:       'gestion-usuarios'
+    }
+];
+
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
 router.get('/gestion-usuarios', (request,response,next) => {
     response.render('gestion_usuarios', {
+        usuarios: usuarios, 
         tituloDeHeader: "Gestión de usuarios",
         tituloBarra: "Usuarios",
         backArrow: {display: 'block', link: '/gestionAdmin'},
