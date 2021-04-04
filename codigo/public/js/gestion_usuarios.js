@@ -11,34 +11,33 @@ $(document).ready(function(){
 });
 
 // Validar rol para crear usuario
-
 $(document).ready(() => {
   $(".validarRol").on("click", () => {
     const val = ($('select[name^="selRol"]').val());
-    if (val.find(element => element > 4)){
-      console.log("nuevo");
-      location.replace("./crear_rol.html");
-    }
-    else if (val.find(element => element < 2)){
+    if (val.find(element => element < 2)){
       console.log("terapeuta");
-      location.replace("./crear_terapeuta.html");
+      location.replace("./crear-terapeuta");
     }
-    else if (val.find(element => element < 3)){
-      console.log("participante");
-      location.replace("./crear_participante.html");
-    }
-    else{
+    else if(val.find(element => element >  1)){
       console.log("gestor o admin");
-      location.replace("./gestion_usuarios.html");
-      window.alert("Se asignaron correctamente los roles al usuario nuevo.");
+      location.replace("./gestion-usuarios");
+      window.alert("Se guardó correctamente el usuario.");
     }
+  });
+});
+
+// Cambiar rol de usuario existente
+$(document).ready(() => {
+  $(".crearRol").on("click", () => {
+    location.replace("./gestion-usuarios");
+    window.alert("Se registró correctamente el rol.");
   });
 });
 
 //Nuevo rol, validar si no se seleccionó otro rol
 function nuevoRol(){
-  window.alert("Se asignaron correctamente los roles al usuario nuevo.");
-  location.replace("./gestion_usuarios.html");
+  window.alert("Se guardó correctamente el usuario.");
+  location.replace("./gestion-usuarios");
  // if (val.find(element => element < 2)){
  //   console.log("terapeuta");
  //   location.replace("./nuevo_terapeuta.html");
@@ -53,11 +52,8 @@ function nuevoRol(){
   //}
 }
 function nuevoTerapeuta(){
-  window.alert("Se asignaron correctamente los roles al usuario nuevo.");
-  location.replace("./gestion_usuarios.html");
+  window.alert("Se guardó correctamente el usuario.");
+  location.replace("./gestion-usuarios");
  
 }
-function nuevoParticipante(){
-  window.alert("Se asignaron correctamente los roles al usuario nuevo.");
-  location.replace("./gestion_usuarios.html");
-}
+
