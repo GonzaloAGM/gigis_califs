@@ -16,7 +16,7 @@ $(document).ready(() => {
     const val = ($('select[name^="selRol"]').val());
     if (val.find(element => element < 2)){
       console.log("terapeuta");
-      location.replace("./gestion-usuarios/crear-terapeuta");
+      location.replace("./crear-terapeuta");
     }
     else if(val.find(element => element >  1)){
       console.log("gestor o admin");

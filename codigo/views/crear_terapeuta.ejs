@@ -1,0 +1,49 @@
+<%- include('include/head.ejs') %>
+<%- include('include/titleBar.ejs') %>
+<%- include('include/sideNavBar.ejs') %>     
+    <div class="row">
+        <div class="col m1">
+        <h2></h2>
+        <div class="vl"></div>
+        </div>
+        <div class="col s11 m4">
+            <form>
+                <ul>
+                    <li class = "camposPerfil"><strong><br>Título</strong></li>
+                    <li>
+                    <div class="input-field ">
+                        <input id="titulo" type="text" class="validate">
+                        <label for="titulo">titulo</label>
+                    </div>
+                    </li>
+                    <li class = "camposPerfil"><strong><br>Especialidad</strong></li>
+                    <li>
+                    <div class="input-field ">
+                        <input id="especialidad" type="text" class="validate">
+                        <label for="especialidad">especialidad</label>
+                    </div>
+                    </li>
+                    <li class = "camposPerfil"><strong><br>Currículum</strong></li>
+                    <li>
+                        <div class="file-field input-field">
+                            <div class="file-field input-field waves-effect waves-light btn-small white black-text">
+                                <i class="material-icons left">file_upload</i>Subir</a>
+                                <input type="file">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="col s11 m4">
+                                
+        </div>
+        <div class="col m2">
+        </div>
+        <div class="col m4">
+            <p></p>
+            <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" onclick="nuevoTerapeuta()"><i class="material-icons left">save</i>Guardar</a>
+            <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" href= "gestion_usuarios.html"><i class="material-icons left">close</i>Cancelar</a>
+        </div>
+    </div>
+<%- include('include/footer.ejs') %>
