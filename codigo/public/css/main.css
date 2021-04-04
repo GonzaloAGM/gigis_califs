@@ -14,10 +14,20 @@
     padding: 1em 1em;
 }
 
+.navCuenta {
+    background-color: #7AC143;
+}
+
+.btnNavLado {
+    background-color: #488CCB;
+    color:  #488CCB;
+}
+
 .navTitulo {
     height: 100%;
-    background-color: white;
-    color: black;
+    background-color:  #F58220;
+    border-bottom-color: #F58220;
+    color: whitesmoke;
     padding-top:25px;
 }
 
@@ -27,7 +37,6 @@
     font-size: 3.56rem;
     line-height: 110%;
     margin: 2.3733333333rem 0 1.424rem 0;
-    color: black;
 }
 
 .nivel-programas {
