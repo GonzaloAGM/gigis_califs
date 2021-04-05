@@ -57,3 +57,26 @@ function nuevoTerapeuta(){
  
 }
 
+// Guardar participante
+$(document).ready(() => {
+  $(".agregarP").on("click", () => {
+    location.replace("./gestion-participantes");
+    window.alert("Se registró correctamente el participante.");
+  });
+});
+
+// Eliminar participante
+$(document).ready(() => {
+  $(".eliminarP").on("click", () => {
+    location.replace("./gestion-participantes");
+    window.alert("Se eliminó el participante.");
+  });
+});
+
+// Eliminar usuario
+$(document).ready(() => {
+  $(".eliminarU").on("click", () => {
+    location.replace("./gestion-usuarios");
+    window.alert("Se eliminó el usuario.");
+  });
+});

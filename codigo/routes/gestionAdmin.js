@@ -65,6 +65,51 @@ const usuarios = [
     }
 ];
 
+const participantes = [
+    {
+        nombre:     'Adriana Guadalupe',
+        estatus:    'Activo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Alan Eduardo',
+        estatus:    'Activo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Alejandro Vangelis',
+        estatus:    'Inactivo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Alexa Nicole',
+        estatus:    'Activo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Alexander',
+        estatus:    'Activo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Alma Angelica',
+        estatus:    'Activo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+    {
+        nombre:     'Ana del Carmen',
+        estatus:    'Inactivo',
+        rutaEditar: './editar-participante',
+        ruta:       './perfil-participante'
+    },
+];
+
 const roles = [
     {
         nombre:     'Terapeuta',
@@ -129,7 +174,7 @@ router.get('/editar-gestor', (request,response,next) => {
         roles: roles, 
         tituloDeHeader: "Editar gestor",
         tituloBarra: "Gestor",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios/perfil-gestor'},
+        backArrow: {display: 'block', link: '/gestionAdmin/perfil-gestor'},
         forwArrow: arrows[1]
     });
 });
@@ -150,7 +195,7 @@ router.get('/editar-administrador', (request,response,next) => {
         roles: roles, 
         tituloDeHeader: "Editar administrador",
         tituloBarra: "Administrador",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios/perfil-administrador'},
+        backArrow: {display: 'block', link: '/gestionAdmin/perfil-administrador'},
         forwArrow: arrows[1]
     });
 });
@@ -166,8 +211,18 @@ router.get('/gestion-usuarios', (request,response,next) => {
     });
 });
 
+router.get('/editar-participante', (request,response,next) => {
+    response.render('editar_participante', {
+        tituloDeHeader: "Editar participante",
+        tituloBarra: "Adriana Guadalupe",
+        backArrow: {display: 'block', link: '/gestionAdmin/perfil-participante'},
+        forwArrow: arrows[1]
+    });
+});
+
 router.get('/gestion-participantes', (request,response,next) => {
     response.render('gestion_participantes', {
+        participantes: participantes, 
         tituloDeHeader: "Gestión de participantes",
         tituloBarra: "Participantes",
         backArrow: {display: 'block', link: '/gestionAdmin'},
