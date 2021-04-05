@@ -125,6 +125,83 @@ const roles = [
     }
 ];
 
+const ciclos_actuales = [
+    {
+        nombre:     'Enero-Marzo',
+        anio:       '2021',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Abril-Junio',
+        anio:       '2021',
+        ruta:       './gestion-perfil-ciclo'
+    }    
+];
+
+const ciclos_anteriores = [
+    {
+        nombre:     'Enero-Marzo',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Abril-Junio',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    } ,   
+    {
+        nombre:     'Julio-Septiembre',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Octubre-Diciembre',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },  
+    {
+        nombre:     'Enero-Marzo',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Abril-Junio',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Julio-Septiembre',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Octubre-Diciembre',
+        anio:       '2020',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Enero-Marzo',
+        anio:       '2019',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Abril-Junio',
+        anio:       '2019',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Julio-Septiembre',
+        anio:       '2019',
+        ruta:       './gestion-perfil-ciclo'
+    },
+    {
+        nombre:     'Octubre-Diciembre',
+        anio:       '2019',
+        ruta:       './gestion-perfil-ciclo'
+    },
+     
+];
+
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
@@ -250,6 +327,8 @@ router.get('/gestion-programas', (request,response,next) => {
 
 router.get('/gestion-ciclos', (request,response,next) => {
     response.render('gestion_ciclos', {
+        ciclos_actuales: ciclos_actuales,
+        ciclos_anteriores: ciclos_anteriores,
         tituloDeHeader: "Gestión de ciclos",
         tituloBarra: "Ciclos",
         backArrow: {display: 'block', link: '/gestionAdmin'},

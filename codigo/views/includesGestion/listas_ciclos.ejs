@@ -1,0 +1,67 @@
+<table class="highlight">
+    <thead>
+    <tr>
+        <th data-field="nombre">Ciclos del año en curso</th>
+        <th data-field="titulo"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <% for (let ciclo of ciclos_actuales) { %>  
+            <tr>
+                <td  style="cursor: pointer;"><a href="<%= ciclo.ruta %>" class = "black-text"><%= ciclo.nombre %></a></td>
+                <td><%= ciclo.anio %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<!---<ul class="collapsible">
+    <% for (let ciclo of ciclos_anteriores) { %>  
+        <li>
+            <div class="collapsible-header"><%= ciclo.anio %></div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <a href="<%= ciclo.ruta %>" class="collection-item"><%= ciclo.nombre %>
+                    <a href="<%= ciclo.ruta %>" class="collection-item"><%= ciclo.nombre %>
+                    <a href="<%= ciclo.ruta %>" class="collection-item"><%= ciclo.nombre %>
+                </div>
+            </div>
+        </li>
+    <% } %>
+</ul> --->
+<p><br><strong>Ciclos anteriores</strong></p>
+<ul class="collapsible"> 
+    <li>
+        <div class="collapsible-header">2020</div>
+        <div class="collapsible-body">
+            <div class="collection">
+                <a href="./gestion-perfil-ciclo" class="collection-item"> Enero - Marzo 
+                <a href="./gestion-perfil-ciclo" class="collection-item">Abril - Junio 
+                <a href="./gestion-perfil-ciclo " class="collection-item">Julio - Septiembre
+                <a href="./gestion-perfil-ciclo" class="collection-item">Octubre - Diciembre
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">2019</div>
+        <div class="collapsible-body">
+            <div class="collection">
+                <a href="./gestion-perfil-ciclo" class="collection-item"> Enero - Marzo 
+                <a href="./gestion-perfil-ciclo" class="collection-item">Abril - Junio 
+                <a href="./gestion-perfil-ciclo " class="collection-item">Julio - Septiembre
+                <a href=" ./gestion-perfil-ciclo" class="collection-item">Octubre - Diciembre
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="collapsible-header">2018</div>
+        <div class="collapsible-body">
+            <div class="collection">
+                <a href="./gestion-perfil-ciclo" class="collection-item"> Enero - Marzo 
+                <a href="./gestion-perfil-ciclo" class="collection-item">Abril - Junio 
+                <a href="./gestion-perfil-ciclo " class="collection-item">Julio - Septiembre
+                <a href=" ./gestion-perfil-ciclo" class="collection-item">Octubre - Diciembre
+            </div>
+        </div>
+    </li>
+</ul>

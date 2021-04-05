@@ -1,0 +1,29 @@
+<%- include('include/head.ejs') %>
+<%- include('include/titleBar.ejs') %>
+<%- include('include/sideNavBar.ejs') %>   
+<h4>Programas</h4>
+<div class="row">
+    <div class="col s12 m4">
+        <div class="row">
+            <div class="input-field col s12" >
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Ciclo</label>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="input-field col s12">
+                <a class="waves-effect waves-light btn-small light-green accent-4" href="./agregar-ciclo"><i class="material-icons left">add_circle</i>Agregar</a>
+            </div>
+        </div>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col s12 m12">
+            <%- include('includesGestion/listas_ciclos.ejs') %>
+        </div> 
+    </div>
+</div>
+<%- include('include/footer.ejs') %>
