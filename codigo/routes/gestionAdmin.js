@@ -220,6 +220,15 @@ router.get('/editar-participante', (request,response,next) => {
     });
 });
 
+router.get('/perfil-participante', (request,response,next) => {
+    response.render('perfil_participante', {
+        tituloDeHeader: "Perfil participante",
+        tituloBarra: "Adriana Guadalupe",
+        backArrow: {display: 'block', link: '/gestionAdmin/gestion-participantes'},
+        forwArrow: arrows[1]
+    });
+});
+
 router.get('/gestion-participantes', (request,response,next) => {
     response.render('gestion_participantes', {
         participantes: participantes, 
