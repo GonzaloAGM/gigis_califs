@@ -196,7 +196,7 @@ const ciclos_anteriores = [
     },
     {
         nombre:     'Octubre-Diciembre',
-        anio:       '2019',
+        anio:       '2020',
         ruta:       './gestion-perfil-ciclo'
     },
      
