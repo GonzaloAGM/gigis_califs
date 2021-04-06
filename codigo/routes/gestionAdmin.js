@@ -208,34 +208,35 @@ const programas = [
         ciclo: 'EM2020',
         promedio: 'X',
         nivel:  [1,2],
-        referencia: '/programas/programa1'
+        referencia: './inscribir-en-grupo'
     },
     {
         nombre: 'Sensorial',
         ciclo: 'EM2020',
         promedio: 'X',
         nivel:  [1,2],
-        referencia: '/programas/programa1'
+        referencia: './inscribir-en-grupo'
     },
     {
         nombre: 'Escritura',
         ciclo: 'EM2020',
         promedio: 'X',
         nivel:  [1,2,3],
-        referencia: '/programas/programa1'
+        referencia: './inscribir-en-grupo'
     },
     {
         nombre: 'Ballet',
         ciclo: 'EM2020',
         promedio: 'X',
         nivel: [1],
-        referencia: '/programas/programa1'
+        referencia: './inscribir-en-grupo'
     },
     {
         nombre: 'Matemáticas',
         ciclo: 'EM2020',
         promedio: 'X',
-        nivel: [1,2,3]
+        nivel: [1,2,3],
+        referencia: './inscribir-en-grupo'
     }
 
 ];
@@ -363,6 +364,14 @@ router.get('/gestion-programas', (request,response,next) => {
     });
 });
 
+router.get('/inscribir-en-grupo', (request,response,next) => {
+    response.render('gc_inscribir', {
+        tituloDeHeader: "Inscribir participantes",
+        tituloBarra: "Inscribir participantes en Lectura",
+        backArrow: {display: 'block', link: '/gestionAdmin/gestion-ciclos'},
+        forwArrow: arrows[1]
+    });
+});
 router.get('/agregar-ciclo', (request,response,next) => {
     response.render('agregar_ciclo', {
         tituloDeHeader: "Nuevo ciclo",
