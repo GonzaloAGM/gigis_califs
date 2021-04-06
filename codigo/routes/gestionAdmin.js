@@ -202,6 +202,44 @@ const ciclos_anteriores = [
      
 ];
 
+const programas = [
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Sensorial',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Escritura',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel:  [1,2,3],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Ballet',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel: [1],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Matemáticas',
+        ciclo: 'EM2020',
+        promedio: 'X',
+        nivel: [1,2,3]
+    }
+
+];
+
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
@@ -325,10 +363,20 @@ router.get('/gestion-programas', (request,response,next) => {
     });
 });
 
-router.get('/gestion-ciclos/agregar-ciclo', (request,response,next) => {
+router.get('/agregar-ciclo', (request,response,next) => {
     response.render('agregar_ciclo', {
         tituloDeHeader: "Nuevo ciclo",
         tituloBarra: "Nuevo ciclo",
+        backArrow: {display: 'block', link: '/gestionAdmin/gestion-ciclos'},
+        forwArrow: arrows[1]
+    });
+});
+
+router.get('/gestion-perfil-ciclo', (request,response,next) => {
+    response.render('gestion_perfil_ciclo', {
+        programas: programas,
+        tituloDeHeader: "Ciclo EM-21",
+        tituloBarra: "Ciclo enero - marzo 2021",
         backArrow: {display: 'block', link: '/gestionAdmin/gestion-ciclos'},
         forwArrow: arrows[1]
     });
