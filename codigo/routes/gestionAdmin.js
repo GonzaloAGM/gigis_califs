@@ -37,7 +37,7 @@ const usuarios = [
         nombre:     'Marcela',
         rol:        'Terapeuta',
         rutaEditar: './editar-terapeuta',
-        ruta:       './perfil-terapeuta'
+        ruta:       './gestion-usuarios/perfil-terapeuta'
     },
     {
         nombre:     'Eva',
@@ -49,7 +49,7 @@ const usuarios = [
         nombre:     'Maye',
         rol:        'Administrador',
         rutaEditar: './editar-administrador',
-        ruta:       './perfil-administrador'
+        ruta:       './gestion-usuarios/perfil-administrador'
     },
     {
         nombre:     'Gabriela',
@@ -256,7 +256,7 @@ router.get('/editar-gestor', (request,response,next) => {
     });
 });
 
-router.get('/perfil-administrador', (request,response,next) => {
+router.get('/gestion-usuarios/perfil-administrador', (request,response,next) => {
     response.render('perfil_usuario', {
         usuarios: usuarios, 
         tituloDeHeader: "Perfil administrador",
@@ -321,6 +321,15 @@ router.get('/gestion-programas', (request,response,next) => {
         tituloDeHeader: "Gestión de programas",
         tituloBarra: "Programas",
         backArrow: {display: 'block', link: '/gestionAdmin'},
+        forwArrow: arrows[1]
+    });
+});
+
+router.get('/gestion-ciclos/agregar-ciclo', (request,response,next) => {
+    response.render('agregar_ciclo', {
+        tituloDeHeader: "Nuevo ciclo",
+        tituloBarra: "Nuevo ciclo",
+        backArrow: {display: 'block', link: '/gestionAdmin/gestion-ciclos'},
         forwArrow: arrows[1]
     });
 });

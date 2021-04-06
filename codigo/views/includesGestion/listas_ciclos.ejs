@@ -1,20 +1,19 @@
-<table class="highlight">
-    <thead>
-    <tr>
-        <th data-field="nombre">Ciclos del año en curso</th>
-        <th data-field="titulo"></th>
-    </tr>
-    </thead>
-    <tbody>
-        <% for (let ciclo of ciclos_actuales) { %>  
-            <tr>
-                <td  style="cursor: pointer;"><a href="<%= ciclo.ruta %>" class = "black-text"><%= ciclo.nombre %></a></td>
-                <td><%= ciclo.anio %></td>
-            </tr>
-        <% } %>
-    </tbody>
-</table>
 
+<p><strong>Ciclos del año en curso</strong></p>
+<ul class="collapsible"> 
+    <% for (let ciclo of ciclos_actuales) { %>
+        <li>
+            <div class="collapsible-header">
+                <a href="<%= ciclo.ruta %>" class = "black-text">
+                    <%= ciclo.nombre %> 
+                </a>
+                <span class="badge">
+                    <%= ciclo.anio %>
+                </span>
+            </div>
+        </li>
+    <% } %>
+</ul>
 <!---<ul class="collapsible">
     <% for (let ciclo of ciclos_anteriores) { %>  
         <li>
