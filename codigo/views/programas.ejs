@@ -8,23 +8,25 @@
             <div class="card-image">
               <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
             </div>
-            <div class="card-content">
+            <div>
+
               <a href="/programas/programa1">
                 <span class="card-title"><%= programa.nombre%></span>
               </a>
               <p>Ciclo: <%= programa.ciclo%></p>
               <p>Promedio: <%= programa.promedio%></p>
-              <br>
               <div class="row">
                 <div class="col s12">
-                  <div class="nivel-programas">
-                    <% for (nivel of programa.nivel) { %>
-                      <!--<i class="material-icons red-text medium "><%= nivel%></i>
-                      <i class="material-icons white-text medium"><%= nivel%></i>
-                      -->
-                      <a  href= '<%= programa.referencia %>' class="btn-large halfway-fab waves-effect waves-light red"><%= nivel%></a>
-                    <% } %>
-                  </div>
+                  <ul class="collapsible">
+                    <li>
+                      <div class="collapsible-header">Grupos</div>
+                      <div class="collapsible-body">
+                        <% for (grupo of programa.grupos) { %>   
+                          <a href="<%= programa.referencia %>">Grupo: <%= grupo%></a><br>
+                        <% } %>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
