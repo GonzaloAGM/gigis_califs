@@ -112,6 +112,40 @@ const grupos = [
         ]
         
     },
+    {
+        nombre: 'Lectura',
+        terapeuta: 'Paula Tornell Pantoja',
+        numero: 2,
+        promedio: 3,
+        participantes: [
+            {
+                nombre: 'Isaac Delgado Nieves',
+                calificacion: 3,
+                nivel: 1
+            },
+            {
+                nombre: 'Maria Ximena Pastenes Camacho',
+                calificacion: 3,
+                nivel: 2
+            },
+            {
+                nombre: 'Kaylani Avalos Irenia ',
+                calificacion: 3,
+                nivel: 3
+            },
+            {
+                nombre: 'Franco Vázquez',
+                calificacion: 3,
+                nivel: 3
+            },
+            {
+                nombre: 'Diana Canul Pelayo ',
+                calificacion: 3,
+                nivel: 2
+            }
+        ]
+        
+    }
 
 ];
 

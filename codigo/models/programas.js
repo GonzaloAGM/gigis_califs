@@ -40,49 +40,6 @@ const programas = [
             }
         ],
     },
-    {
-        nombre: 'Sensorial',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        grupos:  [
-            {
-                numero: 1,
-                referencia: '/programas/sensorial-grupo-1'
-            },
-            {
-                numero: 2,
-                referencia: '/programas/sensorial-grupo-2'
-            },
-            {
-                numero: 3,
-                referencia: '/programas/sensorial-grupo-3'
-            }
-        ],
-    },
-    {
-        nombre: 'Matemáticas',
-        ciclo: 'EM2020',
-        promedio: '3',
-        grupos: [
-            {
-                numero: 1,
-                referencia: '/programas/matematicas-grupo-1'
-            },
-            {
-                numero: 2,
-                referencia: '/programas/matematicas-grupo-2'
-            },
-            {
-                numero: 3,
-                referencia: '/programas/matematicas-grupo-3'
-            },
-            {
-                numero: 4,
-                referencia: '/programas/matematicas-grupo-4'
-            }
-        ],
-    }
-
 ];
 
 module.exports = class Programas {

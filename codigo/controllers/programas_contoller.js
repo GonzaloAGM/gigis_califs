@@ -46,6 +46,16 @@ exports.programaLectura1 = (request,response,next) => {
     });
 }
 
+exports.programaLectura2 = (request,response,next) => {
+    response.render('programas_programa1', {
+        tituloDeHeader: grupos[4].nombre,
+        tituloBarra: grupos[4].nombre,
+        grupo: grupos[4],
+        backArrow: {display: 'block', link: '/programas'},
+        forwArrow: arrows[1]
+    });
+}
+
 exports.get = (request,response,next) => {
     response.render('programas', {
         tituloDeHeader: "Programas",
