@@ -14,7 +14,7 @@ const programas = [
         referencia: '/programas/programa1'
     },
     {
-        nombre: 'Baile',
+        nombre: 'Lectura',
         ciclo: 'EM2020',
         promedio: '3',
         grupos:  [1,2],
