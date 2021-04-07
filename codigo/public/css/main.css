@@ -39,10 +39,9 @@
     margin: 2.3733333333rem 0 1.424rem 0;
 }
 
-.card-content .grupo-programas {
-    position: relative;
-    font-size: x-large;
-    width: fill-available;
+.programa-titulo {
+    font-size: xx-large;
+    padding: .35em;
 }
 
 .nivel-programas-consultas {

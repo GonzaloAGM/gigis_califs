@@ -9,26 +9,27 @@
               <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
             </div>
             <div>
-
               <a href="/programas/programa1">
-                <span class="card-title"><%= programa.nombre%></span>
+                <span class="programa-titulo"><%= programa.nombre%></span>
               </a>
-              <p>Ciclo: <%= programa.ciclo%></p>
-              <p>Promedio: <%= programa.promedio%></p>
-              <div class="row">
-                <div class="col s12">
-                  <ul class="collapsible">
-                    <li>
-                      <div class="collapsible-header">Grupos</div>
-                      <div class="collapsible-body">
-                        <% for (grupo of programa.grupos) { %>   
-                          <a href="<%= programa.referencia %>">Grupo: <%= grupo%></a><br>
-                        <% } %>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">Ciclo: <%= programa.ciclo%></div>
+                </li>
+                <li>
+                  <div class="collapsible-header">Promedio: <%= programa.promedio%></div>
+                </li>
+                <li>
+                  <div class="collapsible-header">Grupos</div>
+                  <div class="collapsible-body">
+                    <div class="collection">
+                      <% for (grupo of programa.grupos) { %>   
+                        <a href="<%= programa.referencia %>" class="collection-item">Grupo: <%= grupo%></a><br>
+                      <% } %>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div><!------------------Fin Programa 1 -------------------------------->
