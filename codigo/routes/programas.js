@@ -1,74 +1,19 @@
 const express = require('express');
 const router = express.Router();
-
 const path = require('path');
 
 const bodyParser = require('body-parser');
-
-const arrows = [
-    {display: 'none', link: ''}, //Backward arrow
-    {display: 'none', link: ''}  //Forward  arrow
-];
-
-const programas = [
-    {
-        nombre: 'Lectura 1',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Sensorial',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Escritura',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2,3],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Ballet',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel: [1],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Matemáticas',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel: [1,2,3,4]
-    }
-
-];
-
 router.use(bodyParser.urlencoded({ extended: false }))
-
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
-router.get('/programa1', (request,response,next) => {
-    response.render('programas_programa1', {
-        tituloDeHeader: "Programa 1",
-        tituloBarra: "Programa 1",
-        backArrow: {display: 'block', link: '/programas'},
-        forwArrow: arrows[1]
-    });
-});
+const programasController = require('../controllers/programas_contoller')
 
-router.get('/', (request,response,next) => {
-    response.render('programas', {
-        tituloDeHeader: "Programas",
-        tituloBarra: "Programas",
-        programas: programas,
-        backArrow: arrows[0],
-        forwArrow: arrows[1]
-    });
-});
+router.get('/gateo-y-caminata-grupo-1', programasController.programaGateo1);
+router.get('/gateo-y-caminata-grupo-2', programasController.programaGateo2);
+router.get('/cocina-grupo-1', programasController.programaCocina1);
+router.get('/lectura-grupo-1', programasController.programaLectura1);
+router.get('/lectura-grupo-2', programasController.programaLectura2);
 
+
+router.get('/', programasController.get);
 module.exports = router;

@@ -2,127 +2,119 @@
 <%- include('include/titleBar.ejs') %>
 <%- include('include/sideNavBar.ejs') %>
 
-                <div class="row">
-                    <div class="col s12 m6">
-                        <h5>Terapauta: Terapeuta1</h5>
-                    </div>
-                    <div class="col s12 m6">
-                        <h5>Promedio General: X</h5>
-                    </div>
-                </div>
-                <table>
-                    <thead>
-                      <tr>
-                          <th>Participantes</th>
-                          <th>Calificaciones</th>
-                      </tr>
-                    </thead>
-            
-                    <tbody>
-                      <tr>
-                        <td><button class="btn-flat modal-trigger" data-target="participante1">Participante 1</button></td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td><button class="btn-flat">Participante 2</button></td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td><button class="btn-flat">Participante 3</button></td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td><button class="btn-flat" data-target="">Participante 4</button></td>
-                        <td>X</td>
-                      </tr>
-                    </tbody>
-                </table>
-                <div id="participante1" class="modal"> <!-- Tabla de objetivos a calificar------------------------>
-                    <div class="modal-content">
-                        <table>
-                            <thead>
-                              <tr>
-                                  <th>Objetivos</th>
-                                  <th>Inicio</th>
-                                  <th>Final</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Objetivo 1</td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>Objetivo 2</td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                </tr>
-                                <tr>
-                                    <td>Objetivo 3</td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                    <td><div class="input-field puntaje">
-                                        <select>
-                                            <option value="" disabled selected>___</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                          </select>
-                                    </div></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="modal-footer">
-                            <a href="#" class="btn modal-close">Cerrar</a>
-                        </div>
-                    </div>
-                </div><!---------------  Fin tabla objetivos----------------------------------------------->
+    <div class="row">
+        <div class="col s12 m6">
+            <h5>Terapauta: <%= grupo.terapeuta%></h5>
+        </div>
+        <div class="col s12 m6">
+            <h5>Promedio General: <%= grupo.promedio%></h5>
+        </div>
+    </div>
+    <table>
+        <thead>
+          <tr>
+              <th>Participantes</th>
+              <th>Nivel</th>
+              <th>Calificaciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% for (participante of grupo.participantes) {%>
+            <tr>
+              <td><button class="btn-flat modal-trigger" data-target="participante1"><%= participante.nombre%></button></td>
+              <td><%= participante.nivel%></td>
+              <td><%= participante.calificacion%></td>
+            </tr>
+          <% }%>
+        </tbody>
+    </table>
+    <div id="participante1" class="modal"> <!-- Tabla de objetivos a calificar------------------------>
+        <div class="modal-content">
+            <table>
+                <thead>
+                  <tr>
+                      <th>Objetivos</th>
+                      <th>Inicio</th>
+                      <th>Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Objetivo 1</td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Objetivo 2</td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>Objetivo 3</td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                        <td><div class="input-field puntaje">
+                            <select>
+                                <option value="" disabled selected>___</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal-footer">
+                <a href="#" class="btn modal-close">Cerrar</a>
+            </div>
+        </div>
+    </div><!---------------  Fin tabla objetivos----------------------------------------------->
                 
 <%- include('include/footer.ejs') %>

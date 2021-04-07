@@ -39,9 +39,9 @@
     margin: 2.3733333333rem 0 1.424rem 0;
 }
 
-.nivel-programas a {
-    font-size: x-large;
-    margin: .12em 0.12em;
+.programa-titulo {
+    font-size: xx-large;
+    padding: .35em;
 }
 
 .nivel-programas-consultas {
