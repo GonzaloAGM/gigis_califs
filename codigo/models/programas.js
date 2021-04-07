@@ -1,8 +1,22 @@
 const programas = [
     {
-        nombre: 'Lectura 1',
+        nombre: 'Gateo y caminata',
         ciclo: 'EM2020',
-        promedio: 'X',
+        promedio: '4.5',
+        grupos:  [1,2],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Cocina',
+        ciclo: 'EM2020',
+        promedio: '4',
+        grupos: [1],
+        referencia: '/programas/programa1'
+    },
+    {
+        nombre: 'Baile',
+        ciclo: 'EM2020',
+        promedio: '3',
         grupos:  [1,2],
         referencia: '/programas/programa1'
     },
@@ -10,27 +24,13 @@ const programas = [
         nombre: 'Sensorial',
         ciclo: 'EM2020',
         promedio: 'X',
-        grupos:  [1,2],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Escritura',
-        ciclo: 'EM2020',
-        promedio: 'X',
         grupos:  [1,2,3],
-        referencia: '/programas/programa1'
-    },
-    {
-        nombre: 'Ballet',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        grupos: [1],
         referencia: '/programas/programa1'
     },
     {
         nombre: 'Matemáticas',
         ciclo: 'EM2020',
-        promedio: 'X',
+        promedio: '3',
         grupos: [1,2,3,4],
         referencia: '/programas/programa1'
     }
