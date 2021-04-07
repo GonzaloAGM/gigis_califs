@@ -1,0 +1,15 @@
+<p><strong>Programas</strong></p>
+<ul class="collapsible"> 
+    <% for (let programa of programas) { %>  
+        <li>
+            <div class="collapsible-header"><%= programa.nombre %></div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <% for (let nivel of programa.niveles) { %> 
+                        <a href="./gestion-nivel-objetivos" class="collection-item"><%= nivel.nombre %></a> 
+                    <% } %>
+                </div>
+            </div>
+        </li>
+    <% } %>
+</ul>

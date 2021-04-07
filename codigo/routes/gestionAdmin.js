@@ -4,6 +4,8 @@ const router = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const rutasGestionProgramas = require('./gestionProgramas');
+
 const arrows = [
     {display: 'none', link: ''}, //Backward arrow
     {display: 'none', link: ''}  //Forward  arrow
@@ -23,7 +25,7 @@ const tabGestion = [
     {
         nombre: 'GESTIÓN DE PROGRAMAS',
         imagen: 'https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg',
-        ruta:   'gestion-programas'
+        ruta:   'gestionProgramas'
     },
     {
         nombre: 'GESTION DE CICLOS',
@@ -244,6 +246,8 @@ const programas = [
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
+
+
 router.get('/perfil-terapeuta', (request,response,next) => {
     response.render('perfil_terapeuta', {
         usuarios: usuarios, 
@@ -355,14 +359,8 @@ router.get('/gestion-participantes', (request,response,next) => {
     });
 });
 
-router.get('/gestion-programas', (request,response,next) => {
-    response.render('gestion_programas', {
-        tituloDeHeader: "Gestión de programas",
-        tituloBarra: "Programas",
-        backArrow: {display: 'block', link: '/gestionAdmin'},
-        forwArrow: arrows[1]
-    });
-});
+router.use('/gestionProgramas', rutasGestionProgramas);
+
 
 router.get('/inscribir-en-grupo', (request,response,next) => {
     response.render('gc_inscribir', {
