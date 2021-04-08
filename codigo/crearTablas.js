@@ -171,7 +171,6 @@ for(let dato of arr){
     for(let participante of dato.participantes){
         for(numObj = acumObj; numObj < acumObj + dato.cantObj; numObj++){
             let anteObj = "";
-            let text = "";
             let antePart = "";
 
             if (numObj < 10){
