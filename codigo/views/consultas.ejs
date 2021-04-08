@@ -7,7 +7,7 @@
             
         <!-- Elegir ciclo de inicio y final-->
         <div class="col s8 push-s4 "><br>
-            <div class="row">
+            <div class="row valign-wrapper">
                 <div class="input-field col s4 m3 l3 xl3">
                         <select>
                             <optgroup label="2020">
@@ -25,7 +25,7 @@
                         <label>Desde Ciclo</label>
                         </select>
                 </div>
-                <div class="col s2 m3 l3 xl3">
+                <div class="col s2 m3 l3 xl3 center">
                     <label>
                         <input type="checkbox" checked="checked" />
                         <span>hasta</span>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col s2 m3 l3 xl3">
                     <label>
-                        <input type="checkbox" checked="checked" />
+                        <input type="checkbox" checked="checked light-blue darken-2" class="light-blue darken-2" />
                         <span>Solo ciclos activos</span>
                         </label>
                 </div>
@@ -112,7 +112,7 @@
             </div>
             <div class="col s6">
                 <h5>Edad:</h5>
-                <div class="row">
+                <div class="row valign-wrapper">
                     <div class="col s5">
                         <label>
                             <input type="number" value="1" min="0"/>
@@ -160,7 +160,7 @@
                             <p class="flow-text">
                                 calificaciones
                                 <label>
-                                    <input disabled type="checkbox" id="CalifOProg">
+                                    <input disabled type="checkbox" id="CalifOProg" name="CalifOProg">
                                     <span class="lever"></span>
                                 </label>
                                 Porcentaje de avance
@@ -173,6 +173,14 @@
                             </label>
                             
                         </div>
+                        <br>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="datosProg" id="datosProg">
+                                <span class="flow-text"> <strong class="flow-text black-text">Mostrar datos de programas</strong> </span>
+                            </label>
+                            
+                        </div>
                     </div>
                 </div>
                 <!--Boton consultar-->
@@ -182,6 +190,7 @@
                         <div style="display: none;">
                             <input type="number" id="cantProg" name="cantProg" value="0" min="0">
                         </div>
+                        <br>
                         <div>
                             <button type="submit" class="waves-effect  waves-light btn-large light-blue darken-2"> Consulta </button>
                         </div>
