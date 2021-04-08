@@ -24,7 +24,8 @@ CREATE TABLE `gigisplayhousebd`.`grupos`
     `idPrograma` CHAR(4) NOT NULL , 
     `idCiclo` CHAR(4) NOT NULL , 
     PRIMARY KEY (`idGrupo`),
-    FOREIGN KEY(`idPrograma`) REFERENCES `programas`(`idPrograma`)
+    FOREIGN KEY(`idPrograma`) REFERENCES `programas`(`idPrograma`),
+    FOREIGN KEY(`idCiclo`) REFERENCES `ciclos`(`idCiclo`)
 ) 
 ENGINE = InnoDB;
 --ALTER TABLE `grupos` ADD FOREIGN KEY(`idPrograma`) REFERENCES `programas`(`idPrograma`)
