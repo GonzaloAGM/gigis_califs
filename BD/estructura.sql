@@ -62,7 +62,6 @@ CREATE TABLE `gigisplayhousebd`.`participantes`
     `sexo` CHAR(1) NOT NULL , 
     `fechaNacimiento` DATE NOT NULL , 
     `edad` INT NOT NULL , 
-    `estatus` CHAR(1) NOT NULL , 
     `telefonoPadre` INT NULL , 
     PRIMARY KEY (`login`)
 ) 
@@ -95,7 +94,7 @@ CREATE TABLE `gigisplayhousebd`.`funciones`
 ) 
 ENGINE = InnoDB;
 
-CREATE TABLE `gigisplayhousebd`.`grupos_terapeuta` 
+CREATE TABLE `gigisplayhousebd`.`grupos_terapeutas` 
 ( 
     `idGrupo` CHAR(4) NOT NULL , 
     `login` VARCHAR(50) NOT NULL , 
