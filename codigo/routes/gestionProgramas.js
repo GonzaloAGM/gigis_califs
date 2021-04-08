@@ -130,11 +130,21 @@ subrouter.get('/gestion-nivel-objetivos', (request,response,next) => {
     response.render('objetivos', {
         objetivos:objetivos,
         tituloDeHeader: "Objetivos",
-        tituloBarra: "Lenguaje nivel 1",
+        tituloBarra: "Lenguaje nivel prelingüístico",
         backArrow: {display: 'block', link: '/gestionAdmin/gestionProgramas'},
         forwArrow: arrows[1]
     });
 });
+
+subrouter.post('/gestion-nivel-objetivos', (request,response,next) => {
+    objetivos.push({
+        nombre:     request.body.descripcionObj,
+        nivel:      1,
+        numero:     6
+    });
+    response.redirect('/gestionAdmin/gestionProgramas/gestion-nivel-objetivos');
+});
+
 subrouter.get('/', (request,response,next) => {
     response.render('gestion_programas', {
         programas: programas,

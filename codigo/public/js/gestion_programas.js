@@ -4,7 +4,7 @@ $(document).ready(function(){
     $('.modal').modal();
 });
 
-// Eliminar participante
+// Eliminar programa
 $(document).ready(() => {
     $(".eliminarProgra").on("click", () => {
       location.replace("./");
@@ -14,3 +14,11 @@ $(document).ready(() => {
 
       //let index = programas.indexOf(programa);
       //programas.splice(index,1);
+
+// Eliminar objetivos
+$(document).ready(() => {
+  $(".eliminarObj").on("click", () => {
+    location.replace("./gestion-nivel-objetivos");
+    window.alert("Se eliminó el objetivo.");
+  });
+});

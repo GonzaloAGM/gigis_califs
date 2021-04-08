@@ -1,16 +1,96 @@
 <%- include('include/head.ejs') %>
 <%- include('include/titleBar.ejs') %>
 <%- include('include/sideNavBar.ejs') %>  
-
+    
+<div class="row">
+    <div class="col s12 m4">     
+        <div class="row">
+            <div class="input-field col s12" >
+            <i class="material-icons prefix">search</i>
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="autocomplete-input">Objetivo</label>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+          <div class="input-field col s12">
+            <!-- Modal Agregar -->
+             <a class="waves-effect waves-light btn-small modal-trigger light-green accent-4" href="#agregarObjetivo"><i class="material-icons left">add_circle</i>Agregar</a>
+          </div>
+        </div>
+    </div>
+    <!-- Inicia Modal Structure agregar objetivo-->
+    <form action="/gestionAdmin/gestionProgramas/gestion-nivel-objetivos" method="POST">
+        <div id="agregarObjetivo" class="modal">
+            <div class="modal-content">
+                <h3>Nuevo objetivo</h3>
+            <ul>
+                <li><strong><br>Descripción</strong></li>
+                <li>
+                <div class="input">
+                    <input name="descripcionObj" type="text" class="validate"  placeholder="Descripción">
+                </div>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <br>
+            <button  type = "cancel" href = "gestionAdmin/gestionPrograma/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Cancel</button>
+            <button  type = "submit" href = "gestionAdmin/gestionPrograma/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Guardar</button>
+        </div>
+        </div><!--Fin Modal Structure agregar programa-->
+    </form>
+</div>
 <p><strong>Objetivos</strong></p>
 <ul class="collapsible"> 
     <% for (let objetivo of objetivos) { %>  
         <li>
             <% if (objetivo.nivel==1) { %> 
-                <div class="collapsible-header"><%= objetivo.numero %> - <%= objetivo.descripcion %></div>
+                <div class="collapsible-header">
+                    <%= objetivo.numero %> - <%= objetivo.descripcion %>
+                    <span class="badge">
+                        <!-- Modal Editar -->
+                        <a class="waves-effect waves-light modal-trigger black-text" href="#EditarObjetivo"><i class="material-icons left">edit</i></a>
+                        <!-- Modal Eliminar -->
+                        <a class="waves-effect waves-light modal-trigger black-text" href="#modalEliminarObj"><i class="material-icons left">delete</i></a>
+                    </span>
+                </div>
             <% } %>
         </li>
     <% } %>
 </ul>
+
+<!-- Modal Structure Editar Objetivo-->
+<div id="EditarObjetivo" class="modal">
+    <div class="modal-content">
+        <h3>Editar objetivo</h3>
+        <ul>
+            <li><strong><br>Descripción</strong></li>
+            <li>
+              <div class="input">
+                <input name="descripcionObj" type="text" class="validate"  placeholder="Descripción">
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <br>
+        <button  type = "cancel" href = "gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Cancel</button>
+        <button  type = "submit" href = "gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Actualizar</button>
+      </div>
+</div><!-- Fin Modal Structure Editar Programa-->
+
+<!-- Modal Structure Eliminar Objetivo-->
+<div id="modalEliminarObj" class="modal">
+    <div class="modal-content">
+    <h4>Eliminar objetivo</h4>
+    <p>¿Está seguro de eliminar este objetivo?</p>
+    </div>
+    <div class="modal-footer">
+    <a href="#" class="modal-close waves-effect waves-green btn-flat eliminarObj">Sí</a>
+    <a href="/gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+    </div>
+</div><!-- Fin Modal Structure Eliminar Objetivo-->
 
 <%- include('include/footer.ejs') %>
