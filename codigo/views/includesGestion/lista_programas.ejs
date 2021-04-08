@@ -1,0 +1,74 @@
+<p><strong>Programas</strong></p>
+<ul class="collapsible"> 
+    <% for (let programa of programas) { %>  
+        <li>
+            <div class="collapsible-header">
+                <%= programa.nombre %>
+                <span class="badge">
+                    <!-- Modal Editar -->
+                    <a class="waves-effect waves-light modal-trigger black-text" href="#EditarPrograma"><i class="material-icons left">edit</i></a>
+                </span>
+            </div>
+            <div class="collapsible-body">
+                <div class="collection">
+                    <% for (let nivel of programa.niveles) { %> 
+                        <a href="./gestion-nivel-objetivos" class="collection-item"><%= nivel.nombre %></a> 
+                    <% } %>
+                    <a class="collection-item modal-trigger" href="#agregarNivel">Nuevo nivel</a>
+                </div>
+            </div>
+        </li>
+    <% } %>
+</ul>
+
+<!-- Modal Structure Editar Programa-->
+<div id="EditarPrograma" class="modal">
+    <div class="modal-content">
+        <h3>Editar Lenguaje</h3>
+        <ul>
+          <li><strong><br>Cambiar nombre</strong></li>
+            <li>
+              <div class="input">
+                <input name="nombreProgra" type="text" class="validate"  placeholder="Nombre">
+              </div>
+          </li>
+          <li><strong><br>Cambiar imagen (para vista en el tablero)</strong></li>
+            <li>
+              <div class="file-field input-field">
+                  <div class="file-field input-field waves-effect waves-light btn-small white black-text">
+                      <i class="material-icons left">file_upload</i>Subir</a>
+                      <input type="file" id = "dirImagen">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+              </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <br>
+        <button  type = "cancel" href = "gestionAdmin/gestionPrograma" class="modal-close waves-effect btn-flat">Cancel</button>
+        <button  type = "submit" href = "gestionAdmin/gestionPrograma" class="modal-close waves-effect btn-flat">Actualizar</button>
+      </div>
+</div><!-- Fin Modal Structure Editar Programa-->
+
+<!-- Modal Structure Agregar Nivel-->
+<div id="agregarNivel" class="modal">
+    <div class="modal-content">
+        <h3>Agregar Nivel</h3>
+        <ul>
+            <li><strong><br>Nombre del nivel nuevo</strong></li>
+            <li>
+              <div class="input">
+                <input name="nombreNivel" type="text" class="validate"  placeholder="Nombre">
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <br>
+        <button  type = "cancel" href = "gestionAdmin/gestionProgramas" class="modal-close waves-effect btn-flat">Cancel</button>
+        <button  type = "submit" href = "gestionAdmin/gestionProgramas" class="modal-close waves-effect btn-flat">Agregar</button>
+      </div>
+</div><!-- Fin Modal Structure Agregar Nivel-->
