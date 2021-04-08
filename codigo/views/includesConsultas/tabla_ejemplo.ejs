@@ -2,242 +2,89 @@
     <% if(estadoConsulta) { %> <!-- Tabla de un solo programa -->
         <table class="striped highlight responsive-table">
             <thead>
-            <tr>
-                    <th data-field="Participante">Participante</th>
-                    <% if(mostrarSexEdad) { %>
-                    <th data-field="Edad">Edad</th>
-                    <th data-field="Sexo">Sexo</th>
-                    <% } %>
-                    <th data-field="Ciclo1">EM-2020</th>
-                    <th data-field="Ciclo2">AJ-2020</th>
-                    <th data-field="Ciclo3">JO-2020</th>
-                    <th data-field="Ciclo4">OD-2020</th>
-                    <th data-field="Nota inicial">Nota inicial</th>
-                    <th data-field="Nota Final">Nota Final</th>
-                    <th data-field="Promedio">Promedio</th>
-                    <th data-field="Progreso">Progreso</th>
-            </tr>
+              <tr>
+                <td><%= tablaUnProg[0].nombre %></td>
+                <% if(mostrarSexEdad) { %>
+                  <td><%= tablaUnProg[0].dato[0] %></td>
+                  <td><%= tablaUnProg[0].dato[1] %></td>
+                <% } %>
+                <% if(mostrarCalif) { %>
+                  <% for(let p of tablaUnProg[0].Periodos) { %>
+                    <td><%= p %></td>
+                  <% } %>
+                  <td><%= tablaUnProg[0].Notas[0] %></td>
+                  <td><%= tablaUnProg[0].Notas[1] %></td>
+                  <td><%= tablaUnProg[0].datosFin[0] %></td>
+                  <td><%= tablaUnProg[0].datosFin[1] %></td>
+                <% } %>
+                </tr>
             </thead>
     
             <tbody>
+              <% for(let i = 1; i < 7; i++) { %>
                 <tr>
-                <td>Participante 1</td>
+                <td><%= tablaUnProg[i].nombre %></td>
                 <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
+                  <td><%= tablaUnProg[i].dato[0] %></td>
+                  <td><%= tablaUnProg[i].dato[1] %></td>
                 <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
+                <% if(mostrarCalif) { %>
+                  <% for(let p of tablaUnProg[i].Periodos) { %>
+                    <td><%= p %></td>
+                  <% } %>
+                  <td><%= tablaUnProg[i].Notas[0] %></td>
+                  <td><%= tablaUnProg[i].Notas[1] %></td>
+                  <td><%= tablaUnProg[i].datosFin[0] %></td>
+                  <td><%= tablaUnProg[i].datosFin[1] %> %</td>
                 <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
                 </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
-                <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>2.6</td>
-                <td>3.2</td>
-                <td>3.2</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>2.7</td>
-                <td>22%</td>
-                </tr>
+              <% } %>
             </tbody>
         </table>
     <% } else { %> <!-- Tabla de varios programas -->
         <table class="striped highlight responsive-table">
-            <thead>
-              <tr>
-                  <th data-field="Participante">Participante</th>
-                  <% if(mostrarSexEdad) { %>
-                  <th data-field="Edad">Edad</th>
-                  <th data-field="Sexo">Sexo</th>
+          <thead>
+            <tr>
+              <td><%= tablaVariosProg[0].nombre %></td>
+              <% if(mostrarSexEdad) { %>
+                <td><%= tablaVariosProg[0].dato[0] %></td>
+                <td><%= tablaVariosProg[0].dato[1] %></td>
+              <% } %>
+              <% if(mostrarCalif) { %>
+                <% if(califOava) { %>
+                  <% for(let p of tablaVariosProg[0].Periodos) { %>
+                    <td><%= p %></td>
                   <% } %>
-                  <th data-field="Programa1">P1-EM2020</th>
-                  <th data-field="Programa2">P2-EM2020</th>
-                  <th data-field="Programa3">P3-EM2020</th>
-                  <th data-field="Programa1">P1-AJ2020</th>
-                  <th data-field="Programa2">P2-AJ2020</th>
-                  <th data-field="Programa3">P3-AJ2020</th>
-              </tr>
-            </thead>
-    
-            <tbody>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
+                <% } else { %>
+                  <% for(let a of tablaVariosProg[0].Avences) { %>
+                    <td><%= a %></td>
+                  <% } %>
                 <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 1; i<7; i++) { %>
               <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
+              <td><%= tablaVariosProg[i].nombre %></td>
+              <% if(mostrarSexEdad) { %>
+                <td><%= tablaVariosProg[i].dato[0] %></td>
+                <td><%= tablaVariosProg[i].dato[1] %></td>
+              <% } %>
+              <% if(mostrarCalif) { %>
+                <% if(califOava) { %>
+                  <% for(let p of tablaVariosProg[i].Periodos) { %>
+                    <td><%= p %></td>
+                  <% } %>
+                <% } else { %>
+                  <% for(let a of tablaVariosProg[i].Avences) { %>
+                    <td><%= a %></td>
+                  <% } %>
                 <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
+              <% } %>
               </tr>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
-              <tr>
-                <td>Participante 1</td>
-                <% if(mostrarSexEdad) { %>
-                <td>7</td>
-                <td>M</td>
-                <% } %>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-                <td>2.1</td>
-                <td>3.2</td>
-                <td>x</td>
-              </tr>
-            </tbody>
+            <% } %>
+          </tbody>
         </table> 
     <% } %>                
 </div>
