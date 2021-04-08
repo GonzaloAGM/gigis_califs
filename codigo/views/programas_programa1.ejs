@@ -23,7 +23,7 @@
             <tbody>
             <% for (participante of grupo.participantes) {%>
                 <tr>
-                <td><button class="btn-flat modal-trigger" data-target="participante1"><%= participante.nombre%></button></td>
+                <td><button class="btn-flat modal-trigger" data-target="participante1" ><%= participante.nombre%></button></td>
                 <td><%= participante.nivel%></td>
                 <td><%= participante.calificacion%></td>
                 </tr>
@@ -44,75 +44,28 @@
                   </tr>
                 </thead>
                 <tbody>
+                    <% for (objetivo of objetivos) { %>
                     <tr>
-                        <td>Objetivo 1</td>
+                        
+                        <td><%= objetivo.descripcion%></td>
                         <td><div class="input-field puntaje">
                             <select>
                                 <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo; puntaje++) { %>
+                                    <option value="<%= puntaje%>"><%= puntaje%></option>
+                                <% } %>
                               </select>
                         </div></td>
                         <td><div class="input-field puntaje">
                             <select>
                                 <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo; puntaje++) { %>
+                                    <option value="<%= puntaje%>"><%= puntaje%></option>
+                                <% } %>>
                               </select>
                         </div></td>
                     </tr>
-                    <tr>
-                        <td>Objetivo 2</td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                        </div></td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                        </div></td>
-                    </tr>
-                    <tr>
-                        <td>Objetivo 3</td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                        </div></td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                              </select>
-                        </div></td>
-                    </tr>
+                    <% } %>
                 </tbody>
             </table>
             <div class="modal-footer">

@@ -1,10 +1,12 @@
 const Programa = require('../models/programas');
 const Grupo = require('../models/grupos');
 const Arrow = require('../models/arrow');
+const Objetivo = require('../models/objetivos');
 
 const programas = Programa.fetchAll();
 const arrows = Arrow.fetchAll();
 const grupos = Grupo.fetchAll();
+const objetivos = Objetivo.fetchAll();
 
 exports.programaGateo = (request,response,next) => {
     const gruposGateo = [];
@@ -17,6 +19,7 @@ exports.programaGateo = (request,response,next) => {
         tituloDeHeader: gruposGateo[0].nombre,
         tituloBarra: gruposGateo[0].nombre,
         grupos: gruposGateo,
+        objetivos: objetivos,
         backArrow: {display: 'block', link: '/programas'},
         forwArrow: arrows[1]
     });
@@ -32,6 +35,7 @@ exports.programaCocina = (request,response,next) => {
         tituloDeHeader: gruposCocina[0].nombre,
         tituloBarra: gruposCocina[0].nombre,
         grupos: gruposCocina,
+        objetivos: objetivos,
         backArrow: {display: 'block', link: '/programas'},
         forwArrow: arrows[1]
     });
@@ -47,11 +51,11 @@ exports.programaLectura = (request,response,next) => {
         tituloDeHeader: gruposLectura[0].nombre,
         tituloBarra: gruposLectura[0].nombre,
         grupos: gruposLectura,
+        objetivos:objetivos,
         backArrow: {display: 'block', link: '/programas'},
         forwArrow: arrows[1]
     });
 }
-
 
 exports.get = (request,response,next) => {
     response.render('programas', {
