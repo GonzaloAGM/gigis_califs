@@ -8,11 +8,9 @@ router.use(express.static(path.join(__dirname,'..', 'public')));
 
 const programasController = require('../controllers/programas_contoller')
 
-router.get('/gateo-y-caminata-grupo-1', programasController.programaGateo1);
-router.get('/gateo-y-caminata-grupo-2', programasController.programaGateo2);
-router.get('/cocina-grupo-1', programasController.programaCocina1);
-router.get('/lectura-grupo-1', programasController.programaLectura1);
-router.get('/lectura-grupo-2', programasController.programaLectura2);
+router.get('/gateo-y-caminata', programasController.programaGateo);
+router.get('/cocina', programasController.programaCocina);
+router.get('/lectura', programasController.programaLectura);
 
 
 router.get('/', programasController.get);
