@@ -190,13 +190,8 @@ for(let dato of arr){
                 antePart = "correo";
             }
 
-            let numRand1 = Math.floor(Math.random() * dato.maxPunt * 10)/10;
-            let numRand2 = menorRand(numRand1, dato.maxPunt);
-            if(numRand1 > numRand2){
-                let temp = numRand1;
-                numRand1 = numRand2;
-                numRand2 = temp;
-            }
+            let numRand2 = Math.round(Math.random() * (dato.maxPunt-1)) + 1;
+            let numRand1 = menorRand(numRand2, dato.maxPunt);
 
             let registro = antePart + participante + "," + dato.grupo + "," + dato.niveles[k] + "," + anteObj + (numObj+1) + "," + numRand1 + "," + numRand2 + "\n";
             file_system.writeFileSync(archivo, registro,{encoding: "utf8",flag: "a+"});
@@ -209,7 +204,7 @@ for(let dato of arr){
 }
 
 function menorRand(numMayor, max){
-    let numMenor = Math.floor(Math.random() * max * 10)/10;
+    let numMenor = Math.floor(Math.random() * (max-1)) + 1;
     if(numMenor > numMayor)
         return menorRand(numMayor, max);
     else
