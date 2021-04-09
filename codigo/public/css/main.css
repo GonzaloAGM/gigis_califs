@@ -38,6 +38,12 @@
     line-height: 110%;
     margin: 2.3733333333rem 0 1.424rem 0;
 }
+.card-title{
+    font-size: xx-large !important;
+}
+.card-content p{
+    font-size: large;
+}
 
 .programa-titulo {
     font-size: xx-large;
