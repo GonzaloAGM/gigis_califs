@@ -131,7 +131,7 @@ const arr = [
     participantes: [1,6,7,8,9,10,11,14,15,17,18,19,20,23,24,26,27,28,29,30],
     grupo: "G009",
     niveles: ["N009","N010","N020"],
-    primObj: [    79,    85,    89],
+    primObj: [    79,    84,    89],
     cantObj: [     5,     5,     5],
     ciclo: "C007",
     maxPunt: 4
@@ -140,7 +140,7 @@ const arr = [
     participantes: [31,33,35,36,37,41,42,45,46,47,48,49,50,53,54,58,59,61,62,63],
     grupo: "G010",
     niveles: ["N009","N010","N020"],
-    primObj: [    79,    85,    89],
+    primObj: [    79,    84,    89],
     cantObj: [     5,     5,     5],
     ciclo: "C007",
     maxPunt: 4
@@ -149,7 +149,7 @@ const arr = [
     participantes: [65,66,68,70,71,72,73,74,75,80,82,83,86,87,91,92,93,95,97],
     grupo: "G020",
     niveles: ["N009","N010","N020"],
-    primObj: [    79,    85,    89],
+    primObj: [    79,    84,    89],
     cantObj: [     5,     5,     5],
     ciclo: "C007",
     maxPunt: 4
