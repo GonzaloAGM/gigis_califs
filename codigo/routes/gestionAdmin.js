@@ -334,7 +334,7 @@ router.get('/gestion-usuarios', (request,response,next) => {
 router.get('/editar-participante', (request,response,next) => {
     response.render('editar_participante', {
         tituloDeHeader: "Editar participante",
-        tituloBarra: "Adriana Guadalupe",
+        tituloBarra: "Editar participante",
         backArrow: {display: 'block', link: '/gestionAdmin/perfil-participante'},
         forwArrow: arrows[1]
     });

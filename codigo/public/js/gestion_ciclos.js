@@ -21,6 +21,7 @@ $(document).ready(function(){
   $(document).ready(function(){
     $('.datepicker').datepicker({ 
       firstDay: true, 
+      yearRange: 2,
       //En español
       i18n: {
           months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],

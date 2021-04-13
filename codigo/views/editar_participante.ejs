@@ -9,29 +9,28 @@
     <div class="col s11 m3">
       <form>
         <ul>
-          <li class = "camposPerfil"><strong><br>Estatus</strong></li>
+          <li class = "camposPerfil"><strong><br>Nombre</strong></li>
           <li>
-            <div class="input-field blue">
-              <label>
-                  <input class="with-gap blue lighten-1" name="group1" type="radio" checked />
-                  <span>Inactivo</span>
-                  <input class="with-gap blue lighten-1" name="group1" type="radio" checked />
-                  <span>Activo</span>
-              </label>
+            <div class="input-field ">
+              <input id="nombre" type="text" class="validate">
+              <label for="nombre">Nombre(s)</label>
             </div>
           </li>
-          <li class = "camposPerfil"><strong><br><br>Sexo</strong></li>
+          <li class = "camposPerfil"><strong>Apellido paterno</strong></li>
           <li>
-            <div class="input-field blue">
-              <label>
-                  <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
-                  <span>Femenino</span>
-                  <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
-                  <span>Masculino</span>
-              </label>
+            <div class="input-field ">
+              <input id="apellidoP" type="text" class="validate">
+              <label for="apellidoP">Primer apellido</label>
             </div>
           </li>
-          <li class = "camposPerfil"><strong><br><br>Correo</strong></li>
+          <li class = "camposPerfil"><strong>Apellido materno</strong></li>
+          <li>
+            <div class="input-field ">
+              <input id="apellidoM" type="text" class="validate">
+              <label for="apellidoM">Segundo apellido</label>
+            </div>
+          </li>
+          <li class = "camposPerfil"><strong>Correo</strong></li>
           <li>
             <div class="input-field ">
               <input id="correo" type="text" class="validate">
@@ -41,8 +40,46 @@
         </ul>
       </form>
     </div>
+    <div class="col s11 m1"></div>
     <div class="col s11 m3">
-        
+      <ul>
+        <li class = "camposPerfil"><strong><br>Sexo</strong></li>
+        <li>
+          <div class="input-field blue">
+            <label>
+                <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
+                <span>Femenino</span>
+                <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
+                <span>Masculino</span>
+            </label>
+          </div>
+        </li>
+        <li class = "camposPerfil"><strong><br><br>Estatus</strong></li>
+        <li>
+          <div class="input-field blue">
+            <label>
+                <input class="with-gap blue lighten-1" name="group1" type="radio" checked />
+                <span>Inactivo</span>
+                <input class="with-gap blue lighten-1" name="group1" type="radio" checked />
+                <span>Activo</span>
+            </label>
+          </div>
+        </li>
+        <li class = "camposPerfil"><strong><br><br>Contacto</strong></li>
+        <li>
+          <div class="input-field ">
+            <input id="tel" type="text" class="validate">
+            <label for="tel">Número telefónico</label>
+          </div>
+        </li>
+        <li class = "camposPerfil"><strong>Fecha de nacimiento</strong></li>
+        <li>
+          <div class="input-field">
+            <input type="text" id="fechaN" class="datepickerP">
+            <label for="fecha">Elige la fecha de nacimiento</label>
+          </div>
+        </li>
+      </ul>
     </div>
     <div class="col m2">
       <p></p>
