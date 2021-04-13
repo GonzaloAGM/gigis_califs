@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const rutasGestionProgramas = require('./gestionProgramas');
+const rutasGestionParticipantes = require('./gestionParticipantes');
 
 const arrows = [
     {display: 'none', link: ''}, //Backward arrow
@@ -20,7 +21,7 @@ const tabGestion = [
     {
         nombre: 'GESTIÓN DE PARTICIPANTES',
         imagen: 'https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg',
-        ruta:   'gestion-participantes'
+        ruta:   'gestionParticipantes'
     },
     {
         nombre: 'GESTIÓN DE PROGRAMAS',
@@ -65,51 +66,6 @@ const usuarios = [
         rutaEditar: './perfil-terapeuta',
         ruta:       './gestion-usuarios'
     }
-];
-
-const participantes = [
-    {
-        nombre:     'Adriana Guadalupe',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alan Eduardo',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alejandro Vangelis',
-        estatus:    'Inactivo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alexa Nicole',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alexander',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alma Angelica',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Ana del Carmen',
-        estatus:    'Inactivo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
 ];
 
 const roles = [
@@ -331,33 +287,7 @@ router.get('/gestion-usuarios', (request,response,next) => {
     });
 });
 
-router.get('/editar-participante', (request,response,next) => {
-    response.render('editar_participante', {
-        tituloDeHeader: "Editar participante",
-        tituloBarra: "Editar participante",
-        backArrow: {display: 'block', link: '/gestionAdmin/perfil-participante'},
-        forwArrow: arrows[1]
-    });
-});
-
-router.get('/perfil-participante', (request,response,next) => {
-    response.render('perfil_participante', {
-        tituloDeHeader: "Perfil participante",
-        tituloBarra: "Adriana Guadalupe",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-participantes'},
-        forwArrow: arrows[1]
-    });
-});
-
-router.get('/gestion-participantes', (request,response,next) => {
-    response.render('gestion_participantes', {
-        participantes: participantes, 
-        tituloDeHeader: "Gestión de participantes",
-        tituloBarra: "Participantes",
-        backArrow: {display: 'block', link: '/gestionAdmin'},
-        forwArrow: arrows[1]
-    });
-});
+router.use('/gestionParticipantes', rutasGestionParticipantes);
 
 router.use('/gestionProgramas', rutasGestionProgramas);
 
