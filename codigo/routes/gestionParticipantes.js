@@ -10,6 +10,8 @@ const gestionParticController = require('../controllers/gestion_participantes_co
 
 subrouter.get('/editar-participante',gestionParticController.getEditPartic);
 
+subrouter.post('/editar-participante',gestionParticController.postEditPartic);
+
 subrouter.get('/perfil-participante',gestionParticController.getPerfilPartic);
 
 subrouter.get('/', gestionParticController.get);

@@ -14,6 +14,12 @@ exports.getEditPartic = ((request,response,next) => {
     });
 });
 
+exports.postEditPartic = ((request,response,next) => {
+    response.redirect('/gestionAdmin/gestionParticipantes/perfil-participante');
+    // Aquí se updatearía
+    console.log("Accion post en gestionPartcipantesEdit");
+});
+
 exports.getPerfilPartic = ((request,response,next) => {
     response.render('perfil_participante', {
         tituloDeHeader: "Perfil participante",
@@ -34,6 +40,8 @@ exports.get = ((request,response,next) => {
 });
 
 exports.post = ((request,response,next) => {
-    response.redirect('/gestionAdmin/gestionPArticipantes');
+    const participantee = new Participante(request.body.nombre, request.body.apellidoP, request.body.apellidoM, 'Activo', './editar-participante', './perfil-participante');
+    participantee.save();
+    response.redirect('/gestionAdmin/gestionParticipantes');
 });
 

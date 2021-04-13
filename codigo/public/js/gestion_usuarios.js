@@ -60,7 +60,7 @@ function nuevoTerapeuta(){
 // Guardar participante
 $(document).ready(() => {
   $(".agregarP").on("click", () => {
-    location.replace("./gestion-participantes");
+    location.replace("./");
     window.alert("Se registró correctamente el participante.");
   });
 });
@@ -68,7 +68,7 @@ $(document).ready(() => {
 // Eliminar participante
 $(document).ready(() => {
   $(".eliminarP").on("click", () => {
-    location.replace("./gestion-participantes");
+    location.replace("./");
     window.alert("Se eliminó el participante.");
   });
 });

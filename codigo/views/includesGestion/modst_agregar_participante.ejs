@@ -1,23 +1,23 @@
-<div class="modal-content">
-    <form>
+<form action="/gestionAdmin/gestionParticipantes" method="POST">
+    <div class="modal-content">
         <h3>Nuevo usuario</h3>
         <ul>
             <li><strong><br>Nombre</strong></li>
             <li>
                 <div class="input">
-                    <input id="nombre" type="text" class="validate"  placeholder="Nombre(s)">
+                    <input id="nombreP" name="nombre"  type="text" class="validate"  placeholder="Nombre(s)">
                 </div>
             </li>
             <li><strong><br>Apellido paterno</strong></li>
             <li>
                 <div class="input">
-                    <input id="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
+                    <input id="apellidoP" name="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
                 </div>
             </li>
             <li><strong><br>Apellido materno</strong></li>
             <li>
                 <div class="input">
-                    <input id="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
+                    <input id="apellidoM" name="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
                 </div>
             </li>
             <li><strong><br>Sexo</strong></li>
@@ -34,7 +34,7 @@
             <li><strong><br><br><br>Correo</strong></li>
             <li>
                 <div class="input">
-                    <input id="correo" type="email" class="validate"  placeholder="correo@mail.com">
+                    <input id="correo" type="email" class="validate"  placeholder="correo o usuario">
                 </div>
             </li>
             <li><strong><br>Fecha de nacimiento</strong></li>
@@ -52,8 +52,8 @@
                 </div>
             </li>
         </ul>
-    </form>
   </div>
   <div class="modal-footer">
-    <a href="#"  class="modal-close waves-effect btn-flat agregarP">Agregar</a>
+    <button  type = "submit" class="modal-close waves-effect btn-flat">Agregar</button>
   </div>
+</form>
