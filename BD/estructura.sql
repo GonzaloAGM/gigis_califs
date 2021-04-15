@@ -1,6 +1,6 @@
-CREATE TABLE `gigisplayhousebd_v4`.`ciclos` 
+CREATE TABLE `gigisplayhousebd_v5`.`ciclos` 
 (
-    `idCiclo` CHAR(4) NOT NULL ,
+    `idCiclo` INT NOT NULL ,
     `fechaInicial` DATE NOT NULL , 
     `fechaFinal` DATE NOT NULL
 )
@@ -9,9 +9,9 @@ ALTER TABLE `ciclos`
 ADD CONSTRAINT `llave_ciclos` 
 PRIMARY KEY (`idCiclo`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`programas` 
+CREATE TABLE `gigisplayhousebd_v5`.`programas` 
 ( 
-    `idPrograma` CHAR(4) NOT NULL , 
+    `idPrograma` INT NOT NULL , 
     `nombrePrograma` VARCHAR(50) NOT NULL , 
     `puntajeMaximo` INT NOT NULL , 
     `dirImagen` VARCHAR(100) NULL
@@ -21,32 +21,32 @@ ALTER TABLE `programas`
 ADD CONSTRAINT `llave_programas` 
 PRIMARY KEY (`idPrograma`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`niveles` 
+CREATE TABLE `gigisplayhousebd_v5`.`niveles` 
 (
-    `idNivel` CHAR(4) NOT NULL , 
+    `idNivel` INT NOT NULL , 
     `nombreNivel` VARCHAR(50) NOT NULL , 
-    `idPrograma` CHAR(4) NOT NULL
+    `idPrograma` INT NOT NULL
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `niveles` 
 ADD CONSTRAINT `llave_niveles` 
 PRIMARY KEY (`idNivel`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`objetivos` 
+CREATE TABLE `gigisplayhousebd_v5`.`objetivos` 
 (
-    `idNivel` CHAR(4) NOT NULL , 
-    `idObjetivo` CHAR(4) NOT NULL , 
+    `idNivel` INT NOT NULL , 
+    `idObjetivo` INT NOT NULL , 
     `descripcion` VARCHAR(200) NOT NULL , 
-    `fechaRegistroObj` CHAR(1) NOT NULL
+    `fechaRegistroObj` DATE NOT NULL
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `objetivos` 
 ADD CONSTRAINT `llave_objetivos` 
 PRIMARY KEY (`idNivel`, `idObjetivo`);
 
-CREATE TABLE `gigisplayhousebd_v4`.`funciones` 
+CREATE TABLE `gigisplayhousebd_v5`.`funciones` 
 ( 
-    `idFuncion` CHAR(3) NOT NULL , 
+    `idFuncion` INT NOT NULL , 
     `requisitoFuncional` VARCHAR(50) NOT NULL
 ) 
 ENGINE = InnoDB;
@@ -54,9 +54,9 @@ ALTER TABLE `funciones`
 ADD CONSTRAINT `llave_funciones` 
 PRIMARY KEY (`idFuncion`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`roles` 
+CREATE TABLE `gigisplayhousebd_v5`.`roles` 
 ( 
-    `idRol` CHAR(3) NOT NULL , 
+    `idRol` INT NOT NULL , 
     `nombre` VARCHAR(30) NOT NULL
 ) 
 ENGINE = InnoDB;
@@ -64,10 +64,10 @@ ALTER TABLE `roles`
 ADD CONSTRAINT `llave_roles` 
 PRIMARY KEY (`idRol`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`usuarios` 
+CREATE TABLE `gigisplayhousebd_v5`.`usuarios` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
-    `password` VARCHAR(30) NOT NULL , 
+    `password` VARCHAR(100) NOT NULL , 
     `nombreUsuario` VARCHAR(50) NULL , 
     `apellidoPaterno` VARCHAR(50) NULL , 
     `apellidoMaterno` VARCHAR(50) NULL
@@ -77,7 +77,7 @@ ALTER TABLE `usuarios`
 ADD CONSTRAINT `llave_usuarios` 
 PRIMARY KEY (`login`);
 
-CREATE TABLE `gigisplayhousebd_v4`.`terapeutas` 
+CREATE TABLE `gigisplayhousebd_v5`.`terapeutas` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
     `titulo` VARCHAR(50) NULL , 
@@ -89,7 +89,7 @@ ALTER TABLE `terapeutas`
 ADD CONSTRAINT `llave_terapeutas` 
 PRIMARY KEY (`login`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`participantes` 
+CREATE TABLE `gigisplayhousebd_v5`.`participantes` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
     `sexo` CHAR(1) NOT NULL , 
@@ -102,22 +102,22 @@ ALTER TABLE `participantes`
 ADD CONSTRAINT `llave_participantes` 
 PRIMARY KEY (`login`);  
 
-CREATE TABLE `gigisplayhousebd_v4`.`grupos` 
+CREATE TABLE `gigisplayhousebd_v5`.`grupos` 
 (
-    `idGrupo` CHAR(4) NOT NULL , 
+    `idGrupo` INT NOT NULL , 
     `numeroGrupo` INT NOT NULL , 
-    `idPrograma` CHAR(4) NOT NULL , 
-    `idCiclo` CHAR(4) NOT NULL
+    `idPrograma` INT NOT NULL , 
+    `idCiclo` INT NOT NULL
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `grupos` 
 ADD CONSTRAINT `llave_grupos` 
 PRIMARY KEY (`idGrupo`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`roles_funciones` 
+CREATE TABLE `gigisplayhousebd_v5`.`roles_funciones` 
 ( 
-    `idRol` CHAR(3) NOT NULL , 
-    `idfuncion` CHAR(3) NOT NULL , 
+    `idRol` INT NOT NULL , 
+    `idfuncion` INT NOT NULL , 
     `fechaRF` DATE NOT NULL
 
 ) 
@@ -126,10 +126,10 @@ ALTER TABLE `roles_funciones`
 ADD CONSTRAINT `llave_roles_funciones` 
 PRIMARY KEY  (`idRol`, `idfuncion`);
 
-CREATE TABLE `gigisplayhousebd_v4`.`usuarios_roles`  
+CREATE TABLE `gigisplayhousebd_v5`.`usuarios_roles`  
 ( 
     `login` VARCHAR(50) NOT NULL , 
-    `idRol` CHAR(4) NOT NULL , 
+    `idRol` INT NOT NULL , 
     `fechaUR` DATE NOT NULL
 ) 
 ENGINE = InnoDB;
@@ -137,9 +137,9 @@ ALTER TABLE `usuarios_roles`
 ADD CONSTRAINT `llave_usuarios_roles` 
 PRIMARY KEY  (`login`, `idRol`);
 
-CREATE TABLE `gigisplayhousebd_v4`.`grupos_terapeutas` 
+CREATE TABLE `gigisplayhousebd_v5`.`grupos_terapeutas` 
 ( 
-    `idGrupo` CHAR(4) NOT NULL , 
+    `idGrupo` INT NOT NULL , 
     `login` VARCHAR(50) NOT NULL , 
     `fechaAsignacion` DATE NOT NULL
 ) 
@@ -148,12 +148,12 @@ ALTER TABLE `grupos_terapeutas`
 ADD CONSTRAINT `llave_grupos_terapeutas` 
 PRIMARY KEY (`idGrupo`, `login`); 
 
-CREATE TABLE `gigisplayhousebd_v4`.`participantes_grupos_objetivo` 
+CREATE TABLE `gigisplayhousebd_v5`.`participantes_grupos_objetivo` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
-    `idGrupo` CHAR(4) NOT NULL , 
-    `idNivel` CHAR(4) NOT NULL , 
-    `idObjetivo` CHAR(4) NOT NULL , 
+    `idGrupo` INT NOT NULL , 
+    `idNivel` INT NOT NULL , 
+    `idObjetivo` INT NOT NULL , 
     `puntajeInicial` INT NULL , 
     `puntajeFinal` INT NULL
 
