@@ -7,14 +7,14 @@ const bodyParser = require('body-parser');
 const rutasGestionProgramas = require('./gestionProgramas');
 const rutasGestionParticipantes = require('./gestionParticipantes');
 const rutasGestionUsuarios = require('./gestionUsuarios');
-const rutasGestionCiclos = require('./gestionCiclos');
+//const rutasGestionCiclos = require('./gestionCiclos');
 
 const Arrow = require('../models/arrow');
 const Usuario = require('../models/usuario');
 const Rol = require('../models/rol');
 const TableroGestion = require('../models/tablero_gestion');
 
-const arrow = Arrow.fetchAll();
+const arrows = Arrow.fetchAll();
 const usuario = Usuario.fetchAll();
 const rol = Rol.fetchAll();
 const tabGestion = TableroGestion.fetchAll();

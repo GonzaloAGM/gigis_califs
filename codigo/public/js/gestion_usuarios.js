@@ -20,7 +20,7 @@ $(document).ready(() => {
     }
     else if(val.find(element => element >  1)){
       console.log("gestor o admin");
-      location.replace("./gestion-usuarios");
+      location.replace("./");
       window.alert("Se guardó correctamente el usuario.");
     }
   });
@@ -29,7 +29,7 @@ $(document).ready(() => {
 // Cambiar rol de usuario existente
 $(document).ready(() => {
   $(".crearRol").on("click", () => {
-    location.replace("./gestion-usuarios");
+    location.replace("./");
     window.alert("Se registró correctamente el rol.");
   });
 });
@@ -37,7 +37,7 @@ $(document).ready(() => {
 //Nuevo rol, validar si no se seleccionó otro rol
 function nuevoRol(){
   window.alert("Se guardó correctamente el usuario.");
-  location.replace("./gestion-usuarios");
+  location.replace("./");
  // if (val.find(element => element < 2)){
  //   console.log("terapeuta");
  //   location.replace("./nuevo_terapeuta.html");
@@ -53,7 +53,7 @@ function nuevoRol(){
 }
 function nuevoTerapeuta(){
   window.alert("Se guardó correctamente el usuario.");
-  location.replace("./gestion-usuarios");
+  location.replace("./");
  
 }
 
@@ -76,7 +76,7 @@ $(document).ready(() => {
 // Eliminar usuario
 $(document).ready(() => {
   $(".eliminarU").on("click", () => {
-    location.replace("./gestion-usuarios");
+    location.replace("./");
     window.alert("Se eliminó el usuario.");
   });
 });

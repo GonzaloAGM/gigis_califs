@@ -1,83 +1,98 @@
+const Arrow = require('../models/arrow');
+const Usuario = require('../models/usuario');
+const Rol = require('../models/rol');
 
+const arrows = Arrow.fetchAll();
+const usuarios = Usuario.fetchAll();
+const roles = Rol.fetchAll();
 
-
-
-
-
-/*
-router.get('/perfil-terapeuta', (request,response,next) => {
+exports.getPerfilTerapeuta = ((request,response,next) => {
     response.render('perfil_terapeuta', {
         usuarios: usuarios, 
         tituloDeHeader: "Perfil terapeuta",
         tituloBarra: "Marcela",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/editar-terapeuta', (request,response,next) => {
+exports.getEditarTerapeuta = ((request,response,next) => {
     response.render('editar_terapeuta', {
         usuarios: usuarios, 
         roles: roles, 
         tituloDeHeader: "Editar terapeuta",
         tituloBarra: "Terapeuta",
-        backArrow: {display: 'block', link: '/gestionAdmin/perfil-terapeuta'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios/perfil-terapeuta'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/crear-terapeuta', (request,response,next) => {
+//exports.postEditarTerapeuta = ((request,response,next) => {
+//});
+
+exports.getCrearTerapeuta = ((request,response,next) => {
     response.render('crear_terapeuta', {
         tituloDeHeader: "Nuevo terapeuta",
         tituloBarra: "Nuevo terapeuta",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/perfil-gestor', (request,response,next) => {
+//exports.postCrearTerapeuta = ((request,response,next) => {
+//});
+
+exports.getPerfilGestor = ((request,response,next) => {
     response.render('perfil_usuario', {
         usuarios: usuarios, 
         tituloDeHeader: "Perfil gestor",
         tituloBarra: "Gestor",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/editar-gestor', (request,response,next) => {
+exports.getEditarGestor = ((request,response,next) => {
     response.render('editar_usuario', {
         usuarios: usuarios, 
         roles: roles, 
         tituloDeHeader: "Editar gestor",
         tituloBarra: "Gestor",
-        backArrow: {display: 'block', link: '/gestionAdmin/perfil-gestor'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios/perfil-gestor'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/gestion-usuarios/perfil-administrador', (request,response,next) => {
+//exports.postEditarGestor = ((request,response,next) => {
+    
+//});
+
+exports.getPerfilAdministrador = ((request,response,next) => {
     response.render('perfil_usuario', {
         usuarios: usuarios, 
         tituloDeHeader: "Perfil administrador",
         tituloBarra: "Administrador",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestion-usuarios'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/editar-administrador', (request,response,next) => {
+exports.getEditarAdministrador = ((request,response,next) => {
     response.render('editar_usuario', {
         usuarios: usuarios, 
         roles: roles, 
         tituloDeHeader: "Editar administrador",
         tituloBarra: "Administrador",
-        backArrow: {display: 'block', link: '/gestionAdmin/perfil-administrador'},
+        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios/perfil-administrador'},
         forwArrow: arrows[1]
     });
 });
 
-router.get('/gestion-usuarios', (request,response,next) => {
+//exports.postEditarAdministrador = ((request,response,next) => {
+    
+//});
+
+exports.get = ((request,response,next) => {
     response.render('gestion_usuarios', {
         usuarios: usuarios, 
         roles: roles, 
@@ -88,4 +103,19 @@ router.get('/gestion-usuarios', (request,response,next) => {
     });
 });
 
+/*exports.post = ((request,response,next) => {
+    if (request.body.selRol === "1"){
+        const usuario = new Usuario(request.body.nombre, request.body.rol, './editar-terapeuta', './perfil-terapeuta',);
+        usuario.save();
+    }
+    else if (request.body.selRol === "2"){
+        const usuario = new Usuario(request.body.nombre, request.body.rol,'./editar-administrador','./perfil-administrador');
+        usuario.save();
+    }
+    else{
+        const usuario = new Usuario(request.body.nombre, request.body.rol,'./editar-gestor','./perfil-gestor');
+        usuario.save();
+    }
+    response.redirect('/');
+});
 */

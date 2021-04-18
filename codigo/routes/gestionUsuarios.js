@@ -10,23 +10,23 @@ const gestionUserController = require('../controllers/gestion_usuarios_controlle
 
 subrouter.get('/perfil-terapeuta',gestionUserController.getPerfilTerapeuta);
 
-subrouter.post('/editar-terapeuta',gestionUserController.getEditarTerapeuta);
-subrouter.post('/editar-terapeuta',gestionUserController.postEditarTerapeuta);
+subrouter.get('/editar-terapeuta',gestionUserController.getEditarTerapeuta);
+//subrouter.post('/editar-terapeuta',gestionUserController.postEditarTerapeuta);
 
 subrouter.get('/crear-terapeuta',gestionUserController.getCrearTerapeuta);
-subrouter.get('/crear-terapeuta',gestionUserController.postCrearTerapeuta);
+//subrouter.post('/crear-terapeuta',gestionUserController.postCrearTerapeuta);
 
 subrouter.get('/perfil-gestor', gestionUserController.getPerfilGestor);
 
 subrouter.get('/editar-gestor', gestionUserController.getEditarGestor);
-subrouter.get('/editar-gestor', gestionUserController.postEditarGestor);
+//subrouter.post('/editar-gestor', gestionUserController.postEditarGestor);
 
 subrouter.get('/perfil-administrador', gestionUserController.getPerfilAdministrador);
 
 subrouter.get('/editar-administrador', gestionUserController.getEditarAdministrador);
-subrouter.get('/editar-administrador', gestionUserController.postEditarAdministrador);
+//subrouter.post('/editar-administrador', gestionUserController.postEditarAdministrador);
 
 subrouter.get('/', gestionUserController.get);
-subrouter.post('/', gestionUserController.post);
+//subrouter.post('/', gestionUserController.post);
 
 module.exports = subrouter;

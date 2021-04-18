@@ -3,7 +3,7 @@ const usuarios = [
         nombre:     'Marcela',
         rol:        'Terapeuta',
         rutaEditar: './editar-terapeuta',
-        ruta:       './gestion-usuarios/perfil-terapeuta'
+        ruta:       './perfil-terapeuta'
     },
     {
         nombre:     'Eva',
@@ -15,7 +15,7 @@ const usuarios = [
         nombre:     'Maye',
         rol:        'Administrador',
         rutaEditar: './editar-administrador',
-        ruta:       './gestion-usuarios/perfil-administrador'
+        ruta:       './perfil-administrador'
     },
     {
         nombre:     'Gabriela',
