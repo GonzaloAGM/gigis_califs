@@ -8,23 +8,23 @@ subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 
 const gestionUserController = require('../controllers/gestion_usuarios_controller')
 
-subrouter.get('/perfil-terapeuta',gestionUserController.get);
+subrouter.get('/perfil-terapeuta',gestionUserController.getPerfilTerapeuta);
 
-subrouter.post('/editar-terapeuta',gestionUserController.get);
-subrouter.post('/editar-terapeuta',gestionUserController.post);
+subrouter.post('/editar-terapeuta',gestionUserController.getEditarTerapeuta);
+subrouter.post('/editar-terapeuta',gestionUserController.postEditarTerapeuta);
 
-subrouter.get('/crear-terapeuta',gestionUserController.get);
-subrouter.get('/crear-terapeuta',gestionUserController.post);
+subrouter.get('/crear-terapeuta',gestionUserController.getCrearTerapeuta);
+subrouter.get('/crear-terapeuta',gestionUserController.postCrearTerapeuta);
 
-subrouter.get('/perfil-gestor', gestionUserController.get);
+subrouter.get('/perfil-gestor', gestionUserController.getPerfilGestor);
 
-subrouter.get('/editar-gestor', gestionUserController.get);
-subrouter.get('/editar-gestor', gestionUserController.post);
+subrouter.get('/editar-gestor', gestionUserController.getEditarGestor);
+subrouter.get('/editar-gestor', gestionUserController.postEditarGestor);
 
-subrouter.get('/perfil-administrador', gestionUserController.get);
+subrouter.get('/perfil-administrador', gestionUserController.getPerfilAdministrador);
 
-subrouter.get('/editar-administrador', gestionUserController.get);
-subrouter.get('/editar-administrador', gestionUserController.post);
+subrouter.get('/editar-administrador', gestionUserController.getEditarAdministrador);
+subrouter.get('/editar-administrador', gestionUserController.postEditarAdministrador);
 
 subrouter.get('/', gestionUserController.get);
 subrouter.post('/', gestionUserController.post);
