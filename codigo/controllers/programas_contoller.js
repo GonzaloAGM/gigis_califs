@@ -2,6 +2,7 @@ const Programa = require('../models/programas');
 const Grupo = require('../models/grupos');
 const Arrow = require('../models/arrow');
 const Objetivo = require('../models/objetivos');
+const Ciclo = require('../models/ciclos');
 
 const programas = Programa.fetchAll();
 const arrows = Arrow.fetchAll();
@@ -58,6 +59,13 @@ exports.programaLectura = (request,response,next) => {
 }
 
 exports.get = (request,response,next) => {
+    Ciclo.fetchIdCiclo('2020-10-30')
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     response.render('programas', {
         tituloDeHeader: "Programas",
         tituloBarra: "Programas",
