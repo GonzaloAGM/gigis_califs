@@ -1,77 +1,63 @@
-<%- include('include/head.ejs') %>
-<%- include('include/titleBar.ejs') %>
-<%- include('include/sideNavBar.ejs') %>
+<%- include('include/head.ejs') %> <%- include('include/titleBar.ejs') %> <%-
+include('include/sideNavBar.ejs') %> <% for (grupo of grupos) { %>
+<div class="row">
+  <div class="col s12 m6">
+    <h5>Terapauta: <%= grupo.nombreUsuario%> <%= grupo.apellidoPaterno%></h5>
+  </div>
+  <div class="col s12 m6">
+    <h5>Promedio General: X</h5>
+  </div>
+</div>
 
-    <% for (grupo of grupos) { %>
-        <div class="row">
-            <div class="col s12 m6">
-                <h5>Terapauta: <%= grupo.terapeuta%></h5>
-            </div>
-            <div class="col s12 m6">
-                <h5>Promedio General: <%= grupo.promedio%></h5>
-            </div>
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Participantes</th>
-                <th>Nivel</th>
-                <th>Calificaciones</th>
-            </tr>
-            </thead>
+<br /><br />
+<% } %>
 
-            <tbody>
-            <% for (participante of grupo.participantes) {%>
-                <tr>
-                <td><button class="btn-flat modal-trigger" data-target="participante1" ><%= participante.nombre%></button></td>
-                <td><%= participante.nivel%></td>
-                <td><%= participante.calificacion%></td>
-                </tr>
-            <% }%>
-            </tbody>
-        </table>
-        <br><br>
-    <% } %>
-    
-    <div id="participante1" class="modal"> <!-- Tabla de objetivos a calificar------------------------>
-        <div class="modal-content">
-            <table>
-                <thead>
-                  <tr>
-                      <th>Objetivos</th>
-                      <th>Inicio</th>
-                      <th>Final</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% for (objetivo of objetivos) { %>
-                    <tr>
-                        
-                        <td><%= objetivo.descripcion%></td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo; puntaje++) { %>
-                                    <option value="<%= puntaje%>"><%= puntaje%></option>
-                                <% } %>
-                              </select>
-                        </div></td>
-                        <td><div class="input-field puntaje">
-                            <select>
-                                <option value="" disabled selected>___</option>
-                                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo; puntaje++) { %>
-                                    <option value="<%= puntaje%>"><%= puntaje%></option>
-                                <% } %>>
-                              </select>
-                        </div></td>
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-            <div class="modal-footer">
-                <a href="#" class="btn modal-close">Cerrar</a>
+<div id="participante1" class="modal">
+  <!-- Tabla de objetivos a calificar------------------------>
+  <div class="modal-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Objetivos</th>
+          <th>Inicio</th>
+          <th>Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (objetivo of objetivos) { %>
+        <tr>
+          <td><%= objetivo.descripcion%></td>
+          <td>
+            <div class="input-field puntaje">
+              <select>
+                <option value="" disabled selected>___</option>
+                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo;
+                puntaje++) { %>
+                <option value="<%= puntaje%>"><%= puntaje%></option>
+                <% } %>
+              </select>
             </div>
-        </div>
-    </div><!---------------  Fin tabla objetivos----------------------------------------------->
-                
+          </td>
+          <td>
+            <div class="input-field puntaje">
+              <select>
+                <option value="" disabled selected>___</option>
+                <% for (let puntaje = 1; puntaje <= grupos[0].puntajeMaximo;
+                puntaje++) { %>
+                <option value="<%= puntaje%>"><%= puntaje%></option>
+                <% } %>>
+              </select>
+            </div>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <a href="#" class="btn modal-close">Cerrar</a>
+    </div>
+  </div>
+</div>
+<!---------------  Fin tabla objetivos----------------------------------------------->
+
 <%- include('include/footer.ejs') %>
