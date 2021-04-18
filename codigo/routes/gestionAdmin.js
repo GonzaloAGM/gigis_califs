@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 
 const rutasGestionProgramas = require('./gestionProgramas');
 const rutasGestionParticipantes = require('./gestionParticipantes');
+const rutasGestionUsuarios = require('./gestionUsuarios');
+const rutasGestionCiclos = require('./gestionCiclos');
 
 const arrows = [
     {display: 'none', link: ''}, //Backward arrow
@@ -16,7 +18,7 @@ const tabGestion = [
     {
         nombre: 'GESTIÓN DE USUARIOS',
         imagen: 'https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg',
-        ruta:   'gestion-usuarios'
+        ruta:   'gestionUsuarios'
     },
     {
         nombre: 'GESTIÓN DE PARTICIPANTES',
@@ -287,9 +289,13 @@ router.get('/gestion-usuarios', (request,response,next) => {
     });
 });
 
+router.use('/gestionUsuarios', rutasGestionUsuarios);
+
 router.use('/gestionParticipantes', rutasGestionParticipantes);
 
 router.use('/gestionProgramas', rutasGestionProgramas);
+
+//router.use('/gestionciclos', rutasGestionCiclos);
 
 
 router.get('/inscribir-en-grupo', (request,response,next) => {
