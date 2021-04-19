@@ -9,7 +9,12 @@ exports.getProgramas = (request, response, next) => {
   Grupo.fethcGruposProgramaActual(programa)
     .then(([grupos, fieldData1]) => {
       console.log(grupos);
-
+      let idGrupos = [];
+      for (grupo of grupos) {
+        idGrupos.push(grupo.idGrupos);
+        console.log(grupo.idGrupo);
+      }
+      console.log(idGrupos);
       response.render('programas_programa1', {
         tituloDeHeader: grupos[0].nombrePrograma,
         tituloBarra: grupos[0].nombrePrograma,
