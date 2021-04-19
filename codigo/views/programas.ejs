@@ -1,48 +1,47 @@
-<%- include('include/head.ejs') %>
-<%- include('include/titleBar.ejs') %>
-<%- include('include/sideNavBar.ejs') %>        
-    <div class="row"><!------------------Fila 1 ------------------------>
-      <% for (programa of programas) { %>
-        <div class="col s12 m6 l4"><!------------------Programa 1 ------------------------>
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg">
-            </div>
-            <div class="card-content">
-              <a href="<%= programa.referencia %>">
-                <span class="card-title"><%= programa.nombre%></span>
-              </a>
-              <br>
-              <p>Ciclo: <%= programa.ciclo%></p>
-              <p>Promedio: <%= programa.promedio%></p>
-              <p>Grupos:</p>
-              <br>
-              <div class="row">
-                <div class="col s12">
-                  <div>
-                    <% for (grupo of programa.grupos) { 
-                        switch (grupo) {
-                          case 1: %>
-                            <i class="material-icons medium red-text">looks_one</i>
-                          <% break;
-                          case 2: %>
-                            <i class="material-icons medium red-text">looks_two</i>
-                          <% break;
-                          case 3: %>
-                            <i class="material-icons medium red-text">looks_3</i>
-                          <% break;
-                          case 4: %>  
-                            <i class="material-icons medium red-text">looks_4</i>          
-                    <%       break;
-                        } 
-                      } %>
-                  </div>
-                </div>
-              </div>
+<%- include('include/head.ejs') %> <%- include('include/titleBar.ejs') %> <%-
+include('include/sideNavBar.ejs') %>
+<div class="row">
+  <!------------------Fila 1 ------------------------>
+  <% for (programa of programas) { %>
+  <div class="col s12 m6 l4">
+    <!------------------Programa 1 ------------------------>
+    <div class="card">
+      <div class="card-image">
+        <img
+          src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg"
+        />
+      </div>
+      <div class="card-content">
+        <a href="<%= programa.nombrePrograma %>">
+          <span class="card-title"><%= programa.nombrePrograma%></span>
+        </a>
+        <br />
+        <p>Ciclo: <%= programa.fechaInicio%> - <%= programa.fechaFinal%></p>
+        <p></p>
+        <p>Grupos:</p>
+        <br />
+        <div class="row">
+          <div class="col s12">
+            <div>
+              <% for (grupo of grupos) { if (programa.idPrograma ===
+              grupo.idPrograma){ switch (grupo.numeroGrupo) { case 1: %>
+              <i class="material-icons medium red-text">looks_one</i>
+              <% break; case 2: %>
+              <i class="material-icons medium red-text">looks_two</i>
+              <% break; case 3: %>
+              <i class="material-icons medium red-text">looks_3</i>
+              <% break; case 4: %>
+              <i class="material-icons medium red-text">looks_4</i>
+              <% break; } } } %>
             </div>
           </div>
-        </div><!------------------Fin Programa 1 -------------------------------->
-      <% } %>
-    </div><!------------------Fin Fila 1 -------------------------------->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------------Fin Programa 1 -------------------------------->
+  <% } %>
+</div>
+<!------------------Fin Fila 1 -------------------------------->
 
 <%- include('include/footer.ejs') %>
