@@ -1,20 +1,20 @@
-1,se autentifica,,,
-2,cerrar sesion,,,
-3,cambiar contraseña,,,
-4,registrar programa,,,
-5,modificar datos programa,,,
-6,asignar participantes,,,
-7,agregar ciclo,,,
-8,generar comparativa de programas,,,
-9,generar reporte programa individual,,,
-10,generar archivo de descarga,,,
-11,registrar usuario,,,
-12,modificar usuario,,,
-13,modificar funciones del rol,,,
-14,asignar rol,,,
-15,crear rol,,,
-16,cambiarrol,,,
-17,consultar datos participante,,,
-18,registrar puntaje de participante,,,
-19,modificar objetivos de divisiones,,,
-20,eliminar usuario,,,
+1,se autentifica
+2,cerrar sesion
+3,cambiar contraseña
+4,registrar programa
+5,modificar datos programa
+6,asignar participantes
+7,agregar ciclo
+8,generar comparativa de programas
+9,generar reporte programa individual
+10,generar archivo de descarga
+11,registrar usuario
+12,modificar usuario
+13,modificar funciones del rol
+14,asignar rol
+15,crear rol
+16,cambiarrol
+17,consultar datos participante
+18,registrar puntaje de participante
+19,modificar objetivos de divisiones
+20,eliminar usuario
