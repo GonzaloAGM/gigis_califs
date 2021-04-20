@@ -1,54 +1,43 @@
-const usuarios = [
-    {
-        nombre:     'Marcela',
-        rol:        'Terapeuta',
-        rutaEditar: './editar-terapeuta',
-        ruta:       './perfil-terapeuta'
-    },
-    {
-        nombre:     'Eva',
-        rol:        'Gestor',
-        rutaEditar: './editar-gestor',
-        ruta:       './perfil-gestor'
-    },
-    {
-        nombre:     'Maye',
-        rol:        'Administrador',
-        rutaEditar: './editar-administrador',
-        ruta:       './perfil-administrador'
-    },
-    {
-        nombre:     'Gabriela',
-        rol:        'Terapeuta',
-        rutaEditar: './editar-terapeuta',
-        ruta:       './perfil-terapeuta'
-    },
-    {
-        nombre:     'Valentina',
-        rol:        'Terapeuta',
-        rutaEditar: './perfil-terapeuta',
-        ruta:       './gestion-usuarios'
-    }
-];
+const db = require('../util/database');
 
-module.exports = class Usuarios {
+module.exports = class Usuario {
+  //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
+  constructor(nombre, rol, rutaEditar, ruta) {
+    this.nombre = nombre;
+    this.rol = rol;
+    this.rutaEditar = rutaEditar;
+    this.ruta = ruta; 
+  }
 
-    //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nombre, rol, rutaEditar, ruta) {
-        this.nombre = nombre;
-        this.rol = rol;
-        this.rutaEditar = rutaEditar;
-        this.ruta = ruta; 
-    }
+  //Este método servirá para guardar de manera persistente el nuevo objeto.
+  save() {
+    return db.execute(
+      'INSERT INTO grupos (numeroGrupo, idPrograma, idCiclo) VALUES (?,?,?)',
+      [this.numeroGrupo, this.idPrograma, this.idCiclo]
+    );
+  }
 
-    //Este método servirá para guardar de manera persistente el nuevo objeto. 
-    save() {
-        usuarios.push(this);
-    }
+  //Este método servirá para devolver los objetos del almacenamiento persistente.
+  static fetchAll() {
+    return db.execute('SELECT * FROM grupos');
+  }
 
-    //Este método servirá para devolver los objetos del almacenamiento persistente.
-    static fetchAll() {
-        return usuarios;
-    }
+  static fetchProgramasCicloActual() {
+    return db.execute(
+      'SELECT G.idPrograma, nombrePrograma, DATE_FORMAT(fechaInicial, "%M") AS fechaInicio , DATE_FORMAT(fechafinal, "%M %Y") AS fechaFinal FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY idPrograma'
+    );
+  }
 
-}
+  static fetchGruposCicloActual() {
+    return db.execute(
+      'SELECT numeroGrupo,G.idPrograma FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE'
+    );
+  }
+
+  static fethcGruposProgramaActual(programa) {
+    return db.execute(
+      'SELECT numeroGrupo,G.idGrupo,nombrePrograma, U.nombreUsuario, U.apellidoPaterno FROM grupos G ,ciclos C, programas P, grupos_terapeutas GP, usuarios U WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND G.idGrupo=GP.idGrupo AND GP.login=U.login AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE AND nombrePrograma=?',
+      [programa]
+    );
+  }
+};
