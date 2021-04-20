@@ -1,81 +1,33 @@
-const participantes = [
-    {
-        nombre:     'Adriana Guadalupe',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alan Eduardo',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alejandro Vangelis',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Inactivo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alexa Nicole',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alexander',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Alma Angelica',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Activo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-    {
-        nombre:     'Ana del Carmen',
-        apellidoP:  '',
-        apellidoM:  '',
-        estatus:    'Inactivo',
-        rutaEditar: './editar-participante',
-        ruta:       './perfil-participante'
-    },
-];
+const db = require('../util/database');
 
 module.exports = class Participante {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nombre, apellidoP, apellidoM, estatus, rutaEditar, ruta) {
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.estatus = estatus;
-        this.rutaEditar = rutaEditar;
-        this.ruta = ruta;
+    constructor(login, password, nombreUsuario, apellidoPaterno, apellidoMaterno, sexo, fechaNacimiento, edad, telefonoPadre) {
+        this.login = login;
+        this.password = password;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.telefonoPadre = telefonoPadre;
     }
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        participantes.push(this);
+        return db.execute('INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?, ?, ?, ?, ?)',
+            [this.login, this.password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
+        ).then(() => {
+            db.execute('INSERT INTO participantes (login, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?)',
+                [this.login ,this.sexo,this.fechaNacimiento, this.edad,this.telefonoPadre])
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return participantes;
+        return db.execute('SELECT * FROM participantes');
     }
-
 }

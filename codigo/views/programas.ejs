@@ -1,5 +1,6 @@
-<%- include('include/head.ejs') %> <%- include('include/titleBar.ejs') %> <%-
-include('include/sideNavBar.ejs') %>
+<%- include('include/head.ejs') %> 
+<%- include('include/titleBar.ejs') %>
+<%-include('include/sideNavBar.ejs') %>
 <div class="row">
   <!------------------Fila 1 ------------------------>
   <% for (programa of programas) { %>
@@ -7,9 +8,7 @@ include('include/sideNavBar.ejs') %>
     <!------------------Programa 1 ------------------------>
     <div class="card">
       <div class="card-image">
-        <img
-          src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg"
-        />
+        <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg" />
       </div>
       <div class="card-content">
         <a href="<%= programa.nombrePrograma %>">
@@ -23,16 +22,24 @@ include('include/sideNavBar.ejs') %>
         <div class="row">
           <div class="col s12">
             <div>
-              <% for (grupo of grupos) { if (programa.idPrograma ===
-              grupo.idPrograma){ switch (grupo.numeroGrupo) { case 1: %>
-              <i class="material-icons medium red-text">looks_one</i>
-              <% break; case 2: %>
-              <i class="material-icons medium red-text">looks_two</i>
-              <% break; case 3: %>
-              <i class="material-icons medium red-text">looks_3</i>
-              <% break; case 4: %>
-              <i class="material-icons medium red-text">looks_4</i>
-              <% break; } } } %>
+              <% for (grupo of grupos) { 
+                if (programa.idPrograma === grupo.idPrograma){ 
+                  switch (grupo.numeroGrupo) { 
+                    case 1: %>
+                      <i class="material-icons medium red-text">looks_one</i>
+                      <% break; 
+                    case 2: %>
+                      <i class="material-icons medium red-text">looks_two</i>
+                      <% break; 
+                    case 3: %>
+                      <i class="material-icons medium red-text">looks_3</i>
+                      <% break; 
+                    case 4: %>
+                      <i class="material-icons medium red-text">looks_4</i>
+                      <% break; 
+                    } 
+                  } 
+                } %>
             </div>
           </div>
         </div>
