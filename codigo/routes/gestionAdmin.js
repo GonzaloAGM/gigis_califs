@@ -20,7 +20,7 @@ router.use('/gestionParticipantes', rutasGestionParticipantes);
 
 router.use('/gestionProgramas', rutasGestionProgramas);
 
-router.use('/gestionciclos', rutasGestionCiclos);
+router.use('/gestionCiclos', rutasGestionCiclos);
 
 router.get('/', gestionAdminController.get);
 

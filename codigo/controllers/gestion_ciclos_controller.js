@@ -1,3 +1,7 @@
+const Arrow = require('../models/arrow');
+
+const arrows = Arrow.fetchAll();
+
 const ciclos_actuales = [
     {
         nombre:     'Enero-Marzo',
@@ -115,25 +119,25 @@ const programas = [
 ];
 
 
-exports.getInsGrupo = ((request,response,next) => {
+exports.getInsGrupo = (request,response,next) => {
     response.render('gc_inscribir', {
         tituloDeHeader: "Inscribir participantes",
         tituloBarra: "Inscribir participantes en Lectura",
         backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
         forwArrow: arrows[1]
     });
-});
+};
 
-exports.getAgrCiclo = ((request,response,next) => {
+exports.getAgrCiclo = (request,response,next) => {
     response.render('agregar_ciclo', {
         tituloDeHeader: "Nuevo ciclo",
         tituloBarra: "Nuevo ciclo",
         backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
         forwArrow: arrows[1]
     });
-});
+};
 
-exports.get = ((request,response,next) => {
+exports.getPerfilCiclo = (request,response,next) => {
     response.render('gestion_perfil_ciclo', {
         programas: programas,
         tituloDeHeader: "Ciclo EM-21",
@@ -141,9 +145,9 @@ exports.get = ((request,response,next) => {
         backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
         forwArrow: arrows[1]
     });
-});
+};
 
-exports.get = ((request,response,next) => {
+exports.get = (request,response,next) => {
     response.render('gestion_ciclos', {
         ciclos_actuales: ciclos_actuales,
         ciclos_anteriores: ciclos_anteriores,
@@ -152,4 +156,4 @@ exports.get = ((request,response,next) => {
         backArrow: {display: 'block', link: '/gestionAdmin'},
         forwArrow: arrows[1]
     });
-});
+};

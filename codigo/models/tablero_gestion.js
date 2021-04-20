@@ -17,7 +17,7 @@ const tabGestion = [
     {
         nombre: 'GESTION DE CICLOS',
         imagen: 'https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg',
-        ruta:   'gestion-ciclos'
+        ruta:   'gestionCiclos'
     }
 ];
 
