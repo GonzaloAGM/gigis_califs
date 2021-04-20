@@ -1,6 +1,7 @@
 <%- include('include/head.ejs') %> 
 <%- include('include/titleBar.ejs') %>
 <%-include('include/sideNavBar.ejs') %>
+
 <div class="row">
   <!------------------Fila 1 ------------------------>
   <% for (programa of programas) { %>
@@ -11,7 +12,7 @@
         <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg" />
       </div>
       <div class="card-content">
-        <a href="<%= programa.nombrePrograma %>">
+        <a href="<%= programa.idPrograma %>">
           <span class="card-title"><%= programa.nombrePrograma%></span>
         </a>
         <br />

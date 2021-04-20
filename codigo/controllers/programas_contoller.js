@@ -1,12 +1,13 @@
 const Grupo = require('../models/grupos');
+const Programa = require('../models/programas');
 const Arrow = require('../models/arrow');
 
 const arrows = Arrow.fetchAll();
 
 exports.getProgramas = (request, response, next) => {
-  const programa = request.params.nombre_programa;
-  console.log(programa + ': -------------------------------------------------');
-  Grupo.fethcGruposProgramaActual(programa)
+  const idPrograma = request.params.id_programa;
+  console.log(idPrograma + ': -----------------------------------------------');
+  Grupo.fethcGruposProgramaActual(idPrograma)
     .then(([grupos, fieldData1]) => {
       console.log(grupos);
       let idGrupos = [];
@@ -28,7 +29,7 @@ exports.getProgramas = (request, response, next) => {
 };
 
 exports.get = (request, response, next) => {
-  Grupo.fetchProgramasCicloActual()
+  Programa.fetchProgramasCicloActual()
     .then(([programas, fieldData1]) => {
       Grupo.fetchGruposCicloActual()
         .then(([grupos, fieldData2]) => {

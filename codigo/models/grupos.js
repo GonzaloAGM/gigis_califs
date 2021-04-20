@@ -21,22 +21,16 @@ module.exports = class Grupo {
     return db.execute('SELECT * FROM grupos');
   }
 
-  static fetchProgramasCicloActual() {
-    return db.execute(
-      'SELECT G.idPrograma, nombrePrograma, DATE_FORMAT(fechaInicial, "%M") AS fechaInicio , DATE_FORMAT(fechafinal, "%M %Y") AS fechaFinal FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY idPrograma'
-    );
-  }
-
   static fetchGruposCicloActual() {
     return db.execute(
       'SELECT numeroGrupo,G.idPrograma FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE'
     );
   }
 
-  static fethcGruposProgramaActual(programa) {
+  static fethcGruposProgramaActual(idPrograma) {
     return db.execute(
-      'SELECT numeroGrupo,G.idGrupo,nombrePrograma, U.nombreUsuario, U.apellidoPaterno FROM grupos G ,ciclos C, programas P, grupos_terapeutas GP, usuarios U WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND G.idGrupo=GP.idGrupo AND GP.login=U.login AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE AND nombrePrograma=?',
-      [programa]
+      'SELECT numeroGrupo,G.idGrupo,nombrePrograma, U.nombreUsuario, U.apellidoPaterno FROM grupos G ,ciclos C, programas P, grupos_terapeutas GP, usuarios U WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND G.idGrupo=GP.idGrupo AND GP.login=U.login AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE AND P.idPrograma=?',
+      [idPrograma]
     );
   }
 };
