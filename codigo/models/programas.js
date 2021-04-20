@@ -1,40 +1,12 @@
-const programas = [
-    {
-        nombre: 'Gateo y caminata',
-        ciclo: 'EM2020',
-        promedio: '4.5',
-        grupos:  [1,2],
-        puntajeMaximo: 4,
-        referencia: '/programas/gateo-y-caminata'
-    },
-    {
-        nombre: 'Cocina',
-        ciclo: 'EM2020',
-        promedio: '4',
-        grupos: [1],
-        puntajeMaximo: 4,
-        referencia: '/programas/cocina'
-    },
-    {
-        nombre: 'Lectura',
-        ciclo: 'EM2020',
-        promedio: '3',
-        grupos:  [1,2],
-        puntajeMaximo: 5, 
-        referencia: '/programas/lectura'
-    },
-];
+const db = require('../util/database');
 
 module.exports = class Programas {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nombre, ciclo, promedio, grupos, puntajeMaximo, referencia) {
-        this.nombre = nombre;
-        this.ciclo = ciclo;
-        this.promedio = promedio;
-        this.grupos = grupos;
+    constructor(nombrePrograma, puntajeMaximo, dirImagen) {
+        this.nombrePrograma = nombrePrograma;
         this.puntajeMaximo = puntajeMaximo;
-        this.referencia = referencia;
+        this.dirImagen = dirImagen;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
@@ -46,6 +18,11 @@ module.exports = class Programas {
     static fetchAll() {
         return programas;
     }
-
+    
+    static fetchProgramasCicloActual() {
+        return db.execute(
+        'SELECT G.idPrograma, nombrePrograma, DATE_FORMAT(fechaInicial, "%M") AS fechaInicio , DATE_FORMAT(fechafinal, "%M %Y") AS fechaFinal FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY idPrograma'
+        );
+    }
 }
 
