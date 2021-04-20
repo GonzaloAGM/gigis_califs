@@ -130,6 +130,7 @@ exports.getInsGrupo = (request,response,next) => {
 
 exports.getAgrCiclo = (request,response,next) => {
     response.render('agregar_ciclo', {
+        programas: programas,
         tituloDeHeader: "Nuevo ciclo",
         tituloBarra: "Nuevo ciclo",
         backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
