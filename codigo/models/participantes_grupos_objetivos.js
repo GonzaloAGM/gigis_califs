@@ -24,8 +24,7 @@ module.exports = class Participante_Grupo_Objetivo {
         return db.execute('SELECT * FROM participantes_grupos_objetivos');
     }
 
-    static fetchParticipantesPorGrupo(id) {
-        return db.execute('SELECT login, PGO.idGrupo, PGO.idNivel, O.descripcion, PGO.puntajeInicial, PGO.puntajeFinal FROM participantes_grupos_objetivo PGO, objetivos O WHERE PGO.idObjetivo=O.idObjetivo AND idGrupo=? ORDER BY `PGO`.`login` ASC',[id]);
+    static fetchParticipantesPorGrupo(idGrupo) {
+        return db.execute('SELECT login, PGO.idGrupo, PGO.idNivel, O.descripcion, PGO.puntajeInicial, PGO.puntajeFinal FROM participantes_grupos_objetivo PGO, objetivos O WHERE PGO.idObjetivo=O.idObjetivo AND idGrupo=? ORDER BY `PGO`.`login` ASC',[idGrupo]);
     }
-
 }
