@@ -9,10 +9,15 @@
     <tbody>
     <% for (let usuario of usuarios) { %>  
         <tr>
-            <td  style="cursor: pointer;"><a href="<%= usuario.ruta %>" class = "black-text"><%= usuario.nombre %></a></td>
-            <td><%= usuario.rol %></td>
+            <td  style="cursor: pointer;"><a href="<%= usuario.login%>-perfil" class = "black-text"><%= usuario.nombreUsuario %> <%= usuario.apellidoPaterno %></a></td>
+            <% for (let rol of roldeusuarios) { %> 
+                <% if (usuario.login === rol.login) { %> 
+                    <td><%= rol.nombre %></td>
+                    <% break %> 
+                <% } %> 
+            <% } %>
             <td>
-            <a href="<%= usuario.rutaEditar %>" class = "black-text"><i class="material-icons left" style="cursor: pointer;">edit</i></a>
+            <a href="<%= usuario.login %>-editar" class = "black-text"><i class="material-icons left" style="cursor: pointer;">edit</i></a>
             <!-- Modal Eliminar Usuario -->
             <a class="modal-trigger black-text" href="#modalEliminarU"><i class="material-icons left">delete</i></a>
             </td>

@@ -22,4 +22,11 @@ module.exports = class Usuario {
   static fetchAll() {
     return db.execute('SELECT * FROM usuarios');
   }
+
+  static fetchSin(nombreRol) {
+    return db.execute(
+      'SELECT nombreUsuario, login FROM  usuarios WHERE login NOT IN (SELECT U.login FROM roles R, usuarios_roles UR, usuarios U WHERE R.idRol = UR.idRol AND U.login = UR.login AND R.nombre = ?)',
+      [nombreRol]
+      );
+  }
 }
