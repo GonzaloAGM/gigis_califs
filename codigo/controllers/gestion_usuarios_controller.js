@@ -39,7 +39,6 @@ exports.get = (request, response, next) => {
 exports.postNuevoUsuario = ((request,response,next) => {
     const usuario = new Usuario(request.body.correo, 'contraseña', request.body.nombre, request.body.apellidoP, request.body.apellidoM);
     const usuario_rol = new Usuario_Rol(request.body.correo, request.body.selRol);
-    const ruta = '';
     usuario.save()
         .then(() => {
             usuario_rol.save()
@@ -50,11 +49,11 @@ exports.postNuevoUsuario = ((request,response,next) => {
                         response.redirect('/gestionAdmin/gestionUsuarios/');  
                 }).catch( err => {
                     console.log(err);
-                    response.redirect('/gestionAdmin/gestionUsuarios/');    
+                    response.redirect('/gestionAdmin/');    
                 });
         }).catch( err => {
             console.log(err);
-            response.redirect('/gestionAdmin/gestionUsuarios/');    
+            response.redirect('/gestionAdmin/');    
         });
 });
 

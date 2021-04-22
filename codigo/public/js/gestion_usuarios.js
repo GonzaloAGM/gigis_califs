@@ -10,10 +10,22 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
-// Validar rol para crear usuario
-$(document).ready(() => {
-  $(".toastRegUsuario").on("click", () => {
-      //M.toast({html: 'Se registró correctamente el usuario.'});
+// Avisar que se creo correctamente el usuario
+function toastRegUser(){   
+  M.toast({
+            html: 'Se registró correctamente el usuario.',
+            displayLenght: 5000
+          });
+}
+
+ // Autocompletar
+ $(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+    data: {
+      "Alejandra": null,
+      "Carolina": null,
+      "Eva": null
+    },
   });
 });
 
