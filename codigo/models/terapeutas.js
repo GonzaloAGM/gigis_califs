@@ -12,8 +12,8 @@ module.exports = class Terapeuta{
   //Este método servirá para guardar de manera persistente el nuevo objeto.
   save() {
     return db.execute(
-        'INSERT INTO terapeutas (login,titulo, cv ) VALUES (?, ?, ?)',
-        [this.login ,this.titulo,this.cv, this.estatus, 'activo']
+        'INSERT INTO terapeutas (login, titulo, cv, estatus) VALUES (?, ?, ?, ?)',
+        [this.login, this.titulo, this.cv, this.estatus]
     );
   }
 

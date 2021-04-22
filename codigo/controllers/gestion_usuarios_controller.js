@@ -1,10 +1,12 @@
 const Arrow = require('../models/arrow');
 const Usuario = require('../models/usuarios');
+const Terapeuta = require('../models/terapeutas');
 const Usuario_Rol = require('../models/usuarios_roles');
 const Rol = require('../models/roles');
 
 const arrows = Arrow.fetchAll();
 const usuarios = Usuario.fetchAll();
+const terapeutas = Terapeuta.fetchAll();
 const usuarios_roles = Usuario_Rol.fetchAll();
 const roles = Rol.fetchAll();
 
@@ -15,6 +17,17 @@ exports.getCrearTerapeuta = ((request,response,next) => {
         backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
         forwArrow: arrows[1]
     });
+});
+
+exports.postCrearTerapeuta = ((request,response,next) => {
+    const terapeuta = new Terapeuta(request.session.ultimo_usuario, request.body.titulo, request.body.cv,'A');
+    terapeuta.save()
+        .then(() => {
+            response.redirect('/gestionAdmin/gestionUsuarios/');  
+        }).catch( err => {
+            console.log(err);
+            response.redirect('/gestionAdmin/gestionUsuarios/crear-terapeuta');    
+        });
 });
 
 exports.get = (request, response, next) => {
@@ -43,9 +56,11 @@ exports.postNuevoUsuario = ((request,response,next) => {
         .then(() => {
             usuario_rol.save()
                 .then(() => {
-                    if (request.body.selRol === '2')                
+                    if (request.body.selRol === '2'){ 
+                        request.session.ultimo_usuario = request.body.correo;
+                        console.log(request.session.ultimo_usuario);              
                         response.redirect('/gestionAdmin/gestionUsuarios/crear-terapeuta'); 
-                    else
+                    }else
                         response.redirect('/gestionAdmin/gestionUsuarios/');  
                 }).catch( err => {
                     console.log(err);
