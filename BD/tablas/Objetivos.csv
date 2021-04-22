@@ -96,15 +96,15 @@
 13,96,Escribe lo que se le dicta,2021-04-05
 13,97,Escribe palabras por deletreo,2021-04-05
 13,98,Identifica la silaba tonica de las palabras,2021-04-05
-11,99,NULL,2021-04-05
-11,100,NULL,2021-04-05
-11,101,NULL,2021-04-05
-11,102,NULL,2021-04-05
-11,103,NULL,2021-04-05
+11,99,Puede caminar en linea recta,2021-04-05
+11,100,Puede mantener distancia dentro de una fila,2021-04-05
+11,101,Tiene buen equilibrio,2021-04-05
+11,102,Puede mantener un baso de agua sin distraerse,2021-04-05
+11,103,Puede comer sin que se le caiga la comida,2021-04-05
 12,104,Sabe contar hasta un millon,2021-04-05
 12,105,Realiza multiplicaciones de un digito,2021-04-05
 12,106,Realiza restas de numeros de un digito,2021-04-05
-12,107,Realiza multiplicaciones de un dígito,2021-04-05
+12,107,Realiza multiplicaciones de dos dígitos,2021-04-05
 12,108,Entiende la diferencia entre unidades decenas y centenas,2021-04-05
 21,109,Realiza divisiones simples,2021-04-05
 21,110,Entiendan el concepto de cantidades fraccionarias,2021-04-05
@@ -116,48 +116,48 @@
 22,116,Puede interpretar textos que hablen de cantidades,2021-04-05
 22,117,Realiza sumas de un digito,2021-04-03
 22,118,Sabe contar hasta el cien,2021-04-03
-23,119,NULL,2021-04-03
-23,120,NULL,2021-04-03
-23,121,NULL,2021-04-03
-23,122,NULL,2021-04-03
-23,123,NULL,2021-04-03
-24,124,NULL,2021-04-03
-24,125,NULL,2021-04-03
-24,126,NULL,2021-04-03
-24,127,NULL,2021-04-03
-24,128,NULL,2021-04-03
-25,129,NULL,2021-04-03
-25,130,NULL,2021-04-05
-25,131,NULL,2021-04-05
-25,132,NULL,2021-04-05
-25,133,NULL,2021-04-05
-26,134,NULL,2021-04-05
-26,135,NULL,2021-04-05
-26,136,NULL,2021-04-05
-26,137,NULL,2021-04-05
-26,138,NULL,2021-04-05
-27,139,NULL,2021-04-05
-27,140,NULL,2021-04-05
-27,141,NULL,2021-04-05
-27,142,NULL,2021-04-05
-27,143,NULL,2021-04-05
-28,144,NULL,2021-04-05
-28,145,NULL,2021-04-05
-28,146,NULL,2021-04-05
-28,147,NULL,2021-04-05
-28,148,NULL,2021-04-05
-29,149,NULL,2021-04-05
-29,150,NULL,2021-04-05
-29,151,NULL,2021-04-05
-29,152,NULL,2021-04-05
-29,153,NULL,2021-04-05
-30,154,NULL,2021-04-05
-30,155,NULL,2021-04-05
-30,156,NULL,2021-04-05
-30,157,NULL,2021-04-05
-30,158,NULL,2021-04-05
-31,159,NULL,2021-04-05
-31,160,NULL,2021-04-05
-31,161,NULL,2021-04-05
-31,162,NULL,2021-04-05
-31,163,NULL,2021-04-05
+23,119,Puede leer 100 palabras por minuto,2021-04-03
+23,120,Puede leer 120 palabras por minuto,2021-04-03
+23,121,Puede diferenciar entre la S y la C,2021-04-03
+23,122,Puede distinguir donde usar la H,2021-04-03
+23,123,Puede entender lecturas mas complicadas,2021-04-03
+24,124,Puede distinguir las letras de un texto,2021-04-03
+24,125,Puede distiguir palabras de un texto,2021-04-03
+24,126,Puede formar montañas de caligrafia,2021-04-03
+24,127,Puede distinguir lo que falta en una figura más sencilla y completarlo,2021-04-03
+24,128,Puede distinguir lo que falta en una figura más complicada y completarlo,2021-04-03
+25,129,Capacidad para percibir y comprender el punto de vista de los demás,2021-04-03
+25,130,Aceptación adecuada de las críticas,2021-04-05
+25,131,Comportamiento democrático en situaciones de grupo,2021-04-05
+25,132,Habilidad para pedir la información que precise o solicitar ayuda,2021-04-05
+25,133,Percepción de las interacciones sociales desde diferentes perspectivas,2021-04-05
+26,134,Se prestará especial atención a los saludos y despedidas en todas las situaciones y a la utilización de "por favor" y de "gracias" cuando se solicita algo (normas de cortesía básica),2021-04-05
+26,135,Autopercepción y percepción en los demás de los elementos fundamentales del lenguaje corporal,2021-04-05
+26,136,Saluda de forma adecuada a distintas personas de su entorno social. Se despide correctamente,2021-04-05
+26,137,Se presenta y presenta a sus acompañantes en las situaciones adecuadas,2021-04-05
+26,138,Muestra la conducta adecuada ante las personas que le insultan y ofenden,2021-04-05
+27,139,Controlar la correcta colocación del cuerpo,2021-04-05
+27,140,Lograr dominio en la coordinación y desarrollo de todos los movimientos,2021-04-05
+27,141,Ejecutar con musicalidad los movimientos que configuran la danza,2021-04-05
+27,142,Aplicar los conocimientos técnicos y estilísticos adquiridos,2021-04-05
+27,143,Conseguir la calidad del movimiento necesaria para alcanzar el máximo grado de interpretación artística,2021-04-05
+28,144,Capacidad de concentrarse en estímulos visuales,2021-04-05
+28,145,Presenta necesidad de la comunicación oral,2021-04-05
+28,146,Condiciona patrones adecuados de conducta,2021-04-05
+28,147,Socialización y empatia,2021-04-05
+28,148,Promueve la integración al grupo,2021-04-05
+29,149,Lanzamiento a canasta,2021-04-05
+29,150,Pases con un balón de fútbol, con los pies,2021-04-05
+29,151,Pases con un balón de baloncesto, con las manos,2021-04-05
+29,152,Puede botar un balon libremente,2021-04-05
+29,153,Puede usar la ejecución técnica del acto motriz,2021-04-05
+30,154,Puede caminar con postura correcta,2021-04-05
+30,155,Al estar de pie sus pies miran alfrente,2021-04-05
+30,156,Puede mantener la cabeza mirando hacia el frente,2021-04-05
+30,157,Al estar parado no presenta hiperextension de rodilla,2021-04-05
+30,158,Puede estirar diferentes partes del cuerpo,2021-04-05
+31,159,Guarda conexiones sistemáticas con lo que no es juego,2021-04-05
+31,160,Se da cuenta del mundo exterior y de sí mismo,2021-04-05
+31,161,Cooperacion en equipo,2021-04-05
+31,162,Flexibidad para resolver problemas,2021-04-05
+31,163,Puede realizar un kime sin problemas,2021-04-05
