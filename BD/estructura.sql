@@ -37,7 +37,7 @@ CREATE TABLE `gigisplayhousebd_v5`.`objetivos`
     `idNivel` INT NOT NULL , 
     `idObjetivo` INT NOT NULL , 
     `descripcion` VARCHAR(200) NOT NULL , 
-    `fechaRegistroObj` DATE NOT NULL
+    `fechaRegistroObj` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `objetivos` 
@@ -118,7 +118,7 @@ CREATE TABLE `gigisplayhousebd_v5`.`roles_funciones`
 ( 
     `idRol` INT NOT NULL , 
     `idfuncion` INT NOT NULL , 
-    `fechaRF` DATE NOT NULL
+    `fechaRF` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 
 ) 
 ENGINE = InnoDB;
@@ -130,7 +130,7 @@ CREATE TABLE `gigisplayhousebd_v5`.`usuarios_roles`
 ( 
     `login` VARCHAR(50) NOT NULL , 
     `idRol` INT NOT NULL , 
-    `fechaUR` DATE NOT NULL
+    `fechaUR` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `usuarios_roles` 
@@ -141,7 +141,7 @@ CREATE TABLE `gigisplayhousebd_v5`.`grupos_terapeutas`
 ( 
     `idGrupo` INT NOT NULL , 
     `login` VARCHAR(50) NOT NULL , 
-    `fechaAsignacion` DATE NOT NULL
+    `fechaAsignacion` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) 
 ENGINE = InnoDB;
 ALTER TABLE `grupos_terapeutas` 
