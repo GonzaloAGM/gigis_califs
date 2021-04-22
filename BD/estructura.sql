@@ -7,7 +7,7 @@ CREATE TABLE `gigisplayhousebd_v5`.`ciclos`
 ENGINE = InnoDB;
 ALTER TABLE `ciclos` 
 ADD CONSTRAINT `llave_ciclos` 
-PRIMARY KEY (`idCiclo`); 
+PRIMARY KEY (`idCiclo`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`programas` 
 ( 
@@ -267,3 +267,7 @@ FOREIGN KEY (`idNivel`, `idObjetivo`)
 REFERENCES `objetivos`(`idNivel`, `idObjetivo`) 
 ON DELETE RESTRICT 
 ON UPDATE RESTRICT;
+
+ALTER TABLE `ciclos`
+ADD CONSTRAINT `CK_fechaInicial_vs_fechaFinal`
+CHECK (fechaInicial < fechaFinal);

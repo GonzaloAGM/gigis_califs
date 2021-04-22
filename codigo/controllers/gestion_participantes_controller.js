@@ -1,5 +1,5 @@
 const Arrow = require('../models/arrow');
-const Participante = require('../models/participante');
+const Participante = require('../models/participantes');
 
 const arrows = Arrow.fetchAll();
 const participantes = Participante.fetchAll();
