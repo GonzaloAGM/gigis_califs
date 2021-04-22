@@ -1,45 +1,48 @@
-<div class="modal-content">
-    <form>
+<form action="/gestionAdmin/gestionUsuarios" method="POST">
+  <div class="modal-content">
       <h3>Nuevo usuario</h3>
       <ul>
         <li><strong><br>Nombre</strong></li>
         <li>
           <div class="input">
-            <input id="nombre" type="text" class="validate"  placeholder="Nombre(s)">
+            <input id="nombre" name="nombre" type="text" class="validate"  placeholder="Nombre(s)" required>
           </div>
         </li>
         <li><strong><br>Apellido paterno</strong></li>
         <li>
           <div class="input">
-            <input id="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
+            <input id="apellidoP" name="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
           </div>
         </li>
         <li><strong><br>Apellido materno</strong></li>
         <li>
           <div class="input">
-            <input id="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
+            <input id="apellidoM" name="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
           </div>
         </li>
         <li><strong><br>Correo</strong></li>
         <li>
           <div class="input">
-            <input id="correo" type="email" class="validate"  placeholder="correo@mail.com">
+            <input id="correo" name="correo" type="email" class="validate"  placeholder="correo@mail.com" required>
+            <span class="helper-text" data-error="Introduce un correo válido" data-success="Correo válido"></span>
           </div>
         </li>
         <li><strong><br>Roles</strong></li>
         <li>
-          <div class="input-field m4">
-            <select name = "selRol" multiple>
-              <% for (let rol of roles) { %>  
-                <option value="<%= rol.valor %>"><%= rol.nombre %></option>
+          <div class="input-field m4" required >
+            <select name = "selRol"  multiple required>
+              <% for (let rol of roles) { %>
+                <% if (rol.idRol != 1) { %> 
+                  <option value="<%= rol.idRol %>"><%= rol.nombre %></option>
+                <% } %>
               <% } %>
             </select>
             <label>Selecciona los roles que desees asignar.</label>
           </div>
         </li>
       </ul>
-    </form>
   </div>
   <div class="modal-footer">
-    <a href="#"  class="modal-close waves-effect btn-flat validarRol">Agregar</a>
+    <button  type = "submit" class="modal-action waves-effect btn-flat">Agregar</button>
   </div>
+</form>

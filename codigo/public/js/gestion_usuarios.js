@@ -12,17 +12,8 @@ $(document).ready(function(){
 
 // Validar rol para crear usuario
 $(document).ready(() => {
-  $(".validarRol").on("click", () => {
-    const val = ($('select[name^="selRol"]').val());
-    if (val.find(element => element < 2)){
-      console.log("terapeuta");
-      location.replace("./crear-terapeuta");
-    }
-    else if(val.find(element => element >  1)){
-      console.log("gestor o admin");
-      location.replace("./");
-      window.alert("Se guardó correctamente el usuario.");
-    }
+  $(".toastRegUsuario").on("click", () => {
+      //M.toast({html: 'Se registró correctamente el usuario.'});
   });
 });
 
@@ -36,7 +27,7 @@ $(document).ready(() => {
 
 //Nuevo rol, validar si no se seleccionó otro rol
 function nuevoRol(){
-  window.alert("Se guardó correctamente el usuario.");
+  M.toast({html: 'Se registró correctamente el rol.'});
   location.replace("./");
  // if (val.find(element => element < 2)){
  //   console.log("terapeuta");
@@ -51,11 +42,7 @@ function nuevoRol(){
     //window.alert("Se asignaron correctamente los roles al usuario nuevo.");
   //}
 }
-function nuevoTerapeuta(){
-  window.alert("Se guardó correctamente el usuario.");
-  location.replace("./");
- 
-}
+
 
 // Guardar participante
 $(document).ready(() => {

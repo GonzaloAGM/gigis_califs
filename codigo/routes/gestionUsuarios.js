@@ -8,6 +8,7 @@ subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 
 const gestionUserController = require('../controllers/gestion_usuarios_controller')
 
+subrouter.get('/crear-terapeuta',gestionUserController.getCrearTerapeuta);
 
 subrouter.get('/', gestionUserController.get);
 subrouter.post('/', gestionUserController.postNuevoUsuario);

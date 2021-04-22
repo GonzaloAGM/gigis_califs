@@ -13,7 +13,7 @@ module.exports = class Usuario {
   //Este método servirá para guardar de manera persistente el nuevo objeto.
   save() {
     return db.execute(
-      'INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?,?,?)',
+      'INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?,?,?,?,?)',
       [this.login, this.password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
     );
   }

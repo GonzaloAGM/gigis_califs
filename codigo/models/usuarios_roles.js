@@ -11,8 +11,8 @@ module.exports = class Usuario_Rol {
   //Este método servirá para guardar de manera persistente el nuevo objeto.
   save() {
     return db.execute(
-      'INSERT INTO usuarios_roles (login, idRol, nombre) VALUES (?,?,?)',
-      [this.login,this.idRol,this.nombre]
+      'INSERT INTO usuarios_roles (login, idRol) VALUES (?,?)',
+      [this.login,this.idRol]
     );
   }
 
