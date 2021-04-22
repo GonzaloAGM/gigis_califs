@@ -76,10 +76,11 @@ $(document).ready(() => {
 // Eliminar usuario
 $(document).ready(() => {
   $(".eliminarU").on("click", () => {
-    location.replace("./");
-    window.alert("Se eliminó el usuario.");
+    M.toast({html: 'Usuario eliminado'}); 
+
   });
 });
+
 
 // jQuery date picker 
 $(document).ready(function(){

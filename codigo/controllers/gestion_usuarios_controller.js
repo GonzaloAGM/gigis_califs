@@ -9,32 +9,25 @@ const usuarios_roles = Usuario_Rol.fetchAll();
 const roles = Rol.fetchAll();
 
 exports.get = (request, response, next) => {
-    Usuario.fetchSin('participante')
+    Usuario.fetchListaSin('participante')
         .then(([usuarios, fieldData1]) => {
             Rol.fetchAll()
                 .then(([roles, fieldData2]) => {
-                    Usuario_Rol.fetchRolDeUnUsuario('participante') 
-                        .then(([roldeusuarios, fieldData2]) => {
-                            response.render('gestion_usuarios', {
-                                usuarios: usuarios, 
-                                roles: roles, 
-                                roldeusuarios: roldeusuarios, 
-                                tituloDeHeader: "Gestión de usuarios",
-                                tituloBarra: "Usuarios",
-                                backArrow: {display: 'block', link: '/gestionAdmin'},
-                                forwArrow: arrows[1]
-                            });
-                        })
-                        .catch((err) => console.log(err));
+                    response.render('gestion_usuarios', {
+                        usuarios: usuarios, 
+                        roles: roles, 
+                        tituloDeHeader: "Gestión de usuarios",
+                        tituloBarra: "Usuarios",
+                        backArrow: {display: 'block', link: '/gestionAdmin'},
+                        forwArrow: arrows[1]
+                    });
                 })
                 .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
 };
     
-
-
-/*exports.post = ((request,response,next) => {
+exports.postNuevoUsuario = ((request,response,next) => {
     if (request.body.selRol === "1"){
         const usuario = new Usuario(request.body.nombre, request.body.rol, './editar-terapeuta', './perfil-terapeuta',);
         usuario.save();
@@ -49,4 +42,4 @@ exports.get = (request, response, next) => {
     }
     response.redirect('/');
 });
-*/
+

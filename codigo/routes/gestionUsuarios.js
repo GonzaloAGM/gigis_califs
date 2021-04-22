@@ -10,6 +10,6 @@ const gestionUserController = require('../controllers/gestion_usuarios_controlle
 
 
 subrouter.get('/', gestionUserController.get);
-//subrouter.post('/', gestionUserController.post);
+subrouter.post('/', gestionUserController.postNuevoUsuario);
 
 module.exports = subrouter;

@@ -23,9 +23,9 @@ module.exports = class Usuario {
     return db.execute('SELECT * FROM usuarios');
   }
 
-  static fetchSin(nombreRol) {
+  static fetchListaSin(nombreRol) {
     return db.execute(
-      'SELECT nombreUsuario, login FROM  usuarios WHERE login NOT IN (SELECT U.login FROM roles R, usuarios_roles UR, usuarios U WHERE R.idRol = UR.idRol AND U.login = UR.login AND R.nombre = ?)',
+      'SELECT nombreUsuario, U.login, R.nombre FROM  usuarios U, roles R, usuarios_roles UR WHERE R.idRol = UR.idRol AND U.login = UR.login AND  R.nombre NOT LIKE ? GROUP BY U.login',
       [nombreRol]
       );
   }

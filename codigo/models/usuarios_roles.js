@@ -21,19 +21,4 @@ module.exports = class Usuario_Rol {
     return db.execute('SELECT * FROM usuarios_roles');
   }
 
-  // Devolver el rol de un usuario en específico
-  static fetchRolDeUnUsuario(nombre) {
-    return db.execute(
-      'SELECT R.nombre, U.login FROM roles R, usuarios_roles UR, usuarios U WHERE R.idRol = UR.idRol AND U.login = UR.login AND U.login NOT IN (SELECT U.login FROM roles R, usuarios_roles UR, usuarios U WHERE R.idRol = UR.idRol AND U.login = UR.login AND R.nombre = ?)',
-      [nombre]
-      );
-  }
-  /*
-  static fetchRolDeUnUsuario(login) {
-    return db.execute(
-      'SELECT R.nombre FROM roles R, usuarios_roles UR, usuarios U WHERE R.idRol = UR.idRol AND U.login = UR.login AND U.login = ?',
-      [login]
-      );
-  }
-  */
 }
