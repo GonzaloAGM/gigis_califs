@@ -67,7 +67,7 @@ PRIMARY KEY (`idRol`);
 CREATE TABLE `gigisplayhousebd_v5`.`usuarios` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
-    `password` VARCHAR(100) NOT NULL , 
+    `password` VARCHAR(250) NOT NULL , 
     `nombreUsuario` VARCHAR(50) NULL , 
     `apellidoPaterno` VARCHAR(50) NULL , 
     `apellidoMaterno` VARCHAR(50) NULL
