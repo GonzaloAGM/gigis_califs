@@ -10,26 +10,6 @@ const terapeutas = Terapeuta.fetchAll();
 const usuarios_roles = Usuario_Rol.fetchAll();
 const roles = Rol.fetchAll();
 
-exports.getCrearTerapeuta = ((request,response,next) => {
-    response.render('crear_terapeuta', {
-        tituloDeHeader: "Nuevo terapeuta",
-        tituloBarra: "Nuevo terapeuta",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestionUsuarios'},
-        forwArrow: arrows[1]
-    });
-});
-
-exports.postCrearTerapeuta = ((request,response,next) => {
-    const terapeuta = new Terapeuta(request.session.ultimo_usuario, request.body.titulo, request.body.cv,'A');
-    terapeuta.save()
-        .then(() => {
-            response.redirect('/gestionAdmin/gestionUsuarios/');  
-        }).catch( err => {
-            console.log(err);
-            response.redirect('/gestionAdmin/gestionUsuarios/crear-terapeuta');    
-        });
-});
-
 exports.get = (request, response, next) => {
     Usuario.fetchListaSin('participante')
         .then(([usuarios, fieldData1]) => {
@@ -51,21 +31,28 @@ exports.get = (request, response, next) => {
     
 exports.postNuevoUsuario = ((request,response,next) => {
     const usuario = new Usuario(request.body.correo, 'contraseña', request.body.nombre, request.body.apellidoP, request.body.apellidoM);
-    const usuario_rol = new Usuario_Rol(request.body.correo, request.body.selRol);
     usuario.save()
         .then(() => {
-            usuario_rol.save()
-                .then(() => {
-                    if (request.body.selRol === '2'){ 
-                        request.session.ultimo_usuario = request.body.correo;
-                        console.log(request.session.ultimo_usuario);              
-                        response.redirect('/gestionAdmin/gestionUsuarios/crear-terapeuta'); 
-                    }else
-                        response.redirect('/gestionAdmin/gestionUsuarios/');  
-                }).catch( err => {
-                    console.log(err);
-                    response.redirect('/gestionAdmin/');    
-                });
+            for (let rol of request.body.selRol){
+                var usuario_rol = new Usuario_Rol(request.body.correo, rol);
+                usuario_rol.save()
+                    .then(() => {
+                        if (rol === '2'){ 
+                            const terapeuta = new Terapeuta(request.body.correo, request.body.titulo, 'NULL','A');
+                            terapeuta.save()
+                                .then(() => {
+                                }).catch( err => {
+                                    console.log(err);
+                                    response.redirect('/gestionAdmin/');    
+                                }); 
+                        }  
+                        console.log("Todo cool");            
+                    }).catch( err => {
+                        console.log(err);
+                        response.redirect('/gestionAdmin/');    
+                    });
+                }
+                response.redirect('/gestionAdmin/gestionUsuarios/'); 
         }).catch( err => {
             console.log(err);
             response.redirect('/gestionAdmin/');    

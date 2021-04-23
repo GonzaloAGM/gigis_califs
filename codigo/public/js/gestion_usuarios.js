@@ -18,6 +18,20 @@ function toastRegUser(){
           });
 }
 
+function camposTerapeuta(opcion){
+  if (opcion.value === '2'){
+    document.getElementById("campoT1").style.visibility = "visible";
+    document.getElementById("campoT2").style.visibility = "visible";
+    document.getElementById("campoT3").style.visibility = "visible";
+    document.getElementById("campoT4").style.visibility = "visible";
+  }else{
+    document.getElementById("campoT1").style.visibility = "hidden";
+    document.getElementById("campoT2").style.visibility = "hidden";
+    document.getElementById("campoT3").style.visibility = "hidden";
+    document.getElementById("campoT4").style.visibility = "hidden";
+  }
+}
+
  // Autocompletar
  $(document).ready(function(){
   $('input.autocomplete').autocomplete({
@@ -28,6 +42,7 @@ function toastRegUser(){
     },
   });
 });
+
 
 // Cambiar rol de usuario existente
 $(document).ready(() => {
@@ -41,18 +56,6 @@ $(document).ready(() => {
 function nuevoRol(){
   M.toast({html: 'Se registró correctamente el rol.'});
   location.replace("./");
- // if (val.find(element => element < 2)){
- //   console.log("terapeuta");
- //   location.replace("./nuevo_terapeuta.html");
-  //}
-  //else if (val.find(element => element > 2 && element < 4)){
-    //console.log("gestor o admin");
-   // location.replace("./nuevo_administrador.html");
-  //}
-  //else {
-    //location.replace("./gestion_usuarios.html");
-    //window.alert("Se asignaron correctamente los roles al usuario nuevo.");
-  //}
 }
 
 

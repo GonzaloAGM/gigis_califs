@@ -30,7 +30,7 @@
         <li><strong><br>Roles</strong></li>
         <li>
           <div class="input-field m4" required >
-            <select name = "selRol"  multiple required>
+            <select name = "selRol" onchange="camposTerapeuta(this)" multiple required>
               <% for (let rol of roles) { %>
                 <% if (rol.idRol != 1) { %> 
                   <option value="<%= rol.idRol %>"><%= rol.nombre %></option>
@@ -39,6 +39,22 @@
             </select>
             <label>Selecciona los roles que desees asignar.</label>
           </div>
+        </li>
+        <li style = "visibility:hidden" id = "campoT1"><strong><br>Formación profesional</strong></li>
+        <li style = "visibility:hidden" id = "campoT2">
+          <div class="input-field ">
+              <input id="titulo" name="titulo" type="text" class="validate">
+              <label for="titulo">Título</label>
+          </div>
+        </li>
+        <li style = "visibility:hidden" id = "campoT3"><strong><br>Currículum</strong></li>
+        <li style = "visibility:hidden" id = "campoT4">
+            <div class="file-field input-field">
+                <div class="file-field input-field waves-effect waves-light btn-small white black-text">
+                    <i class="material-icons left">file_upload</i>Subir</a>
+                    <input type="file" name="cv">
+                </div>
+            </div>
         </li>
       </ul>
   </div>
