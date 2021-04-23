@@ -1,6 +1,6 @@
 CREATE TABLE `gigisplayhousebd_v5`.`ciclos` 
 (
-    `idCiclo` INT NOT NULL ,
+    `idCiclo` INT NOT NULL AUTO_INCREMENT,
     `fechaInicial` DATE NOT NULL , 
     `fechaFinal` DATE NOT NULL
 )
@@ -11,7 +11,7 @@ PRIMARY KEY (`idCiclo`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`programas` 
 ( 
-    `idPrograma` INT NOT NULL , 
+    `idPrograma` INT NOT NULL AUTO_INCREMENT , 
     `nombrePrograma` VARCHAR(50) NOT NULL , 
     `puntajeMaximo` INT NOT NULL , 
     `dirImagen` VARCHAR(100) NULL
@@ -23,7 +23,7 @@ PRIMARY KEY (`idPrograma`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`niveles` 
 (
-    `idNivel` INT NOT NULL , 
+    `idNivel` INT NOT NULL AUTO_INCREMENT, 
     `nombreNivel` VARCHAR(50) NOT NULL , 
     `idPrograma` INT NOT NULL
 ) 
@@ -35,7 +35,7 @@ PRIMARY KEY (`idNivel`);
 CREATE TABLE `gigisplayhousebd_v5`.`objetivos` 
 (
     `idNivel` INT NOT NULL , 
-    `idObjetivo` INT NOT NULL , 
+    `idObjetivo` INT NOT NULL AUTO_INCREMENT, 
     `descripcion` VARCHAR(200) NOT NULL , 
     `fechaRegistroObj` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) 
@@ -46,7 +46,7 @@ PRIMARY KEY (`idNivel`, `idObjetivo`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`funciones` 
 ( 
-    `idFuncion` INT NOT NULL , 
+    `idFuncion` INT NOT NULL AUTO_INCREMENT , 
     `requisitoFuncional` VARCHAR(50) NOT NULL
 ) 
 ENGINE = InnoDB;
@@ -56,7 +56,7 @@ PRIMARY KEY (`idFuncion`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`roles` 
 ( 
-    `idRol` INT NOT NULL , 
+    `idRol` INT NOT NULL AUTO_INCREMENT , 
     `nombre` VARCHAR(30) NOT NULL
 ) 
 ENGINE = InnoDB;
@@ -104,7 +104,7 @@ PRIMARY KEY (`login`);
 
 CREATE TABLE `gigisplayhousebd_v5`.`grupos` 
 (
-    `idGrupo` INT NOT NULL , 
+    `idGrupo` INT NOT NULL AUTO_INCREMENT , 
     `numeroGrupo` INT NOT NULL , 
     `idPrograma` INT NOT NULL , 
     `idCiclo` INT NOT NULL
