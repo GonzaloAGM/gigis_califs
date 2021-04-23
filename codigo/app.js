@@ -16,6 +16,7 @@ app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 app.use(session({
     secret: 'ytfvvjsdfmc467879cievy8ihrwtbuc4y+nu948wbyn8cr4mivnj8bfugnc', //cambiar a otra variable externa que no se versione
