@@ -92,6 +92,7 @@ PRIMARY KEY (`login`);
 CREATE TABLE `gigisplayhousebd_v5`.`participantes` 
 ( 
     `login` VARCHAR(50) NOT NULL , 
+    `estatus` CHAR(1) NOT NULL DEFAULT 'A',
     `sexo` CHAR(1) NOT NULL , 
     `fechaNacimiento` DATE NOT NULL , 
     `edad` INT NOT NULL , 

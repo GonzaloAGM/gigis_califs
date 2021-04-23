@@ -1,7 +1,9 @@
 const Arrow = require('../models/arrow');
+const Usuario = require('../models/usuarios');
 const Participante = require('../models/participantes');
 
 const arrows = Arrow.fetchAll();
+const usuarios = Usuario.fetchAll();
 const participantes = Participante.fetchAll();
 
 
@@ -30,13 +32,17 @@ exports.getPerfilPartic = ((request,response,next) => {
 });
 
 exports.get = ((request,response,next) => {
-    response.render('gestion_participantes', {
-        participantes: participantes,
-        tituloDeHeader: "Gestión de participantes",
-        tituloBarra: "Participantes",
-        backArrow: {display: 'block', link: '/gestionAdmin'},
-        forwArrow: arrows[1]
-    });
+    Participante.fetchAll('participante')
+        .then(([participantes, fieldData1]) => {
+            response.render('gestion_participantes', {
+                participantes: participantes,
+                tituloDeHeader: "Gestión de participantes",
+                tituloBarra: "Participantes",
+                backArrow: {display: 'block', link: '/gestionAdmin'},
+                forwArrow: arrows[1]
+            });
+        })
+        .catch((err) => console.log(err));
 });
 
 exports.post = ((request,response,next) => {
