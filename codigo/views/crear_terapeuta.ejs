@@ -2,47 +2,40 @@
 <%- include('include/titleBar.ejs') %>
 <%- include('include/sideNavBar.ejs') %>     
     <div class="row">
-        <div class="col m1">
-        <h2></h2>
-        <div class="vl"></div>
-        </div>
-        <div class="col s11 m4">
-            <form>
-                <ul>
-                    <li class = "camposPerfil"><strong><br>Título</strong></li>
-                    <li>
-                    <div class="input-field ">
-                        <input id="titulo" type="text" class="validate">
-                        <label for="titulo">titulo</label>
-                    </div>
-                    </li>
-                    <li class = "camposPerfil"><strong><br>Especialidad</strong></li>
-                    <li>
-                    <div class="input-field ">
-                        <input id="especialidad" type="text" class="validate">
-                        <label for="especialidad">especialidad</label>
-                    </div>
-                    </li>
-                    <li class = "camposPerfil"><strong><br>Currículum</strong></li>
-                    <li>
-                        <div class="file-field input-field">
-                            <div class="file-field input-field waves-effect waves-light btn-small white black-text">
-                                <i class="material-icons left">file_upload</i>Subir</a>
-                                <input type="file">
-                            </div>
+        <form action="/gestionAdmin/gestionUsuarios/crear-terapeuta" method="POST" onsubmit="toastRegUser()">
+            <div class="col m1">
+            <h2></h2>
+            <div class="vl"></div>
+            </div>
+            <div class="col s11 m4">
+                    <ul>
+                        <li class = "camposPerfil"><strong><br>Formación profesional</strong></li>
+                        <li>
+                        <div class="input-field ">
+                            <input id="titulo" name="titulo" type="text" class="validate">
+                            <label for="titulo">Título</label>
                         </div>
-                    </li>
-                </ul>
-            </form>
-        </div>
-        <div class="col s11 m4">
-                                
-        </div>
-        <div class="col m2">
-        </div>
-        <div class="col m4">
-            <p></p>
-            <a class="waves-effect waves-light modal-trigger btn-small light-green accent-4" onclick="nuevoTerapeuta()"><i class="material-icons left">save</i>Guardar</a>
-        </div>
+                        </li>
+                        <li class = "camposPerfil"><strong><br>Currículum</strong></li>
+                        <li>
+                            <div class="file-field input-field">
+                                <div class="file-field input-field waves-effect waves-light btn-small white black-text">
+                                    <i class="material-icons left">file_upload</i>Subir</a>
+                                    <input type="file" name="cv">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+            <div class="col s11 m4">
+                                    
+            </div>
+            <div class="col m2">
+            </div>
+            <div class="col m4">
+                <p></p>
+                <button  type = "submit" class="waves-effect btn-small light-green accent-4"><i class="material-icons left">save</i>Guardar</button>
+            </div>
+        </form>
     </div>
 <%- include('include/footer.ejs') %>

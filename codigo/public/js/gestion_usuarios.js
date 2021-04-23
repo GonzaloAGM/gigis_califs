@@ -10,21 +10,39 @@ $(document).ready(function(){
   $('select').formSelect();
 });
 
-// Validar rol para crear usuario
-$(document).ready(() => {
-  $(".validarRol").on("click", () => {
-    const val = ($('select[name^="selRol"]').val());
-    if (val.find(element => element < 2)){
-      console.log("terapeuta");
-      location.replace("./crear-terapeuta");
-    }
-    else if(val.find(element => element >  1)){
-      console.log("gestor o admin");
-      location.replace("./");
-      window.alert("Se guardó correctamente el usuario.");
-    }
+// Avisar que se creo correctamente el usuario
+function toastRegUser(){   
+  M.toast({
+            html: 'Se registró correctamente el usuario.',
+            displayLenght: 5000
+          });
+}
+
+function camposTerapeuta(opcion){
+  if (opcion.value === '2'){
+    document.getElementById("campoT1").style.visibility = "visible";
+    document.getElementById("campoT2").style.visibility = "visible";
+    document.getElementById("campoT3").style.visibility = "visible";
+    document.getElementById("campoT4").style.visibility = "visible";
+  }else{
+    document.getElementById("campoT1").style.visibility = "hidden";
+    document.getElementById("campoT2").style.visibility = "hidden";
+    document.getElementById("campoT3").style.visibility = "hidden";
+    document.getElementById("campoT4").style.visibility = "hidden";
+  }
+}
+
+ // Autocompletar
+ $(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+    data: {
+      "Alejandra": null,
+      "Carolina": null,
+      "Eva": null
+    },
   });
 });
+
 
 // Cambiar rol de usuario existente
 $(document).ready(() => {
@@ -36,26 +54,10 @@ $(document).ready(() => {
 
 //Nuevo rol, validar si no se seleccionó otro rol
 function nuevoRol(){
-  window.alert("Se guardó correctamente el usuario.");
+  M.toast({html: 'Se registró correctamente el rol.'});
   location.replace("./");
- // if (val.find(element => element < 2)){
- //   console.log("terapeuta");
- //   location.replace("./nuevo_terapeuta.html");
-  //}
-  //else if (val.find(element => element > 2 && element < 4)){
-    //console.log("gestor o admin");
-   // location.replace("./nuevo_administrador.html");
-  //}
-  //else {
-    //location.replace("./gestion_usuarios.html");
-    //window.alert("Se asignaron correctamente los roles al usuario nuevo.");
-  //}
 }
-function nuevoTerapeuta(){
-  window.alert("Se guardó correctamente el usuario.");
-  location.replace("./");
- 
-}
+
 
 // Guardar participante
 $(document).ready(() => {
@@ -76,10 +78,11 @@ $(document).ready(() => {
 // Eliminar usuario
 $(document).ready(() => {
   $(".eliminarU").on("click", () => {
-    location.replace("./");
-    window.alert("Se eliminó el usuario.");
+    M.toast({html: 'Usuario eliminado'}); 
+
   });
 });
+
 
 // jQuery date picker 
 $(document).ready(function(){

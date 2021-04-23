@@ -65,3 +65,18 @@
 .btn-flat {
     text-transform: none!important;
 }
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+color: #488CCB!important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+border-bottom: 1px solid #488CCB!important;
+box-shadow: 0 1px 0 0 #488CCB!important;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #488CCB!important;
+    }
