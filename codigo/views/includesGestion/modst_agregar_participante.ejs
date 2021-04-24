@@ -4,56 +4,55 @@
         <ul>
             <li><strong><br>Nombre</strong></li>
             <li>
-                <div class="input">
-                    <input id="nombreP" name="nombre"  type="text" class="validate"  placeholder="Nombre(s)">
+                <div class="input-field">
+                    <input id="nombreP" name="nombre"  type="text" class="validate"  placeholder="Nombre(s)" required>
                 </div>
             </li>
             <li><strong><br>Apellido paterno</strong></li>
             <li>
-                <div class="input">
+                <div class="input-field">
                     <input id="apellidoP" name="apellidoP" type="text" class="validate"  placeholder="Apellido paterno">
                 </div>
             </li>
             <li><strong><br>Apellido materno</strong></li>
             <li>
-                <div class="input">
+                <div class="input-field">
                     <input id="apellidoM" name="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
                 </div>
             </li>
             <li><strong><br>Sexo</strong></li>
             <li>
-                <div class="input-field blue">
-                    <label>
-                        <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
-                        <span>Femenino</span>
-                        <input class="with-gap blue lighten-1" name="group3" type="radio" checked />
-                        <span>Masculino</span>
-                    </label>
+                <div class="input-field m4" required >
+                    <select name = "sexo" required>
+                      <option value="" disabled selected>Elige el sexo</option>
+                      <option value="M">Mujer</option>
+                      <option value="H">Hombre</option> 
+                    </select>
                 </div>
             </li>
-            <li><strong><br><br><br>Correo</strong></li>
+            <li><strong><br>Correo o nombre de usuario</strong></li>
             <li>
-                <div class="input">
-                    <input id="correo" type="email" class="validate"  placeholder="correo o usuario">
+                <div class="input-field" requiered>
+                    <input id="correo" type="text" class="validate"  placeholder="Correo o usuario">
                 </div>
             </li>
             <li><strong><br>Fecha de nacimiento</strong></li>
             <li>
-                <div class="input-field">
-                  <input type="text" id="fechaN" class="datepickerP">
-                  <label for="fecha">Elige la fecha de nacimiento</label>
+                <div class="input-field " requiered>
+                  <input type="text" id="fechaN" name="fechaN" class="datepickerP ">
+                  <label for="fechaN">Elige la fecha de nacimiento</label>
                 </div>
             </li>
-            <li"><strong><br>Teléfono del tutor</strong></li>
+            <li"><strong><br>Teléfono del responsable</strong></li>
             <li>
                 <div class="input-field ">
                     <input id="tel" type="text" class="validate">
-                    <label for="tel">número telefónico</label>
+                    <label for="tel">Número telefónico</label>
                 </div>
             </li>
         </ul>
   </div>
   <div class="modal-footer">
-    <button  type = "submit" class="modal-close waves-effect btn-flat">Agregar</button>
+    <button  type = "submit" class="modal-action waves-effect btn-flat">Registrar</button>
   </div>
 </form>

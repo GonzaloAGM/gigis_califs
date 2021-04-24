@@ -86,11 +86,19 @@ $(document).ready(() => {
 
 // jQuery date picker 
 $(document).ready(function(){
+  const hoy = new Date();
+  const maxYear = hoy.getFullYear();
+  const minYear = hoy.getFullYear()-65;
   $('.datepickerP').datepicker({ 
+    format: 'yyyy-mm-dd',
     firstDay: true,
-    yearRange: 60,
+    maxDate: new Date(),
+    yearRange: [minYear,maxYear], 
+    container: 'body',
     //En español
     i18n: {
+        cancel: 'Cancelar',
+        done: 'Aceptar',
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
         weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
