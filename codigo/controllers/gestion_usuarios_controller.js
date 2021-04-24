@@ -30,7 +30,10 @@ exports.get = (request, response, next) => {
 };
     
 exports.postNuevoUsuario = ((request,response,next) => {
-    const usuario = new Usuario(request.body.correo, 'contraseña', request.body.nombre, request.body.apellidoP, request.body.apellidoM);
+    var apellidoP, apellidoM;
+    apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
+    apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
+    const usuario = new Usuario(request.body.correo, 'contraseña', request.body.nombre, apellidoP, apellidoM);
     usuario.save()
         .then(() => {
             for (let rol of request.body.selRol){
@@ -38,7 +41,10 @@ exports.postNuevoUsuario = ((request,response,next) => {
                 usuario_rol.save()
                     .then(() => {
                         if (rol === '2'){ 
-                            const terapeuta = new Terapeuta(request.body.correo, request.body.titulo, 'NULL','A');
+                            var cv, titulo;
+                            cv = request.body.cv === ''? null :  request.body.cv;
+                            titulo = request.body.cv === ''? null :  request.body.titulo;
+                            const terapeuta = new Terapeuta(request.body.correo, titulo,  cv, 'A');
                             terapeuta.save()
                                 .then(() => {
                                 }).catch( err => {

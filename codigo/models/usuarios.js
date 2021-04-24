@@ -39,14 +39,4 @@ module.exports = class Usuario {
   }
 
 
-  //Este método servirá para devolver solo los usuarios que tengan el rol que se pasa por parámetro.
-  static fetchUnRol(nombreRol) {
-    return db.execute(
-      'SELECT nombreUsuario, apellidoPaterno, U.login, R.nombre FROM  usuarios U, roles R, usuarios_roles UR WHERE R.idRol = UR.idRol AND U.login = UR.login AND  R.nombre LIKE ? GROUP BY U.login',
-      [nombreRol]
-      );
-  }
-
-
-
 }

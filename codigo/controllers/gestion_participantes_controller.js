@@ -48,7 +48,11 @@ exports.get = ((request,response,next) => {
 });
 
 exports.post = ((request,response,next) => {
-    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, request.body.apellidoP, request.body.apellidoM, 'A', request.body.sexo, request.body.fechaN, '5', request.body.tel);
+    var apellidoP, apellidoM, tel;
+    apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
+    apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
+    tel = request.body.tel === ''? null :  request.body.tel;
+    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, '5',tel);
     participante.save()
         .then(() => {
             const usuario_rol = new Usuario_Rol(request.body.correo, '1');
