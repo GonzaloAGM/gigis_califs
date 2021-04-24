@@ -20,7 +20,7 @@ module.exports = class Participante {
         return db.execute('INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?, ?, ?, ?, ?)',
             [this.login, this.password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
         ).then(() => {
-            db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?)',
+            db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?,?)',
                 [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.edad,this.telefonoPadre])
         }).catch(err => {
             console.log(err);

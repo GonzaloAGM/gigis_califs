@@ -30,7 +30,7 @@
         <li><strong>Roles</strong></li>
         <li>
           <div class="input-field m4" required >
-            <select name = "selRol" onchange="camposTerapeuta(this)" multiple required>
+            <select name="selRol" id= "selRol" onchange="camposTerapeuta(this)" multiple required>
               <% for (let rol of roles) { %>
                 <% if (rol.idRol != 1) { %> 
                   <option value="<%= rol.idRol %>"><%= rol.nombre %></option>

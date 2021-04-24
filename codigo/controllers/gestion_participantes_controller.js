@@ -1,10 +1,12 @@
 const Arrow = require('../models/arrow');
 const Usuario = require('../models/usuarios');
 const Participante = require('../models/participantes');
+const Usuario_Rol = require('../models/usuarios_roles');
 
 const arrows = Arrow.fetchAll();
 const usuarios = Usuario.fetchAll();
 const participantes = Participante.fetchAll();
+const usuarios_roles = Usuario_Rol.fetchAll();
 
 
 exports.getEditPartic = ((request,response,next) => {
@@ -46,8 +48,22 @@ exports.get = ((request,response,next) => {
 });
 
 exports.post = ((request,response,next) => {
-    const participantee = new Participante(request.body.nombre, request.body.apellidoP, request.body.apellidoM, 'Activo', './editar-participante', './perfil-participante');
-    participantee.save();
-    response.redirect('/gestionAdmin/gestionParticipantes');
+    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, request.body.apellidoP, request.body.apellidoM, 'A', request.body.sexo, request.body.fechaN, '5', request.body.tel);
+    participante.save()
+        .then(() => {
+            const usuario_rol = new Usuario_Rol(request.body.correo, '1');
+            usuario_rol.save()
+                .then(() => {
+                    console.log('Todo ok');
+                    response.redirect('/gestionAdmin/gestionParticipantes');         
+                }).catch( err => {
+                    console.log(err);
+                    response.redirect('/gestionAdmin/');    
+                });
+        }).catch( err => {
+            console.log(err);
+            console.log('Noentra al 1er then');
+            response.redirect('/gestionAdmin/');    
+        });
 });
 
