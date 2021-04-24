@@ -1,4 +1,5 @@
 const db = require('../util/database');
+const bcrypt = require('bcryptjs');
 
 module.exports = class Participante {
 
@@ -17,14 +18,20 @@ module.exports = class Participante {
     }
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        return db.execute('INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?, ?, ?, ?, ?)',
-            [this.login, this.password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
-        ).then(() => {
-            db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?,?)',
-                [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.edad,this.telefonoPadre])
-        }).catch(err => {
-            console.log(err);
-        });
+        return bcrypt.hash(this.password, 12)
+            .then( (password) => {
+                return db.execute('INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?, ?, ?, ?, ?)',
+                    [this.login, password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
+                ).then(() => {
+                    db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?,?)',
+                        [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.edad,this.telefonoPadre])
+                }).catch(err => {
+                    console.log(err);
+                });
+            }).catch( err => {
+                console.log(err); 
+                throw Error("Nombre de usuario duplicado");  
+            });
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
