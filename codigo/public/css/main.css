@@ -148,3 +148,10 @@ box-shadow: 0 1px 0 0 #e53935 !important;
     .select-content li>a {
     color: #ef6c00 !important;
     }
+
+    [type="checkbox"]:checked+span:not(.lever):before {
+
+        border-right: 2px solid #ef6c00 !important;
+        border-bottom: 2px solid #ef6c00 !important;
+    
+    }
