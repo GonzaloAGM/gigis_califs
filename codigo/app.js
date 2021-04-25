@@ -1,34 +1,42 @@
-//Estructura básica de una aplicación con express
+//Dependencias
 const express = require('express');
 const app = express();
+const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const path = require('path');
-
-const rutasConsultas = require('./routes/consultas');
-const rutasProgramas = require('./routes/programas');
-const rutasGestionAdmin = require('./routes/GestionAdmin');
-
+//EJS
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+//Rutas
+const rutasConsultas = require('./routes/consultas');
+const rutasProgramas = require('./routes/programas');
+const rutasGestionAdmin = require('./routes/GestionAdmin');
+const rutaUsuarios = require('./routes/sesion_usuarios');
 
+//Inicializar dependencias
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 app.use(session({
     secret: 'ytfvvjsdfmc467879cievy8ihrwtbuc4y+nu948wbyn8cr4mivnj8bfugnc', //cambiar a otra variable externa que no se versione
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
 
+//Enviar archivos estáticos en carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/consultas', rutasConsultas);
 
 app.use('/programas', rutasProgramas);
 
 app.use('/gestionAdmin', rutasGestionAdmin);
+
+app.use('/Usuarios',rutaUsuarios);
 
 app.get('/', (request, response, next) => {
     console.log('Prueba home');
