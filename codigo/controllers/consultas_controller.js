@@ -1,4 +1,9 @@
 const Arrow = require('../models/arrow');
+const Usuario = require('../models/usuarios');
+const Participante = require('../models/participantes');
+const Grupo = require('../models/grupos');
+const Ciclo = require('../models/ciclos');
+const Programas = require('../models/programas');
 
 const arrows = Arrow.fetchAll();
 
