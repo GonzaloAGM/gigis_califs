@@ -28,6 +28,14 @@ exports.getProgramas = (request, response, next) => {
     .catch((err) => console.log(err));
 };
 
+exports.postProgramas = (request, response, next) => {
+  console.log("Peticion asincrona recibida");
+  console.log(request.body);
+  console.log(request.body.programa_id);
+  response.status(200).json({message: "respuesta asincrona"});
+
+};
+
 exports.get = (request, response, next) => {
   Programa.fetchProgramasCicloActual()
     .then(([programas, fieldData1]) => {
