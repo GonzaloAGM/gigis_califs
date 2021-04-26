@@ -91,6 +91,30 @@ const programasConsutas = [
         ciclo: 'EM2020',
         nivel:  'looks_one',
         cantDePart: 12
+    },
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        nivel:  'looks_one',
+        cantDePart: 12
+    },
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        nivel:  'looks_one',
+        cantDePart: 12
+    },
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        nivel:  'looks_one',
+        cantDePart: 12
+    },
+    {
+        nombre: 'Lectura 1',
+        ciclo: 'EM2020',
+        nivel:  'looks_one',
+        cantDePart: 12
     }
 ];
 
@@ -277,24 +301,9 @@ const tablaVariosProg = [
     }
 ];
 
-const carrouselTarj = [
-    {
-        color: 'red',
-        numLink: '#one!'
-    },
-    {
-        color: 'blue',
-        numLink: '#two!'
-    },
-    {
-        color: 'green',
-        numLink: '#three!'
-    },
-    {
-        color: 'yellow',
-        numLink: '#four!'
-    }
-];
+const color = ['red', 'blue', 'green', 'yellow'];
+
+const meses = ['','Ene', 'Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
 let consultaGen = {
     promTotal: 3.3,
@@ -358,17 +367,32 @@ exports.postResultadosPrograma = ((request, response, next) => {
 });
 
 exports.getConsultas = ((request, response, next) => {
-    response.render('consultas', {
-        tituloDeHeader: "Consultas",
-        tituloBarra: "Consultas",
-        carrouselTarj: carrouselTarj,
-        programasConsutas: programasConsutas,
-        numProg: programasConsutas.length,
-        backArrow: arrows[0],
-        forwArrow: arrows[1]
+    Ciclo.fetchFechaCiclo(0)
+    .then(([rows_Fechas, fieldData_Fechas]) => {
+        Ciclo.fetchCantPorAno(0)
+        .then(([rows_CantAno, fieldData_CantAno]) => {
+            response.render('consultas', {
+                tituloDeHeader: "Consultas",
+                tituloBarra: "Consultas",
+                meses: meses,
+                años: rows_CantAno,
+                fechasDeCiclos: rows_Fechas,
+                color: color,
+                programasConsutas: programasConsutas,
+                numProg: programasConsutas.length,
+                backArrow: arrows[0],
+                forwArrow: arrows[1]
+            });
+            console.log("Consultas");
+            response.status(201);
+        }).catch(err => {
+            console.log(err);
+            response.redirect('/');
+        });
+    }).catch(err => {
+        console.log(err);
+        response.redirect('/');
     });
-    console.log("Consultas");
-    response.status(201);
 });
 
 exports.postConsultas = ((request, response, next) => {

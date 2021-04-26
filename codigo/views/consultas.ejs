@@ -8,51 +8,39 @@
         <!-- Elegir ciclo de inicio y final-->
         <div class="col s8 push-s4 "><br>
             <div class="row valign-wrapper">
-                <div class="input-field col s4 m3 l3 xl3">
-                        <select>
-                            <optgroup label="2020">
-                                <option value="1">Enero-Marzo</option>
-                                <option value="2">Abril-Junio</option>
-                                <option value="3">Julio-Octubre</option>                                
-                                <option value="4">Octubre-Diciembre</option>
+                <div class="input-field col s5 m4 l4 xl4">
+                    <select>
+                        <% let acum_ano_ini = 1; let cont_ano_ini = acum_ano_ini; %> 
+                        <% for (let l = 0; l<años.length; l++) { %>
+                            <optgroup label="<%= años[l].ano_inicio %>">
+                                <% for (cont_ano_ini = acum_ano_ini; cont_ano_ini < acum_ano_ini + años[l].cant_por_ano_inicio ; cont_ano_ini++) { %>
+                                    <option value="<%= cont_ano_ini %>"><%= cont_ano_ini %>: <%= meses[fechasDeCiclos[cont_ano_ini-1].mes_inicio] %>-<%= fechasDeCiclos[cont_ano_ini-1].dia_inicio %></option>
+                                <% } %>
+                            <% acum_ano_ini = cont_ano_ini; %>
                             </optgroup>
-                            <optgroup label="2021">
-                                <option value="5">Enero-Marzo</option>
-                                <option value="6">Abril-Junio</option>
-                                <option value="7">Julio-Octubre</option>                                
-                                <option value="8">Octubre-Diciembre</option>
-                            </optgroup>
-                        <label>Desde Ciclo</label>
-                        </select>
+                        <% } %>
+                    </select>
+                    <label>Desde Ciclo</label>
                 </div>
-                <div class="col s2 m3 l3 xl3 center">
+                <div class="col s2 m4 l4 xl4 center">
                     <label>
                         <input type="checkbox" checked="checked" />
                         <span>hasta</span>
                     </label>
                 </div>
-                <div class="input-field col s4 m3 l3 xl3">
+                <div class="input-field col s5 m4 l4 xl4">
                     <select>
-                        <label>Hasta Ciclo</label>
-                        <optgroup label="2020">
-                            <option value="1">Enero-Marzo</option>
-                            <option value="2">Abril-Junio</option>
-                            <option value="3">Julio-Octubre</option>                                
-                            <option value="3">Octubre-Diciembre</option>
-                        </optgroup>
-                        <optgroup label="2021">
-                            <option value="1">Enero-Marzo</option>
-                            <option value="2">Abril-Junio</option>
-                            <option value="3">Julio-Octubre</option>                                
-                            <option value="3">Octubre-Diciembre</option>
-                        </optgroup>
+                        <% let acum_ano_fin = 1; let cont_ano_fin = acum_ano_fin; %> 
+                        <% for (let l = 0; l<años.length; l++) { %>
+                            <optgroup label="<%= años[l].ano_fin %>">
+                                <% for (cont_ano_fin = acum_ano_fin; cont_ano_fin < acum_ano_fin + años[l].cant_por_ano_fin ; cont_ano_fin++) { %>
+                                    <option value="<%= cont_ano_fin %>"><%= cont_ano_fin %>: <%= meses[fechasDeCiclos[cont_ano_fin-1].mes_fin] %>-<%= fechasDeCiclos[cont_ano_fin-1].dia_fin %></option>
+                                <% } %>
+                            <% acum_ano_fin = cont_ano_fin; %>
+                            </optgroup>
+                        <% } %>
                     </select>
-                </div>
-                <div class="col s2 m3 l3 xl3">
-                    <label>
-                        <input type="checkbox" checked="checked light-blue darken-2" class="light-blue darken-2" />
-                        <span>Solo ciclos activos</span>
-                        </label>
+                    <label>Hasta Ciclo</label>
                 </div>
             </div>
         </div>
@@ -65,17 +53,17 @@
 
     <!-- Carrousel de tarjetas -->
     <div id="carouselContainer black-text">
-        <div class="carousel carousel-slider center black-text" data-indicators="true">
+        <div class="carousel carousel-slider center white-text" data-indicators="true">
 
             <!-- Flechas a los lados -->
             <div class="carousel-fixed-item center middle-indicator">
                 <div class="left">
-                    <a onclick="movePrevCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                    <a onclick="movePrevCarousel()" class="middle-indicator-text white-text waves-effect waves-light content-indicator"><i
                             class="material-icons left black-text middle-indicator-text">chevron_left</i></a>
                 </div>
     
                 <div class="right">
-                    <a onclick="moveNextCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                    <a onclick="moveNextCarousel()" class="middle-indicator-text white-text waves-effect waves-light content-indicator"><i
                             class="material-icons right black-text middle-indicator-text">chevron_right</i></a>
                 </div>
             </div>

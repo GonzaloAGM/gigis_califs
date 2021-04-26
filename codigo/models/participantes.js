@@ -37,4 +37,8 @@ module.exports = class Participante {
     static fetchAll() {
         return db.execute('SELECT nombreUsuario, apellidoPaterno, apellidoMaterno, P.login, estatus, password, sexo, fechaNacimiento, telefonoPadre  FROM participantes P,usuarios U WHERE P.login = U.login');
     }
+
+    static fetchAllPart() {
+        return db.execute('SELECT * FROM participantes');
+    }
 }
