@@ -115,12 +115,17 @@ box-shadow: 0 1px 0 0 #e53935 !important;
 
 
     /*datapicker colors*/
-    .datepicker-date-display {
+    .datepicker-date-display  {
         background-color: #ffcc80  !important;
     }
+
         
     .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
     color:#ef6c00  !important;
+    }
+
+    .month-prev,  .month-next {
+        background-color:  transparent!important;
     }
     
     .datepicker-table td.is-today {
