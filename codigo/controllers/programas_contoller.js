@@ -32,6 +32,8 @@ exports.postProgramas = (request, response, next) => {
   console.log("Peticion asincrona recibida");
   console.log(request.body);
   console.log(request.body.programa_id);
+  
+
   response.status(200).json({message: "respuesta asincrona"});
 
 };
