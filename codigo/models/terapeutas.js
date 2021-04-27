@@ -19,7 +19,7 @@ module.exports = class Terapeuta{
 
   //Este método servirá para devolver los objetos del almacenamiento persistente.
   static fetchAll() {
-    return db.execute('SELECT * FROM participantes');
+    return db.execute('SELECT * FROM terapeutas');
   }
 
 }

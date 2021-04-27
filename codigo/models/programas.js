@@ -16,7 +16,7 @@ module.exports = class Programas {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return programas;
+        return db.execute('SELECT * FROM programas');
     }
     
     static fetchProgramasCicloActual() {

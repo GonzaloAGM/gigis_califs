@@ -33,4 +33,33 @@ module.exports = class Ciclo {
       [fecha, fecha]
     );
   }
+
+  static fetchFechaCiclo(modo){
+    switch(modo){
+      case 1://devuelve tabla fechas inciales de cada ciclo
+        return db.execute('SELECT MONTH(fechaInicial) AS `mes_inicio`, DAY(fechaInicial) AS `dia_inicio` FROM `ciclos`');
+      case 2://devuelve tabla fechas finale de cada ciclo
+        return db.execute('SELECT MONTH(fechaFinal) AS `mes_fin`, DAY(fechaFinal) AS `dia_fin` FROM `ciclos`');
+      default://devuelve tabla con fechas iniciales y finales de cada ciclo
+        return db.execute('SELECT MONTH(fechaInicial) AS `mes_inicio`, DAY(fechaInicial) AS `dia_inicio`, MONTH(fechaFinal) AS `mes_fin`, DAY(fechaFinal) AS `dia_fin` FROM `ciclos`'); 
+    }
+    
+  }
+
+  static fetchCantPorAno(modo){
+    switch(modo){
+      case 1: //devuelve cuantos ciclos iniciaron en cada año
+        return db.execute(
+          'SELECT YEAR(fechaInicial) as `ano_inicio`, COUNT(fechaInicial) as `cant_por_ano` FROM `ciclos` GROUP BY YEAR(fechaInicial)'
+        );
+      case 2: //devuelve cuantos ciclos terminaron en cada año
+        return db.execute(
+          'SELECT YEAR(fechaFinal) as `ano_fin`, COUNT(fechaFinal) as `cant_por_ano` FROM `ciclos` GROUP BY YEAR(fechaFinal)'
+        );
+      default: //devuelve cuanto ciclos acabaron y terminaron en cada año
+        return db.execute(
+          'SELECT YEAR(fechaInicial) as `ano_inicio`, YEAR(fechaFinal) as `ano_fin` , COUNT(fechaInicial) as `cant_por_ano_inicio`, COUNT(fechaFinal) as `cant_por_ano_fin` FROM `ciclos` GROUP BY YEAR(fechaInicial),  YEAR(fechaFinal)'
+        );
+    }
+  }
 };

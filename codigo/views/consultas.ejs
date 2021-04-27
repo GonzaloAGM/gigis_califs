@@ -2,57 +2,46 @@
 <%- include('include/titleBar.ejs') %>
 <%- include('include/sideNavBar.ejs') %>
 
+<form action="/consultas" method="POST">
     <!-- Titulo elegir programa y selección de ciclo-->
     <div class="row">
             
         <!-- Elegir ciclo de inicio y final-->
         <div class="col s8 push-s4 "><br>
             <div class="row valign-wrapper">
-                <div class="input-field col s4 m3 l3 xl3">
-                        <select>
-                            <optgroup label="2020">
-                                <option value="1">Enero-Marzo</option>
-                                <option value="2">Abril-Junio</option>
-                                <option value="3">Julio-Octubre</option>                                
-                                <option value="4">Octubre-Diciembre</option>
+                <div class="input-field col s5 m4 l4 xl4">
+                    <select id="inCiclosIni" name="inCiclosIni">
+                        <% let acum_ano_ini = 1; let cont_ano_ini = acum_ano_ini; %> 
+                        <% for (let l = 0; l<años.length; l++) { %>
+                            <optgroup label="<%= años[l].ano_inicio %>">
+                                <% for (cont_ano_ini = acum_ano_ini; cont_ano_ini < acum_ano_ini + años[l].cant_por_ano_inicio ; cont_ano_ini++) { %>
+                                    <option value="<%= cont_ano_ini %>"><%= cont_ano_ini %>: <%= meses[fechasDeCiclos[cont_ano_ini-1].mes_inicio] %>-<%= fechasDeCiclos[cont_ano_ini-1].dia_inicio %></option>
+                                <% } %>
+                            <% acum_ano_ini = cont_ano_ini; %>
                             </optgroup>
-                            <optgroup label="2021">
-                                <option value="5">Enero-Marzo</option>
-                                <option value="6">Abril-Junio</option>
-                                <option value="7">Julio-Octubre</option>                                
-                                <option value="8">Octubre-Diciembre</option>
-                            </optgroup>
-                        <label>Desde Ciclo</label>
-                        </select>
+                        <% } %>
+                    </select>
+                    <label>Desde Ciclo</label>
                 </div>
-                <div class="col s2 m3 l3 xl3 center">
+                <div class="col s2 m4 l4 xl4 center">
                     <label>
-                        <input type="checkbox" checked="checked" />
+                        <input type="checkbox" checked="checked" id="chRangoCiclos" name="chRangoCiclos" />
                         <span>hasta</span>
                     </label>
                 </div>
-                <div class="input-field col s4 m3 l3 xl3">
-                    <select>
-                        <label>Hasta Ciclo</label>
-                        <optgroup label="2020">
-                            <option value="1">Enero-Marzo</option>
-                            <option value="2">Abril-Junio</option>
-                            <option value="3">Julio-Octubre</option>                                
-                            <option value="3">Octubre-Diciembre</option>
-                        </optgroup>
-                        <optgroup label="2021">
-                            <option value="1">Enero-Marzo</option>
-                            <option value="2">Abril-Junio</option>
-                            <option value="3">Julio-Octubre</option>                                
-                            <option value="3">Octubre-Diciembre</option>
-                        </optgroup>
+                <div class="input-field col s5 m4 l4 xl4">
+                    <select id="inCiclosFin" name="inCiclosFin">
+                        <% let acum_ano_fin = 1; let cont_ano_fin = acum_ano_fin; %> 
+                        <% for (let l = 0; l<años.length; l++) { %>
+                            <optgroup label="<%= años[l].ano_fin %>">
+                                <% for (cont_ano_fin = acum_ano_fin; cont_ano_fin < acum_ano_fin + años[l].cant_por_ano_fin ; cont_ano_fin++) { %>
+                                    <option value="<%= cont_ano_fin %>"><%= cont_ano_fin %>: <%= meses[fechasDeCiclos[cont_ano_fin-1].mes_fin] %>-<%= fechasDeCiclos[cont_ano_fin-1].dia_fin %></option>
+                                <% } %>
+                            <% acum_ano_fin = cont_ano_fin; %>
+                            </optgroup>
+                        <% } %>
                     </select>
-                </div>
-                <div class="col s2 m3 l3 xl3">
-                    <label>
-                        <input type="checkbox" checked="checked light-blue darken-2" class="light-blue darken-2" />
-                        <span>Solo ciclos activos</span>
-                        </label>
+                    <label>Hasta Ciclo</label>
                 </div>
             </div>
         </div>
@@ -65,17 +54,17 @@
 
     <!-- Carrousel de tarjetas -->
     <div id="carouselContainer black-text">
-        <div class="carousel carousel-slider center black-text" data-indicators="true">
+        <div class="carousel carousel-slider center white-text" data-indicators="true">
 
             <!-- Flechas a los lados -->
             <div class="carousel-fixed-item center middle-indicator">
                 <div class="left">
-                    <a onclick="movePrevCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                    <a onclick="movePrevCarousel()" class="white waves-effect waves-light content-indicator"><i
                             class="material-icons left black-text middle-indicator-text">chevron_left</i></a>
                 </div>
     
                 <div class="right">
-                    <a onclick="moveNextCarousel()" class="middle-indicator-text black-text waves-effect waves-light content-indicator"><i
+                    <a onclick="moveNextCarousel()" class="white waves-effect waves-light content-indicator"><i
                             class="material-icons right black-text middle-indicator-text">chevron_right</i></a>
                 </div>
             </div>
@@ -85,118 +74,125 @@
             
         </div>
     </div>
-
-        <form action="/consultas" method="POST">
-        <!--Filtros-->
-        <div class="row">
-        <h4>Filtros:</h4>
-            <div class="col s6">
-                <div>
-                    <br>
+    <br>
+    <div class="row valign-wrapper">
+        <div class="col s4 offset-s1 right-align">
+            <div class="switch" >
+                <p>
+                    calificaciones
                     <label>
-                        <input type="checkbox" checked="checked"/>
-                        <span class="flow-text"> <strong class="flow-text black-text">Solo participantes activos</strong></span>
+                        <input disabled type="checkbox" id="swCalifOProg" name="swCalifOProg">
+                        <span class="lever"></span>
                     </label>
-                    
-                </div>
-                <div>
-                    <br>
-                    <button type="button" class="waves-effect waves-light btn-large light-blue darken-2" onclick="todosProg()"> &nbsp &nbsp Todos los programas &nbsp &nbsp</button>
-                    
-                </div>
-                <div>
-                    <br>
-                    <button type="button" class="waves-effect waves-light btn-large light-blue darken-2" onclick="ningunProg()"> Deseleccionar programas </button>
-                    
-                </div>
+                    Porcentaje de avance
+                </p>
             </div>
-            <div class="col s6">
-                <h5>Edad:</h5>
+        </div>
+        <div class="col s3 offset-s1">
+            <br>
+            <button type="button" class="waves-effect waves-light btn-large light-blue darken-2" onclick="todosProg()"> &nbsp Seleccionar todos &nbsp</button>
+            
+        </div>
+        <div class="col s3">
+            <br>
+            <button type="button" class="waves-effect waves-light btn-large light-blue darken-2" onclick="ningunProg()"> Deseleccionar todos </button>
+            
+        </div>
+    </div>
+    <br>
+    <hr>    
+    <div class="row">
+        <!--Filtros-->
+        <div class="col s5">
+            <h4>Filtros:</h4>
+            <div>
+                <!--Edad-->
                 <div class="row valign-wrapper">
-                    <div class="col s5">
+                    <div class="col s5 offset-s1">
                         <label>
-                            <input type="number" value="1" min="0"/>
+                            <input type="checkbox" name="chEdad" id="chEdad" onclick="enableEdad()">
+                            <span> <strong class= "flow-text black-text" >Por edad</strong> </span>
+                        </label>
+                    </div>
+                    <div class="col s2">
+                        <label>
+                            <input disabled type="number" value="1" min="0" id="inEdadIni" name="inEdadIni"/>
                             <span class="flow-text"> <strong class="flow-text black-text"></strong></span>
                         </label>
                     </div>
                     <div class="col s2">
                         <label>
-                            <input type="checkbox" checked="checked"/>
+                            <input disabled type="checkbox" id="chRangoEdad" name="chRangoEdad"/>
                             <span class="flow-text"> hasta </span>
                         </label>
                         
                     </div>
-                    <div class="col s5">
+                    <div class="col s2">
                         <label>
-                            <input type="number" value="18" min="0"/>
+                            <input disabled type="number" value="18" min="0" id="inEdadFin" name="inEdadFin"/>
                             <span class="flow-text"> <strong class="flow-text black-text"></strong></span>
                         </label>
                     </div>
                 </div>
-                <h5>Sexo:</h5>
-                <div class="row">
-                    <div class="col s6">
+                <!--Sexo-->
+                <div class="row valign-wrapper">
+                    <div class="col s5 offset-s1">
                         <label>
-                            <a class="waves-effect waves-teal btn wideBtn light-blue darken-2">Mujeres</a>
+                            <input type="checkbox" name="chSexo" id="chSexo" onclick="enableSexo()">
+                            <span> <strong class="flow-text black-text">Por sexo</strong> </span>
                         </label>
                     </div>
                     <div class="col s6">
-                        <label>
-                            <a class="waves-effect waves-teal btn wideBtn light-blue darken-2">Hombres</a>
-                        </label>
+                        <div class="switch" >
+                            <p>
+                                Femenino
+                                <label>
+                                    <input disabled type="checkbox" id="swSexo" name="swSexo">
+                                    <span class="lever"></span>
+                                </label>
+                                Masculino
+                            </p>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
-        <hr>
-        
-            <!--Por mostrar y consultar-->
-            <div class="row ">
-                <!--Por mostrar-->
-                <div class="col s8">
-                    <div class="row">
-                        <h4>Por mostrar:</h4>
-                        <div class="switch" >
-                            <p class="flow-text">
-                                calificaciones
-                                <label>
-                                    <input disabled type="checkbox" id="CalifOProg" name="CalifOProg">
-                                    <span class="lever"></span>
-                                </label>
-                                Porcentaje de avance
-                            </p>
-                        </div>
-                        <div>
-                            <label>
-                                <input type="checkbox" name="datosPart" id="datosPart">
-                                <span class="flow-text"> <strong class="flow-text black-text">Mostrar datos de participantes</strong> </span>
-                            </label>
-                            
-                        </div>
-                        <br>
-                        <div>
-                            <label>
-                                <input type="checkbox" name="datosProg" id="datosProg">
-                                <span class="flow-text"> <strong class="flow-text black-text">Mostrar datos de programas</strong> </span>
-                            </label>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!--Boton consultar-->
-                <div class="col s4">
-                    <div class="row center">
-                        <h4>Realizar consulta</h4><br>
-                        <div style="display: none;">
-                            <input type="number" id="cantProg" name="cantProg" value="0" min="0">
-                        </div>
-                        <br>
-                        <div>
-                            <button type="submit" class="waves-effect  waves-light btn-large light-blue darken-2"> Consulta </button>
-                        </div>
-                    </div>
+
+        <!--Por mostrar-->
+        <div class="col s5 offset-s1">
+            <h4>Por mostrar:</h4>
+            <br>
+            <div class="row valign-wrapper">
+                <div class="col s11 offset-s1">
+                    <label>
+                        <input type="checkbox" name="datosPart" id="datosPart">
+                        <span class="flow-text"> <strong class="flow-text black-text">Mostrar sexo y edad</strong> </span>
+                    </label>
+                    
                 </div>
             </div>
-        </form>
+            <br>
+            <div class="row valign-wrapper">
+                <div class="col s11 offset-s1">
+                    <label>
+                        <input type="checkbox" name="datosProg" id="datosProg">
+                        <span class="flow-text"> <strong class="flow-text black-text">Mostrar calificaciones y avance</strong> </span>
+                    </label>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!--Boton consultar-->
+        <div class="col s6 offset-s6">
+            <div class="row center">
+                <div>
+                    <button type="submit" class="waves-effect  waves-light btn-large light-blue darken-2"> Realizar Consulta </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
     
 <%- include('include/footer.ejs') %>

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 module.exports = class Participante {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(login, password, nombreUsuario, apellidoPaterno, apellidoMaterno, estatus, sexo, fechaNacimiento, edad, telefonoPadre) {
+    constructor(login, password, nombreUsuario, apellidoPaterno, apellidoMaterno, estatus, sexo, fechaNacimiento, telefonoPadre) {
         this.login = login;
         this.password = password;
         this.nombreUsuario = nombreUsuario;
@@ -13,7 +13,6 @@ module.exports = class Participante {
         this.estatus = estatus;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
         this.telefonoPadre = telefonoPadre;
     }
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
@@ -24,7 +23,7 @@ module.exports = class Participante {
                     [this.login, password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
                 ).then(() => {
                     db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?,?)',
-                        [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.edad,this.telefonoPadre])
+                        [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.telefonoPadre])
                 }).catch(err => {
                     console.log(err);
                 });
@@ -36,6 +35,10 @@ module.exports = class Participante {
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT nombreUsuario, apellidoPaterno, apellidoMaterno, P.login, estatus, password, sexo, fechaNacimiento, edad, telefonoPadre  FROM participantes P,usuarios U WHERE P.login = U.login');
+        return db.execute('SELECT nombreUsuario, apellidoPaterno, apellidoMaterno, P.login, estatus, password, sexo, fechaNacimiento, telefonoPadre  FROM participantes P,usuarios U WHERE P.login = U.login');
+    }
+
+    static fetchAllPart() {
+        return db.execute('SELECT * FROM participantes');
     }
 }
