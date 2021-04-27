@@ -76,6 +76,12 @@ border-bottom: 1px solid #ffcc80!important;
 box-shadow: 0 1px 0 0 #ffcc80!important;
 }
 
+/* label underline number focus color */
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid #ffcc80!important;
+    box-shadow: 0 1px 0 0 #ffcc80!important;
+    }
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #ffcc80!important;

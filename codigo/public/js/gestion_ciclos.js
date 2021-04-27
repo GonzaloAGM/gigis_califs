@@ -13,6 +13,7 @@ $(document).ready(function(){
     $('select').formSelect();
   });
 
+  //DATE PICKER 
 // Spanish overwrite
 inter_es = {
 	cancel: "Cancelar",
@@ -63,7 +64,7 @@ var date = new Date();
 // set default date for #from (1 week from today)
 var nextWeekFrom = new Date(date.setDate(date.getDate() + 7));
 // Default date for #to
-var nextWeekTo = new Date(date.setDate(nextWeekFrom.getDate() + 7));
+var nextWeekTo = new Date(date.setDate(nextWeekFrom.getDate() + 92));
 //Set min date for #to
 var minDateTo = new Date(date.setDate(nextWeekFrom.getDate() + 1));
 
@@ -74,7 +75,6 @@ var optionsFrom = {
 	i18n: inter_es,
 	defaultDate: new Date(nextWeekFrom),
 	setDefaultDate: true,
-	autoClose: true,
 	onSelect: function(el) {
 		const ell = new Date(el);
 		const setMM = ell.getDate() + 1;
@@ -91,7 +91,6 @@ var optionsTo = {
 	minDate: new Date(minDateTo),
 	defaultDate: new Date(nextWeekTo),
 	setDefaultDate: true,
-	autoClose: true
 };
 
 
@@ -116,3 +115,15 @@ var setMinTo = function(vad) {
 };
 
 $("select").formSelect();
+
+// Aparecer boton de asignar terapeutas
+function mostrarOps(elemento){
+  isChecked = document.getElementById(elemento.id).checked;
+  var id2 = elemento.id + 'at'; 
+  if (isChecked){
+    document.getElementById(id2).style.visibility = "visible";
+  }else{
+    document.getElementById(id2).style.visibility = "hidden";
+  }
+  
+}

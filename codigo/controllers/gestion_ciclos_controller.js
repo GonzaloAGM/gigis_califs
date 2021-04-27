@@ -1,7 +1,9 @@
 const Arrow = require('../models/arrow');
 const Ciclo = require('../models/ciclos');
+const Programa = require('../models/programas')
 
 const arrows = Arrow.fetchAll();
+const programas = Programa.fetchAll();
 const mes = [
     'Enero',
     'Febrero',
@@ -16,45 +18,7 @@ const mes = [
     'Noviembre',
     'Diciembre'
 ];
-const programas = [
-    {
-        nombre: 'Lectura 1',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2],
-        referencia: './inscribir-en-grupo'
-    },
-    {
-        nombre: 'Sensorial',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2],
-        referencia: './inscribir-en-grupo'
-    },
-    {
-        nombre: 'Escritura',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel:  [1,2,3],
-        referencia: './inscribir-en-grupo'
-    },
-    {
-        nombre: 'Ballet',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel: [1],
-        referencia: './inscribir-en-grupo'
-    },
-    {
-        nombre: 'Matemáticas',
-        ciclo: 'EM2020',
-        promedio: 'X',
-        nivel: [1,2,3],
-        referencia: './inscribir-en-grupo'
-    }
-
-];
-
+const grupos = [{numero: '1'}, {numero: '2'}] 
 
 exports.getInsGrupo = (request,response,next) => {
     response.render('gc_inscribir', {
@@ -66,13 +30,18 @@ exports.getInsGrupo = (request,response,next) => {
 };
 
 exports.getAgrCiclo = (request,response,next) => {
-    response.render('agregar_ciclo', {
-        programas: programas,
-        tituloDeHeader: "Nuevo ciclo",
-        tituloBarra: "Nuevo ciclo",
-        backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
-        forwArrow: arrows[1]
-    });
+    Programa.fetchAll()
+    .then(([programas, fieldData1]) => {
+        response.render('agregar_ciclo', {
+            programas: programas,
+            grupos: grupos,
+            tituloDeHeader: "Nuevo ciclo",
+            tituloBarra: "Nuevo ciclo",
+            backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
+            forwArrow: arrows[1]
+        });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getPerfilCiclo = (request,response,next) => {
