@@ -56,8 +56,8 @@ exports.postNuevoUsuario = ((request,response,next) => {
                         console.log(err);
                         response.redirect('/gestionAdmin/');    
                     });
-                }
-                response.redirect('/gestionAdmin/gestionUsuarios/'); 
+            }
+            response.redirect('/gestionAdmin/gestionUsuarios/'); 
         }).catch( err => {
             console.log(err);
             response.redirect('/gestionAdmin/');    
