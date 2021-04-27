@@ -4,7 +4,6 @@
 
 <div class="row" id="lista_programas">
   <!------------------Fila 1 ------------------------>
- 
   <% for (programa of programas) { %>
     <div class="col s12 m6 l4">
       <!------------------Programa 1 ------------------------>
@@ -50,8 +49,8 @@
     </div>
     <!------------------Fin Programa 1 -------------------------------->
   <% } %>
-
 </div>
+<div id="lista_modals"></div>
 <!------------------Fin Fila 1 -------------------------------->
 
 <%- include('include/footer.ejs') %>
@@ -80,9 +79,8 @@
         console.log(data);
         let html = '';
         let html2 = '';
-        let html3 = '';
+        let loginParticipante = '';
         for (grupo of data.grupos){
-          let nombreParticipante = '';
           html += '<div class="row">' +
                     '<div class="col s12 m6">' +
                       '<h5>Terapeuta: ' + grupo.nombreUsuario + ' ' + grupo.apellidoPaterno + '</h5>' +
@@ -101,24 +99,129 @@
                     '</thead>'+
                   '</tbody>';
           for (participante of data.participantes){
-            if (participante.login !== nombreParticipante && participante.idGrupo === grupo.idGrupo){
+            if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo){
               html += '<tr>' +
                       '<td>' +
-                        '<button class="btn-flat modal-trigger" data-target="' + participante.login +'">' +
+                        '<a class="btn-flat modal-trigger" href="#' + participante.login +'">' +
                           participante.nombreUsuario + ' ' + participante.apellidoPaterno + ' ' + participante.apellidoMaterno +
-                        '</button>' +
+                        '</a>' +
                       '</td>' +
                       '<td>' + participante.nombreNivel + '</td>' + 
                       '<td></td>' +
                     '</tr>';
-              nombreParticipante = participante.login;
+              loginParticipante = participante.login;
             }
           } 
           html += '</tbody>' +
                   '</table>' +
                   '<br /><br />';         
         }
-       document.getElementById('lista_programas').innerHTML = html;
+        /*for(participante of data.participantes){
+          console.log('login: ' + loginParticipante)
+          console.log('participante: ' + participante.login)
+          if (participante.login !== loginParticipante){
+            html2 +=' <div id="' + participante.login + '" class="modal">' +
+                      '<div class="modal-content">' +
+                        '<table>' +
+                          '<thead>' +
+                            '<tr>' +
+                              '<th>Objetivos</th>' +
+                              '<th>Inicio</th>' +
+                              '<th>Final</th>' +
+                            '</tr>' +
+                          '</thead>' +
+                          '<tbody>' 
+          }
+          html2 +=  '<tr>' +
+                      '<td>'+ participante.descripcion + '</td>'+
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                    '</tr>';
+
+          if (participante.login !== loginParticipante){
+            html2 +=  '</tbody>' +
+                        '</table>' +
+                          '<div class="modal-footer">' +
+                            '<a href="#" class="btn modal-close">Cerrar</a>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>'
+            }
+          loginParticipante = participante.login;
+        }*/
+        let html3 = '<div id="correo006" class="modal">' +
+                        '<div class="modal-content">'+
+                      '<h4>Modal Header</h4>'+
+                     ' <p>A bunch of text</p>'+
+                   ' </div>'+
+                    '<div class="modal-footer">'+
+                      '<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>'+
+                    '</div>'+
+                  '</div>';
+
+        html2 +=' <div id="correo006" class="modal">' +
+                      '<div class="modal-content">' +
+                        '<table>' +
+                          '<thead>' +
+                            '<tr>' +
+                              '<th>Objetivos</th>' +
+                              '<th>Inicio</th>' +
+                              '<th>Final</th>' +
+                            '</tr>' +
+                          '</thead>' +
+                          '<tbody>' 
+          html2 +=  '<tr>' +
+                      '<td>holaaaaaaaa</td>'+
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= 5; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= 5; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                    '</tr>';
+
+          html2 +=  '</tbody>' +
+                        '</table>' +
+                          '<div class="modal-footer">' +
+                            '<a href="#" class="btn modal-close">Cerrar</a>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>'
+
+        document.getElementById('lista_programas').innerHTML = html;
+        document.getElementById('lista_modals').innerHTML = html3;
 
     }).catch(err => {
         console.log(err);
