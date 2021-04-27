@@ -2,54 +2,229 @@
 <%- include('include/titleBar.ejs') %>
 <%-include('include/sideNavBar.ejs') %>
 
-<div class="row">
+<div class="row" id="lista_programas">
   <!------------------Fila 1 ------------------------>
   <% for (programa of programas) { %>
-  <div class="col s12 m6 l4">
-    <!------------------Programa 1 ------------------------>
-    <div class="card">
-      <div class="card-image">
-        <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg" />
-      </div>
-      <div class="card-content">
-        <a href="<%= programa.idPrograma %>">
-          <span class="card-title"><%= programa.nombrePrograma%></span>
-        </a>
-        <br />
-        <p>Ciclo: <%= programa.fechaInicio%> - <%= programa.fechaFinal%></p>
-        <p></p>
-        <p>Grupos:</p>
-        <br />
-        <div class="row">
-          <div class="col s12">
-            <div>
-              <% for (grupo of grupos) { 
-                if (programa.idPrograma === grupo.idPrograma){ 
-                  switch (grupo.numeroGrupo) { 
-                    case 1: %>
-                      <i class="material-icons medium red-text">looks_one</i>
-                      <% break; 
-                    case 2: %>
-                      <i class="material-icons medium red-text">looks_two</i>
-                      <% break; 
-                    case 3: %>
-                      <i class="material-icons medium red-text">looks_3</i>
-                      <% break; 
-                    case 4: %>
-                      <i class="material-icons medium red-text">looks_4</i>
-                      <% break; 
+    <div class="col s12 m6 l4">
+      <!------------------Programa 1 ------------------------>
+      <div class="card">
+        <div class="card-image">
+          <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg" />
+        </div>
+        <div class="card-content">
+          <a onclick="mostrarGrupos(<%= programa.idPrograma %>)">
+            <span class="card-title"><%= programa.nombrePrograma%></span>
+          </a>
+          <br />
+          <p>Ciclo: <%= programa.fechaInicio%> - <%= programa.fechaFinal%></p>
+          <p></p>
+          <p>Grupos:</p>
+          <br />
+          <div class="row">
+            <div class="col s12">
+              <div>
+                <% for (grupo of grupos) { 
+                  if (programa.idPrograma === grupo.idPrograma){ 
+                    switch (grupo.numeroGrupo) { 
+                      case 1: %>
+                        <i class="material-icons medium red-text">looks_one</i>
+                        <% break; 
+                      case 2: %>
+                        <i class="material-icons medium red-text">looks_two</i>
+                        <% break; 
+                      case 3: %>
+                        <i class="material-icons medium red-text">looks_3</i>
+                        <% break; 
+                      case 4: %>
+                        <i class="material-icons medium red-text">looks_4</i>
+                        <% break; 
+                      } 
                     } 
-                  } 
-                } %>
+                  } %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!------------------Fin Programa 1 -------------------------------->
+    <!------------------Fin Programa 1 -------------------------------->
   <% } %>
 </div>
+<div id="lista_modals"></div>
 <!------------------Fin Fila 1 -------------------------------->
 
 <%- include('include/footer.ejs') %>
+
+<script>
+  const mostrarGrupos = (idPrograma) => {
+    //El token de protección CSRF
+    //const csrf = document.getElementById('_csrf').value;
+
+    let data = {programa_id: idPrograma};
+    console.log(data);
+    //función que manda la petición asíncrona
+    fetch('/programas/' + idPrograma, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            //'csrf-token': csrf
+        },
+        body: JSON.stringify(data)
+    }).then(result => {
+        return result.json(); //Regresa otra promesa
+    }).then(data => {
+        //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+        //...
+        console.log("Respuesta de la peticion asincrona");
+        console.log(data);
+        let html = '';
+        let html2 = '';
+        let loginParticipante = '';
+        for (grupo of data.grupos){
+          html += '<div class="row">' +
+                    '<div class="col s12 m6">' +
+                      '<h5>Terapeuta: ' + grupo.nombreUsuario + ' ' + grupo.apellidoPaterno + '</h5>' +
+                    '</div>'+
+                    '<div class="col s12 m6">' +
+                      '<h5>Promedio General: X</h5>' +
+                    '</div>' +
+                  '</div>' +
+                  '<table>' +
+                    '<thead>'+
+                      '<tr>'+
+                        '<th>Participantes</th>'+
+                        '<th>Nivel</th>'+
+                        '<th>Calificaciones</th>'+
+                      '</tr>'+
+                    '</thead>'+
+                  '</tbody>';
+          for (participante of data.participantes){
+            if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo){
+              html += '<tr>' +
+                      '<td>' +
+                        '<a class="btn-flat modal-trigger" href="#' + participante.login +'">' +
+                          participante.nombreUsuario + ' ' + participante.apellidoPaterno + ' ' + participante.apellidoMaterno +
+                        '</a>' +
+                      '</td>' +
+                      '<td>' + participante.nombreNivel + '</td>' + 
+                      '<td></td>' +
+                    '</tr>';
+              loginParticipante = participante.login;
+            }
+          } 
+          html += '</tbody>' +
+                  '</table>' +
+                  '<br /><br />';         
+        }
+        /*for(participante of data.participantes){
+          console.log('login: ' + loginParticipante)
+          console.log('participante: ' + participante.login)
+          if (participante.login !== loginParticipante){
+            html2 +=' <div id="' + participante.login + '" class="modal">' +
+                      '<div class="modal-content">' +
+                        '<table>' +
+                          '<thead>' +
+                            '<tr>' +
+                              '<th>Objetivos</th>' +
+                              '<th>Inicio</th>' +
+                              '<th>Final</th>' +
+                            '</tr>' +
+                          '</thead>' +
+                          '<tbody>' 
+          }
+          html2 +=  '<tr>' +
+                      '<td>'+ participante.descripcion + '</td>'+
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                    '</tr>';
+
+          if (participante.login !== loginParticipante){
+            html2 +=  '</tbody>' +
+                        '</table>' +
+                          '<div class="modal-footer">' +
+                            '<a href="#" class="btn modal-close">Cerrar</a>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>'
+            }
+          loginParticipante = participante.login;
+        }*/
+        let html3 = '<div id="correo006" class="modal">' +
+                        '<div class="modal-content">'+
+                      '<h4>Modal Header</h4>'+
+                     ' <p>A bunch of text</p>'+
+                   ' </div>'+
+                    '<div class="modal-footer">'+
+                      '<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>'+
+                    '</div>'+
+                  '</div>';
+
+        html2 +=' <div id="correo006" class="modal">' +
+                      '<div class="modal-content">' +
+                        '<table>' +
+                          '<thead>' +
+                            '<tr>' +
+                              '<th>Objetivos</th>' +
+                              '<th>Inicio</th>' +
+                              '<th>Final</th>' +
+                            '</tr>' +
+                          '</thead>' +
+                          '<tbody>' 
+          html2 +=  '<tr>' +
+                      '<td>holaaaaaaaa</td>'+
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= 5; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                      '<td>' +
+                        '<div class="input-field puntaje">' +
+                          '<select>' +
+                            '<option value="" disabled selected>___</option>';
+                            for (let puntaje = 1; puntaje <= 5; puntaje++) {
+                              html2 += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                            }
+          html2 +=          '</select>' +
+                        '</div>' +
+                      '</td>' +
+                    '</tr>';
+
+          html2 +=  '</tbody>' +
+                        '</table>' +
+                          '<div class="modal-footer">' +
+                            '<a href="#" class="btn modal-close">Cerrar</a>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>'
+
+        document.getElementById('lista_programas').innerHTML = html;
+        document.getElementById('lista_modals').innerHTML = html3;
+
+    }).catch(err => {
+        console.log(err);
+    });
+  };
+</script>

@@ -9,6 +9,8 @@ router.use(express.static(path.join(__dirname, '..', 'public')));
 const programasController = require('../controllers/programas_contoller');
 
 router.get('/:id_programa', programasController.getProgramas);
+router.post('/:programa_id', programasController.postProgramas);
+
 router.get('/', programasController.get);
 
 module.exports = router;
