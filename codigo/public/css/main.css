@@ -160,3 +160,8 @@ box-shadow: 0 1px 0 0 #e53935 !important;
         border-bottom: 2px solid #ef6c00 !important;
     
     }
+
+    /*collection color*/
+    .collection a.collection-item {
+        color: #ef6c00 !important;
+    }

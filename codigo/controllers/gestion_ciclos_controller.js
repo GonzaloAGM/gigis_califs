@@ -1,84 +1,21 @@
 const Arrow = require('../models/arrow');
+const Ciclo = require('../models/ciclos');
 
 const arrows = Arrow.fetchAll();
-
-const ciclos_actuales = [
-    {
-        nombre:     'Enero-Marzo',
-        anio:       '2021',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Abril-Junio',
-        anio:       '2021',
-        ruta:       './gestion-perfil-ciclo'
-    }    
+const mes = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril', 
+    'Mayo',
+    'Junio',
+    'Julio', 
+    'Agosto',
+    'Septiembre', 
+    'Octubre', 
+    'Noviembre',
+    'Diciembre'
 ];
-
-const ciclos_anteriores = [
-    {
-        nombre:     'Enero-Marzo',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Abril-Junio',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    } ,   
-    {
-        nombre:     'Julio-Septiembre',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Octubre-Diciembre',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },  
-    {
-        nombre:     'Enero-Marzo',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Abril-Junio',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Julio-Septiembre',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Octubre-Diciembre',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Enero-Marzo',
-        anio:       '2019',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Abril-Junio',
-        anio:       '2019',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Julio-Septiembre',
-        anio:       '2019',
-        ruta:       './gestion-perfil-ciclo'
-    },
-    {
-        nombre:     'Octubre-Diciembre',
-        anio:       '2020',
-        ruta:       './gestion-perfil-ciclo'
-    },
-     
-];
-
 const programas = [
     {
         nombre: 'Lectura 1',
@@ -149,12 +86,26 @@ exports.getPerfilCiclo = (request,response,next) => {
 };
 
 exports.get = (request,response,next) => {
-    response.render('gestion_ciclos', {
-        ciclos_actuales: ciclos_actuales,
-        ciclos_anteriores: ciclos_anteriores,
-        tituloDeHeader: "Gestión de ciclos",
-        tituloBarra: "Ciclos",
-        backArrow: {display: 'block', link: '/gestionAdmin'},
-        forwArrow: arrows[1]
-    });
+    Ciclo.fetchAll()
+        .then(([ciclos, fieldData1]) => {
+            Ciclo.fetchCiclosAnioActual()
+                .then(([ciclos_aactual, fieldData1]) => {
+                    Ciclo.fetchAniosPasados()
+                        .then(([a_pasados, fieldData1]) => {
+                            response.render('gestion_ciclos', {
+                                ciclos: ciclos,
+                                a_pasados:a_pasados,
+                                ciclos_aactual: ciclos_aactual,
+                                mes: mes,
+                                tituloDeHeader: "Gestión de ciclos",
+                                tituloBarra: "Ciclos",
+                                backArrow: {display: 'block', link: '/gestionAdmin'},
+                                forwArrow: arrows[1]
+                            });
+                        })
+                        .catch((err) => console.log(err));
+                })
+                .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
 };
