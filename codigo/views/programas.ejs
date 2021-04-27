@@ -105,21 +105,19 @@
               html += '<tr>' +
                       '<td>' +
                         '<button class="btn-flat modal-trigger" data-target="' + participante.login +'">' +
-                          participante.login +
+                          participante.nombreUsuario + ' ' + participante.apellidoPaterno + ' ' + participante.apellidoMaterno +
                         '</button>' +
                       '</td>' +
-                      '<td>' + participante.idNivel + '</td>' + 
+                      '<td>' + participante.nombreNivel + '</td>' + 
                       '<td></td>' +
                     '</tr>';
               nombreParticipante = participante.login;
-              console.log(nombreParticipante);
             }
           } 
           html += '</tbody>' +
                   '</table>' +
                   '<br /><br />';         
         }
-        
        document.getElementById('lista_programas').innerHTML = html;
 
     }).catch(err => {
