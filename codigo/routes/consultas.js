@@ -33,4 +33,6 @@ router.get('/', consultasController.getConsultas);
 
 router.post('/', consultasController.postConsultas);
 
+router.post('/SelProgram', consultasController.postSelProgram);
+
 module.exports = router;

@@ -29,7 +29,7 @@ function selCard(evt) {
     if(evt.currentTarget.className.includes("blue-grey")){
         //Seleccionar programa
         evt.currentTarget.className = evt.currentTarget.className.replace(" blue-grey", " light-blue");
-        listaProg.push(evt.currentTarget.id);
+        listaProg.push(parseInt(evt.currentTarget.id));
         console.table(listaProg);
     }
     else if(evt.currentTarget.className.includes("light-blue")){
@@ -37,14 +37,26 @@ function selCard(evt) {
         evt.currentTarget.className = evt.currentTarget.className.replace(" light-blue", " blue-grey");
         let pos = listaProg.indexOf(evt.currentTarget.id);
         listaProg.splice(pos, 1);
-        console.table(listaProg);
+        //console.table(listaProg);
     }
     if(listaProg.length > 1){
-        document.getElementById('CalifOProg').removeAttribute("disabled");
+        document.getElementById('swCalifOProg').removeAttribute("disabled");
     }else{
-        document.getElementById('CalifOProg').setAttribute("disabled",null);
+        document.getElementById('swCalifOProg').setAttribute("disabled",null);
     }
-    document.getElementById('cantProg').value=listaProg.length;
+
+    let data = {
+        listaProg : listaProg,
+    };
+
+    fetch('/Consultas/SelProgram',{
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+    }).then(result => {
+        return result.json();
+    });
+    //console.log('Hecho');
 }
 
 function todosProg(){
@@ -55,8 +67,19 @@ function todosProg(){
             listaProg.push(tarjetProg[i].id);
         }
     }
-    console.table(listaProg);
-    document.getElementById('cantProg').value=listaProg.length;
+    //console.table(listaProg);
+    document.getElementById('swCalifOProg').removeAttribute("disabled");
+    let data = {
+        listaProg : listaProg,
+    };
+
+    fetch('/Consultas/SelProgram',{
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+    }).then(result => {
+        return result.json();
+    });
 }
 
 function ningunProg(){
@@ -67,6 +90,41 @@ function ningunProg(){
             listaProg.pop();
         }
     }
-    console.table(listaProg);
-    document.getElementById('cantProg').value=listaProg.length;
+    //console.table(listaProg);
+    document.getElementById('swCalifOProg').setAttribute("disabled",null);
+    let data = {
+        listaProg : listaProg,
+    };
+
+    fetch('/Consultas/SelProgram',{
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+    }).then(result => {
+        return result.json();
+    });
+}
+
+function enableSexo(){
+    let bool = document.getElementById('chSexo').checked;
+    //console.log('Sexo: '+bool);
+    if(bool){
+        document.getElementById('swSexo').removeAttribute("disabled");
+    }else{
+        document.getElementById('swSexo').setAttribute("disabled",null);
+    }
+}
+
+function enableEdad(){
+    let bool = document.getElementById('chEdad').checked;
+    //console.log('Edad: '+bool);
+    if(bool){
+        document.getElementById('inEdadIni').removeAttribute("disabled");
+        document.getElementById('chRangoEdad').removeAttribute("disabled");
+        document.getElementById('inEdadFin').removeAttribute("disabled");
+    }else{
+        document.getElementById('inEdadIni').setAttribute("disabled",null);
+        document.getElementById('chRangoEdad').setAttribute("disabled",null);
+        document.getElementById('inEdadFin').setAttribute("disabled",null);
+    }
 }
