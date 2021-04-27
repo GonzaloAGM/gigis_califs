@@ -14,6 +14,6 @@ subrouter.post('/gestion-nivel-objetivos',gestionPrograController.postGpObjetivo
 
 subrouter.get('/', gestionPrograController.get);
 
-subrouter.post('/', gestionPrograController.post);
+subrouter.post('/', gestionPrograController.postNuevoPrograma);
 
 module.exports = subrouter;
