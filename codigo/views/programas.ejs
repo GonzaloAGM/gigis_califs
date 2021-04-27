@@ -101,7 +101,7 @@
                     '</thead>'+
                   '</tbody>';
           for (participante of data.participantes){
-            if (participante.login !== nombreParticipante){
+            if (participante.login !== nombreParticipante && participante.idGrupo === grupo.idGrupo){
               html += '<tr>' +
                       '<td>' +
                         '<button class="btn-flat modal-trigger" data-target="' + participante.login +'">' +
