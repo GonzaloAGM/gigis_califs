@@ -1,7 +1,7 @@
 const Grupo = require('../models/grupos');
 const Programa = require('../models/programas');
 const Arrow = require('../models/arrow');
-
+const Participante_Grupo_Objetivo = require('../models/participantes_grupos_objetivos');
 const arrows = Arrow.fetchAll();
 
 exports.getProgramas = (request, response, next) => {
@@ -33,8 +33,25 @@ exports.postProgramas = (request, response, next) => {
   console.log(request.body);
   console.log(request.body.programa_id);
   
+  Grupo.fethcGruposProgramaActual(request.body.programa_id)
+    .then(([grupos, fieldData]) => {
+      console.log(grupos);
+      Participante_Grupo_Objetivo.fetchParticipantesPorPrograma(request.body.programa_id)
+        .then(([participantes,fieldData2]) => {
+          return response.status(200).json({
+            grupos: grupos,
+            participantes: participantes
+          });
+        }).catch((err) => {
+          console.log(err);
+          return response.status(500).json({message: "Internal Server Error"});
+        })
+    }).catch((err) => {
+        console.log(err);
+        return response.status(500).json({message: "Internal Server Error"});
+    })
 
-  response.status(200).json({message: "respuesta asincrona"});
+  //response.status(200).json({message: "respuesta asincrona"});
 
 };
 

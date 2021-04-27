@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
+
 const rutasConsultas = require('./routes/consultas');
 const rutasProgramas = require('./routes/programas');
 const rutasGestionAdmin = require('./routes/GestionAdmin');
