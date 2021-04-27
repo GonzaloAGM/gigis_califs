@@ -3,7 +3,7 @@
     <% for (let programa of programas) { %>  
         <li>
             <div class="collapsible-header">
-                <%= programa.nombre %>
+                <%= programa.nombrePrograma %>
                 <span class="badge">
                     <!-- Modal Editar -->
                     <a class="waves-effect waves-light modal-trigger black-text" href="#EditarPrograma"><i class="material-icons left">edit</i></a>
@@ -11,8 +11,10 @@
             </div>
             <div class="collapsible-body">
                 <div class="collection">
-                    <% for (let nivel of programa.niveles) { %> 
-                        <a href="./gestion-nivel-objetivos" class="collection-item"><%= nivel.nombre %></a> 
+                    <% for (let nivel of niveles) { %>
+                      <% if (nivel.idPrograma === programa.idPrograma) {%> 
+                        <a href="./gestion-nivel-objetivos" class="collection-item"><%= nivel.nombreNivel %></a> 
+                      <% } %>
                     <% } %>
                     <a class="collection-item modal-trigger" href="#agregarNivel">Nuevo nivel</a>
                 </div>
