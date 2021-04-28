@@ -49,6 +49,14 @@ exports.getAgrCiclo = (request,response,next) => {
     .catch((err) => console.log(err));
 };
 
+exports.postSelProg = (request,response,next) => {
+    
+};
+
+exports.postSelTera = (request,response,next) => {
+    
+};
+
 exports.getPerfilCiclo = (request,response,next) => {
     response.render('gestion_perfil_ciclo', {
         programas: programas,

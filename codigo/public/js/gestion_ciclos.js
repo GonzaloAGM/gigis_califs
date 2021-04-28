@@ -116,6 +116,16 @@ var setMinTo = function(vad) {
 
 $("select").formSelect();
 
+function toastRegCiclo(){   
+	M.toast({
+			  html: 'Se registró correctamente el ciclo.',
+			  displayLenght: 5000
+			});
+  }
+
+// Registro de ciclos 
+  var prograsSel=[], terapAsig=[];
+
 // Aparecer boton de asignar terapeutas
 function mostrarOps(elemento){
   isChecked = document.getElementById(elemento.id).checked;
@@ -123,15 +133,57 @@ function mostrarOps(elemento){
   console.log(elemento.id) 
   if (isChecked){
     document.getElementById(id2).style.display = "block";
+	prograsSel.push(parseInt(elemento.id));
+	console.log(prograsSel);
   }else{
     document.getElementById(id2).style.display = "none";
+	let pos = listaProg.indexOf(elemento.id);
+    prograsSel.splice(pos, 1);
+	console.log(prograsSel);
   }
+  let data = {
+	prograsSel : prograsSel,
+};
+
+fetch('/gestionAdmin/gestionCiclos/selProg',{
+	method: 'POST',
+	headers: {'Content-Type':'application/json'},
+	body:JSON.stringify(data)
+}).then(result => {
+	return result.json();
+});
   
 }
 
-function toastRegCiclo(){   
-	M.toast({
-			  html: 'Se registró correctamente el ciclo.',
-			  displayLenght: 5000
-			});
+function selTe(terapeuta){
+isChecked = document.getElementById(terapeuta.id).checked;
+  var idP = parseInt(terapeuta.id);
+  console.log(idP);
+  var aux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP}];
+  if (isChecked){
+	terapAsig.push(aux);
+	console.log(terapAsig);
+  }else{
+	let pos = listaProg.indexOf(terapeuta.id);
+    terapAsig.splice(pos, 1);
+	console.log(terapAsig);
   }
+  let data = {
+	terapAsig: terapAsig,
+	};
+
+	fetch('/gestionAdmin/gestionCiclos/selTera',{
+		method: 'POST',
+		headers: {'Content-Type':'application/json'},
+		body:JSON.stringify(data)
+	}).then(result => {
+		return result.json();
+	});
+
+}
+
+
+
+
+
+
