@@ -38,5 +38,12 @@ module.exports = class Usuario {
       );
   }
 
+   //Este método servirá para devolver usuarios de un solo rol que se pasa por parámetro.
+   static fetchNomTerapeutas() {
+    return db.execute(
+      'SELECT nombreUsuario, apellidoPaterno, U.login FROM  usuarios U, terapeutas T WHERE   U.login = T.login AND T.estatus = "A"'
+      );
+  }
+
 
 }

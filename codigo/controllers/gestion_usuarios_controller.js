@@ -5,10 +5,6 @@ const Usuario_Rol = require('../models/usuarios_roles');
 const Rol = require('../models/roles');
 
 const arrows = Arrow.fetchAll();
-const usuarios = Usuario.fetchAll();
-const terapeutas = Terapeuta.fetchAll();
-const usuarios_roles = Usuario_Rol.fetchAll();
-const roles = Rol.fetchAll();
 
 exports.get = (request, response, next) => {
     Usuario.fetchListaSin('participante')

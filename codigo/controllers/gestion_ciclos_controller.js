@@ -1,9 +1,9 @@
 const Arrow = require('../models/arrow');
 const Ciclo = require('../models/ciclos');
 const Programa = require('../models/programas')
+const Usuario = require('../models/usuarios');
 
 const arrows = Arrow.fetchAll();
-const programas = Programa.fetchAll();
 const mes = [
     'Enero',
     'Febrero',
@@ -32,14 +32,19 @@ exports.getInsGrupo = (request,response,next) => {
 exports.getAgrCiclo = (request,response,next) => {
     Programa.fetchAll()
     .then(([programas, fieldData1]) => {
-        response.render('agregar_ciclo', {
-            programas: programas,
-            grupos: grupos,
-            tituloDeHeader: "Nuevo ciclo",
-            tituloBarra: "Nuevo ciclo",
-            backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
-            forwArrow: arrows[1]
-        });
+        Usuario.fetchNomTerapeutas()
+        .then(([terapeutas, fieldData1]) => {
+            response.render('agregar_ciclo', {
+                programas: programas,
+                terapeutas: terapeutas,
+                grupos: grupos,
+                tituloDeHeader: "Nuevo ciclo",
+                tituloBarra: "Nuevo ciclo",
+                backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
+                forwArrow: arrows[1]
+            });
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 };

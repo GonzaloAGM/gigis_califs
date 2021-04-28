@@ -40,8 +40,10 @@
                     </span>
                 </div>
                 <div class="collapsible-body">
-                    <div class="collection">
-                        <a class="collection-item modal-trigger" id="<%= programa.idPrograma %>at" href="#asignarTerapeutas" style = "visibility:hidden">Asignar terapeutas</a>
+                    <div class="collection" id="<%= programa.idPrograma %>at" style = "display:none">
+                        <% for (let terapeuta of terapeutas) { %>  
+                            <a href="#" class="collection-item"><%= terapeuta.nombreUsuario %> <%= terapeuta.apellidoPaterno %></a> 
+                        <% } %>
                     </div>
                 </div>
             </li>
@@ -49,5 +51,6 @@
         </ul>       
      </div> 
   </div>
+
 
 <%- include('include/footer.ejs') %>

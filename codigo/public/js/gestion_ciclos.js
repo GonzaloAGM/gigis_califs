@@ -119,11 +119,12 @@ $("select").formSelect();
 // Aparecer boton de asignar terapeutas
 function mostrarOps(elemento){
   isChecked = document.getElementById(elemento.id).checked;
-  var id2 = elemento.id + 'at'; 
+  var id2 = elemento.id + 'at';
+  console.log(elemento.id) 
   if (isChecked){
-    document.getElementById(id2).style.visibility = "visible";
+    document.getElementById(id2).style.display = "block";
   }else{
-    document.getElementById(id2).style.visibility = "hidden";
+    document.getElementById(id2).style.display = "none";
   }
   
 }
