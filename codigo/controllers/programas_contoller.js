@@ -6,26 +6,30 @@ const arrows = Arrow.fetchAll();
 
 exports.getProgramas = (request, response, next) => {
   const idPrograma = request.params.id_programa;
-  console.log(idPrograma + ': -----------------------------------------------');
-  Grupo.fethcGruposProgramaActual(idPrograma)
-    .then(([grupos, fieldData1]) => {
-      console.log(grupos);
-      let idGrupos = [];
-      for (grupo of grupos) {
-        idGrupos.push(grupo.idGrupos);
-        console.log(grupo.idGrupo);
-      }
-      console.log(idGrupos);
-      response.render('programas_programa1', {
-        tituloDeHeader: grupos[0].nombrePrograma,
-        tituloBarra: grupos[0].nombrePrograma,
-        grupos: grupos,
-        objetivos: [],
-        backArrow: { display: 'block', link: '/programas' },
-        forwArrow: arrows[1],
-      });
-    })
-    .catch((err) => console.log(err));
+  Programa.fetchNombreProgama(idPrograma)
+    .then(([programa, fieldData]) => {
+      Grupo.fethcGruposProgramaActual(idPrograma)
+      .then(([grupos, fieldData1]) => {
+        console.log(grupos);
+        Participante_Grupo_Objetivo.fetchParticipantesPorPrograma(idPrograma)
+          .then(([participantes,fieldData2]) => {
+            response.render('programas_programa1', {
+              tituloDeHeader: programa[0].nombrePrograma,
+              tituloBarra: programa[0].nombrePrograma,
+              grupos: grupos,
+              participantes: participantes,
+              backArrow: { display: 'block', link: '/programas' },
+              forwArrow: arrows[1]
+            });
+          }).catch((err) => {
+            console.log(err);
+          })
+      }).catch((err) => {
+          console.log(err);
+      })
+    }).catch((err) => {
+      console.log(err);
+  })
 };
 
 exports.postProgramas = (request, response, next) => {

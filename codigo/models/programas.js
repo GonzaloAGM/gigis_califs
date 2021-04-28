@@ -33,5 +33,11 @@ module.exports = class Programas {
         'SELECT G.idPrograma, nombrePrograma, DATE_FORMAT(fechaInicial, "%M") AS fechaInicio , DATE_FORMAT(fechafinal, "%M %Y") AS fechaFinal FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY idPrograma'
         );
     }
+
+    static fetchNombreProgama(idPrograma){
+        return db.execute('SELECT nombrePrograma FROM programas WHERE idPrograma=?', 
+            [idPrograma]
+        );
+    }
 }
 

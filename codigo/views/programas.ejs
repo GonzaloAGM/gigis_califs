@@ -12,7 +12,7 @@
           <img src="https://www.fundacionsomos.cl/wp-content/uploads/2017/05/IMG_2792-960x750.jpeg" />
         </div>
         <div class="card-content">
-          <a onclick="mostrarGrupos(<%= programa.idPrograma %>)">
+          <a href="<%= programa.idPrograma %>">
             <span class="card-title"><%= programa.nombrePrograma%></span>
           </a>
           <br />
@@ -50,7 +50,6 @@
     <!------------------Fin Programa 1 -------------------------------->
   <% } %>
 </div>
-<div id="lista_modals"></div>
 <!------------------Fin Fila 1 -------------------------------->
 
 <%- include('include/footer.ejs') %>
