@@ -2,39 +2,65 @@
 <%- include('include/titleBar.ejs') %> 
 <%-include('include/sideNavBar.ejs') %> 
 
+<% let loginParticipante = ''; %>
 <% for (grupo of grupos) { %>
-<div class="row">
-  <div class="col s12 m6">
-    <h5>Terapeuta: <%= grupo.nombreUsuario%> <%= grupo.apellidoPaterno%></h5>
-  </div>
-  <div class="col s12 m6">
-    <h5>Promedio General: X</h5>
-  </div>
-</div>
-
-<br /><br />
-<% } %>
-
-<div id="participante1" class="modal">
-  <!-- Tabla de objetivos a calificar------------------------>
-  <div class="modal-content">
-    <table>
-      <thead>
-        <tr>
-          <th>Objetivos</th>
-          <th>Inicio</th>
-          <th>Final</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
-    <div class="modal-footer">
-      <a href="#" class="btn modal-close">Cerrar</a>
+  <div class="row">
+    <div class="col s12 m6">
+      <h5>Terapeuta: <%= grupo.nombreUsuario%> <%= grupo.apellidoPaterno%></h5>
+    </div>
+    <div class="col s12 m6">
+      <h5>Promedio General: X</h5>
     </div>
   </div>
-</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Participantes</th>
+        <th>Nivel</th>
+        <th>Calificaciones</th>
+      </tr>
+    </thead>
+    </tbody>
+    <% for (participante of participantes) { %>
+      <% if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo) { %>
+        <tr>
+          <td>
+            <a class="btn-flat modal-trigger" href="#' + participante.login +'">
+              <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
+            </a>
+          </td>
+          <td>  <%=participante.nombreNivel%>  </td>
+          <td></td>
+        </tr>
+          <% loginParticipante = participante.login;%>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  <br /><br />
+<% } %>
+
+  <div id="participante1" class="modal">
+    <!-- Tabla de objetivos a calificar------------------------>
+    <div class="modal-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Objetivos</th>
+            <th>Inicio</th>
+            <th>Final</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+      <div class="modal-footer">
+        <a href="#" class="btn modal-close">Cerrar</a>
+      </div>
+    </div>
+  </div>
 <!---------------  Fin tabla objetivos----------------------------------------------->
 
 <%- include('include/footer.ejs') %>
