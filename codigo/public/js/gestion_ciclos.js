@@ -141,17 +141,6 @@ function mostrarOps(elemento){
 		prograsSel.splice(pos, 1);
 		console.log(prograsSel);
 	}
-	let data = {
-		prograsSel : prograsSel,
-	};
-
-	fetch('/gestionAdmin/gestionCiclos/selProg',{
-		method: 'POST',
-		headers: {'Content-Type':'application/json'},
-		body:JSON.stringify(data)
-	}).then(result => {
-		return result.json();
-	});
   
 }
 
@@ -168,7 +157,23 @@ isChecked = document.getElementById(terapeuta.id).checked;
     terapAsig.splice(pos, 1);
 	console.log(terapAsig);
   }
-  let data = {
+
+}
+
+function enviarJSONs(){
+let data = {
+	prograsSel : prograsSel,
+};
+
+fetch('/gestionAdmin/gestionCiclos/selProg',{
+	method: 'POST',
+	headers: {'Content-Type':'application/json'},
+	body:JSON.stringify(data)
+}).then(result => {
+	return result.json();
+});
+
+data = {
 	terapAsig: terapAsig,
 	};
 
@@ -179,9 +184,7 @@ isChecked = document.getElementById(terapeuta.id).checked;
 	}).then(result => {
 		return result.json();
 	});
-
 }
-
 
 
 
