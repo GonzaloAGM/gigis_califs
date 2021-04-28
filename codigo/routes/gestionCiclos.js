@@ -14,9 +14,9 @@ subrouter.post('/selTera',gestionCicloController.postSelTera);
 
 subrouter.post('/selProg',gestionCicloController.postSelProg);
 
-subrouter.post('/agregar-ciclo',gestionCicloController.postAgrCiclo);
-
 subrouter.get('/agregar-ciclo',gestionCicloController.getAgrCiclo);
+
+subrouter.post('/agregar-ciclo',gestionCicloController.postAgrCiclo);
 
 subrouter.get('/gestion-perfil-ciclo',gestionCicloController.getPerfilCiclo);
 

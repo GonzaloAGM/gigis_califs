@@ -61,7 +61,15 @@ exports.postSelTera = (request,response,next) => {
 };
 
 exports.postAgrCiclo = (request,response,next) => {
-    
+    const ciclo = new Ciclo(request.body.fechaInicial, request.body.fechaFinal);
+    ciclo.save()
+        .then(() => {
+            console.log('Todo ok');
+            response.redirect('/gestionAdmin/gestionCiclos');         
+        }).catch( err => {
+            console.log(err);
+            response.redirect('/gestionAdmin/');    
+        });
 };
 
 exports.getPerfilCiclo = (request,response,next) => {
