@@ -30,7 +30,7 @@ function selCard(evt) {
         //Seleccionar programa
         evt.currentTarget.className = evt.currentTarget.className.replace(" blue-grey", " light-blue");
         listaProg.push(parseInt(evt.currentTarget.id));
-        console.table(listaProg);
+        //console.table(listaProg);
     }
     else if(evt.currentTarget.className.includes("light-blue")){
         //Des-seleccionar programa

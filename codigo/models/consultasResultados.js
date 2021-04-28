@@ -6,7 +6,7 @@ const meses = ['','Ene', 'Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','
 module.exports = class DatosConsultas {
   //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
   constructor() {
-    this.listaProgam = [9,2];
+    this.listaProgam = [];
     this.cicloIni = 0;
     this.intervaloCiclo = true;
     this.cicloFin = 0;
@@ -60,7 +60,11 @@ module.exports = class DatosConsultas {
     return db.execute('SELECT * FROM CalifDatos');
   }
 
-  fetch() {
+  fetch(){
+      
+  }
+
+  fetch2() {
     let texto = 'SELECT nombreUsuario, apellidoPaterno, apellidoMaterno';
     let vars = [];
 

@@ -196,13 +196,13 @@ let datosConsultas = new DatosConsultas();
 const arrows = Arrow.fetchAll();
 
 exports.getResultados = ((request, response, next) => {
-    datosConsultas.fetch()
+    datosConsultas.fetch2()
     .then(([rows, fieldData_Fechas]) => {
         console.table(rows);
         response.render('consultas_Resultados', {
             tituloDeHeader: "Consulta - Resultados",
             tituloBarra: "Resultados de consulta",
-            estadoConsulta: true,
+            estadoConsulta: false,
             mostrarSexEdad: true,
             mostrarCalif: true,
             consultaGen: consultaGen,
@@ -229,7 +229,7 @@ exports.postResultados = ((request, response, next) => {
 });
 
 exports.getResultadosPrograma = ((request, response, next) => {
-    datosConsultas.fetch()
+    datosConsultas.fetch2()
     .then(([rows, fieldData_Fechas]) => {
         response.render('consultas_Programa', {
             tituloDeHeader: "Resultados Programa N",
