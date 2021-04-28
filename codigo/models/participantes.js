@@ -36,12 +36,10 @@ module.exports = class Participante {
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
         return db.execute('SELECT nombreUsuario, apellidoPaterno, apellidoMaterno, P.login, estatus, password, sexo, fechaNacimiento, telefonoPadre  FROM participantes P,usuarios U WHERE P.login = U.login');
-<<<<<<< HEAD
     }
 
     static fetchAllPart() {
         return db.execute('SELECT * FROM participantes');
-=======
->>>>>>> Sandra/GestionCiclosGrupos
+
     }
 }
