@@ -27,15 +27,15 @@ function toastRegPar(){
 
 function camposTerapeuta(opcion){
   if (opcion.value === '2'){
-    document.getElementById("campoT1").style.visibility = "visible";
-    document.getElementById("campoT2").style.visibility = "visible";
-    document.getElementById("campoT3").style.visibility = "visible";
-    document.getElementById("campoT4").style.visibility = "visible";
+    document.getElementById("campoT1").style.display = "block";
+    document.getElementById("campoT2").style.display = "block";
+    document.getElementById("campoT3").style.display = "block";
+    document.getElementById("campoT4").style.display = "block";
   }else{
-    document.getElementById("campoT1").style.visibility = "hidden";
-    document.getElementById("campoT2").style.visibility = "hidden";
-    document.getElementById("campoT3").style.visibility = "hidden";
-    document.getElementById("campoT4").style.visibility = "hidden";
+    document.getElementById("campoT1").style.display = "none";
+    document.getElementById("campoT2").style.display = "none";
+    document.getElementById("campoT3").style.display = "none";
+    document.getElementById("campoT4").style.display = "none";
   }
 }
 

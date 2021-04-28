@@ -128,3 +128,10 @@ function mostrarOps(elemento){
   }
   
 }
+
+function toastRegCiclo(){   
+	M.toast({
+			  html: 'Se registró correctamente el ciclo.',
+			  displayLenght: 5000
+			});
+  }

@@ -4,6 +4,7 @@
 
 <div class="row">
     <br>
+  <form action="/gestionAdmin/gestionCiclos" method="POST" onsubmit="toastRegCiclo()">
     <div class="row">
         <div class="input-field col s2 m1">
             <p><strong>Fecha:</strong></p>
@@ -18,7 +19,7 @@
         </div>
         <div class="col right">
             <div class="input-field">
-               <a class="waves-effect waves-light btn-small light-green accent-4 right" href="./gestion-perfil-ciclo"><i class="material-icons left">save</i>Guardar</a>
+               <a class="waves-effect waves-light btn-small light-green accent-4 right"  type = "submit"><i class="material-icons left">save</i>Guardar</a>
             </div>
         </div>
     </div>
@@ -57,7 +58,8 @@
         <% } %>  
         </ul>       
      </div> 
-  </div>
+  </form>
+</div>
 
 
 <%- include('include/footer.ejs') %>
