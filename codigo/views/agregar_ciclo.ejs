@@ -41,8 +41,15 @@
                 </div>
                 <div class="collapsible-body">
                     <div class="collection" id="<%= programa.idPrograma %>at" style = "display:none">
-                        <% for (let terapeuta of terapeutas) { %>  
-                            <a href="#" class="collection-item"><%= terapeuta.nombreUsuario %> <%= terapeuta.apellidoPaterno %></a> 
+                        <% for (let terapeuta of terapeutas) { %> 
+                            <a href="#" class="collection-item"><%= terapeuta.nombreUsuario %> <%= terapeuta.apellidoPaterno %> 
+                                <span class="badge">
+                                    <label>
+                                        <input name ="<%= programa.idPrograma %><%= terapeuta.nombreUsuario %>" id="<%= programa.idPrograma %><%= terapeuta.nombreUsuario %>" type="checkbox"/>
+                                        <span></span>
+                                    </label>
+                                </span> 
+                            </a>
                         <% } %>
                     </div>
                 </div>
