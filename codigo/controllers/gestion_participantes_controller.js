@@ -52,7 +52,7 @@ exports.post = ((request,response,next) => {
     apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
     apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
     tel = request.body.tel === ''? null :  request.body.tel;
-    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, '5',tel);
+    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, tel);
     participante.save()
         .then(() => {
             const usuario_rol = new Usuario_Rol(request.body.correo, '1');

@@ -18,17 +18,24 @@ function toastRegUser(){
           });
 }
 
+function toastRegPar(){   
+  M.toast({
+            html: 'Se registró correctamente el participante.',
+            displayLenght: 5000
+          });
+}
+
 function camposTerapeuta(opcion){
   if (opcion.value === '2'){
-    document.getElementById("campoT1").style.visibility = "visible";
-    document.getElementById("campoT2").style.visibility = "visible";
-    document.getElementById("campoT3").style.visibility = "visible";
-    document.getElementById("campoT4").style.visibility = "visible";
+    document.getElementById("campoT1").style.display = "block";
+    document.getElementById("campoT2").style.display = "block";
+    document.getElementById("campoT3").style.display = "block";
+    document.getElementById("campoT4").style.display = "block";
   }else{
-    document.getElementById("campoT1").style.visibility = "hidden";
-    document.getElementById("campoT2").style.visibility = "hidden";
-    document.getElementById("campoT3").style.visibility = "hidden";
-    document.getElementById("campoT4").style.visibility = "hidden";
+    document.getElementById("campoT1").style.display = "none";
+    document.getElementById("campoT2").style.display = "none";
+    document.getElementById("campoT3").style.display = "none";
+    document.getElementById("campoT4").style.display = "none";
   }
 }
 
@@ -52,37 +59,22 @@ $(document).ready(() => {
   });
 });
 
-//Nuevo rol, validar si no se seleccionó otro rol
-function nuevoRol(){
-  M.toast({html: 'Se registró correctamente el rol.'});
-  location.replace("./");
+
+//Calcular edad 
+function calculaEdad(){
+  let hoy = new Date();
+  let nacimiento = document.getElementByName("fechaN");
+  let m;
+  edad = hoy.getFullYear() - nacimiento.getFullYear();
+  m = hoy.getMonth() - nacimiento.getMonth();
+  if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad=edad-1;
+  }  
+  document.getElementByName("edad").innerHTML = edad; 
+  console.log('edad desde js');
+  console.log(edad);
+  console.log(document.getElementByName("edad").innerHTML); 
 }
-
-
-// Guardar participante
-$(document).ready(() => {
-  $(".agregarP").on("click", () => {
-    location.replace("./");
-    window.alert("Se registró correctamente el participante.");
-  });
-});
-
-// Eliminar participante
-$(document).ready(() => {
-  $(".eliminarP").on("click", () => {
-    location.replace("./");
-    window.alert("Se eliminó el participante.");
-  });
-});
-
-// Eliminar usuario
-$(document).ready(() => {
-  $(".eliminarU").on("click", () => {
-    M.toast({html: 'Usuario eliminado'}); 
-
-  });
-});
-
 
 // jQuery date picker 
 $(document).ready(function(){
@@ -100,7 +92,7 @@ $(document).ready(function(){
         cancel: 'Cancelar',
         done: 'Aceptar',
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
+        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
         weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
         weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
         weekdaysAbbrev: ["D","L", "M", "M", "J", "V", "S"]

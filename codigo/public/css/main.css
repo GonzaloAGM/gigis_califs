@@ -76,6 +76,12 @@ border-bottom: 1px solid #ffcc80!important;
 box-shadow: 0 1px 0 0 #ffcc80!important;
 }
 
+/* label underline number focus color */
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid #ffcc80!important;
+    box-shadow: 0 1px 0 0 #ffcc80!important;
+    }
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #ffcc80!important;
@@ -115,12 +121,17 @@ box-shadow: 0 1px 0 0 #e53935 !important;
 
 
     /*datapicker colors*/
-    .datepicker-date-display {
+    .datepicker-date-display  {
         background-color: #ffcc80  !important;
     }
+
         
     .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
     color:#ef6c00  !important;
+    }
+
+    .month-prev,  .month-next {
+        background-color:  transparent!important;
     }
     
     .datepicker-table td.is-today {
@@ -154,4 +165,9 @@ box-shadow: 0 1px 0 0 #e53935 !important;
         border-right: 2px solid #ef6c00 !important;
         border-bottom: 2px solid #ef6c00 !important;
     
+    }
+
+    /*collection color*/
+    .collection a.collection-item {
+        color: #ef6c00 !important;
     }

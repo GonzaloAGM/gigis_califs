@@ -62,4 +62,16 @@ module.exports = class Ciclo {
         );
     }
   }
+  static fetchCiclosAnioActual(){
+    return db.execute(
+      'SELECT * FROM ciclos WHERE YEAR(fechaInicial)>= YEAR(CURRENT_DATE)'
+    );
+  }
+
+  static fetchAniosPasados(){
+    return db.execute(
+      'SELECT YEAR(fechaInicial) AS anio FROM ciclos WHERE YEAR(fechaInicial)< YEAR(CURRENT_DATE) GROUP BY YEAR(fechaInicial) DESC'
+    );
+  }
+
 };

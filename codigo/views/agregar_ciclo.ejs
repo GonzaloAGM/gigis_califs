@@ -3,89 +3,63 @@
 <%- include('include/sideNavBar.ejs') %>   
 
 <div class="row">
-    <div class="col s12 m7">
-        <div class="input-field" >
-          <i class="material-icons prefix">search</i>
-          <input type="text" id="autocomplete-input" class="autocomplete">
-          <label for="autocomplete-input">Busca programa</label>
+    <br>
+  <form action="/gestionAdmin/gestionCiclos" method="POST" onsubmit="toastRegCiclo()">
+    <div class="row">
+        <div class="input-field col s2 m1">
+            <p><strong>Fecha:</strong></p>
+        </div>
+        <div class="input-field col s4 m3">
+          <input type="text"  id="from" name="fechaInicial" class="datepickerInicial">
+          <label for="from">Elige la fecha de inicio</label>
+        </div>
+        <div class="input-field col s4 m3">
+          <input type="text" id="to" name="fechaFinal" class="datepickerFinal">
+          <label for="to">Elige la fecha de finalización</label>
+        </div>
+        <div class="col right">
+            <div class="input-field">
+               <a class="waves-effect waves-light btn-small light-green accent-4 right"  type = "submit"><i class="material-icons left">save</i>Guardar</a>
+            </div>
         </div>
     </div>
-    <div class="col">
-        <div class="input-field">
-           <a class="waves-effect waves-light btn-small light-green accent-4" href="./gestion-perfil-ciclo"><i class="material-icons left">add_circle</i>Guardar</a>
-        </div>
-    </div>
-  </div>
-  <div class="row">
-      <div class="input-field col s2 m1">
-          <p><strong>Fecha:</strong></p>
-      </div>
-      <div class="input-field col s4 m3">
-        <input type="text" id="fechaI" class="datepicker">
-        <label for="fecha">Elige la fecha de inicio</label>
-      </div>
-      <div class="input-field col s4 m3">
-        <input type="text" id="fechaF" class="datepicker">
-        <label for="fecha">Elige la fecha de finalización</label>
-      </div>
   </div>
 
   <div class="row">
     <div class="col s12 m12">
       <h4>Programas</h4>
       <ul class="collapsible">
-          <li>
-          <div class="collapsible-header">Pintura</div>
-          <div class="collapsible-body">
-            <div class="collection">
-                
-            </div>
-          </div>
-          </li>
-          <li>
-          <div class="collapsible-header">Cocina</div>
-          <div class="collapsible-body">
-              <div class="collection">
-                  <a href="#!" class="collection-item">Nivel básico
-                  <span class="badge">
-                      <label>
-                          <input type="checkbox" />
-                          <span>1</span>
-                      </label>
-                  </span></a>
-                  <a href="#!" class="collection-item">Nivel intermedio
-                  <span class="badge">
-                      <label>
-                          <input type="checkbox" />
-                          <span>2</span>
-                      </label>
-                  </span></a>
-                  <a href="#!" class="collection-item">Nivel avanzado
-                  <span class="badge">
-                      <label>
-                          <input type="checkbox" />
-                          <span>3</span>
-                      </label>
-                  </span></a>
-              </div>
-          </div>
-          </li>
-          <li>
-          <div class="collapsible-header">Baile</div>
-          <div class="collapsible-body">
-          <div class="collection">
-                  <a href="#!" class="collection-item">Nivel 1
-                  <span class="badge">
-                      <label>
-                          <input type="checkbox" />
-                          <span>1</span>
-                      </label>
-                  </span></a>
-          </div>
-          </li>
-      </ul>       
-
+        <% for (let programa of programas) { %>  
+            <li>
+                <div class="collapsible-header">
+                    <%= programa.nombrePrograma %>
+                    <span class="badge">
+                        <label>
+                            <input name ="<%= programa.idPrograma %>" id="<%= programa.idPrograma %>" type="checkbox" onChange="mostrarOps(this)"/>
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+                <div class="collapsible-body">
+                    <div class="collection" id="<%= programa.idPrograma %>at" style = "display:none">
+                        <% for (let terapeuta of terapeutas) { %> 
+                            <a href="#" class="collection-item"><%= terapeuta.nombreUsuario %> <%= terapeuta.apellidoPaterno %> 
+                                <span class="badge">
+                                    <label>
+                                        <input name ="<%= programa.idPrograma %><%= terapeuta.nombreUsuario %>" id="<%= programa.idPrograma %><%= terapeuta.nombreUsuario %>" type="checkbox"/>
+                                        <span></span>
+                                    </label>
+                                </span> 
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+            </li>
+        <% } %>  
+        </ul>       
      </div> 
-  </div>
+  </form>
+</div>
+
 
 <%- include('include/footer.ejs') %>

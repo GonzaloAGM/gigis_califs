@@ -11,14 +11,15 @@ module.exports = class Programas {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        return db.execute('INSERT INTO programas (nombrePrograma, puntajeMaximo, dirImagen) VALUES(?, ?, ?)', 
-            [this.nombrePrograma, this.puntajeMaximo, this.dirImagen]
-        );
+        return db.execute(
+            'INSERT INTO programas (nombrePrograma, puntajeMaximo, dirImagen) VALUES (?,?,?)',
+            [this.nombrePrograma,this.puntajeMaximo,this.dirImagen]
+          );
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM programas');
+        return db.execute('SELECT * FROM programas ORDER BY nombrePrograma ASC');
     }
 
     static fetchIdPrograma(nombrePrograma) {

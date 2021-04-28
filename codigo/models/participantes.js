@@ -22,8 +22,8 @@ module.exports = class Participante {
                 return db.execute('INSERT INTO usuarios (login, password, nombreUsuario, apellidoPaterno, apellidoMaterno) VALUES (?, ?, ?, ?, ?)',
                     [this.login, password,this.nombreUsuario, this.apellidoPaterno,this.apellidoMaterno]
                 ).then(() => {
-                    db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, edad, telefonoPadre) VALUES (?, ?, ?, ?, ?,?)',
-                        [this.login,this.estatus,this.sexo,this.fechaNacimiento, this.telefonoPadre])
+                    db.execute('INSERT INTO participantes (login, estatus, sexo, fechaNacimiento, telefonoPadre) VALUES (?, ?, ?, ?,?)',
+                        [this.login,this.estatus,this.sexo,this.fechaNacimiento,this.telefonoPadre])
                 }).catch(err => {
                     console.log(err);
                 });
@@ -36,9 +36,12 @@ module.exports = class Participante {
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
         return db.execute('SELECT nombreUsuario, apellidoPaterno, apellidoMaterno, P.login, estatus, password, sexo, fechaNacimiento, telefonoPadre  FROM participantes P,usuarios U WHERE P.login = U.login');
+<<<<<<< HEAD
     }
 
     static fetchAllPart() {
         return db.execute('SELECT * FROM participantes');
+=======
+>>>>>>> Sandra/GestionCiclosGrupos
     }
 }

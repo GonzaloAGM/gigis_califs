@@ -71,7 +71,7 @@ CREATE TABLE `participantes`
     `estatus` CHAR(1) NOT NULL DEFAULT 'A',
     `sexo` CHAR(1) NOT NULL , 
     `fechaNacimiento` DATE NOT NULL , 
-    `telefonoPadre` INT NULL
+    `telefonoPadre` VARCHAR(12) NULL
 ) 
 ENGINE = InnoDB;
 
