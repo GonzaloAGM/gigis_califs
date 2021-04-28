@@ -10,9 +10,11 @@ const gestionCicloController = require('../controllers/gestion_ciclos_controller
 
 subrouter.get('/inscribir-en-grupo',gestionCicloController.getInsGrupo);
 
-subrouter.post('/agregar-ciclo',gestionCicloController.postSelTera);
+subrouter.post('/selTera',gestionCicloController.postSelTera);
 
-subrouter.post('/agregar-ciclo',gestionCicloController.postSelProg);
+subrouter.post('/selProg',gestionCicloController.postSelProg);
+
+subrouter.post('/agregar-ciclo',gestionCicloController.postAgrCiclo);
 
 subrouter.get('/agregar-ciclo',gestionCicloController.getAgrCiclo);
 

@@ -2,6 +2,7 @@ const Arrow = require('../models/arrow');
 const Ciclo = require('../models/ciclos');
 const Programa = require('../models/programas')
 const Usuario = require('../models/usuarios');
+const inputsCiclos = require('../models/inputsCiclos');
 
 const arrows = Arrow.fetchAll();
 const mes = [
@@ -50,10 +51,16 @@ exports.getAgrCiclo = (request,response,next) => {
 };
 
 exports.postSelProg = (request,response,next) => {
-    
+    inputsCiclos.setProg(request.body.prograsSel);
+    console.log(inputsCiclos.getProg());
 };
 
 exports.postSelTera = (request,response,next) => {
+    inputsCiclos.setGrup(request.body.terapAsig);
+    console.log(inputsCiclos.getTer());
+};
+
+exports.postAgrCiclo = (request,response,next) => {
     
 };
 

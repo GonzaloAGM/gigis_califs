@@ -128,30 +128,30 @@ function toastRegCiclo(){
 
 // Aparecer boton de asignar terapeutas
 function mostrarOps(elemento){
-  isChecked = document.getElementById(elemento.id).checked;
-  var id2 = elemento.id + 'at';
-  console.log(elemento.id) 
-  if (isChecked){
-    document.getElementById(id2).style.display = "block";
-	prograsSel.push(parseInt(elemento.id));
-	console.log(prograsSel);
-  }else{
-    document.getElementById(id2).style.display = "none";
-	let pos = listaProg.indexOf(elemento.id);
-    prograsSel.splice(pos, 1);
-	console.log(prograsSel);
-  }
-  let data = {
-	prograsSel : prograsSel,
-};
+	isChecked = document.getElementById(elemento.id).checked;
+	var id2 = elemento.id + 'at';
+	console.log(elemento.id) 
+	if (isChecked){
+		document.getElementById(id2).style.display = "block";
+		prograsSel.push(parseInt(elemento.id));
+		console.log(prograsSel);
+	}else{
+		document.getElementById(id2).style.display = "none";
+		let pos = listaProg.indexOf(elemento.id);
+		prograsSel.splice(pos, 1);
+		console.log(prograsSel);
+	}
+	let data = {
+		prograsSel : prograsSel,
+	};
 
-fetch('/gestionAdmin/gestionCiclos/selProg',{
-	method: 'POST',
-	headers: {'Content-Type':'application/json'},
-	body:JSON.stringify(data)
-}).then(result => {
-	return result.json();
-});
+	fetch('/gestionAdmin/gestionCiclos/selProg',{
+		method: 'POST',
+		headers: {'Content-Type':'application/json'},
+		body:JSON.stringify(data)
+	}).then(result => {
+		return result.json();
+	});
   
 }
 
@@ -159,12 +159,12 @@ function selTe(terapeuta){
 isChecked = document.getElementById(terapeuta.id).checked;
   var idP = parseInt(terapeuta.id);
   console.log(idP);
-  var aux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP}];
+  var aux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP},];
   if (isChecked){
 	terapAsig.push(aux);
 	console.log(terapAsig);
   }else{
-	let pos = listaProg.indexOf(terapeuta.id);
+	let pos = terapAsig.indexOf( idP);
     terapAsig.splice(pos, 1);
 	console.log(terapAsig);
   }
