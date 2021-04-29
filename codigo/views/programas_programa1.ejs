@@ -26,9 +26,9 @@
       <% if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo) { %>
         <tr>
           <td>
-            <a class="btn-flat modal-trigger" href="#' + participante.login +'">
+            <button class="btn-flat modal-trigger" data-target="rPuntaje-<%=participante.login%>" >
               <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
-            </a>
+            </button>
           </td>
           <td>  <%=participante.nombreNivel%>  </td>
           <td></td>
@@ -41,26 +41,86 @@
   <br /><br />
 <% } %>
 
-  <div id="participante1" class="modal">
-    <!-- Tabla de objetivos a calificar------------------------>
-    <div class="modal-content">
-      <table>
-        <thead>
-          <tr>
-            <th>Objetivos</th>
-            <th>Inicio</th>
-            <th>Final</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-        </tbody>
-      </table>
-      <div class="modal-footer">
-        <a href="#" class="btn modal-close">Cerrar</a>
-      </div>
+<% loginParticipante = participantes[0].login %>
+<div id="rPuntaje-<%=loginParticipante%>" class="modal">
+  <div class="modal-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Objetivos</th>
+          <th>Inicio</th>
+          <th>Final</th>
+        </tr>
+      </thead>
+      <tbody>
+<% for (participante of participantes) { %>
+  <% if (participante.login === loginParticipante) { %>
+        <tr>       
+          <td><%= participante.descripcion%></td>
+          <td><div class="input-field puntaje">
+              <select>
+                  <option value="" disabled selected>___</option>
+                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
+                      <option value="<%= puntaje%>"><%= puntaje%></option>
+                  <% } %>
+                </select>
+          </div></td>
+          <td><div class="input-field puntaje">
+              <select>
+                  <option value="" disabled selected>___</option>
+                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
+                      <option value="<%= puntaje%>"><%= puntaje%></option>
+                  <% } %>>
+                </select>
+          </div></td>
+      </tr>
+  <% } else { %>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <a href="#" class="btn modal-close">Guardar</a>
     </div>
   </div>
+</div>
+<div id="rPuntaje-<%=participante.login%>" class="modal">
+  <div class="modal-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Objetivos</th>
+          <th>Inicio</th>
+          <th>Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>       
+          <td><%= participante.descripcion%></td>
+          <td><div class="input-field puntaje">
+              <select>
+                  <option value="" disabled selected>___</option>
+                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
+                      <option value="<%= puntaje%>"><%= puntaje%></option>
+                  <% } %>
+                </select>
+          </div></td>
+          <td><div class="input-field puntaje">
+              <select>
+                  <option value="" disabled selected>___</option>
+                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
+                      <option value="<%= puntaje%>"><%= puntaje%></option>
+                  <% } %>>
+                </select>
+          </div></td>
+      </tr>
+  <% } %>
+<% } %>
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <a href="#" class="btn modal-close">Guardar</a>
+    </div>
+  </div>
+</div>
 <!---------------  Fin tabla objetivos----------------------------------------------->
 
 <%- include('include/footer.ejs') %>
