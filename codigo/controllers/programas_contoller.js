@@ -10,7 +10,6 @@ exports.getProgramas = (request, response, next) => {
     .then(([programa, fieldData]) => {
       Grupo.fethcGruposProgramaActual(idPrograma)
       .then(([grupos, fieldData1]) => {
-        console.log(grupos);
         Participante_Grupo_Objetivo.fetchParticipantesPorPrograma(idPrograma)
           .then(([participantes,fieldData2]) => {
             response.render('programas_programa1', {
@@ -34,9 +33,9 @@ exports.getProgramas = (request, response, next) => {
 
 exports.registroPuntaje = (request, response, next) => {
   console.log("Peticion asincrona recibida");
-  console.log(request.body);
-  console.log(request.body.programa_id);
-  
+  console.log(request.body.grupo_id);
+  console.log(request.body.login_participante);
+
   Participante_Grupo_Objetivo.fetchObjetivosPorParticipante(request.body.grupo_id,request.body.login_participante)
     .then(([objetivos, fieldData]) => {
       return response.status(200).json({ objetivos: objetivos });

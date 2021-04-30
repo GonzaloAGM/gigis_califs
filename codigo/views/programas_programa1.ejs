@@ -40,6 +40,7 @@
   </table>
   <br /><br />
 <% } %>
+  <div id="modal_objetivos"></div>
 
 <script>
   const registroPuntajes = (idGrupo, login) => {
@@ -63,7 +64,51 @@
         //...
         console.log("Respuesta de la peticion asincrona");
         console.log(data);
-
+        let html = ' <div id="' + data.objetivos[0].login + '" class="modal">' +
+                      '<div class="modal-content">' +
+                        '<table>' +
+                          '<thead>' +
+                            '<tr>' +
+                              '<th>Objetivos</th>' +
+                              '<th>Inicio</th>' +
+                              '<th>Final</th>' +
+                            '</tr>' +
+                          '</thead>' +
+                          '<tbody>' 
+        for (objetivo of data.objetivos){
+          html +=           '<tr>' +
+                              '<td>'+ objetivo.descripcion + '</td>'+
+                              '<td>' +
+                                '<div class="input-field puntaje">' +
+                                  '<select>' +
+                                    '<option value="" disabled selected>___</option>';
+                                    for (let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++) {
+                                      html += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                                    }
+          html +=                 '</select>' +
+                                '</div>' +
+                              '</td>' +
+                              '<td>' +
+                                '<div class="input-field puntaje">' +
+                                  '<select>' +
+                                    '<option value="" disabled selected>___</option>';
+                                    for (let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++) {
+                                      html += '<option value="'+ puntaje + '">' + puntaje + '</option>';
+                                    }
+          html +=                 '</select>' +
+                                '</div>' +
+                              '</td>' +
+                            '</tr>';
+        }
+        html +=           '</tbody>' +
+                        '</table>' +
+                      '<div class="modal-footer">' +
+                        '<a href="#" class="btn modal-close">Cerrar</a>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>';
+        document.getElementById('modal_objetivos').innerHTML = html;
+        M.AutoInit();
     }).catch(err => {
       console.log(err);
     });
