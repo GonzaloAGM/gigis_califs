@@ -196,17 +196,18 @@ let datosConsultas = new DatosConsultas();
 const arrows = Arrow.fetchAll();
 
 exports.getResultados = ((request, response, next) => {
-    datosConsultas.fetch2()
+    let bools = datosConsultas.getBools();
+    datosConsultas.fetch()
     .then(([rows, fieldData_Fechas]) => {
         console.table(rows);
         response.render('consultas_Resultados', {
             tituloDeHeader: "Consulta - Resultados",
             tituloBarra: "Resultados de consulta",
-            estadoConsulta: false,
-            mostrarSexEdad: true,
-            mostrarCalif: true,
+            estadoConsulta: !bools.estadoConsulta,
+            mostrarSexEdad: bools.mostrarSexEdad,
+            mostrarCalif: bools.mostrarCalif,
             consultaGen: consultaGen,
-            califOava: true,
+            califOava: bools.califOava,
             tablaVariosProg: tablaVariosProg,
             tablaUnProg: tablaUnProg,
             programasResultados: programasResultados,
