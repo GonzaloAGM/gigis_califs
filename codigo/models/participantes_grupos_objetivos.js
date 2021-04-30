@@ -24,11 +24,13 @@ module.exports = class Participante_Grupo_Objetivo {
         return db.execute('SELECT * FROM participantes_grupos_objetivos');
     }
 
-    static fetchParticipantesPorGrupo(idGrupo) {
-        return db.execute('SELECT login, PGO.idGrupo, PGO.idNivel, O.descripcion, PGO.puntajeInicial, PGO.puntajeFinal FROM participantes_grupos_objetivo PGO, objetivos O WHERE PGO.idObjetivo=O.idObjetivo AND idGrupo=? ORDER BY `PGO`.`login` ASC',[idGrupo]);
+    static fetchObjetivosPorParticipante(idGrupo, login) {
+        return db.execute('SELECT login, PGO.idGrupo, O.descripcion, PGO.puntajeInicial, PGO.puntajeFinal, P.puntajeMaximo FROM participantes_grupos_objetivo PGO, objetivos O, programas P, grupos G WHERE PGO.idObjetivo=O.idObjetivo AND PGO.idGrupo=G.idGrupo AND G.idPrograma=P.idPrograma AND PGO.idGrupo=? AND login=?',[idGrupo, login]);
     }
 
     static fetchParticipantesPorPrograma(idPrograma) {
-        return db.execute('SELECT PGO.login, U.nombreUsuario, U.apellidoPaterno, U.apellidoMaterno, PGO.idGrupo, N.nombreNivel, O.descripcion, PGO.puntajeInicial, PGO.puntajeFinal, P.puntajeMaximo FROM participantes_grupos_objetivo PGO, objetivos O, grupos G, ciclos C, usuarios U, niveles N, programas P WHERE PGO.idObjetivo=O.idObjetivo AND PGO.idGrupo=G.idGrupo AND G.idCiclo=C.idCiclo AND PGO.login=U.login AND PGO.idNivel=N.idNivel AND G.idPrograma=P.idPrograma AND G.idPrograma=? AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE ORDER BY `PGO`.`idGrupo` ASC', [idPrograma]);
+        return db.execute('SELECT PGO.login, U.nombreUsuario, U.apellidoPaterno, U.apellidoMaterno, PGO.idGrupo, N.nombreNivel FROM participantes_grupos_objetivo PGO, grupos G, ciclos C, usuarios U, niveles N WHERE PGO.idGrupo=G.idGrupo AND G.idCiclo=C.idCiclo AND PGO.login=U.login AND PGO.idNivel=N.idNivel AND G.idPrograma=? AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY PGO.login ORDER BY PGO.login ASC', [idPrograma]);
     }
+
+
 }

@@ -26,7 +26,7 @@
       <% if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo) { %>
         <tr>
           <td>
-            <button class="btn-flat modal-trigger" data-target="rPuntaje-<%=participante.login%>" >
+            <button class="btn-flat modal-trigger" data-target="rPuntaje-<%=participante.login%>" onclick="registroPuntajes(<%=grupo.idGrupo%>,'<%=participante.login%>')">
               <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
             </button>
           </td>
@@ -41,86 +41,32 @@
   <br /><br />
 <% } %>
 
-<% loginParticipante = participantes[0].login %>
-<div id="rPuntaje-<%=loginParticipante%>" class="modal">
-  <div class="modal-content">
-    <table>
-      <thead>
-        <tr>
-          <th>Objetivos</th>
-          <th>Inicio</th>
-          <th>Final</th>
-        </tr>
-      </thead>
-      <tbody>
-<% for (participante of participantes) { %>
-  <% if (participante.login === loginParticipante) { %>
-        <tr>       
-          <td><%= participante.descripcion%></td>
-          <td><div class="input-field puntaje">
-              <select>
-                  <option value="" disabled selected>___</option>
-                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
-                      <option value="<%= puntaje%>"><%= puntaje%></option>
-                  <% } %>
-                </select>
-          </div></td>
-          <td><div class="input-field puntaje">
-              <select>
-                  <option value="" disabled selected>___</option>
-                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
-                      <option value="<%= puntaje%>"><%= puntaje%></option>
-                  <% } %>>
-                </select>
-          </div></td>
-      </tr>
-  <% } else { %>
-      </tbody>
-    </table>
-    <div class="modal-footer">
-      <a href="#" class="btn modal-close">Guardar</a>
-    </div>
-  </div>
-</div>
-<div id="rPuntaje-<%=participante.login%>" class="modal">
-  <div class="modal-content">
-    <table>
-      <thead>
-        <tr>
-          <th>Objetivos</th>
-          <th>Inicio</th>
-          <th>Final</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>       
-          <td><%= participante.descripcion%></td>
-          <td><div class="input-field puntaje">
-              <select>
-                  <option value="" disabled selected>___</option>
-                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
-                      <option value="<%= puntaje%>"><%= puntaje%></option>
-                  <% } %>
-                </select>
-          </div></td>
-          <td><div class="input-field puntaje">
-              <select>
-                  <option value="" disabled selected>___</option>
-                  <% for (let puntaje = 1; puntaje <= participante.puntajeMaximo; puntaje++) { %>
-                      <option value="<%= puntaje%>"><%= puntaje%></option>
-                  <% } %>>
-                </select>
-          </div></td>
-      </tr>
-  <% } %>
-<% } %>
-      </tbody>
-    </table>
-    <div class="modal-footer">
-      <a href="#" class="btn modal-close">Guardar</a>
-    </div>
-  </div>
-</div>
-<!---------------  Fin tabla objetivos----------------------------------------------->
+<script>
+  const registroPuntajes = (idGrupo, login) => {
+    let data = {
+      grupo_id: idGrupo,
+      login_participante: login
+    };
+    console.log(data);
+    //función que manda la petición asíncrona
+    fetch('/programas/registro-puntaje', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            //'csrf-token': csrf
+        },
+        body: JSON.stringify(data)
+    }).then(result => {
+        return result.json(); //Regresa otra promesa
+    }).then(data => {
+        //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
+        //...
+        console.log("Respuesta de la peticion asincrona");
+        console.log(data);
 
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+</script>
 <%- include('include/footer.ejs') %>
