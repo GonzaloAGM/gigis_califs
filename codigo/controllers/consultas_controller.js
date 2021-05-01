@@ -1,11 +1,7 @@
 const Arrow = require('../models/arrow');
-const Usuario = require('../models/usuarios');
-const Participante = require('../models/participantes');
-const Grupo = require('../models/grupos');
 const Ciclo = require('../models/ciclos');
 const Programas = require('../models/programas');
-
-const arrows = Arrow.fetchAll();
+const DatosConsultas = require('../models/consultasResultados');
 
 const programasResultados = [
     {
@@ -190,49 +186,61 @@ const tablaVariosProg = [
     }
 ];
 
-const color = ['red', 'blue', 'green', 'yellow'];
-
-const meses = ['','Ene', 'Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-
 let consultaGen = {
     promTotal: 3.3,
     totalCoincid: 24,
     avanceGen: 25 
 };
 
-let listaProgam = [];
-let cicloIni = 0;
-let intervaloCiclo = true;
-let cicloFin = 0;
-let estadoConsulta = true;
-let califOava = true;
-let filtrarEdad = false;
-let edadIni = 0;
-let intervaloEdad = false;
-let edadFin = 99;
-let filtrarSexo = false;
-let valueSexo = false;
-let mostrarSexEdad = true;
-let mostrarCalif = true;
+let datosConsultas = new DatosConsultas();
+const arrows = Arrow.fetchAll();
 
 exports.getResultados = ((request, response, next) => {
-    response.render('consultas_Resultados', {
-        tituloDeHeader: "Consulta - Resultados",
-        tituloBarra: "Resultados de consulta",
-        estadoConsulta: estadoConsulta,
-        mostrarSexEdad: mostrarSexEdad,
-        mostrarCalif: mostrarCalif,
-        consultaGen: consultaGen,
-        califOava: califOava,
-        tablaVariosProg: tablaVariosProg,
-        tablaUnProg: tablaUnProg,
-        programasResultados: programasResultados,
-        backArrow: {display: 'block', link: '/consultas'},
-        forwArrow: arrows[1]
+    let bools = datosConsultas.getBools();
+    let intervalos = datosConsultas.getIntervalos();
+    let listaProg = datosConsultas.getListaProg();
+    Programas.fetchAll()
+    .then(([rows_Programas, fieldData_Prog]) => {
+        datosConsultas.fetch()
+        .then(([rowsDatos, fieldData_Datos]) => {
+            datosConsultas.fetchGen()
+            .then(([rowsGen, fieldData_Gen]) => {
+                console.table(rowsDatos);
+                console.table(rows_Programas);
+                console.table(rowsGen);
+                response.render('consultas_Resultados', {
+                    tituloDeHeader: "Consulta - Resultados",
+                    tituloBarra: "Resultados de consulta",
+                    intervalos: intervalos,
+                    listaProg : listaProg,
+                    estadoConsulta: bools.estadoConsulta,
+                    mostrarSexEdad: bools.mostrarSexEdad,
+                    mostrarCalif: bools.mostrarCalif,
+                    datos: rowsDatos,
+                    consultaGen: rowsGen,
+                    programas: rows_Programas,
+                    col_Datos: fieldData_Datos,
+                    col_Gen: fieldData_Gen,
+                    califOava: bools.califOava,
+                    programasResultados: programasResultados,
+                    backArrow: {display: 'block', link: '/consultas'},
+                    forwArrow: arrows[1]
+                });
+            
+                console.log("Consultas Resultados");
+                response.status(201);
+            }).catch( err => {
+                console.log(err);
+                response.redirect('/consultas');
+            });
+        }).catch( err => {
+            console.log(err);
+            response.redirect('/consultas');
+        });
+    }).catch( err => {
+        console.log(err);
+        response.redirect('/consultas');
     });
-
-    console.log("Consultas Resultados");
-    response.status(201);
 });
 
 exports.postResultados = ((request, response, next) => {
@@ -242,21 +250,28 @@ exports.postResultados = ((request, response, next) => {
 });
 
 exports.getResultadosPrograma = ((request, response, next) => {
-    response.render('consultas_Programa', {
-        tituloDeHeader: "Resultados Programa N",
-        tituloBarra: "Resultados - Programa 1 - Ciclo EM 2020",
-        estadoConsulta: estadoConsulta,
-        mostrarSexEdad: mostrarSexEdad,
-        mostrarCalif: mostrarCalif,
-        consultaGen: consultaGen,
-        califOava: califOava,
-        tablaVariosProg: tablaVariosProg,
-        tablaUnProg: tablaUnProg,
-        backArrow: {display: 'block', link: '/consultas/Resultados'},
-        forwArrow: arrows[1]
+    let bools = datosConsultas.getBools();
+    datosConsultas.fetch2()
+    .then(([rows, fieldData]) => {
+        response.render('consultas_Programa', {
+            tituloDeHeader: "Resultados Programa N",
+            tituloBarra: "Resultados - Programa 1 - Ciclo EM 2020",
+            estadoConsulta: bools.estadoConsulta,
+            mostrarSexEdad: bools.mostrarSexEdad,
+            mostrarCalif: bools.mostrarCalif,
+            consultaGen: consultaGen,
+            califOava: bools.califOava,
+            tablaVariosProg: tablaVariosProg,
+            tablaUnProg: tablaUnProg,
+            backArrow: {display: 'block', link: '/consultas/Resultados'},
+            forwArrow: arrows[1]
+        });
+        console.log("Consultas Resultados por programa");
+        response.status(201);
+    }).catch( err => {
+        console.log(err);
+        response.redirect('/consultas');
     });
-    console.log("Consultas Resultados por programa");
-    response.status(201);
 });
 
 exports.postResultadosPrograma = ((request, response, next) => {
@@ -271,7 +286,7 @@ exports.getConsultas = ((request, response, next) => {
         Ciclo.fetchCantPorAno(0)
         .then(([rows_CantAno, fieldData_CantAno]) => {
             Programas.fetchAll()
-            .then(([rows_Programas, fieldData_Fechas]) => {
+            .then(([rows_Programas, fieldData_Prog]) => {
                 response.render('consultas', {
                     tituloDeHeader: "Consultas",
                     tituloBarra: "Consultas",
@@ -279,8 +294,8 @@ exports.getConsultas = ((request, response, next) => {
                     fechasDeCiclos: rows_Fechas,
                     programasConsutas: rows_Programas,
                     numProg: rows_Programas.length,
-                    meses: meses,
-                    color: color,
+                    meses: DatosConsultas.fetchMeses(),
+                    color: DatosConsultas.fetchColors(),
                     backArrow: arrows[0],
                     forwArrow: arrows[1]
                 });
@@ -301,30 +316,26 @@ exports.getConsultas = ((request, response, next) => {
 });
 
 exports.postConsultas = ((request, response, next) => {
-    if(listaProgam.length < 1){
+    if(datosConsultas.getModoConsulta() < 1){
         console.log("Accion post en consultas INCORRECTA");
         response.status(304);
         response.redirect('/consultas');
         response.end();
     } else {
-        //console.table(listaProgam);
-        cicloIni = request.body.inCiclosIni;
-        intervaloCiclo = request.body.chRangoCiclos === "on" ? true : false;
-        cicloFin = request.body.inCiclosFin;
-        estadoConsulta = listaProgam.length > 1 ? false : true;
-        califOava = request.body.swCalifOProg === "on" ? true : false;
-        filtrarEdad = request.body.chEdad === "on" ? true : false; 
-        edadIni = request.body.inEdadIni;
-        intervaloEdad = request.body.chRangoEdad === "on" ? true : false;
-        edadFin = request.body.inEdadFin;
-        filtrarSexo = request.body.chSexo === "on" ? true : false;
-        valueSexo = request.body.swSexo === "on" ? true : false;
-        mostrarSexEdad = request.body.datosPart === "on" ? true : false;
-        mostrarCalif = request.body.datosProg === "on" ? true : false;
-        califOava = request.body.califOava === "on" ? true : false;
-        //console.log("Tipo de consulta: " + estadoConsulta);
-        mostrarSexEdad = request.body.datosPart;
-        //console.log("Mostr Datos: " + mostrarSexEdad);
+        datosConsultas.setValues(
+            request.body.inCiclosIni,
+            request.body.chRangoCiclos === "on" ? true : false,
+            request.body.inCiclosFin,
+            datosConsultas.getModoConsulta() > 1 ? false : true,
+            request.body.swCalifOProg === "on" ? true : false,
+            request.body.chEdad === "on" ? true : false,
+            request.body.inEdadIni,
+            request.body.chRangoEdad === "on" ? true : false,
+            request.body.inEdadFin,
+            request.body.chSexo === "on" ? true : false,
+            request.body.swSexo === "on" ? true : false,
+            request.body.datosPart === "on" ? true : false,
+            request.body.datosProg === "on" ? true : false);
         console.log("Accion post en consultas");
         response.status(302);
         response.redirect('/consultas/Resultados');
@@ -333,6 +344,7 @@ exports.postConsultas = ((request, response, next) => {
 });
 
 exports.postSelProgram = ((request, response, next) => {
-    listaProgam = request.body.listaProg;
+    datosConsultas.setListaProg(request.body.listaProg);
+    //listaProgam = request.body.listaProg;
     //console.table(listaProgam);
 });

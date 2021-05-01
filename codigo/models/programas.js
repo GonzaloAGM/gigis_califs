@@ -27,6 +27,10 @@ module.exports = class Programas {
             [nombrePrograma]
         );
     }
+
+    static fetchNombreProg(){
+        return db.execute('SELECT idPrograma, nombrePrograma, puntajeMaximo FROM programas');
+    }
     
     static fetchProgramasCicloActual() {
         return db.execute(
