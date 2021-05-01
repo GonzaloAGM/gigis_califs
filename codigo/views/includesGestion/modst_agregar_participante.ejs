@@ -1,8 +1,9 @@
 <form action="/gestionAdmin/gestionParticipantes" method="POST" onsubmit="toastRegPar()">
     <div class="modal-content">
-        <h3>Nuevo usuario</h3>
+        <h3>Nuevo participante</h3>
+        <label> * Campos obligatorios.</label>
         <ul>
-            <li><strong><br>Nombre</strong></li>
+            <li><strong><br>Nombre *</strong></li>
             <li>
                 <div class="input-field">
                     <input id="nombreP" name="nombre"  type="text" class="validate"  placeholder="Nombre(s)" required>
@@ -20,7 +21,7 @@
                     <input id="apellidoM" name="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
                 </div>
             </li>
-            <li><strong><br>Sexo</strong></li>
+            <li><strong><br>Sexo *</strong></li>
             <li>
                 <div class="input-field m4" required >
                     <select name = "sexo" required>
@@ -30,13 +31,13 @@
                     </select>
                 </div>
             </li>
-            <li><strong><br>Correo o nombre de usuario</strong></li>
+            <li><strong><br>Correo o nombre de usuario *</strong></li>
             <li>
                 <div class="input-field" requiered>
                     <input id="correo" name="correo" type="text" class="validate"  placeholder="Correo o usuario" required>
                 </div>
             </li>
-            <li><strong><br>Fecha de nacimiento</strong></li>
+            <li><strong><br>Fecha de nacimiento *</strong></li>
             <li>
                 <div class="input-field " requiered>
                   <input type="text" id="fechaN" name="fechaN" class="datepickerP " required> 
@@ -53,6 +54,7 @@
   </div>
   <div class="modal-footer">
     <button  type = "submit"  class="modal-action waves-effect btn-flat grey lighten-1">Registrar</button>
+    <label style="visibility:hidden">**</label>
     <br>
 </div>
 </form>
