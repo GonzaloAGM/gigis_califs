@@ -197,26 +197,46 @@ const arrows = Arrow.fetchAll();
 
 exports.getResultados = ((request, response, next) => {
     let bools = datosConsultas.getBools();
-    datosConsultas.fetch()
-    .then(([rows, fieldData_Fechas]) => {
-        console.table(rows);
-        response.render('consultas_Resultados', {
-            tituloDeHeader: "Consulta - Resultados",
-            tituloBarra: "Resultados de consulta",
-            estadoConsulta: !bools.estadoConsulta,
-            mostrarSexEdad: bools.mostrarSexEdad,
-            mostrarCalif: bools.mostrarCalif,
-            consultaGen: consultaGen,
-            califOava: bools.califOava,
-            tablaVariosProg: tablaVariosProg,
-            tablaUnProg: tablaUnProg,
-            programasResultados: programasResultados,
-            backArrow: {display: 'block', link: '/consultas'},
-            forwArrow: arrows[1]
+    let intervalos = datosConsultas.getIntervalos();
+    let listaProg = datosConsultas.getListaProg();
+    Programas.fetchAll()
+    .then(([rows_Programas, fieldData_Prog]) => {
+        datosConsultas.fetch()
+        .then(([rowsDatos, fieldData_Datos]) => {
+            datosConsultas.fetchGen()
+            .then(([rowsGen, fieldData_Gen]) => {
+                console.table(rowsDatos);
+                console.table(rows_Programas);
+                console.table(rowsGen);
+                response.render('consultas_Resultados', {
+                    tituloDeHeader: "Consulta - Resultados",
+                    tituloBarra: "Resultados de consulta",
+                    intervalos: intervalos,
+                    listaProg : listaProg,
+                    estadoConsulta: bools.estadoConsulta,
+                    mostrarSexEdad: bools.mostrarSexEdad,
+                    mostrarCalif: bools.mostrarCalif,
+                    datos: rowsDatos,
+                    consultaGen: rowsGen,
+                    programas: rows_Programas,
+                    col_Datos: fieldData_Datos,
+                    col_Gen: fieldData_Gen,
+                    califOava: bools.califOava,
+                    programasResultados: programasResultados,
+                    backArrow: {display: 'block', link: '/consultas'},
+                    forwArrow: arrows[1]
+                });
+            
+                console.log("Consultas Resultados");
+                response.status(201);
+            }).catch( err => {
+                console.log(err);
+                response.redirect('/consultas');
+            });
+        }).catch( err => {
+            console.log(err);
+            response.redirect('/consultas');
         });
-    
-        console.log("Consultas Resultados");
-        response.status(201);
     }).catch( err => {
         console.log(err);
         response.redirect('/consultas');
@@ -230,16 +250,17 @@ exports.postResultados = ((request, response, next) => {
 });
 
 exports.getResultadosPrograma = ((request, response, next) => {
+    let bools = datosConsultas.getBools();
     datosConsultas.fetch2()
-    .then(([rows, fieldData_Fechas]) => {
+    .then(([rows, fieldData]) => {
         response.render('consultas_Programa', {
             tituloDeHeader: "Resultados Programa N",
             tituloBarra: "Resultados - Programa 1 - Ciclo EM 2020",
-            estadoConsulta: estadoConsulta,
-            mostrarSexEdad: mostrarSexEdad,
-            mostrarCalif: mostrarCalif,
+            estadoConsulta: bools.estadoConsulta,
+            mostrarSexEdad: bools.mostrarSexEdad,
+            mostrarCalif: bools.mostrarCalif,
             consultaGen: consultaGen,
-            califOava: califOava,
+            califOava: bools.califOava,
             tablaVariosProg: tablaVariosProg,
             tablaUnProg: tablaUnProg,
             backArrow: {display: 'block', link: '/consultas/Resultados'},
@@ -265,7 +286,7 @@ exports.getConsultas = ((request, response, next) => {
         Ciclo.fetchCantPorAno(0)
         .then(([rows_CantAno, fieldData_CantAno]) => {
             Programas.fetchAll()
-            .then(([rows_Programas, fieldData_Fechas]) => {
+            .then(([rows_Programas, fieldData_Prog]) => {
                 response.render('consultas', {
                     tituloDeHeader: "Consultas",
                     tituloBarra: "Consultas",

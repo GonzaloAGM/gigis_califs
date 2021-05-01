@@ -18,6 +18,10 @@ module.exports = class Programas {
     static fetchAll() {
         return db.execute('SELECT * FROM programas');
     }
+
+    static fetchNombreProg(){
+        return db.execute('SELECT idPrograma, nombrePrograma, puntajeMaximo FROM programas');
+    }
     
     static fetchProgramasCicloActual() {
         return db.execute(

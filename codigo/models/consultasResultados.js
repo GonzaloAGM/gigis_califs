@@ -20,11 +20,17 @@ module.exports = class DatosConsultas {
     this.valueSexo = false;
     this.mostrarSexEdad = true;
     this.mostrarCalif = true;
+    this.ultimaConsulta = '';
+    this.varsUltimaConsulta =[];
   }
 
   setListaProg(listaProgam){
-    console.table(listaProgam);
+    //console.table(listaProgam);
     this.listaProgam = listaProgam;
+  }
+
+  getListaProg(){
+    return this.listaProgam;
   }
 
   getModoConsulta(){
@@ -57,7 +63,37 @@ module.exports = class DatosConsultas {
 
   //Este método servirá para devolver los objetos del almacenamiento persistente.
   static fetchAll() {
+    this.ultimaConsulta = 'SELECT * FROM CalifDatos';
+    this.varsUltimaConsulta = [];
     return db.execute('SELECT * FROM CalifDatos');
+  }
+
+  fetchProgCiclos(){
+    let texto = 'SELECT G.idPrograma, P.nombrePrograma, G.idCiclo, P.puntajeMaximo, COUNT(G.idGrupo) AS `numGrupos` FROM grupos G, programas P WHERE G.idPrograma=P.idPrograma AND ';
+    let vars = [];
+
+    texto += 'G.idCiclo >= ? AND G.idCiclo <= ?';
+    if(this.intervaloCiclo){
+        vars.push(this.cicloIni);
+        vars.push(this.cicloFin);
+   } else {
+        vars.push(this.cicloIni);
+        vars.push(this.cicloIni);
+   }
+    
+
+    texto += ' AND ( G.idPrograma = ?';
+    vars.push(this.listaProgam[0]);
+
+    for(let i = 1; i < this.listaProgam.length; i++){
+        texto += ' OR G.idPrograma = ?';
+        vars.push(this.listaProgam[i]);
+    }
+    texto += ' ) GROUP BY G.idPrograma, G.idCiclo ORDER BY G.idCiclo, G.idPrograma';
+    this.ultimaConsulta = texto;
+    this.varsUltimaConsulta = vars;
+    console.log(texto);
+    return db.execute(texto, vars);
   }
 
   getBools(){
@@ -70,6 +106,22 @@ module.exports = class DatosConsultas {
       return arrdeBools;
   }
 
+  getIntervalos(){
+        let cantJoins = 0;
+        if(this.intervaloCiclo){
+            cantJoins = (this.cicloFin - this.cicloIni+1)*this.listaProgam.length;
+        } else {
+            cantJoins = this.listaProgam.length;
+        }
+        let intervalos = {
+            cant : cantJoins,
+            cicloIni : this.cicloIni,
+            cicloFin : this.cicloFin,
+            cantProg : this.listaProgam.length
+        };
+        return intervalos;
+  }
+
   fetch(){
     let consultaFinal = '';
     let vars = [];
@@ -79,23 +131,20 @@ module.exports = class DatosConsultas {
     let ons = [];
     let selects = [];
 
-    if(!this.intervaloCiclo){
-        this.cicloFin = this.cicloIni;
-    }
-
-    if(!this.intervaloEdad){
-        this.edadFin = this.edadIni;
-    }
-
     //Construcción de la extracción de datos de participantes y tabla sobre la cual se une el LEFTT OUTER JOIN
     subConsultaDatos = 'SELECT login, nombreUsuario, apellidoPaterno, apellidoMaterno,';
     if(this.mostrarSexEdad){
         subConsultaDatos += ' sexo, Edad_Matriculacion, ';
     }
-    subConsultaDatos += 'idciclo, idprograma, idGrupo FROM CalifDatos WHERE ';
+    subConsultaDatos += 'idciclo, idprograma FROM CalifDatos WHERE ';
     subConsultaDatos += 'idCiclo >= ? AND idCiclo <= ?';
-    vars.push(this.cicloIni);
-    vars.push(this.cicloFin);
+    if(this.intervaloCiclo){
+        vars.push(this.cicloIni);
+        vars.push(this.cicloFin);
+    } else {
+        vars.push(this.cicloIni);
+        vars.push(this.cicloIni);
+    }
 
     if(this.estadoConsulta){//Un solo programa
         subConsultaDatos += ' AND idPrograma = ?';
@@ -119,30 +168,39 @@ module.exports = class DatosConsultas {
     }
     if(this.filtrarEdad){
         subConsultaDatos += ' AND Edad_Matriculacion >= ? AND Edad_Matriculacion <= ?';
-        vars.push(this.edadIni);
-        vars.push(this.edadFin);
+        if(this.intervaloEdad){
+            vars.push(this.edadIni);
+            vars.push(this.edadFin);
+        } else {
+            vars.push(this.edadIni);
+            vars.push(this.edadIni);
+        }
+        
     }
-    subConsultaDatos += ') t1';
+    subConsultaDatos += ' GROUP BY login) t1';
 
     //Construcción de las tablas auxiliares donde se almacenan los datos
     if(this.estadoConsulta){
         let cont = 1;
-        for(let i = this.cicloIni; i <= this.cicloFin; i++){
-            let texto = '(SELECT login';
-            if(this.mostrarCalif){
-                if(this.califOava){
-                    texto += ', Avance';
-                } else {
-                    texto += ', CalifInicial, CalifFinal';
-                }
-            }
-            texto += ', idGrupo FROM CalifDatos WHERE idCiclo = ? AND idPrograma = ?'
+        let cicloFin = 11;
+        if(this.intervaloCiclo){
+            cicloFin = this.cicloFin;
+        } else {
+            cicloFin = this.cicloIni;
+        } 
+        for(let i = this.cicloIni; i <= cicloFin; i++){
+            let texto = '(SELECT login, CalifInicial, CalifFinal FROM CalifDatos WHERE idCiclo = ? AND idPrograma = ?';
             vars.push(i);
             vars.push(this.listaProgam[0]);
             if(this.filtrarEdad){
                 texto += ' AND Edad_Matriculacion >= ? AND Edad_Matriculacion <= ?';
-                vars.push(this.edadIni);
-                vars.push(this.edadFin);
+                if(this.intervaloEdad){
+                    vars.push(this.edadIni);
+                    vars.push(this.edadFin);
+                } else {
+                    vars.push(this.edadIni);
+                    vars.push(this.edadIni);
+                }
             }
             texto += ') t' + (cont*2);
             cont++;
@@ -150,23 +208,32 @@ module.exports = class DatosConsultas {
         }
     } else {
         let cont = 1;
-        for(let i = this.cicloIni; i <= this.cicloFin; i++){
+        let cicloFin = 11;
+        if(this.intervaloCiclo){
+            cicloFin = this.cicloFin;
+        } else {
+            cicloFin = this.cicloIni;
+        }
+        for(let i = this.cicloIni; i <= cicloFin; i++){
             for(let k = 0; k< this.listaProgam.length; k++){
                 let texto = '(SELECT login';
-                if(this.mostrarCalif){
-                    if(this.califOava){
-                        texto += ', Avance';
-                    } else {
-                        texto += ', CalifInicial, CalifFinal';
-                    }
+                if(this.califOava){
+                    texto += ', Avance';
+                } else {
+                    texto += ', CalifInicial, CalifFinal';
                 }
-                texto += ', idGrupo FROM CalifDatos WHERE idCiclo = ? AND idPrograma = ?'
+                texto += ' FROM CalifDatos WHERE idCiclo = ? AND idPrograma = ?'
                 vars.push(i);
                 vars.push(this.listaProgam[k]);
                 if(this.filtrarEdad){
                     texto += ' AND Edad_Matriculacion >= ? AND Edad_Matriculacion <= ?';
-                    vars.push(this.edadIni);
-                    vars.push(this.edadFin);
+                    if(this.intervaloEdad){
+                        vars.push(this.edadIni);
+                        vars.push(this.edadFin);
+                    } else {
+                        vars.push(this.edadIni);
+                        vars.push(this.edadIni);
+                    }
                 }
                 texto += ') t' + (cont*2);
                 cont++;
@@ -176,12 +243,19 @@ module.exports = class DatosConsultas {
     }
     
     //Construcción de los ON's de los LEFT OUTER JOIN
-    let cantJoins = (this.cicloFin - this.cicloIni+1)*this.listaProgam.length;
-    console.log('Ini - ' + this.cicloFin + '_ Fin - ' + this.cicloIni);
-    console.table(this.listaProgam);
-    console.log(cantJoins);
+    let cantJoins = 1;
+    if(this.intervaloCiclo){
+        cantJoins = (this.cicloFin - this.cicloIni+1)*this.listaProgam.length;
+        //console.log('Ini - ' + this.cicloIni + '_ Fin - ' + this.cicloFin);
+    } else {
+        cantJoins = this.listaProgam.length;
+        //console.log('Ini - ' + this.cicloIni + '_ Fin - ' + this.cicloIni);
+    }
+    //console.log('Un programa: ' + this.estadoConsulta);
+    //console.log('Varios ciclos: ' + this.intervaloCiclo);
+    //console.table(this.listaProgam);
     for(let acumJoins = 0; acumJoins < cantJoins; acumJoins++){
-        let texto =  'ON (t' + (acumJoins*2+1) + '.login = t' + (acumJoins*2+2) + '.login AND t' + (acumJoins*2+1) + '.idGrupo = t' + (acumJoins*2+2) + '.idGrupo)';
+        let texto =  'ON (t' + (acumJoins*2+1) + '.login = t' + (acumJoins*2+2) + '.login)';
         if(acumJoins + 1 < cantJoins){
             texto += ') t' + (acumJoins*2+3);
         } 
@@ -199,80 +273,79 @@ module.exports = class DatosConsultas {
             texto +=       ' t' + (acumJoins*2+1) + '.sexo,' +
                            ' t' + (acumJoins*2+1) + '.Edad_Matriculacion,';
         }
-        if(this.mostrarCalif){
-            if(this.estadoConsulta){
-                for(let i = 0; i <= acumJoins; i++){
-                    if(i === acumJoins){
-                        if(this.califOava){
-                            texto += ' t' + (acumJoins*2+2) + '.Avance AS `Avance_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + '`,';
-                        } else {
-                            texto += ' t' + (acumJoins*2+2) + '.CalifInicial AS `califIni_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + '`,';
-                            texto += ' t' + (acumJoins*2+2) + '.CalifFinal AS `califFin_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + '`,';
-                        }
-                        break;
+        if(this.estadoConsulta){
+            for(let i = 0; i <= acumJoins; i++){
+                if(i === acumJoins){
+                    if(this.califOava){
+                        texto += ' t' + (acumJoins*2+2) + '.Avance AS `Avance_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + '`,';
                     } else {
-                        if(this.califOava){
-                            texto += ' t' + (acumJoins*2+1) + '.Avance_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + ',';
-                        } else {
-                            texto += ' t' + (acumJoins*2+1) + '.califIni_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + ',';
-                            texto += ' t' + (acumJoins*2+1) + '.califFin_P' + this.listaProgam[0] + '_ciclo' + (i+this.cicloIni) + ',';
-                        }
+                        texto += ' t' + (acumJoins*2+2) + '.CalifInicial AS `califIni_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + '`,';
+                        texto += ' t' + (acumJoins*2+2) + '.CalifFinal AS `califFin_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + '`,';
+                    }
+                    break;
+                } else {
+                    if(this.califOava){
+                        texto += ' t' + (acumJoins*2+1) + '.Avance_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + ',';
+                    } else {
+                        texto += ' t' + (acumJoins*2+1) + '.califIni_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + ',';
+                        texto += ' t' + (acumJoins*2+1) + '.califFin_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + ',';
                     }
                 }
-            } else {
-                let k=0;
-                let j=0;
-                for(let i = 0; i <= acumJoins; i++){
-                    if(i === acumJoins){
-                        if(this.califOava){
-                            texto += ' t' + (acumJoins*2+2) + '.Avance AS `Avance_P' + this.listaProgam[k] + '_ciclo' + (parseInt(j)+parseInt(this.cicloIni)) + '`,';
-                        } else {
-                            texto += ' t' + (acumJoins*2+2) + '.CalifInicial AS `califIni_P' + this.listaProgam[k] + '_ciclo' + (parseInt(j)+parseInt(this.cicloIni)) + '`,';
-                            texto += ' t' + (acumJoins*2+2) + '.CalifFinal AS `califFin_P' + this.listaProgam[k] + '_ciclo' + (j+parseInt(this.cicloIni)) + '`,';
-                        }
-                        break;
-                    } else {
-                        if(this.califOava){
-                            texto += ' t' + (acumJoins*2+1) + '.Avance_P' + this.listaProgam[k] + '_ciclo' + (parseInt(j)+parseInt(this.cicloIni)) + ',';
-                        } else {
-                            texto += ' t' + (acumJoins*2+1) + '.califIni_P' + this.listaProgam[k] + '_ciclo' + (parseInt(j)+parseInt(this.cicloIni)) + ',';
-                            texto += ' t' + (acumJoins*2+1) + '.califFin_P' + this.listaProgam[k] + '_ciclo' + (parseInt(j)+parseInt(this.cicloIni)) + ',';
-                        }
-                    }
-                    if(((k+1) % this.listaProgam.length) === 0){
-                        k = 0;
-                        j++;
-                    }else{
-                        k++;
-                    }
-                    console.log(k);
-                }
-                
             }
+        } else {
+            let k=0;
+            let j=0;
+            for(let i = 0; i <= acumJoins; i++){
+                if(i === acumJoins){
+                    if(this.califOava){
+                        texto += ' t' + (acumJoins*2+2) + '.Avance AS `Avance_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + '`,';
+                    } else {
+                        texto += ' t' + (acumJoins*2+2) + '.CalifInicial AS `califIni_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + '`,';
+                        texto += ' t' + (acumJoins*2+2) + '.CalifFinal AS `califFin_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + '`,';
+                    }
+                    break;
+                } else {
+                    if(this.califOava){
+                        texto += ' t' + (acumJoins*2+1) + '.Avance_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + ',';
+                    } else {
+                        texto += ' t' + (acumJoins*2+1) + '.califIni_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + ',';
+                        texto += ' t' + (acumJoins*2+1) + '.califFin_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + ',';
+                    }
+                }
+                if(((k+1) % this.listaProgam.length) === 0){
+                    k = 0;
+                    j++;
+                }else{
+                    k++;
+                }
+                console.log(k);
+            }
+            
         }
             texto +=       ' t' + (acumJoins*2+1) + '.idciclo,' +
-                           ' t' + (acumJoins*2+1) + '.idprograma,' + 
-                           ' t' + (acumJoins*2+1) + '.idGrupo' +
+                           ' t' + (acumJoins*2+1) + '.idprograma' + 
                         ' FROM (';
+                        
+        //console.log('Select '+(acumJoins+1)+': \n' + texto);
         selects.push(texto);
     }
 
     //Construcción string final de la consulta
     for(let acumJoins = cantJoins; acumJoins > 0; acumJoins--){
-        consultaFinal += selects[acumJoins - 1];
+        consultaFinal += selects[acumJoins-1];
     }
-
+    
     consultaFinal += subConsultaDatos;
 
+    console.table(subConsultasCalifAva);
     for(let acumJoins = 0; acumJoins < cantJoins; acumJoins++){
         consultaFinal += ' LEFT OUTER JOIN ' + 
                           subConsultasCalifAva[acumJoins] + ' ' + 
                           ons[acumJoins];
     }
-    console.table(selects);
-    console.table(subConsultasCalifAva);
-    console.log('Final: ' + consultaFinal);
-    console.table(vars);
+    console.log('Final: \n' + consultaFinal);
+    this.ultimaConsulta = consultaFinal;
+    this.varsUltimaConsulta = vars;
     return db.execute(consultaFinal,vars);
 
   }
@@ -371,7 +444,52 @@ module.exports = class DatosConsultas {
         vars.push(this.valueSexo);
     }
     console.log(texto);
-    console.table(vars);
+    this.ultimaConsulta = texto;
+    this.varsUltimaConsulta = vars;
+    return db.execute(texto,vars);
+  }
+
+  fetchGen(){
+    let texto = 'SELECT COUNT(*)';
+    let cantJoins = 0;
+    if(this.intervaloCiclo){
+        cantJoins = (this.cicloFin - this.cicloIni+1)*this.listaProgam.length;
+        console.log('Ini - ' + this.cicloIni + '_ Fin - ' + this.cicloFin);
+    } else {
+        cantJoins = this.listaProgam.length;
+        console.log('Ini - ' + this.cicloIni + '_ Fin - ' + this.cicloIni);
+    }
+    for(let acumJoins = 0; acumJoins < cantJoins; acumJoins++){
+        if(this.estadoConsulta){
+            for(let i = 0; i <= acumJoins; i++){
+                if(this.califOava){
+                    texto += ', AVG(Avance_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + ') AS `Prom_Avance_P' + this.listaProgam[0] +'_ciclo' + (parseInt(this.cicloIni) + i) + '`';
+                } else {
+                    texto += ', AVG(califFin_P' + this.listaProgam[0] + '_ciclo' + (parseInt(this.cicloIni) + i) + ') AS `Prom_Calif_P' + this.listaProgam[0] +'_ciclo' + (parseInt(this.cicloIni) + i) + '`';
+                }
+            }
+        } else {
+            let k=0;
+            let j=0;
+            for(let i = 0; i <= acumJoins; i++){
+                if(this.califOava){
+                    texto += ', AVG(Avance_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + ') AS `Prom_Avance_P' + this.listaProgam[0] +'_ciclo' + (parseInt(this.cicloIni) + j) + '`';
+                } else {
+                    texto += ', AVG(califFin_P' + this.listaProgam[k] + '_ciclo' + (parseInt(this.cicloIni) + j) + ') AS `Prom_Calif_P' + this.listaProgam[0] +'_ciclo' + (parseInt(this.cicloIni) + j) + '`';
+                }
+                if(((k+1) % this.listaProgam.length) === 0){
+                    k = 0;
+                    j++;
+                }else{
+                    k++;
+                }
+                console.log(k);
+            }
+            
+        }
+    }
+    texto +=' FROM ('+ this.ultimaConsulta +') t';
+    let vars = this.varsUltimaConsulta;
     return db.execute(texto,vars);
   }
 };
