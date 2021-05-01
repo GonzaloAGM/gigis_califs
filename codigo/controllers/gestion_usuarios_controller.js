@@ -37,10 +37,10 @@ exports.postNuevoUsuario = ((request,response,next) => {
                 usuario_rol.save()
                     .then(() => {
                         if (rol === '2'){ 
-                            var cv, titulo;
-                            cv = request.body.cv === ''? null :  request.body.cv;
+                            var cv_path, titulo;
+                            cv_path  = request.file.path === ''? null :  request.file.path;
                             titulo = request.body.cv === ''? null :  request.body.titulo;
-                            const terapeuta = new Terapeuta(request.body.correo, titulo,  cv, 'A');
+                            const terapeuta = new Terapeuta(request.body.correo, titulo,  cv_path, 'A');
                             terapeuta.save()
                                 .then(() => {
                                 }).catch( err => {

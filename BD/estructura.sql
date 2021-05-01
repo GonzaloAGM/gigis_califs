@@ -60,7 +60,7 @@ CREATE TABLE `terapeutas`
 ( 
     `login` VARCHAR(50) NOT NULL PRIMARY KEY, 
     `titulo` VARCHAR(50) NULL , 
-    `cv` VARCHAR(50) NULL , 
+    `cv` VARCHAR(200) NULL , 
     `estatus` CHAR(1) NOT NULL
 ) 
 ENGINE = InnoDB;
