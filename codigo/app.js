@@ -37,6 +37,7 @@ app.use(session({
 
 //Enviar archivos estáticos en carpeta public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/consultas', rutasConsultas);
 
