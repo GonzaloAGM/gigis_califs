@@ -52,18 +52,14 @@ exports.get = (request, response, next) => {
     });
 };
 
-//Falta actualizar
 exports.postNuevoPrograma = (request, response, next) => {
-  const programa = new Programa(request.body.nombreProgra, request.body.puntajeMax, null);
-
-  programa
-    .save()
+  const programa = new Programa(request.body.nombreProgra, request.body.puntajeMax,request.file.path);
+  programa.save()
     .then(() => {
       Programa.fetchIdPrograma(request.body.nombreProgra)
         .then(([rows, fieldData]) => {
           const nivel = new Nivel(request.body.nivelBase, rows[0].idPrograma);
-          nivel
-            .save()
+          nivel.save()
             .then(() => {
               response.redirect('/gestionAdmin/gestionProgramas');
             })
