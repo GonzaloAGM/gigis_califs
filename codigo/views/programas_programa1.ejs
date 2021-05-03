@@ -85,8 +85,7 @@
                 '<div class="col s3">' +
                   '<p><strong>Puntaje final</strong></p>' +
                 '</div>' +
-              '</div>' +
-              '<form action="/programas/' + data.programa[0].idPrograma + '/registro" method="POST">';
+              '</div>';
       //Registro objetivos y puntajes 
       for(objetivo of data.objetivos){
         html +=   '<div class="row">' +
@@ -94,7 +93,7 @@
                       '<p>' + objetivo.descripcion + '</p>' +
                     '</div>' +  
                     '<div class="col s3">' +
-                      '<select name = "puntajeInicial-' + numeroObj + '">';
+                      '<select id = "puntajeInicial-' + numeroObj + '">';
           
           //Asignacion de opciones para calificar puntaje inicial              
           html +=       '<option value="" disabled selected> - </option>'
@@ -104,10 +103,10 @@
           html +=     '</select>' +
                     '</div>'+
                     '<div class="col s3">' +
-                      '<select name = "puntajeFinal-' + numeroObj + '">';
+                      '<select id = "puntajeFinal-' + numeroObj + '">';
 
           //Asignacion de opciones para calificar puntaje final 
-          html +=       '<option value="" disabled selected> hola </option>'
+          html +=       '<option value="" disabled selected> - </option>'
           for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
               html +=   '<option value="' + puntaje + '"> ' + puntaje + '</option>';
           }
@@ -117,16 +116,21 @@
           numeroObj++;
       }
       html +=     '<div class="row right">' +
-                    '<button class="btn-formulario btn waves-effect blue lighten-1" type="submit">Guardar' +
+                    '<button class="btn-formulario btn waves-effect blue lighten-1" id="guardarPuntajes">Guardar' +
                       '<i class="material-icons right">send</i>' +
                     '</button>' +
-                  '</div>' +
-                '</form>';
+                    '<input type="hidden" value="' + data.programa[0].idPrograma + '" id="idPrograma">'
+                  '</div>';
                   
       let id = 'objetivos-participante-grupo-' + data.objetivos[0].idGrupo;
-      M.AutoInit();
+
       document.getElementById(id).innerHTML = html;
-     
+      M.AutoInit();
+
+      document.getElementById("guardarPuntajes").onclick = () => {
+        console.log('Guardar puntajes');
+      }
+
     }).catch(err => {
       console.log(err);
     });

@@ -58,7 +58,31 @@ exports.objetivosParticipantes = (request, response, next) => {
 };
 
 exports.registroPuntajes = (request, response, next) => {
-
+  const idPrograma = request.params.id_programa;
+  console.log(request.body)
+  Programa.fetchNombreProgama(idPrograma)
+    .then(([programa, fieldData]) => {
+      Grupo.fethcGruposProgramaActual(idPrograma)
+      .then(([grupos, fieldData1]) => {
+        Participante_Grupo_Objetivo.fetchParticipantesPorPrograma(idPrograma)
+          .then(([participantes,fieldData2]) => {
+            response.render('programas_programa1', {
+              tituloDeHeader: programa[0].nombrePrograma,
+              tituloBarra: programa[0].nombrePrograma,
+              grupos: grupos,
+              participantes: participantes,
+              backArrow: { display: 'block', link: '/programas' },
+              forwArrow: arrows[1]
+            });
+          }).catch((err) => {
+            console.log(err);
+          })
+      }).catch((err) => {
+          console.log(err);
+      })
+    }).catch((err) => {
+      console.log(err);
+  })
 };
 
 exports.get = (request, response, next) => {
