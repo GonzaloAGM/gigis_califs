@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s12 m4 l4 ">
+    <div class="col s12 m6 l6 ">
       <table >
         <thead>
           <tr>
@@ -41,7 +41,7 @@
       </table>
       <br /><br />
     </div>
-    <div class="col s12 m8 l8 asignar-puntaje">
+    <div class="col s12 m6 l6 asignar-puntaje">
       <div id="objetivos-participante-grupo-<%=grupo.idGrupo%>">
 
       </div>
@@ -52,10 +52,6 @@
   
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems);
-  });
   const registroPuntajes = (idGrupo, login) => {
     let data = {
       grupo_id: idGrupo,
@@ -63,7 +59,7 @@
     };
     console.log(data);
     //función que manda la petición asíncrona
-    fetch('/programas/registro-puntaje', {
+    fetch('/programas/objetivos-participante', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -76,50 +72,57 @@
       //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
       //...
       let html = '';
-
+      let numeroObj = 1;
+      //Header puntajes
       html ='<h6>Asignar puntajes a: ' + data.objetivos[0].nombreUsuario + ' ' + data.objetivos[0].apellidoPaterno + '</h6>' +
-              '<table>' +
-                '<thead>' +
-                  '<th>Objetivos</th>' +
-                  '<th>Puntaje inicial</th>' +
-                  '<th>Puntaje final</th>' +
-                '</thead>' +
-                '<tbody>';
+              '<div class="row">' +
+                '<div class="col s6">' +
+                  '<p><strong>Objetivos</strong></p>' +
+                '</div>' +
+                '<div class="col s3">' +
+                  '<p><strong>Puntaje inicial</strong></p>' +
+                '</div>' +
+                '<div class="col s3">' +
+                  '<p><strong>Puntaje final</strong></p>' +
+                '</div>' +
+              '</div>' +
+              '<form action="/programas/' + data.programa[0].idPrograma + '/registro" method="POST">';
+      //Registro objetivos y puntajes 
       for(objetivo of data.objetivos){
-        html +=   '<tr>' +
-                    '<td>' +
-                      objetivo.descripcion +
-                    '</td>' +  
-                    '<td>' +
-                      '<select name = "puntajeInicial">';
-          html +=         '<option value="" disabled selected> holaa </option>'
-          for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
-              html +=     '<option value="' + puntaje + '"> ' + puntaje + '</option>';
-          }
-          html +=       '</select>';
-        
-          html +=   '</td>' + 
-                    '<td>' +
-                      '<select name = "puntajeFinal">';
+        html +=   '<div class="row">' +
+                    '<div class="col s6">' +
+                      '<p>' + objetivo.descripcion + '</p>' +
+                    '</div>' +  
+                    '<div class="col s3">' +
+                      '<select name = "puntajeInicial-' + numeroObj + '">';
+          
+          //Asignacion de opciones para calificar puntaje inicial              
           html +=       '<option value="" disabled selected> - </option>'
           for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
-              html +=     '<option value="' + puntaje + '"> ' + puntaje + '</option>';
+              html +=   '<option value="' + puntaje + '"> ' + puntaje + '</option>';
           }
-          html +=       '</select>';
-                    '</td>' +
-                  '<tr>'
-      }
-                  
-      html +=   '</tbody>' +
-              '</table>';
+          html +=     '</select>' +
+                    '</div>'+
+                    '<div class="col s3">' +
+                      '<select name = "puntajeFinal-' + numeroObj + '">';
 
-      html +=         '<label>Browser Select</label>' +
-  '<select class="browser-default">' +
-    '<option value="" disabled selected>Choose your option</option>' +
-    '<option value="1">Option 1</option>' +
-    '<option value="2">Option 2</option>' +
-    '<option value="3">Option 3</option>' + 
-  '</select>';
+          //Asignacion de opciones para calificar puntaje final 
+          html +=       '<option value="" disabled selected> hola </option>'
+          for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
+              html +=   '<option value="' + puntaje + '"> ' + puntaje + '</option>';
+          }
+          html +=     '</select>' +
+                    '</div>'+ 
+                  '</div>';
+          numeroObj++;
+      }
+      html +=     '<div class="row right">' +
+                    '<button class="btn-formulario btn waves-effect blue lighten-1" type="submit">Guardar' +
+                      '<i class="material-icons right">send</i>' +
+                    '</button>' +
+                  '</div>' +
+                '</form>';
+                  
       let id = 'objetivos-participante-grupo-' + data.objetivos[0].idGrupo;
       M.AutoInit();
       document.getElementById(id).innerHTML = html;

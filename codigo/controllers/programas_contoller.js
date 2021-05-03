@@ -31,20 +31,33 @@ exports.getProgramas = (request, response, next) => {
   })
 };
 
-exports.registroPuntaje = (request, response, next) => {
+exports.objetivosParticipantes = (request, response, next) => {
   console.log("Peticion asincrona recibida");
   console.log(request.body.grupo_id);
   console.log(request.body.login_participante);
 
   Participante_Grupo_Objetivo.fetchObjetivosPorParticipante(request.body.grupo_id,request.body.login_participante)
     .then(([objetivos, fieldData]) => {
-      return response.status(200).json({ objetivos: objetivos });
+      Grupo.fetchIdPrograma(request.body.grupo_id)
+        .then(([programa,fieldData2]) => {
+          return response.status(200).json({ 
+            objetivos: objetivos,
+            programa: programa
+          });
+        }).catch((err) => { 
+          console.log(err);
+          return response.status(500).json({message: "Internal Server Error"});
+      })
     }).catch((err) => { 
         console.log(err);
         return response.status(500).json({message: "Internal Server Error"});
     })
 
   //response.status(200).json({message: "respuesta asincrona"});
+
+};
+
+exports.registroPuntajes = (request, response, next) => {
 
 };
 
