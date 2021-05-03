@@ -39,25 +39,7 @@ function camposTerapeuta(opcion){
   }
 }
 
- // Autocompletar
- $(document).ready(function(){
-  $('input.autocomplete').autocomplete({
-    data: {
-      "Alejandra": null,
-      "Carolina": null,
-      "Eva": null
-    },
-  });
-});
 
-
-// Cambiar rol de usuario existente
-$(document).ready(() => {
-  $(".crearRol").on("click", () => {
-    location.replace("./");
-    window.alert("Se registró correctamente el rol.");
-  });
-});
 
 
 //Calcular edad 
