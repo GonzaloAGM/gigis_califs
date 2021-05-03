@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s12 m6 l6 ">
+    <div class="col s12 m4 l4 ">
       <table >
         <thead>
           <tr>
@@ -41,8 +41,8 @@
       </table>
       <br /><br />
     </div>
-    <div class="col s12 m6 l6 asignar-puntaje">
-      <div id="objetivos-participante">
+    <div class="col s12 m8 l8 asignar-puntaje">
+      <div id="objetivos-participante-grupo-<%=grupo.idGrupo%>">
 
       </div>
     </div>
@@ -85,13 +85,44 @@
                   '<th>Puntaje final</th>' +
                 '</thead>' +
                 '<tbody>';
-                
+      for(objetivo of data.objetivos){
+        html +=   '<tr>' +
+                    '<td>' +
+                      objetivo.descripcion +
+                    '</td>' +  
+                    '<td>' +
+                      '<select name = "puntajeInicial">';
+          html +=         '<option value="" disabled selected> holaa </option>'
+          for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
+              html +=     '<option value="' + puntaje + '"> ' + puntaje + '</option>';
+          }
+          html +=       '</select>';
+        
+          html +=   '</td>' + 
+                    '<td>' +
+                      '<select name = "puntajeFinal">';
+          html +=       '<option value="" disabled selected> - </option>'
+          for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
+              html +=     '<option value="' + puntaje + '"> ' + puntaje + '</option>';
+          }
+          html +=       '</select>';
+                    '</td>' +
+                  '<tr>'
+      }
                   
       html +=   '</tbody>' +
-              '</table>' +
-            '</div>';
+              '</table>';
 
-      document.getElementById('objetivos-participante').innerHTML = html;
+      html +=         '<label>Browser Select</label>' +
+  '<select class="browser-default">' +
+    '<option value="" disabled selected>Choose your option</option>' +
+    '<option value="1">Option 1</option>' +
+    '<option value="2">Option 2</option>' +
+    '<option value="3">Option 3</option>' + 
+  '</select>';
+      let id = 'objetivos-participante-grupo-' + data.objetivos[0].idGrupo;
+      M.AutoInit();
+      document.getElementById(id).innerHTML = html;
      
     }).catch(err => {
       console.log(err);
