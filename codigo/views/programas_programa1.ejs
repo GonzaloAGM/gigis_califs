@@ -5,41 +5,49 @@
 <% let loginParticipante = ''; %>
 <% for (grupo of grupos) { %>
   <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12 m6 ">
       <h5>Terapeuta: <%= grupo.nombreUsuario%> <%= grupo.apellidoPaterno%></h5>
     </div>
     <div class="col s12 m6">
-      <h5>Promedio General: X</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 l6 ">
+      <table >
+        <thead>
+          <tr>
+            <th>Participantes</th>
+            <th>Nivel</th>
+            <th>Calificaciones</th>
+          </tr>
+        </thead>
+        </tbody>
+        <% for (participante of participantes) { %>
+          <% if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo) { %>
+            <tr>
+              <td>
+                <a  onclick="registroPuntajes(<%=grupo.idGrupo%>,'<%=participante.login%>')" href="#rPuntaje-<%=participante.login%>">
+                  <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
+                 </a>
+              </td>
+              <td>  <%=participante.nombreNivel%>  </td>
+              <td></td>
+            
+          
+              <% loginParticipante = participante.login;%>
+            <% } %>
+          <% } %>
+        </tbody>
+      </table>
+      <br /><br />
+    </div>
+    <div class="col s12 m6 l6 asignar-puntaje">
+      <div id="objetivos-participante">
+
+      </div>
     </div>
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Participantes</th>
-        <th>Nivel</th>
-        <th>Calificaciones</th>
-      </tr>
-    </thead>
-    </tbody>
-    <% for (participante of participantes) { %>
-      <% if (participante.login !== loginParticipante && participante.idGrupo === grupo.idGrupo) { %>
-        <tr>
-          <td>
-            <a  onclick="registroPuntajes(<%=grupo.idGrupo%>,'<%=participante.login%>')" class="btn-flat modal-trigger" href="#rPuntaje-<%=participante.login%>">
-              <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
-             </a>
-          </td>
-          <td>  <%=participante.nombreNivel%>  </td>
-          <td></td>
-        
-      
-          <% loginParticipante = participante.login;%>
-        <% } %>
-      <% } %>
-    </tbody>
-  </table>
-  <br /><br />
 <% } %>
   
 
@@ -69,17 +77,22 @@
       //...
       let html = '';
 
-      html ='<tr>' +
-              '<th>Objetivos <i class="material-icons">arrow_drop_up</i></th>' +
-              '<th>Puntaje inicial</th>' +
-              '<th>Puntaje final</th>' +
-            '</tr>' +
-            <tr>
-            </tr>
+      html ='<h6>Asignar puntajes a: ' + data.objetivos[0].nombreUsuario + ' ' + data.objetivos[0].apellidoPaterno + '</h6>' +
+              '<table>' +
+                '<thead>' +
+                  '<th>Objetivos</th>' +
+                  '<th>Puntaje inicial</th>' +
+                  '<th>Puntaje final</th>' +
+                '</thead>' +
+                '<tbody>';
+                
+                  
+      html +=   '</tbody>' +
+              '</table>' +
+            '</div>';
 
-      document.getElementById('modal_objetivos').innerHTML = html3;
-      M.AutoInit();
-        
+      document.getElementById('objetivos-participante').innerHTML = html;
+     
     }).catch(err => {
       console.log(err);
     });
