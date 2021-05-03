@@ -10,7 +10,6 @@
     </div>
     <div class="col s12 m6">
       <h5>Promedio General: X</h5>
-      <a class="btn-flat modal-trigger" href="#rPuntaje-correo006">Prueba</a>
     </div>
   </div>
 
@@ -29,11 +28,12 @@
           <td>
             <a  onclick="registroPuntajes(<%=grupo.idGrupo%>,'<%=participante.login%>')" class="btn-flat modal-trigger" href="#rPuntaje-<%=participante.login%>">
               <%=participante.nombreUsuario%>  <%=participante.apellidoPaterno%>    <%=participante.apellidoMaterno%>  
-            </a>
+             </a>
           </td>
           <td>  <%=participante.nombreNivel%>  </td>
           <td></td>
-        </tr>
+        
+      
           <% loginParticipante = participante.login;%>
         <% } %>
       <% } %>
@@ -41,7 +41,7 @@
   </table>
   <br /><br />
 <% } %>
-  <div id="modal_objetivos"></div>
+  
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -67,59 +67,15 @@
     }).then(data => {
       //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
       //...
-      let html = ' <div id="rPuntaje-' + data.objetivos[0].login + '" class="modal">' +
-                  '<div class="modal-content">' +
-                    '<table>' +
-                      '<thead>' +
-                        '<tr>' +
-                          '<th>Objetivos</th>' +
-                          '<th>Inicio</th>' +
-                          '<th>Final</th>' +
-                        '</tr>' +
-                      '</thead>' +
-                      '<tbody>' 
-              for (objetivo of data.objetivos){
-              html +=    '<tr>' +
-                          '<td>'+ objetivo.descripcion + '</td>'+
-                          '<td>' +
-                            '<div class="input-field puntaje">' +
-                              '<select>' +
-                                '<option value="" disabled selected>___</option>';
-                                for (let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++) {
-                                  html += '<option value="'+ puntaje + '">' + puntaje + '</option>';
-                                }
-              html +=         '</select>' +
-                            '</div>' +
-                          '</td>' +
-                          '<td>' +
-                            '<div class="input-field puntaje">' +
-                              '<select>' +
-                                '<option value="" disabled selected>___</option>';
-                                for (let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++) {
-                                  html += '<option value="'+ puntaje + '">' + puntaje + '</option>';
-                                }
-              html +=         '</select>' +
-                            '</div>' +
-                          '</td>' +
-                        '</tr>';
-              }
-              html += '</tbody>' +
-                    '</table>' +
-                    '<div class="modal-footer">' +
-                      '<a href="#" class="btn modal-close">Cerrar</a>' +
-                    '</div>' +
-                  '</div>' +
-                '</div>';
+      let html = '';
 
-      let   html3 = '<div id="rPuntaje-correo006" class="modal">' +
-                      '<div class="modal-content">'+
-                        '<h4>Modal Header</h4>'+
-                        ' <p>A bunch of text</p>'+
-                      ' </div>'+
-                      '<div class="modal-footer">'+
-                        '<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>'+
-                      '</div>'+
-                    '</div>';      
+      html ='<tr>' +
+              '<th>Objetivos <i class="material-icons">arrow_drop_up</i></th>' +
+              '<th>Puntaje inicial</th>' +
+              '<th>Puntaje final</th>' +
+            '</tr>' +
+            <tr>
+            </tr>
 
       document.getElementById('modal_objetivos').innerHTML = html3;
       M.AutoInit();
