@@ -8,7 +8,7 @@ router.use(express.static(path.join(__dirname, '..', 'public')));
 
 const programasController = require('../controllers/programas_contoller');
 
-router.post('/:id_programa/registro-puntajes', programasController.registroPuntajes);
+router.post('/registro-puntajes', programasController.registroPuntajes);
 router.get('/:id_programa', programasController.getProgramas);
 router.post('/objetivos-participante', programasController.objetivosParticipantes);
 router.get('/', programasController.get);

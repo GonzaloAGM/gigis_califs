@@ -32,5 +32,9 @@ module.exports = class Participante_Grupo_Objetivo {
         return db.execute('SELECT PGO.login, U.nombreUsuario, U.apellidoPaterno, U.apellidoMaterno, PGO.idGrupo, N.nombreNivel FROM participantes_grupos_objetivo PGO, grupos G, ciclos C, usuarios U, niveles N WHERE PGO.idGrupo=G.idGrupo AND G.idCiclo=C.idCiclo AND PGO.login=U.login AND PGO.idNivel=N.idNivel AND G.idPrograma=? AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE GROUP BY PGO.login ORDER BY PGO.login ASC', [idPrograma]);
     }
 
+    static ActualizarPuntajes(login, idGrupo, idObjetivo, pInicial, pFinal) {
+        return db.execute('UPDATE participantes_grupos_objetivo SET puntajeInicial=?, puntajeFinal=? WHERE login=? AND idGrupo=? AND idObjetivo=?',[pInicial,pFinal,login,idGrupo,idObjetivo]);
+    }
+
 
 }

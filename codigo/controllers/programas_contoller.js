@@ -2,6 +2,7 @@ const Grupo = require('../models/grupos');
 const Programa = require('../models/programas');
 const Arrow = require('../models/arrow');
 const Participante_Grupo_Objetivo = require('../models/participantes_grupos_objetivos');
+const Usuario = require('../models/usuarios')
 const arrows = Arrow.fetchAll();
 
 exports.getProgramas = (request, response, next) => {
@@ -60,31 +61,28 @@ exports.objetivosParticipantes = (request, response, next) => {
 };
 
 exports.registroPuntajes = (request, response, next) => {
-  const idPrograma = request.params.id_programa;
-  console.log(request.body)
-  Programa.fetchNombreProgama(idPrograma)
-    .then(([programa, fieldData]) => {
-      Grupo.fethcGruposProgramaActual(idPrograma)
-      .then(([grupos, fieldData1]) => {
-        Participante_Grupo_Objetivo.fetchParticipantesPorPrograma(idPrograma)
-          .then(([participantes,fieldData2]) => {
-            response.render('programas_programa1', {
-              tituloDeHeader: programa[0].nombrePrograma,
-              tituloBarra: programa[0].nombrePrograma,
-              grupos: grupos,
-              participantes: participantes,
-              backArrow: { display: 'block', link: '/programas' },
-              forwArrow: arrows[1]
-            });
-          }).catch((err) => {
-            console.log(err);
-          })
+  console.log("Peticion asincrona recibida");
+  console.log(request.body[0].login);
+
+  for (participante of request.body){
+    Participante_Grupo_Objetivo.ActualizarPuntajes(participante.login, participante.idGrupo, participante.idObjetivo, participante.pInicial, participante.pFinal)
+      .then(() =>{
+
       }).catch((err) => {
-          console.log(err);
-      })
+        console.log(err);
+        return response.status(500).json({message: "Internal Server Error"});
+    })
+  }
+  Usuario.fetchNombre(request.body[0].login)
+    .then(([nombre,fieldData]) => {
+      return response.status(200).json({
+        nombre: nombre,
+        grupo: request.body[0].idGrupo
+      });
     }).catch((err) => {
-      console.log(err);
-  })
+          console.log(err);
+          return response.status(500).json({message: "Internal Server Error"});
+      })
 };
 
 exports.get = (request, response, next) => {

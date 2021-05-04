@@ -145,14 +145,31 @@
           const puntajeInicial = document.getElementById(idInicio).value;
           const puntajeFinal = document.getElementById(idFinal).value;
           
-          const participante = new PGO(data.grupo, data.participante, objetivo.idObjetivo, puntajeInicial, puntajeFinal );
+          const participante = new PGO(data.participante, data.grupo, objetivo.idObjetivo, puntajeInicial, puntajeFinal );
           objetivos.push(participante); 
           numeroObj++;
         }
         console.log(objetivos);
-
+        fetch('/programas/registro-puntajes',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+              //'csrf-token': csrf
+          },
+          body: JSON.stringify(objetivos)
+        }).then(result => {
+          return result.json();
+        }).then (objetivos => {
+          console.log(objetivos)
+          let html = '';
+          let mensaje = 'Se actualizaron los puntajes de ' + objetivos.nombre[0].nombreUsuario + ' ' + objetivos.nombre[0].apellidoPaterno;
+          let id = 'objetivos-participante-grupo-' + objetivos.grupo; 
+          document.getElementById(id).innerHTML = html;
+          M.toast({html: mensaje}) 
+        }).catch(err => {
+            console.log(err);
+          });
       }
-
     }).catch(err => {
       console.log(err);
     });
