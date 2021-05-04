@@ -96,8 +96,11 @@
                     '<div class="col s3">' +
                       '<select id = "puntajeInicial-' + numeroObj + '">';
           
-          //Asignacion de opciones para calificar puntaje inicial              
-          html +=       '<option value="" disabled selected> - </option>'
+          //Asignacion de opciones para calificar puntaje inicial
+          if (objetivo.puntajeInicial === null || objetivo.puntajeInicial === 0  )             
+            html +=     '<option value="" disabled selected> - </option>'
+          else 
+            html +=     '<option value="' + objetivo.puntajeInicial + '" disabled selected> ' + objetivo.puntajeInicial + '</option>'
           for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
               html +=   '<option value="' + puntaje + '"> ' + puntaje + '</option>';
           }
@@ -107,7 +110,10 @@
                       '<select id = "puntajeFinal-' + numeroObj + '">';
 
           //Asignacion de opciones para calificar puntaje final 
-          html +=       '<option value="" disabled selected> - </option>'
+          if (objetivo.puntajeFinal === null || objetivo.puntajeFinal === 0  )             
+            html +=     '<option value="" disabled selected> - </option>'
+          else 
+            html +=     '<option value="' + objetivo.puntajeFinal + '" disabled selected> ' + objetivo.puntajeFinal + '</option>'
           for(let puntaje = 1; puntaje <= objetivo.puntajeMaximo; puntaje++){
               html +=   '<option value="' + puntaje + '"> ' + puntaje + '</option>';
           }
