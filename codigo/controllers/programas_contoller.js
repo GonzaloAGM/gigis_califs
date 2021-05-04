@@ -42,7 +42,9 @@ exports.objetivosParticipantes = (request, response, next) => {
         .then(([programa,fieldData2]) => {
           return response.status(200).json({ 
             objetivos: objetivos,
-            programa: programa
+            programa: programa,
+            grupo: request.body.grupo_id,
+            participante: request.body.login_participante
           });
         }).catch((err) => { 
           console.log(err);

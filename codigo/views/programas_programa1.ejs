@@ -71,6 +71,7 @@
     }).then(data => {
       //Modificamos el DOM de nuestra página de acuerdo a los datos de la segunda promesa
       //...
+      console.log(data)
       let html = '';
       let numeroObj = 1;
       //Header puntajes
@@ -129,6 +130,27 @@
 
       document.getElementById("guardarPuntajes").onclick = () => {
         console.log('Guardar puntajes');
+        const objetivos = [];
+        numeroObj = 1;
+        function PGO(login, idGrupo, idObjetivo, pInicial, pFinal){
+          this.login = login;
+          this.idGrupo = idGrupo;
+          this.idObjetivo = idObjetivo;
+          this.pInicial = pInicial;
+          this.pFinal = pFinal;
+        }
+        for(objetivo of data.objetivos){
+          const idInicio = 'puntajeInicial-' + numeroObj;
+          const idFinal = 'puntajeFinal-' + numeroObj;
+          const puntajeInicial = document.getElementById(idInicio).value;
+          const puntajeFinal = document.getElementById(idFinal).value;
+          
+          const participante = new PGO(data.grupo, data.participante, objetivo.idObjetivo, puntajeInicial, puntajeFinal );
+          objetivos.push(participante); 
+          numeroObj++;
+        }
+        console.log(objetivos);
+
       }
 
     }).catch(err => {
