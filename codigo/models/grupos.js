@@ -21,6 +21,10 @@ module.exports = class Grupo {
     return db.execute('SELECT * FROM grupos');
   }
 
+  static fetchIdPrograma(idGrupo) {
+    return db.execute('SELECT idPrograma FROM grupos WHERE idGrupo=?', [idGrupo])
+  }
+
   static fetchGruposCicloActual() {
     return db.execute(
       'SELECT G.idGrupo,numeroGrupo,G.idPrograma FROM grupos G ,ciclos C, programas P WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE'
@@ -29,7 +33,7 @@ module.exports = class Grupo {
 
   static fethcGruposProgramaActual(idPrograma) {
     return db.execute(
-      'SELECT numeroGrupo,G.idGrupo,nombrePrograma, U.nombreUsuario, U.apellidoPaterno FROM grupos G ,ciclos C, programas P, grupos_terapeutas GP, usuarios U WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND G.idGrupo=GP.idGrupo AND GP.login=U.login AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE AND P.idPrograma=?',
+      'SELECT G.idPrograma,numeroGrupo,G.idGrupo,nombrePrograma, U.nombreUsuario, U.apellidoPaterno FROM grupos G ,ciclos C, programas P, grupos_terapeutas GP, usuarios U WHERE G.idCiclo=C.idCiclo AND G.idPrograma=P.idPrograma AND G.idGrupo=GP.idGrupo AND GP.login=U.login AND fechaInicial<CURRENT_DATE AND fechaFinal>CURRENT_DATE AND P.idPrograma=?',
       [idPrograma]
     );
   }
