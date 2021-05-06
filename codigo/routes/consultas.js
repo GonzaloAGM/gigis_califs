@@ -8,6 +8,7 @@ const session = require('express-session');
 
 //Controladores
 const consultasController = require('../controllers/consultas_Controller');
+const isAuth = require('../util/is-auth.js');
 
 //Inicializa dependencias
 router.use(bodyParser.urlencoded({extended: false}));
@@ -21,18 +22,18 @@ router.use(session({
 //Enviar archivos estáticos en carpeta public
 router.use(express.static(path.join(__dirname,'..', 'public')));
 
-router.get('/Resultados', consultasController.getResultados);
+router.get('/Resultados', isAuth, consultasController.getResultados);
 
-router.post('/Resultados', consultasController.postResultados);
+router.post('/Resultados', isAuth, consultasController.postResultados);
 
-router.get('/ProgramaN', consultasController.getResultadosPrograma);
+router.get('/ProgramaN', isAuth, consultasController.getResultadosPrograma);
 
-router.post('/ProgramaN', consultasController.postResultadosPrograma);
+router.post('/ProgramaN', isAuth, consultasController.postResultadosPrograma);
 
-router.get('/', consultasController.getConsultas);
+router.get('/', isAuth, consultasController.getConsultas);
 
-router.post('/', consultasController.postConsultas);
+router.post('/', isAuth, consultasController.postConsultas);
 
-router.post('/SelProgram', consultasController.postSelProgram);
+router.post('/SelProgram', isAuth, consultasController.postSelProgram);
 
 module.exports = router;

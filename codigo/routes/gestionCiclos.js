@@ -7,19 +7,20 @@ subrouter.use(bodyParser.urlencoded({ extended: false }))
 subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 
 const gestionCicloController = require('../controllers/gestion_ciclos_controller')
+const isAuth = require('../util/is-auth.js');
 
-subrouter.get('/inscribir-en-grupo',gestionCicloController.getInsGrupo);
+subrouter.get('/inscribir-en-grupo', isAuth, gestionCicloController.getInsGrupo);
 
-subrouter.post('/selTera',gestionCicloController.postSelTera);
+subrouter.post('/selTera', isAuth, gestionCicloController.postSelTera);
 
-subrouter.post('/selProg',gestionCicloController.postSelProg);
+subrouter.post('/selProg', isAuth, gestionCicloController.postSelProg);
 
-subrouter.get('/agregar-ciclo',gestionCicloController.getAgrCiclo);
+subrouter.get('/agregar-ciclo', isAuth, gestionCicloController.getAgrCiclo);
 
-subrouter.post('/agregar-ciclo',gestionCicloController.postAgrCiclo);
+subrouter.post('/agregar-ciclo', isAuth, gestionCicloController.postAgrCiclo);
 
-subrouter.get('/gestion-perfil-ciclo',gestionCicloController.getPerfilCiclo);
+subrouter.get('/gestion-perfil-ciclo', isAuth, gestionCicloController.getPerfilCiclo);
 
-subrouter.get('/', gestionCicloController.get);
+subrouter.get('/', isAuth, gestionCicloController.get);
 
 module.exports = subrouter;

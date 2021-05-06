@@ -7,10 +7,11 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join(__dirname, '..', 'public')));
 
 const programasController = require('../controllers/programas_contoller');
+const isAuth = require('../util/is-auth.js');
 
-router.post('/registro-puntajes', programasController.registroPuntajes);
-router.get('/:id_programa', programasController.getProgramas);
-router.post('/objetivos-participante', programasController.objetivosParticipantes);
-router.get('/', programasController.get);
+router.post('/registro-puntajes', isAuth, programasController.registroPuntajes);
+router.get('/:id_programa', isAuth, programasController.getProgramas);
+router.post('/objetivos-participante', isAuth, programasController.objetivosParticipantes);
+router.get('/', isAuth, programasController.get);
 
 module.exports = router;

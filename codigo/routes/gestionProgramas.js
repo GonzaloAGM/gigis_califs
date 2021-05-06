@@ -7,13 +7,14 @@ subrouter.use(bodyParser.urlencoded({ extended: false }))
 subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 
 const gestionPrograController = require('../controllers/gestion_programas_controller')
+const isAuth = require('../util/is-auth.js');
 
-subrouter.get('/gestion-nivel-objetivos',gestionPrograController.getGpObjetivos);
+subrouter.get('/gestion-nivel-objetivos',isAuth, gestionPrograController.getGpObjetivos);
 
-subrouter.post('/gestion-nivel-objetivos',gestionPrograController.postGpObjetivos);
+subrouter.post('/gestion-nivel-objetivos', isAuth, gestionPrograController.postGpObjetivos);
 
-subrouter.get('/', gestionPrograController.get);
+subrouter.get('/', isAuth, gestionPrograController.get);
 
-subrouter.post('/', gestionPrograController.postNuevoPrograma);
+subrouter.post('/', isAuth, gestionPrograController.postNuevoPrograma);
 
 module.exports = subrouter;

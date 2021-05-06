@@ -1,0 +1,23 @@
+<%- include('include/head.ejs') %>
+
+<body>
+    <div class="container">
+        <h1><%= titulo %></h1>
+        <div style="display:inline-block;vertical-align:top;">
+            <% if (error !== false) { %>
+                <span class="red"><%- error %></span>
+            <% } %>
+            <form action= "login" method="POST">
+                <label for="username">Nombre del usuario</label>
+                <input type="text" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" required minlength="8">
+
+                <input class="waves-effect waves-light btn" type="submit" name="enviar" value="Entrar">     <a class="waves-effect waves-light btn" href="">Recuperar contraseña</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+<%- include('include/footer.ejs') %>

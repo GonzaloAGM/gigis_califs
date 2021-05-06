@@ -7,10 +7,11 @@ subrouter.use(bodyParser.urlencoded({ extended: false }))
 subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 
 const gestionUserController = require('../controllers/gestion_usuarios_controller')
+const isAuth = require('../util/is-auth.js');
 
 
 
-subrouter.get('/', gestionUserController.get);
-subrouter.post('/', gestionUserController.postNuevoUsuario);
-
+subrouter.get('/', isAuth, gestionUserController.get);                  //Quitar isAuth para registrar sus usuarios
+subrouter.post('/', isAuth, gestionUserController.postNuevoUsuario);    //Quitar isAuth para registrar sus usuarios
+                                                                        //y tambien revisar router de gestion administrativa
 module.exports = subrouter;

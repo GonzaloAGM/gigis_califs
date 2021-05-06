@@ -50,6 +50,8 @@ module.exports = class Usuario {
     return db.execute('SELECT nombreUsuario, apellidoPaterno FROM usuarios WHERE login like ?', [login]);
   }
 
-
+  static fetchOne(login) {
+    return db.execute('SELECT * FROM usuarios WHERE login = ?', [login]);
+  }
 
 }

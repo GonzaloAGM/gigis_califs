@@ -15,11 +15,7 @@ app.set('views', 'views');
 const rutasConsultas = require('./routes/consultas');
 const rutasProgramas = require('./routes/programas');
 const rutasGestionAdmin = require('./routes/GestionAdmin');
-const rutaUsuarios = require('./routes/sesion_usuarios');
-
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
+const rutaSessionUsuarios = require('./routes/sesion_usuarios');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -39,7 +35,6 @@ const fileStorage = multer.diskStorage({
 
 //Inicializar dependencias
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
@@ -64,7 +59,7 @@ app.use('/programas', rutasProgramas);
 
 app.use('/gestionAdmin', rutasGestionAdmin);
 
-app.use('/Usuarios',rutaUsuarios);
+app.use('/usuarios',rutaSessionUsuarios);
 
 app.get('/', (request, response, next) => {
     console.log('Prueba home');
