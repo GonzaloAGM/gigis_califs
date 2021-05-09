@@ -1,8 +1,9 @@
-<form action="/gestionAdmin/gestionUsuarios" method="POST" onsubmit="toastRegUser()">
+<form action="/gestionAdmin/gestionUsuarios" method="POST" onsubmit="toastRegUser()" enctype="multipart/form-data">
   <div class="modal-content">
       <h3>Nuevo usuario</h3>
+      <label> * Campos obligatorios.</label>
       <ul>
-        <li><strong><br>Nombre</strong></li>
+        <li><strong>Nombre *</strong></li>
         <li>
           <div class="input-field">
             <input id="nombre" name="nombre" type="text" class="validate"  placeholder="Nombre(s)" required>
@@ -20,14 +21,14 @@
             <input id="apellidoM" name="apellidoM" type="text" class="validate"  placeholder="Apellido materno">
           </div>
         </li>
-        <li><strong><br>Correo</strong></li>
+        <li><strong><br>Correo *</strong></li>
         <li>
           <div class="input-field">
             <input id="correo" name="correo" type="email" class="validate"  placeholder="correo@mail.com" required>
             <span class="helper-text" data-error="Introduce un correo válido"></span>
           </div>
         </li>
-        <li><strong>Roles</strong></li>
+        <li><strong>Roles *</strong></li>
         <li>
           <div class="input-field m4" required >
             <select name="selRol" id= "selRol" onchange="camposTerapeuta(this)" multiple required>
@@ -49,17 +50,21 @@
         <li style = "display:none" id = "campoT3"><strong><br>Currículum</strong></li>
         <li style = "display:none" id = "campoT4">
             <div class="file-field input-field">
-                <div class="file-field input-field waves-effect waves-light btn-small white black-text">
-                    <i class="material-icons left">file_upload</i>Subir</a>
+                <div class="waves-effect waves-light btn-small white black-text">
+                    <i class="material-icons left">file_upload</i>Subir
                     <input type="file" name="cv">
                 </div>
-                <br><br>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Currículum">
+                </div>
+                <br>
             </div>
         </li>
       </ul>
   </div>
   <div class="modal-footer container">
-    <button  type = "submit" class="modal-action waves-effect btn-flat grey lighten-1">Agregar</button>
+    <button  type = "submit" class="modal-action waves-effect btn-flat grey lighten-1 boton-md">Registrar</button>
+    <label style="visibility:hidden">**</label>
   </div>
   <br>
 </form>
