@@ -9,57 +9,6 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('select').formSelect();
 });
-
-// Avisar que se creo correctamente el usuario
-document.getElementById("toastNuevoUsuario").click();
-
-
-function toastRegPar(){   
-  M.toast({
-            html: 'Se registró correctamente el participante.',
-            displayLenght: 5000
-          });
-}
-
-function camposTerapeuta(opcion){
-  if (opcion.value === '2'){
-    document.getElementById("campoT1").style.display = "block";
-    document.getElementById("campoT2").style.display = "block";
-    document.getElementById("campoT3").style.display = "block";
-    document.getElementById("campoT4").style.display = "block";
-  }else{
-    document.getElementById("campoT1").style.display = "none";
-    document.getElementById("campoT2").style.display = "none";
-    document.getElementById("campoT3").style.display = "none";
-    document.getElementById("campoT4").style.display = "none";
-  }
-}
-
-//Generar contraseña
-function generarContra(){
-  let especiales = ['!','#',"$","%","&","*","(",")","+","/"];
-  let indice = Math.floor(Math.random() * ((9+1) - 0) + 0);
-  let correo = document.getElementById("correo");
-  document.getElementById("contra").value = correo.value.split('@')[0]+ new Date().getMilliseconds()+ especiales[indice];
-}
-
-
-//Calcular edad 
-function calculaEdad(){
-  let hoy = new Date();
-  let nacimiento = document.getElementByName("fechaN");
-  let m;
-  edad = hoy.getFullYear() - nacimiento.getFullYear();
-  m = hoy.getMonth() - nacimiento.getMonth();
-  if (m < 0 || (m === 0 && hoy.getDate() < nacimiento.getDate())) {
-      edad=edad-1;
-  }  
-  document.getElementByName("edad").innerHTML = edad; 
-  console.log('edad desde js');
-  console.log(edad);
-  console.log(document.getElementByName("edad").innerHTML); 
-}
-
 // jQuery date picker 
 $(document).ready(function(){
   const hoy = new Date();
@@ -83,3 +32,28 @@ $(document).ready(function(){
     }
 })
 });
+
+// Avisar que se creo correctamente el usuario
+document.getElementById("toastNuevoUsuario").click();
+
+function camposTerapeuta(opcion){
+  if (opcion.value === '2'){
+    document.getElementById("campoT1").style.display = "block";
+    document.getElementById("campoT2").style.display = "block";
+    document.getElementById("campoT3").style.display = "block";
+    document.getElementById("campoT4").style.display = "block";
+  }else{
+    document.getElementById("campoT1").style.display = "none";
+    document.getElementById("campoT2").style.display = "none";
+    document.getElementById("campoT3").style.display = "none";
+    document.getElementById("campoT4").style.display = "none";
+  }
+}
+
+//Generar contraseña
+function generarContra(){
+  let especiales = ['!','#',"$","%","&","*","(",")","+","/"];
+  let indice = Math.floor(Math.random() * ((9+1) - 0) + 0);
+  let correo = document.getElementById("correo");
+  document.getElementById("contra").value = correo.value.split('@')[0]+ new Date().getMilliseconds()+ especiales[indice];
+}

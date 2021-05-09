@@ -58,24 +58,24 @@ exports.post = ((request,response,next) => {
     apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
     apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
     tel = request.body.tel === ''? null :  request.body.tel;
-    const participante = new Participante(request.body.correo, 'contra', request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, tel);
+    const participante = new Participante(request.body.correo, request.body.contra, request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, tel);
     participante.save()
         .then(() => {
             const usuario_rol = new Usuario_Rol(request.body.correo, '1');
             usuario_rol.save()
-                .then(() => {
+                .then(() => {      
                     request.session.error = undefined;
                     request.session.bandera = true; 
-                    response.redirect('/gestionAdmin/gestionParticipantes');         
+                    response.redirect('/gestionAdmin/gestionParticipantes')
                 }).catch( err => {
+                    console.log("err1");
                     console.log(err);
-                    response.redirect('/gestionAdmin/');    
+                    request.session.error = "Ya existe un participante registrado con el correo que ingresaste.";
+                    request.session.bandera =true; 
+                    response.redirect('/gestionAdmin/gestionParticipantes');  
                 });
         }).catch( err => {
-            console.log(err);
-            request.session.error = "Ya existe un participante registrado con el correo que ingresaste.";
-            request.session.bandera =true; 
-            response.redirect('/gestionAdmin/gestionParticipantes');    
+            console.log(err);  
         });
 });
 
