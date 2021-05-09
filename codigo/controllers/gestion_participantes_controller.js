@@ -34,10 +34,14 @@ exports.getPerfilPartic = ((request,response,next) => {
 });
 
 exports.get = ((request,response,next) => {
+    const error = request.session.error === undefined ? false : request.session.error;
+    const bandera = request.session.bandera === undefined ? false : request.session.bandera;
     Participante.fetchAll('participante')
         .then(([participantes, fieldData1]) => {
             response.render('gestion_participantes', {
                 participantes: participantes,
+                error: error,
+                bandera: bandera,
                 tituloDeHeader: "Gestión de participantes",
                 tituloBarra: "Participantes",
                 backArrow: {display: 'block', link: '/gestionAdmin'},
@@ -45,6 +49,8 @@ exports.get = ((request,response,next) => {
             });
         })
         .catch((err) => console.log(err));
+    request.session.error = undefined;
+    request.session.bandera =undefined;
 });
 
 exports.post = ((request,response,next) => {
@@ -58,7 +64,8 @@ exports.post = ((request,response,next) => {
             const usuario_rol = new Usuario_Rol(request.body.correo, '1');
             usuario_rol.save()
                 .then(() => {
-                    console.log('Todo ok');
+                    request.session.error = undefined;
+                    request.session.bandera = true; 
                     response.redirect('/gestionAdmin/gestionParticipantes');         
                 }).catch( err => {
                     console.log(err);
@@ -66,8 +73,9 @@ exports.post = ((request,response,next) => {
                 });
         }).catch( err => {
             console.log(err);
-            console.log('Noentra al 1er then');
-            response.redirect('/gestionAdmin/');    
+            request.session.error = "Ya existe un participante registrado con el correo que ingresaste.";
+            request.session.bandera =true; 
+            response.redirect('/gestionAdmin/gestionParticipantes');    
         });
 });
 
