@@ -39,7 +39,13 @@ function camposTerapeuta(opcion){
   }
 }
 
-
+//Generar contraseña
+function generarContra(){
+  let especiales = ['!','#',"$","%","&","*","(",")","+","/"];
+  let indice = Math.floor(Math.random() * ((9+1) - 0) + 0);
+  let correo = document.getElementById("correo");
+  document.getElementById("contra").value = correo.value.split('@')[0]+ new Date().getMilliseconds()+ especiales[indice];
+}
 
 
 //Calcular edad 

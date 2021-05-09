@@ -29,7 +29,7 @@ exports.postNuevoUsuario = ((request,response,next) => {
     var apellidoP, apellidoM;
     apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
     apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
-    const usuario = new Usuario(request.body.correo, 'contraseña', request.body.nombre, apellidoP, apellidoM);
+    const usuario = new Usuario(request.body.correo, request.body.contra, request.body.nombre, apellidoP, apellidoM);
     usuario.save()
         .then(() => {
             for (let rol of request.body.selRol){
