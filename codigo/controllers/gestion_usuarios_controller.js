@@ -7,6 +7,8 @@ const Rol = require('../models/roles');
 const arrows = Arrow.fetchAll();
 
 exports.get = (request, response, next) => {
+    const error = request.session.error === undefined ? false : request.session.error;
+    const bandera = request.session.bandera === undefined ? false : request.session.bandera;
     Usuario.fetchListaSin('participante')
         .then(([usuarios, fieldData1]) => {
             Rol.fetchAll()
@@ -14,6 +16,8 @@ exports.get = (request, response, next) => {
                     response.render('gestion_usuarios', {
                         usuarios: usuarios, 
                         roles: roles, 
+                        error: error,
+                        bandera: bandera,
                         tituloDeHeader: "Gestión de usuarios",
                         tituloBarra: "Usuarios",
                         backArrow: {display: 'block', link: '/gestionAdmin'},
@@ -23,6 +27,8 @@ exports.get = (request, response, next) => {
                 .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
+    request.session.error = undefined;
+    request.session.bandera =undefined;
 };
     
 exports.postNuevoUsuario = ((request,response,next) => {
@@ -52,10 +58,14 @@ exports.postNuevoUsuario = ((request,response,next) => {
                         response.redirect('/gestionAdmin/');    
                     });
             }
-            response.redirect('/gestionAdmin/gestionUsuarios/'); 
+            request.session.error = undefined;
+            request.session.bandera = true; 
+            response.redirect('/gestionAdmin/gestionUsuarios/');
         }).catch( err => {
             console.log(err);
-            response.redirect('/gestionAdmin/');    
+            request.session.error = "Ya existe un usuario registrado con el correo que ingresaste.";
+            request.session.bandera =true; 
+            response.redirect('/gestionAdmin/gestionUsuarios');    
         });
 });
 

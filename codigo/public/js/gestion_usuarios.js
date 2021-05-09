@@ -11,12 +11,8 @@ $(document).ready(function(){
 });
 
 // Avisar que se creo correctamente el usuario
-function toastRegUser(){   
-  M.toast({
-            html: 'Se registró correctamente el usuario.',
-            displayLenght: 5000
-          });
-}
+document.getElementById("toastNuevoUsuario").click();
+
 
 function toastRegPar(){   
   M.toast({
