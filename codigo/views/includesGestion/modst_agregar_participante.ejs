@@ -34,8 +34,14 @@
             <li><strong><br>Correo o nombre de usuario *</strong></li>
             <li>
                 <div class="input-field" requiered>
-                    <input id="correo" name="correo" type="text" class="validate"  placeholder="Correo o usuario" required>
+                    <input id="correo" name="correo" type="text" class="validate"  placeholder="Correo o usuario" onchange="generarContra();" required>
                 </div>
+            </li>
+            <li><strong><br>Contraseña * </strong></li>
+            <li>
+            <div class="input-field">
+                <input  id="contra" name= "contra"  type="text" class="validate" placeholder="contraseña" required>
+            </div>
             </li>
             <li><strong><br>Fecha de nacimiento *</strong></li>
             <li>

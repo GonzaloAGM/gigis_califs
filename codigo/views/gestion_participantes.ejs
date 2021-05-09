@@ -28,4 +28,10 @@
       </div>
     </div>
 </div>  
+<% if (error !== false && bandera == true) { %>
+  <a id = "toastNuevoUsuario" onclick="M.toast({html: '<%- error %>', length:7500, classes: 'black'})" class="btn" style="visibility: hidden"></a> 
+<% } %>   
+<% if (error === false && bandera == true){ %>
+  <a id = "toastNuevoUsuario" onclick="M.toast({html: 'El usuario fue registrado correctamente.',  length:6500, classes: 'grey'})" class="btn" style="visibility: hidden"></a>  
+<% } %> 
 <%- include('include/footer.ejs') %>

@@ -24,11 +24,17 @@
         <li><strong><br>Correo *</strong></li>
         <li>
           <div class="input-field">
-            <input id="correo" name="correo" type="email" class="validate"  placeholder="correo@mail.com" required>
+            <input id="correo" name="correo" type="email" class="validate"  placeholder="correo@mail.com" onchange="generarContra();" required>
             <span class="helper-text" data-error="Introduce un correo válido"></span>
           </div>
         </li>
-        <li><strong>Roles *</strong></li>
+        <li><strong>Contraseña * </strong></li>
+        <li>
+          <div class="input-field">
+            <input  id="contra" name= "contra"  type="text" class="validate" placeholder="contraseña" required>
+          </div>
+        </li>
+        <li><strong><br>Roles *</strong></li>
         <li>
           <div class="input-field m4" required >
             <select name="selRol" id= "selRol" onchange="camposTerapeuta(this)" multiple required>
