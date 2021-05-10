@@ -37,3 +37,13 @@ blogin{
     transform: translate(-50%, -50%);
     max-width: 50%;
 }
+
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+    color: rgb(255, 255, 255);
+}
+/* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    box-shadow: 0 1px 0 0 rgb(255, 255, 255);
+  }
