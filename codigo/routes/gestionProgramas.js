@@ -16,4 +16,6 @@ subrouter.get('/', gestionPrograController.get);
 
 subrouter.post('/', gestionPrograController.postNuevoPrograma);
 
+subrouter.post('/editarPrograma', gestionPrograController.editarPrograma);
+
 module.exports = subrouter;

@@ -28,7 +28,6 @@ exports.postGpObjetivos = (request, response, next) => {
   console.log('Accion post en gestionProgramasObjs');
 };
 
-//Falta actualizar
 exports.get = (request, response, next) => {
   Programa.fetchAll()
     .then(([programas, fieldData]) => {
@@ -76,3 +75,12 @@ exports.postNuevoPrograma = (request, response, next) => {
     });
   console.log('Accion post en gestionProgramas');
 };
+
+exports.editarPrograma  = (request, response, next) => {
+  Programa.editarPrograma(request.body.idPrograma, request.body.nombrePrograma, request.file.path)
+    .then(() => {
+      response.redirect('./')
+    }).catch((err) => {
+      console.log(err);
+    });
+}

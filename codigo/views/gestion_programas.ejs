@@ -23,6 +23,10 @@
     <div id="agregarPrograma" class="modal">
       <%- include('includesGestion/modst_agregar_programa.ejs') %>  
     </div><!--Fin Modal Structure agregar programa-->
+    
+    <!-- Modals Editar programas-->
+    <%- include('includesGestion/modst_editar_programa.ejs') %>  
+
     <div class="row">
         <div class="col s12 m12">
           <%- include('includesGestion/lista_programas.ejs') %>
@@ -32,3 +36,23 @@
         
 </div>    
 <%- include('include/footer.ejs') %>
+
+<script>
+  const editarPrograma = (idPrograma) => {
+    let data = {programa_id: idPrograma};
+    fetch('/programas/editar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            //'csrf-token': csrf
+        },
+        body: JSON.stringify(data)
+    }).then(result => {
+        return result.json(); //Regresa otra promesa
+    }).then(data => {
+
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+</script>
