@@ -30,6 +30,7 @@ subrouter.use('/uploads/cv', express.static(path.join(__dirname,'..', 'uploads')
 
 const gestionUserController = require('../controllers/gestion_usuarios_controller')
 const isAuth = require('../util/is-auth.js');
+const { isatty } = require('tty');
 
 
 
