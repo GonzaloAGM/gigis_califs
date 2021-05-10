@@ -17,4 +17,8 @@ subrouter.get('/', isAuth, gestionPrograController.get);
 
 subrouter.post('/', isAuth, gestionPrograController.postNuevoPrograma);
 
+subrouter.post('/editarPrograma', gestionPrograController.editarPrograma);
+
+subrouter.post('/agregarNivel', gestionPrograController.agregarNivel);
+
 module.exports = subrouter;
