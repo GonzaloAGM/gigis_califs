@@ -9,13 +9,13 @@
                 <h1><%= titulo %></h1>
                 <div style="display:inline-block;vertical-align:top;">
                     <% if (error !== false) { %>
-                        <span class="red"><%- error %></span>
+                        <span style="color: #ff3d41;"><%- error %></span>
                     <% } %>
                     <form action= "login" method="POST">
-                        <label for="username">Nombre del usuario</label>
+                        <label for="username">Nombre del usuario y/o eMail</label>
                         <input type="text" name="username" required>
         
-                        <label for="password">Password</label>
+                        <label for="password">Clave</label>
                         <input type="password" name="password" required minlength="8">
         
                         <input class="waves-effect waves-light btn" type="submit" name="enviar" value="Entrar">        <a class="waves-effect waves-light btn" href="">Recuperar contraseña</a>
