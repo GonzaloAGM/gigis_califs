@@ -18,4 +18,6 @@ subrouter.post('/', gestionPrograController.postNuevoPrograma);
 
 subrouter.post('/editarPrograma', gestionPrograController.editarPrograma);
 
+subrouter.post('/agregarNivel', gestionPrograController.agregarNivel);
+
 module.exports = subrouter;

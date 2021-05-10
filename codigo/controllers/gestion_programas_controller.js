@@ -84,3 +84,13 @@ exports.editarPrograma  = (request, response, next) => {
       console.log(err);
     });
 }
+
+exports.agregarNivel = (request, response, next) => {
+  const nuevoNivel = new Nivel(request.body.nombreNivel, request.body.idPrograma);
+  nuevoNivel.save()
+    .then(() => {
+      response.redirect('./')
+    }).catch((err) => {
+      console.log(err);
+    });
+}
