@@ -13,6 +13,10 @@ subrouter.get('/objetivos/:nivel_id',isAuth, gestionPrograController.nivelObjeti
 
 subrouter.post('/objetivos/agregar-objetivo', isAuth, gestionPrograController.registrarObjetivo);
 
+subrouter.post('/objetivos/editar-objetivo', isAuth, gestionPrograController.editarObjetivo);
+
+subrouter.post('/objetivos/eliminar-objetivo', isAuth, gestionPrograController.eliminarObjetivo);
+
 subrouter.get('/', isAuth, gestionPrograController.get);
 
 subrouter.post('/', isAuth, gestionPrograController.postNuevoPrograma);

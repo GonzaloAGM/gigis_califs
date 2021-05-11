@@ -25,5 +25,12 @@ module.exports = class Objetivo {
         return db.execute ('SELECT * FROM objetivos WHERE idNivel=?',[idNivel])
     }
 
+    static actualizarObjetivo(idNivel, idObjetivo, descripcion) {
+        return db.execute('UPDATE objetivos SET descripcion=? WHERE idNivel=? AND idObjetivo=?', [descripcion,idNivel,idObjetivo])
+    }
+
+    static eliminar(idObjetivo){
+        return db.execute('DELETE FROM objetivos WHERE idObjetivo=?', [idObjetivo])
+    }
 }
 

@@ -5,7 +5,6 @@ const Nivel = require('../models/niveles');
 const arrows = Arrow.fetchAll();
 
 exports.nivelObjetivos = (request, response, next) => {
-  console.log(request.params.nivel_id);
   Nivel.fetchNombrePrograma(request.params.nivel_id)
     .then(([programa,fieldData]) => {
       Objetivo.objetivosPorNivel(request.params.nivel_id)
@@ -31,6 +30,24 @@ exports.registrarObjetivo = (request, response, next) => {
   console.log(request.body);
   const nuevo = new Objetivo(request.body.idNivel, request.body.descripcion);
   nuevo.save()
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.editarObjetivo  = (request, response, next) => {
+  Objetivo.actualizarObjetivo(request.body.idNivel, request.body.idObjetivo,request.body.descripcion)
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.eliminarObjetivo  = (request, response, next) => {
+  Objetivo.eliminar(request.body.idObjetivo)
     .then(() => {
       response.redirect('./' + request.body.idNivel);
     }).catch((err) => {
