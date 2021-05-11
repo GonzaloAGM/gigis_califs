@@ -21,76 +21,98 @@
         </div>
     </div>
     <!-- Inicia Modal Structure agregar objetivo-->
-    <form action="/gestionAdmin/gestionProgramas/gestion-nivel-objetivos" method="POST">
+    <form action="/gestionAdmin/gestionProgramas/objetivos/agregar-objetivo" method="POST">
         <div id="agregarObjetivo" class="modal">
             <div class="modal-content">
                 <h3>Nuevo objetivo</h3>
+                <input type="hidden" name="idNivel" value="<%=idNivel%>">
             <ul>
                 <li><strong><br>Descripción</strong></li>
                 <li>
                 <div class="input">
-                    <input name="descripcionObj" type="text" class="validate"  placeholder="Descripción">
+                    <input name="descripcion" type="text" class="validate"  placeholder="Descripción">
                 </div>
                 </li>
             </ul>
         </div>
         <div class="modal-footer">
             <br>
-            <button  type = "cancel" href = "gestionAdmin/gestionPrograma/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Cancel</button>
-            <button  type = "submit" href = "gestionAdmin/gestionPrograma/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Guardar</button>
+            <button  type = "submit" class="modal-action waves-effect waves-light-blue lighten-1 btn">Agregar<i class="material-icons right">send</i></button>
         </div>
         </div><!--Fin Modal Structure agregar programa-->
     </form>
 </div>
 <p><strong>Objetivos</strong></p>
 <ul class="collapsible"> 
-    <% for (let objetivo of objetivos) { %>  
+    <% let i = 1; %>
+    <% for (objetivo of objetivos) { %>  
         <li>
-            <% if (objetivo.nivel==1) { %> 
-                <div class="collapsible-header">
-                    <%= objetivo.numero %> - <%= objetivo.descripcion %>
-                    <span class="badge">
-                        <!-- Modal Editar -->
-                        <a class="waves-effect waves-light modal-trigger black-text" href="#EditarObjetivo"><i class="material-icons left">edit</i></a>
-                        <!-- Modal Eliminar -->
-                        <a class="waves-effect waves-light modal-trigger black-text" href="#modalEliminarObj"><i class="material-icons left">delete</i></a>
-                    </span>
-                </div>
-            <% } %>
+            <div class="collapsible-header">
+                <%= i%>.- <%= objetivo.descripcion %>
+                <span class="badge">
+                    <!-- Modal Editar -->
+                    <a class="waves-effect waves-light modal-trigger black-text" href="#EditarObjetivo" onclick="obtenerIdObj(<%=objetivo.idObjetivo%>)"><i class="material-icons left">edit</i></a>
+                    <!-- Modal Eliminar -->
+                    <a class="waves-effect waves-light modal-trigger black-text" href="#modalEliminarObj" onclick="eliminarObj(<%=objetivo.idObjetivo%>)"><i class="material-icons left">delete</i></a>
+                </span>
+            </div>
         </li>
+        <% i++; %>
     <% } %>
 </ul>
 
 <!-- Modal Structure Editar Objetivo-->
-<div id="EditarObjetivo" class="modal">
-    <div class="modal-content">
-        <h3>Editar objetivo</h3>
-        <ul>
-            <li><strong><br>Descripción</strong></li>
-            <li>
-              <div class="input">
-                <input name="descripcionObj" type="text" class="validate"  placeholder="Descripción">
-              </div>
-            </li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <br>
-        <button  type = "cancel" href = "gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Cancel</button>
-        <button  type = "submit" href = "gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect btn-flat">Actualizar</button>
-      </div>
-</div><!-- Fin Modal Structure Editar Programa-->
+<form action="/gestionAdmin/gestionProgramas/objetivos/editar-objetivo" method="POST">
+    <div id="EditarObjetivo" class="modal">
+        <div class="modal-content">
+            <h3>Editar objetivo</h3>
+
+            <input type="hidden" name="idNivel" value="<%=idNivel%>">
+            <div id="idObjetivo"></div>
+            <ul>
+                <li><strong><br>Descripción</strong></li>
+                <li>
+                <div class="input">
+                    <input name="descripcion" type="text" class="validate"  placeholder="Descripción">
+                </div>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <br>
+            <button  type = "submit" class="modal-action waves-effect waves-light-blue lighten-1 btn">Actualizar<i class="material-icons right">send</i></button>
+        </div>
+    </div>
+</form><!-- Fin Modal Structure Editar Programa-->
 
 <!-- Modal Structure Eliminar Objetivo-->
-<div id="modalEliminarObj" class="modal">
-    <div class="modal-content">
-    <h4>Eliminar objetivo</h4>
-    <p>¿Está seguro de eliminar este objetivo?</p>
+<form action="/gestionAdmin/gestionProgramas/objetivos/eliminar-objetivo" method="POST">
+    <div id="modalEliminarObj" class="modal">
+        <div class="modal-content">
+            <h4>Eliminar objetivo</h4>
+            <p>¿Está seguro de eliminar este objetivo?</p>
+            <input type="hidden" name="idNivel" value="<%=idNivel%>">
+            <div id="eliminarObjetivo"></div>
+        </div>
+        <div class="modal-footer">
+            <button  type = "submit" class="modal-action waves-effect waves-light-blue lighten-1 btn">Eliminar<i class="material-icons right">delete</i></button>
+        </div>
     </div>
-    <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect waves-green btn-flat eliminarObj">Sí</a>
-    <a href="/gestionAdmin/gestionProgramas/gestion-nivel-objetivos" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    </div>
-</div><!-- Fin Modal Structure Eliminar Objetivo-->
+</form><!-- Fin Modal Structure Eliminar Objetivo-->
 
 <%- include('include/footer.ejs') %>
+
+<script>
+    const obtenerIdObj = (idObjetivo) => {
+        html = '<input type="hidden" name="idObjetivo" value="' + idObjetivo + '">'
+        document.getElementById('idObjetivo').innerHTML = html;
+        M.AutoInit();
+    }
+
+    const eliminarObj = (idObjetivo) => {
+        html = '<input type="hidden" name="idObjetivo" value="' + idObjetivo + '">'
+        document.getElementById('eliminarObjetivo').innerHTML = html;
+        M.AutoInit();
+    }
+
+</script>

@@ -27,7 +27,7 @@ CREATE TABLE `objetivos` (
     `idNivel` INT NOT NULL , 
     `idObjetivo` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     `descripcion` VARCHAR(400) NOT NULL ,
-    `fechaRegistroObj` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP 
+    `fechaRegistroObj` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
     ) 
 ENGINE = InnoDB;
 

@@ -1,31 +1,58 @@
-//Se eliminaran en un futuro
-const ProgramasNiveles = require('../models/programa_niveles');
-const Objetivos = require('../models/objetivo');
-const programasNiveles = ProgramasNiveles.fetchAll();
-const objetivos = Objetivos.fetchAll();
-
+const Objetivo = require('../models/objetivos');
 const Arrow = require('../models/arrow');
 const Programa = require('../models/programas');
 const Nivel = require('../models/niveles');
 const arrows = Arrow.fetchAll();
 
-//Falta actualizar
-exports.getGpObjetivos = (request, response, next) => {
-  response.render('objetivos', {
-    objetivos: objetivos,
-    tituloDeHeader: 'Objetivos',
-    tituloBarra: 'Lenguaje nivel prelingüístico',
-    backArrow: { display: 'block', link: '/gestionAdmin/gestionProgramas' },
-    forwArrow: arrows[1],
-  });
+exports.nivelObjetivos = (request, response, next) => {
+  Nivel.fetchNombrePrograma(request.params.nivel_id)
+    .then(([programa,fieldData]) => {
+      Objetivo.objetivosPorNivel(request.params.nivel_id)
+      .then(([objetivos, fieldData2]) =>{
+        const tituloBarra = programa[0].nombrePrograma + ' - Nivel: ' + programa[0].nombreNivel;
+        response.render('objetivos', {
+          tituloDeHeader: 'Objetivos',
+          tituloBarra: tituloBarra,
+          idNivel: request.params.nivel_id,
+          objetivos: objetivos,
+          backArrow: { display: 'block', link: '/gestionAdmin/gestionProgramas' },
+          forwArrow: arrows[1],
+        });
+      }).catch((err) => {
+        console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
-//Falta actualizar
-exports.postGpObjetivos = (request, response, next) => {
-  const objetivo = new Objetivos(1, 6, request.body.descripcionObj);
-  objetivo.save();
-  response.redirect('/gestionAdmin/gestionProgramas/gestion-nivel-objetivos');
-  console.log('Accion post en gestionProgramasObjs');
+exports.registrarObjetivo = (request, response, next) => {
+  console.log(request.body);
+  const nuevo = new Objetivo(request.body.idNivel, request.body.descripcion);
+  nuevo.save()
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.editarObjetivo  = (request, response, next) => {
+  Objetivo.actualizarObjetivo(request.body.idNivel, request.body.idObjetivo,request.body.descripcion)
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.eliminarObjetivo  = (request, response, next) => {
+  Objetivo.eliminar(request.body.idObjetivo)
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.get = (request, response, next) => {

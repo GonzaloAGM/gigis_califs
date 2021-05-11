@@ -31,9 +31,13 @@ subrouter.use('/uploads/imagenes', express.static(path.join(__dirname,'..', 'upl
 const gestionPrograController = require('../controllers/gestion_programas_controller')
 const isAuth = require('../util/is-auth.js');
 
-subrouter.get('/gestion-nivel-objetivos',isAuth, gestionPrograController.getGpObjetivos);
+subrouter.get('/objetivos/:nivel_id',isAuth, gestionPrograController.nivelObjetivos);
 
-subrouter.post('/gestion-nivel-objetivos', isAuth, gestionPrograController.postGpObjetivos);
+subrouter.post('/objetivos/agregar-objetivo', isAuth, gestionPrograController.registrarObjetivo);
+
+subrouter.post('/objetivos/editar-objetivo', isAuth, gestionPrograController.editarObjetivo);
+
+subrouter.post('/objetivos/eliminar-objetivo', isAuth, gestionPrograController.eliminarObjetivo);
 
 subrouter.get('/', isAuth, gestionPrograController.get);
 
