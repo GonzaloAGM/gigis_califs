@@ -54,10 +54,9 @@ exports.get = ((request,response,next) => {
 });
 
 exports.post = ((request,response,next) => {
-    var apellidoP, apellidoM, tel;
-    apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
-    apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
-    tel = request.body.tel === ''? null :  request.body.tel;
+    let apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
+    let apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
+    let tel = request.body.tel === ''? null :  request.body.tel;
     const participante = new Participante(request.body.correo, request.body.contra, request.body.nombre, apellidoP, apellidoM, 'A', request.body.sexo, request.body.fechaN, tel);
     participante.save()
         .then(() => {
