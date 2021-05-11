@@ -59,20 +59,24 @@ inter_es = {
 	weekdaysAbbrev: ["D", "L", "M", "M", "J", "V", "S"]
 };
 
+
 // Create default dates
-var date = new Date();
+let date = new Date(document.getElementById("fechaLimite").value);
 // set default date for #from (1 week from today)
-var nextWeekFrom = new Date(date.setDate(date.getDate() + 7));
+let nextWeekFrom = new Date(date.setDate(date.getDate() + 7));
 // Default date for #to
-var nextWeekTo = new Date(date.setDate(nextWeekFrom.getDate() + 92));
+let nextWeekTo = new Date(date.setDate(nextWeekFrom.getDate() + 14));
+//Set min date for #from
+let minDateFrom = new Date(document.getElementById("fechaLimite").value);
 //Set min date for #to
-var minDateTo = new Date(date.setDate(nextWeekFrom.getDate() + 1));
+let minDateTo = new Date(date.setDate(nextWeekFrom.getDate() + 1));
 
 
 // SET OPTIONS FOR FROM DATEPICKER
 var optionsFrom = {
   format: 'yyyy-mm-dd',
 	i18n: inter_es,
+	minDate: new Date(minDateFrom),
 	defaultDate: new Date(nextWeekFrom),
 	setDefaultDate: true,
 	onSelect: function(el) {
@@ -123,68 +127,7 @@ function toastRegCiclo(){
 			});
   }
 
-// Registro de ciclos 
-  var prograsSel=[], terapAsig=[];
 
-// Aparecer boton de asignar terapeutas
-function mostrarOps(elemento){
-	isChecked = document.getElementById(elemento.id).checked;
-	var id2 = elemento.id + 'at';
-	console.log(elemento.id) 
-	if (isChecked){
-		document.getElementById(id2).style.display = "block";
-		prograsSel.push(parseInt(elemento.id));
-		console.log(prograsSel);
-	}else{
-		document.getElementById(id2).style.display = "none";
-		let pos = listaProg.indexOf(elemento.id);
-		prograsSel.splice(pos, 1);
-		console.log(prograsSel);
-	}
-  
-}
-
-function selTe(terapeuta){
-isChecked = document.getElementById(terapeuta.id).checked;
-  var idP = parseInt(terapeuta.id);
-  console.log(idP);
-  var aux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP},];
-  if (isChecked){
-	terapAsig.push(aux);
-	console.log(terapAsig);
-  }else{
-	let pos = terapAsig.indexOf( idP);
-    terapAsig.splice(pos, 1);
-	console.log(terapAsig);
-  }
-
-}
-
-function enviarJSONs(){
-let data = {
-	prograsSel : prograsSel,
-};
-
-fetch('/gestionAdmin/gestionCiclos/selProg',{
-	method: 'POST',
-	headers: {'Content-Type':'application/json'},
-	body:JSON.stringify(data)
-}).then(result => {
-	return result.json();
-});
-
-data = {
-	terapAsig: terapAsig,
-	};
-
-	fetch('/gestionAdmin/gestionCiclos/selTera',{
-		method: 'POST',
-		headers: {'Content-Type':'application/json'},
-		body:JSON.stringify(data)
-	}).then(result => {
-		return result.json();
-	});
-}
 
 
 

@@ -35,15 +35,20 @@ exports.getAgrCiclo = (request,response,next) => {
     .then(([programas, fieldData1]) => {
         Usuario.fetchNomTerapeutas()
         .then(([terapeutas, fieldData1]) => {
-            response.render('agregar_ciclo', {
-                programas: programas,
-                terapeutas: terapeutas,
-                grupos: grupos,
-                tituloDeHeader: "Nuevo ciclo",
-                tituloBarra: "Nuevo ciclo",
-                backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
-                forwArrow: arrows[1]
-            });
+            Ciclo.fetchFechaFinalUltimoCiclo()
+            .then(([fechaLimite, fieldData1]) => {
+                console.log(fechaLimite[0].fechaFinal);
+                response.render('agregar_ciclo', {
+                    fechaLimite: fechaLimite,
+                    programas: programas,
+                    terapeutas: terapeutas,
+                    grupos: grupos,
+                    tituloDeHeader: "Nuevo ciclo",
+                    tituloBarra: "Nuevo ciclo",
+                    backArrow: {display: 'block', link: '/gestionAdmin/gestionCiclos'},
+                    forwArrow: arrows[1]
+                });
+            })
         })
         .catch((err) => console.log(err));
     })

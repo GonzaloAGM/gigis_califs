@@ -4,7 +4,7 @@
 
 <div class="row">
     <br>
-  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onclick= "enviarJSONs()" onsubmit="toastRegCiclo()">
+  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onclick= "enviarJSONs()">
     <div class="row">
         <div class="input-field col s2 m1">
             <p><strong>Fecha:</strong></p>
@@ -59,7 +59,72 @@
         </ul>       
      </div> 
   </form>
+  <input type="text" id="fechaLimite" value="<%= fechaLimite[0].fechaFinal %>" style="visibility:hidden;">
 </div>
 
 
 <%- include('include/footer.ejs') %>
+
+<script>
+    // Registro de ciclos 
+    letprograsSel=[], terapAsig=[];
+    // Aparecer boton de asignar terapeutas
+    function mostrarOps(elemento){
+        isChecked = document.getElementById(elemento.id).checked;
+       letid2 = elemento.id + 'at';
+        console.log(elemento.id) 
+        if (isChecked){
+            document.getElementById(id2).style.display = "block";
+            prograsSel.push(parseInt(elemento.id));
+            console.log(prograsSel);
+        }else{
+            document.getElementById(id2).style.display = "none";
+            let pos = listaProg.indexOf(elemento.id);
+            prograsSel.splice(pos, 1);
+            console.log(prograsSel);
+        }
+    
+    }
+
+    function selTe(terapeuta){
+    isChecked = document.getElementById(terapeuta.id).checked;
+   letidP = parseInt(terapeuta.id);
+    console.log(idP);
+   letaux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP},];
+    if (isChecked){
+        terapAsig.push(aux);
+        console.log(terapAsig);
+    }else{
+        let pos = terapAsig.indexOf( idP);
+        terapAsig.splice(pos, 1);
+        console.log(terapAsig);
+    }
+
+    }
+
+    function enviarJSONs(){
+    let data = {
+        prograsSel : prograsSel,
+    };
+
+    fetch('/gestionAdmin/gestionCiclos/selProg',{
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+    }).then(result => {
+        return result.json();
+    });
+
+    data = {
+        terapAsig: terapAsig,
+        };
+
+        fetch('/gestionAdmin/gestionCiclos/selTera',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body:JSON.stringify(data)
+        }).then(result => {
+            return result.json();
+        });
+    }
+</script>

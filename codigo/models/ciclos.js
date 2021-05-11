@@ -73,5 +73,10 @@ module.exports = class Ciclo {
       'SELECT YEAR(fechaInicial) AS anio FROM ciclos WHERE YEAR(fechaInicial)< YEAR(CURRENT_DATE) GROUP BY YEAR(fechaInicial) DESC'
     );
   }
+  static fetchFechaFinalUltimoCiclo(){
+    return db.execute(
+      'SELECT DATE_FORMAT(fechaFinal, "%Y,%m,%d") fechaFinal FROM ciclos WHERE fechaFinal IN (SELECT MAX(fechaFinal) AS ultimaFecha FROM ciclos)'
+    );
+  }
 
 };
