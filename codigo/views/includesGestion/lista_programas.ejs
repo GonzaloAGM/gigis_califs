@@ -13,7 +13,7 @@
                 <div class="collection">
                     <% for (let nivel of niveles) { %>
                       <% if (nivel.idPrograma === programa.idPrograma) {%> 
-                        <a href="./gestion-nivel-objetivos" class="collection-item"><%= nivel.nombreNivel %></a> 
+                        <a href="./objetivos/<%=nivel.idNivel%>" class="collection-item"><%= nivel.nombreNivel %></a> 
                       <% } %>
                     <% } %>
                     <a class="collection-item modal-trigger" href="#agregarNivel-<%=programa.idPrograma%>">Nuevo nivel</a>

@@ -1,23 +1,29 @@
-//Se eliminaran en un futuro
-const ProgramasNiveles = require('../models/programa_niveles');
-const Objetivos = require('../models/objetivo');
-const programasNiveles = ProgramasNiveles.fetchAll();
-const objetivos = Objetivos.fetchAll();
-
+const Objetivos = require('../models/objetivos');
 const Arrow = require('../models/arrow');
 const Programa = require('../models/programas');
 const Nivel = require('../models/niveles');
 const arrows = Arrow.fetchAll();
 
-//Falta actualizar
-exports.getGpObjetivos = (request, response, next) => {
-  response.render('objetivos', {
-    objetivos: objetivos,
-    tituloDeHeader: 'Objetivos',
-    tituloBarra: 'Lenguaje nivel prelingüístico',
-    backArrow: { display: 'block', link: '/gestionAdmin/gestionProgramas' },
-    forwArrow: arrows[1],
-  });
+exports.nivelObjetivos = (request, response, next) => {
+  console.log(request.params.nivel_id);
+  Nivel.fetchNombrePrograma(request.params.nivel_id)
+    .then(([datos,fieldData]) => {
+      Objetivos.objetivosPorNivel(request.params.nivel_id)
+      .then(([objetivos, fieldData2]) =>{
+        const tituloBarra = datos[0].nombrePrograma + ' - Nivel: ' + datos[0].nombreNivel;
+        response.render('objetivos', {
+          tituloDeHeader: 'Objetivos',
+          tituloBarra: tituloBarra,
+          objetivos: objetivos,
+          backArrow: { display: 'block', link: '/gestionAdmin/gestionProgramas' },
+          forwArrow: arrows[1],
+        });
+      }).catch((err) => {
+        console.log(err);
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
 //Falta actualizar
