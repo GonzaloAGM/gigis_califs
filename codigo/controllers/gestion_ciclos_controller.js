@@ -37,7 +37,6 @@ exports.getAgrCiclo = (request,response,next) => {
         .then(([terapeutas, fieldData1]) => {
             Ciclo.fetchFechaFinalUltimoCiclo()
             .then(([fechaLimite, fieldData1]) => {
-                console.log(fechaLimite[0].fechaFinal);
                 response.render('agregar_ciclo', {
                     fechaLimite: fechaLimite,
                     programas: programas,
