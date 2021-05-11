@@ -31,15 +31,14 @@ exports.get = (request, response, next) => {
     request.session.bandera =undefined;
 };
     
-exports.postNuevoUsuario = ((request,response,next) => {
-    var apellidoP, apellidoM;
-    apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
-    apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
+exports.postNuevoUsuario = (request,response,next) => {
+    let apellidoP = request.body.apellidoP === ''? null :  request.body.apellidoP;
+    let apellidoM = request.body.apellidoM === ''? null :  request.body.apellidoM;
     const usuario = new Usuario(request.body.correo, request.body.contra, request.body.nombre, apellidoP, apellidoM);
     usuario.save()
         .then(() => {
             for (let rol of request.body.selRol){
-                var usuario_rol = new Usuario_Rol(request.body.correo, rol);
+                let usuario_rol = new Usuario_Rol(request.body.correo, rol);
                 usuario_rol.save()
                     .then(() => {
                         if (rol === '2'){ 
@@ -67,5 +66,5 @@ exports.postNuevoUsuario = ((request,response,next) => {
             request.session.bandera =true; 
             response.redirect('/gestionAdmin/gestionUsuarios');    
         });
-});
+};
 

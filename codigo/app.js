@@ -5,7 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const multer = require('multer');
 
 //EJS
 app.set('view engine', 'ejs');
@@ -20,19 +19,6 @@ const rutaSessionUsuarios = require('./routes/sesion_usuarios');
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//fileStorage: Es nuestra constante de configuración para manejar el almacenamiento
-const fileStorage = multer.diskStorage({
-    destination: (request, file, callback) => {
-        //'uploads': Es el directorio del servidor donde se subirán los archivos 
-        callback(null, 'uploads');
-    },
-    filename: (request, file, callback) => {
-        //aquí configuramos el nombre que queremos que tenga el archivo en el servidor, 
-        //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
-        callback(null, new Date().getMilliseconds() + '_' + file.originalname);
-    },
-});
-
 //Inicializar dependencias
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -43,15 +29,9 @@ app.use(session({
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
 
-//En el registro, pasamos la constante de configuración y
-//usamos single porque es un sólo archivo el que vamos a subir, 
-//pero hay diferentes opciones si se quieren subir varios archivos. 
-//'archivo' es el nombre del input tipo file de la forma
-app.use(multer({ storage: fileStorage }).single('imagen')); 
 
 //Enviar archivos estáticos en carpeta public
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/consultas', rutasConsultas);
 

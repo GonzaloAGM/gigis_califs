@@ -8,7 +8,7 @@ const multer = require('multer');
 const fileStorage = multer.diskStorage({
     destination: (request, file, callback) => {
         //'uploads': Es el directorio del servidor donde se subirán los archivos 
-        callback(null, 'uploads');
+        callback(null, 'uploads/cv');
     },
     filename: (request, file, callback) => {
         //aquí configuramos el nombre que queremos que tenga el archivo en el servidor, 
@@ -24,11 +24,11 @@ const fileStorage = multer.diskStorage({
 //'archivo' es el nombre del input tipo file de la forma
 subrouter.use(multer({ storage: fileStorage}).single('cv')); 
 
-subrouter.use(bodyParser.urlencoded({ extended: false }))
+subrouter.use(bodyParser.urlencoded({ extended: false }));
 subrouter.use(express.static(path.join(__dirname,'..', 'public')));
-subrouter.use('/uploads/cv', express.static(path.join(__dirname,'..', 'uploads')));
+subrouter.use('/uploads/cv', express.static(path.join(__dirname,'..', 'uploads/cv')));
 
-const gestionUserController = require('../controllers/gestion_usuarios_controller')
+const gestionUserController = require('../controllers/gestion_usuarios_controller');
 const isAuth = require('../util/is-auth.js');
 
 
