@@ -21,15 +21,16 @@
         </div>
     </div>
     <!-- Inicia Modal Structure agregar objetivo-->
-    <form action="/gestionAdmin/gestionProgramas/gestion-nivel-objetivos" method="POST">
+    <form action="/gestionAdmin/gestionProgramas/objetivos/agregar-objetivo" method="POST">
         <div id="agregarObjetivo" class="modal">
             <div class="modal-content">
                 <h3>Nuevo objetivo</h3>
+                <input type="hidden" name="idNivel" value="<%=idNivel%>">
             <ul>
                 <li><strong><br>Descripción</strong></li>
                 <li>
                 <div class="input">
-                    <input name="descripcionObj" type="text" class="validate"  placeholder="Descripción">
+                    <input name="descripcion" type="text" class="validate"  placeholder="Descripción">
                 </div>
                 </li>
             </ul>

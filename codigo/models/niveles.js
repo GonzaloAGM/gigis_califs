@@ -21,6 +21,6 @@ module.exports = class Nivel {
     }
 
     static fetchNombrePrograma(idNivel) {
-        return db.execute('SELECT nombrePrograma, nombreNivel FROM niveles N, programas P WHERE P.idPrograma=N.idPrograma AND idNivel=?',[idNivel])
+        return db.execute('SELECT nombrePrograma, nombreNivel, P.idPrograma FROM niveles N, programas P WHERE P.idPrograma=N.idPrograma AND idNivel=?',[idNivel])
     }
 }

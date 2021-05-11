@@ -1,4 +1,4 @@
-const Objetivos = require('../models/objetivos');
+const Objetivo = require('../models/objetivos');
 const Arrow = require('../models/arrow');
 const Programa = require('../models/programas');
 const Nivel = require('../models/niveles');
@@ -7,13 +7,14 @@ const arrows = Arrow.fetchAll();
 exports.nivelObjetivos = (request, response, next) => {
   console.log(request.params.nivel_id);
   Nivel.fetchNombrePrograma(request.params.nivel_id)
-    .then(([datos,fieldData]) => {
-      Objetivos.objetivosPorNivel(request.params.nivel_id)
+    .then(([programa,fieldData]) => {
+      Objetivo.objetivosPorNivel(request.params.nivel_id)
       .then(([objetivos, fieldData2]) =>{
-        const tituloBarra = datos[0].nombrePrograma + ' - Nivel: ' + datos[0].nombreNivel;
+        const tituloBarra = programa[0].nombrePrograma + ' - Nivel: ' + programa[0].nombreNivel;
         response.render('objetivos', {
           tituloDeHeader: 'Objetivos',
           tituloBarra: tituloBarra,
+          idNivel: request.params.nivel_id,
           objetivos: objetivos,
           backArrow: { display: 'block', link: '/gestionAdmin/gestionProgramas' },
           forwArrow: arrows[1],
@@ -26,12 +27,15 @@ exports.nivelObjetivos = (request, response, next) => {
     });
 };
 
-//Falta actualizar
-exports.postGpObjetivos = (request, response, next) => {
-  const objetivo = new Objetivos(1, 6, request.body.descripcionObj);
-  objetivo.save();
-  response.redirect('/gestionAdmin/gestionProgramas/gestion-nivel-objetivos');
-  console.log('Accion post en gestionProgramasObjs');
+exports.registrarObjetivo = (request, response, next) => {
+  console.log(request.body);
+  const nuevo = new Objetivo(request.body.idNivel, request.body.descripcion);
+  nuevo.save()
+    .then(() => {
+      response.redirect('./' + request.body.idNivel);
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.get = (request, response, next) => {

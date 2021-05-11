@@ -11,7 +11,7 @@ const isAuth = require('../util/is-auth.js');
 
 subrouter.get('/objetivos/:nivel_id',isAuth, gestionPrograController.nivelObjetivos);
 
-subrouter.post('/gestion-nivel-objetivos', isAuth, gestionPrograController.postGpObjetivos);
+subrouter.post('/objetivos/agregar-objetivo', isAuth, gestionPrograController.registrarObjetivo);
 
 subrouter.get('/', isAuth, gestionPrograController.get);
 
