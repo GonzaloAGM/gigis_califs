@@ -38,6 +38,7 @@ exports.registrarObjetivo = (request, response, next) => {
 };
 
 exports.editarObjetivo  = (request, response, next) => {
+  
   Objetivo.actualizarObjetivo(request.body.idNivel, request.body.idObjetivo,request.body.descripcion)
     .then(() => {
       response.redirect('./' + request.body.idNivel);
@@ -100,7 +101,6 @@ exports.postNuevoPrograma = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
-  console.log('Accion post en gestionProgramas');
 };
 
 exports.editarPrograma  = (request, response, next) => {
