@@ -25,9 +25,9 @@ const fileStorage = multer.diskStorage({
 subrouter.use(multer({ storage: fileStorage}).single('cv')); 
 
 subrouter.use(bodyParser.urlencoded({ extended: false }));
-subrouter.use(express.static(path.join(__dirname,'..', 'public')));
-subrouter.use('/uploads/cv', express.static(path.join(__dirname,'..', 'uploads/cv')));
 
+
+subrouter.use(express.static(path.join(__dirname,'..', 'public')));
 const gestionUserController = require('../controllers/gestion_usuarios_controller');
 const isAuth = require('../util/is-auth.js');
 const { isatty } = require('tty');

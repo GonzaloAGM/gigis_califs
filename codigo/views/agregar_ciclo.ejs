@@ -4,7 +4,6 @@
 
 <div class="row">
     <br>
-  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onclick= "enviarJSONs()" onsubmit="toastRegCiclo()">
     <div class="row">
         <div class="input-field col s2 m1">
             <p><strong>Fecha:</strong></p>
@@ -19,7 +18,7 @@
         </div>
         <div class="col right">
             <div class="input-field">
-               <button class="waves-effect waves-light btn-small light-green accent-4 right"  type = "submit"><i class="material-icons left">save</i>Guardar</button>
+               <button class="waves-effect waves-light btn-small light-green accent-4 right" onclick="enviarJSONs()"><i class="material-icons left">save</i>Guardar</button>
             </div>
         </div>
     </div>
@@ -58,8 +57,66 @@
         <% } %>  
         </ul>       
      </div> 
-  </form>
+  <input type="text" id="fechaLimite" value="<%= fechaLimite[0].fechaFinal %>" style="visibility:hidden;">
 </div>
 
 
 <%- include('include/footer.ejs') %>
+
+<script>
+    // Registro de ciclos 
+    let prograsSel=[], terapAsig=[];
+    // Aparecer boton de asignar terapeutas
+    const  mostrarOps=(elemento) => {
+       let isChecked = document.getElementById(elemento.id).checked;
+       let id2 = elemento.id + 'at';
+        console.log(elemento.id) 
+        if (isChecked){
+            document.getElementById(id2).style.display = "block";
+            prograsSel.push(parseInt(elemento.id));
+            console.log(prograsSel);
+        }else{
+            document.getElementById(id2).style.display = "none";
+            let pos = listaProg.indexOf(elemento.id);
+            prograsSel.splice(pos, 1);
+            console.log(prograsSel);
+        }
+    
+    }
+    const selTe=(terapeuta) => {
+        isChecked = document.getElementById(terapeuta.id).checked;
+        let idP = parseInt(terapeuta.id);
+        console.log(idP);
+        let aux = [ {login: terapeuta.id.split(idP)[1], idPrograma: idP},];
+        if (isChecked){
+            terapAsig.push(aux);
+            console.log(terapAsig);
+        }else{
+            let pos = terapAsig.indexOf( idP);
+            terapAsig.splice(pos, 1);
+            console.log(terapAsig);
+    }
+
+    }
+
+    const enviarJSONs = () => {
+        let fechaInicial =  document.getElementById("from").value;
+        let fechaFinal = document.getElementById("to").value;
+        let data = {
+            prograsSel : prograsSel,
+            terapAsig: terapAsig,
+            fechaInicial: fechaInicial,
+            fechaFinal: fechaFinal
+        };
+
+        fetch('/gestionAdmin/gestionCiclos/agregar-ciclo',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body:JSON.stringify(data)
+        }).then(result => {
+            return result.json();
+        });
+
+        
+    }
+</script>
