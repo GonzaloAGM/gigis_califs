@@ -123,6 +123,12 @@ border-bottom: 1px solid #e53935;
 box-shadow: 0 1px 0 0 #e53935 !important;
 }
 
+/* label underline focus password color */
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #ffcc80!important;
+    box-shadow: 0 1px 0 0 #ffcc80!important;
+}
+
 
     /*datapicker colors*/
     .datepicker-date-display  {
