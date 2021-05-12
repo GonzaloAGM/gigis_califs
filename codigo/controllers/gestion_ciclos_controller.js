@@ -54,26 +54,26 @@ exports.getAgrCiclo = (request,response,next) => {
     .catch((err) => console.log(err));
 };
 
-exports.postGrupos = (request,response,next) => {
-    inputsCiclos.setProg(request.body.prograsSel);
-    inputsCiclos.setGrup(request.body.terapAsig);
-    console.log(inputsCiclos.getTer());
-    console.log(inputsCiclos.getProg());
-    console.log(request.body.fecha);
-    console.log(inputsCiclos.llenarTablas(request.body.fecha));
-};
-
-exports.postAgrCiclo = (request,response,next) => {
+exports.postAgrCiclo= (request,response,next) => {
+    console.log(request.body.fechaInicial);
     const ciclo = new Ciclo(request.body.fechaInicial, request.body.fechaFinal);
     ciclo.save()
         .then(() => {
-            console.log('Todo ok');
-            response.redirect('/gestionAdmin/gestionCiclos');         
+            Ciclo.fetchIdUltimoCiclo(request.body.fechaFinal)
+            .then(([idCiclo, fieldData1]) => {
+                console.log(idCiclo);
+                response.redirect('/gestionAdmin/gestionCiclos'); 
+            }).catch( err => {
+                console.log(err);
+                response.redirect('/gestionAdmin/');    
+            });        
         }).catch( err => {
             console.log(err);
             response.redirect('/gestionAdmin/');    
         });
 };
+
+
 
 exports.getPerfilCiclo = (request,response,next) => {
     response.render('gestion_perfil_ciclo', {

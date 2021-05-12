@@ -27,27 +27,9 @@ module.exports = class inputsCiclos {
 
     static llenarTablas(fechaCiclo){
       this.fechaCiclo = fechaCiclo;
-      this.idCiclo = 'SELECT idCiclo FROM ciclos WHERE fechaFinal =?',
+      this.idCiclo = db.execute('SELECT idCiclo FROM ciclos WHERE fechaFinal =?'),
                       [this.fechaCiclo];
-      for (let programa of this.prograSel){
-        let i = 0;
-        for (let terapeuta of this.terapAsig){
-          if (programa = terapeuta.idPrograma){
-            db.execute('INSERT INTO grupos (numeroGrupo, idPrograma, idCiclo) VALUES (?, ?, ?)',
-                        [i, programa, this.idCiclo]
-            ).then(() => {
-              this.idGrupo = 'SELECT idGrupo FROM grupos WHERE numeroGrupo = ? AND idCiclo = ? AND idPrograma = ?',
-                [i, this.idCiclo, programa];
-              db.execute('INSERT INTO grupos_terapeutas (idGrupo, login) VALUES (?, ?)',
-                [this.idGrupo, terapeuta.login]
-              );
-            }).catch(err => {
-                console.log(err);
-            });
-            i += 1;
-          }
-        }
-      };
-      return true;
+      return this.idCiclo;
+      
   }
 }

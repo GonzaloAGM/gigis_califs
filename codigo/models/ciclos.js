@@ -79,4 +79,13 @@ module.exports = class Ciclo {
     );
   }
 
+  static fetchIdUltimoCiclo(fechaCiclo){
+    return db.execute(
+      'SELECT idCiclo FROM ciclos WHERE fechaFinal = ?',
+      [fechaCiclo]
+    );
+  }
+
+
+
 };

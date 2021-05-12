@@ -4,7 +4,6 @@
 
 <div class="row">
     <br>
-  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onsubmit= "enviarJSONs()">
     <div class="row">
         <div class="input-field col s2 m1">
             <p><strong>Fecha:</strong></p>
@@ -19,7 +18,7 @@
         </div>
         <div class="col right">
             <div class="input-field">
-               <button class="waves-effect waves-light btn-small light-green accent-4 right"  type = "submit"><i class="material-icons left">save</i>Guardar</button>
+               <button class="waves-effect waves-light btn-small light-green accent-4 right" onclick="enviarJSONs()"><i class="material-icons left">save</i>Guardar</button>
             </div>
         </div>
     </div>
@@ -58,7 +57,6 @@
         <% } %>  
         </ul>       
      </div> 
-  </form>
   <input type="text" id="fechaLimite" value="<%= fechaLimite[0].fechaFinal %>" style="visibility:hidden;">
 </div>
 
@@ -102,14 +100,16 @@
     }
 
     const enviarJSONs = () => {
-        let fecha =  new Date (document.getElementById("from").value);
+        let fechaInicial =  document.getElementById("from").value;
+        let fechaFinal = document.getElementById("to").value;
         let data = {
             prograsSel : prograsSel,
             terapAsig: terapAsig,
-            fecha: fecha,
+            fechaInicial: fechaInicial,
+            fechaFinal: fechaFinal
         };
 
-        fetch('/gestionAdmin/gestionCiclos/selProg',{
+        fetch('/gestionAdmin/gestionCiclos/agregar-ciclo',{
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body:JSON.stringify(data)
