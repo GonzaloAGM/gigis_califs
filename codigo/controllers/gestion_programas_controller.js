@@ -115,12 +115,38 @@ exports.postNuevoPrograma = (request, response, next) => {
 };
 
 exports.editarPrograma  = (request, response, next) => {
-  Programa.editarPrograma(request.body.idPrograma, request.body.nombrePrograma, request.file.path)
-    .then(() => {
-      response.redirect('./')
-    }).catch((err) => {
-      console.log(err);
-    });
+   if(request.body.enImagen === 'on' && request.body.enNombre === 'on'){
+      Programa.editarPrograma(request.body.idPrograma, request.body.nombrePrograma, request.file.path)
+      .then(() => {
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   } else if (request.body.enImagen === undefined && request.body.enNombre === 'on'){
+      Programa.editarProgramaSinImagen(request.body.idPrograma, request.body.nombrePrograma)
+      .then(() => {
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   } else if (request.body.enImagen === 'on' && request.body.enNombre === undefined) {
+      Programa.editarProgramaSinTitulo(request.body.idPrograma, request.file.path)
+      .then(() => {
+        console.log('Entre al tercer if');
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   }
 }
 
 exports.agregarNivel = (request, response, next) => {
