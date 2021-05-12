@@ -2,6 +2,7 @@ const Arrow = require('../models/arrow');
 const Ciclo = require('../models/ciclos');
 const Programa = require('../models/programas')
 const Usuario = require('../models/usuarios');
+const Grupo = require('../models/grupos');
 const inputsCiclos = require('../models/inputsCiclos');
 
 const arrows = Arrow.fetchAll();
@@ -60,8 +61,31 @@ exports.postAgrCiclo= (request,response,next) => {
     ciclo.save()
         .then(() => {
             Ciclo.fetchIdUltimoCiclo(request.body.fechaFinal)
-            .then(([idCiclo, fieldData1]) => {
-                console.log(idCiclo);
+            .then(([idUltimoCiclo, fieldData1]) => {
+                for (let p in request.body.prograsSel){
+                    let numeroGrupo = 1;
+                    let idPrograma = request.body.prograsSel[p];
+                    console.log(idPrograma);
+                    for (let t in request.body.terapAsig){
+                        let idProgAsig = request.body.terapAsig[t][0].idPrograma;
+                        let login = request.body.terapAsig[t][0].login.toString();
+                        console.log(idProgAsig);
+                        console.log(login);
+                        if (idPrograma === idProgAsig){
+                            let idCiclo = idUltimoCiclo[0].idCiclo;
+                            console.log(idCiclo);
+                            let grupo = new Grupo(numeroGrupo, idPrograma, idCiclo);
+                            grupo.save()
+                                .then(() => {
+                                    console.log("grupo guardado");            
+                                }).catch( err => {
+                                    console.log(err);
+                                    response.redirect('/gestionAdmin/');    
+                                });
+                                numeroGrupo+=1;
+                        }
+                    }
+                }
                 response.redirect('/gestionAdmin/gestionCiclos'); 
             }).catch( err => {
                 console.log(err);
