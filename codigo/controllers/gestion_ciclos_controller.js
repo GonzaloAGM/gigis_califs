@@ -3,6 +3,7 @@ const Ciclo = require('../models/ciclos');
 const Programa = require('../models/programas')
 const Usuario = require('../models/usuarios');
 const Grupo = require('../models/grupos');
+const Grupo_Terapeuta = require('../models/grupos_terapeutas');
 const inputsCiclos = require('../models/inputsCiclos');
 
 const arrows = Arrow.fetchAll();
@@ -75,15 +76,17 @@ exports.postAgrCiclo= (request,response,next) => {
                                 .then(() => {
                                     Grupo.fetchIdUltimoGrupo(idPrograma, idCiclo, numeroGrupo)
                                     .then(([idUltimoGrupo, fieldData1]) => {
-                                       let idGrupo =  idUltimoGrupo[0].idGrupo;
-                                       console.log("Asignacion al grupo:")
-                                       console.log("grupo guardado");  
-                                        console.log(idCiclo);
-                                        console.log(idPrograma);
-                                        console.log(numeroGrupo);
-                                       console.log(idUltimoGrupo);
-                                       console.log("variable:");
-                                       console.log(idGrupo);
+                                       let idGrupo =  idUltimoGrupo[0].idGrupo;  
+                                       const asignacion = new Grupo_Terapeuta(idGrupo, login);
+                                        asignacion.save()
+                                            .then(() => {
+                                                console.log("Asignacion al grupo:")
+                                                console.log(idGrupo);
+                                                console.log("grupo guardado");
+                                            }).catch( err => {
+                                                console.log(err);
+                                                response.redirect('/gestionAdmin/');    
+                                            }); 
                                     })
                                     .catch(err => console.log(err));          
                                 }).catch( err => {
