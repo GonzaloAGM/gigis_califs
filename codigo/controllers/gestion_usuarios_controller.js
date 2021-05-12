@@ -68,3 +68,6 @@ exports.postNuevoUsuario = (request,response,next) => {
         });
 };
 
+exports.postNuevoRoll = (requese, response) => {
+    
+};
