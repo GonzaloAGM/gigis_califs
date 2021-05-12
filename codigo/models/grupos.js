@@ -37,4 +37,12 @@ module.exports = class Grupo {
       [idPrograma]
     );
   }
+
+  static fetchIdUltimoGrupo(idPrograma, idCiclo, numeroGrupo) {
+    return db.execute(
+      'SELECT idGrupo FROM grupos WHERE idPrograma = ? AND idCiclo = ? AND numeroGrupo = ?',
+      [idPrograma, idCiclo, numeroGrupo]
+    );
+  }
+
 };

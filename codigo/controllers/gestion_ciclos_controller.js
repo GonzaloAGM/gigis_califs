@@ -49,40 +49,47 @@ exports.getAgrCiclo = (request,response,next) => {
                     forwArrow: arrows[1]
                 });
             })
+            .catch(err => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 };
 
 exports.postAgrCiclo= (request,response,next) => {
-    console.log(request.body.fechaInicial);
     const ciclo = new Ciclo(request.body.fechaInicial, request.body.fechaFinal);
     ciclo.save()
         .then(() => {
             Ciclo.fetchIdUltimoCiclo(request.body.fechaFinal)
             .then(([idUltimoCiclo, fieldData1]) => {
+                let idCiclo = idUltimoCiclo[0].idCiclo;
                 for (let p in request.body.prograsSel){
-                    let numeroGrupo = 1;
                     let idPrograma = request.body.prograsSel[p];
-                    console.log(idPrograma);
                     for (let t in request.body.terapAsig){
                         let idProgAsig = request.body.terapAsig[t][0].idPrograma;
                         let login = request.body.terapAsig[t][0].login.toString();
-                        console.log(idProgAsig);
-                        console.log(login);
                         if (idPrograma === idProgAsig){
-                            let idCiclo = idUltimoCiclo[0].idCiclo;
-                            console.log(idCiclo);
+                            let numeroGrupo = t + 1;
                             let grupo = new Grupo(numeroGrupo, idPrograma, idCiclo);
                             grupo.save()
                                 .then(() => {
-                                    console.log("grupo guardado");            
+                                    Grupo.fetchIdUltimoGrupo(idPrograma, idCiclo, numeroGrupo)
+                                    .then(([idUltimoGrupo, fieldData1]) => {
+                                       let idGrupo =  idUltimoGrupo[0].idGrupo;
+                                       console.log("Asignacion al grupo:")
+                                       console.log("grupo guardado");  
+                                        console.log(idCiclo);
+                                        console.log(idPrograma);
+                                        console.log(numeroGrupo);
+                                       console.log(idUltimoGrupo);
+                                       console.log("variable:");
+                                       console.log(idGrupo);
+                                    })
+                                    .catch(err => console.log(err));          
                                 }).catch( err => {
                                     console.log(err);
                                     response.redirect('/gestionAdmin/');    
                                 });
-                                numeroGrupo+=1;
                         }
                     }
                 }
