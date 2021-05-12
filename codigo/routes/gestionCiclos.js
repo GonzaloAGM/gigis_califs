@@ -11,9 +11,7 @@ const isAuth = require('../util/is-auth.js');
 
 subrouter.get('/inscribir-en-grupo', isAuth, gestionCicloController.getInsGrupo);
 
-subrouter.post('/selTera', isAuth, gestionCicloController.postSelTera);
-
-subrouter.post('/selProg', isAuth, gestionCicloController.postSelProg);
+subrouter.post('/selProg', isAuth, gestionCicloController.postGrupos);
 
 subrouter.get('/agregar-ciclo', isAuth, gestionCicloController.getAgrCiclo);
 

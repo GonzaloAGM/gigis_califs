@@ -54,14 +54,13 @@ exports.getAgrCiclo = (request,response,next) => {
     .catch((err) => console.log(err));
 };
 
-exports.postSelProg = (request,response,next) => {
+exports.postGrupos = (request,response,next) => {
     inputsCiclos.setProg(request.body.prograsSel);
-    console.log(inputsCiclos.getProg());
-};
-
-exports.postSelTera = (request,response,next) => {
     inputsCiclos.setGrup(request.body.terapAsig);
     console.log(inputsCiclos.getTer());
+    console.log(inputsCiclos.getProg());
+    console.log(request.body.fecha);
+    console.log(inputsCiclos.llenarTablas(request.body.fecha));
 };
 
 exports.postAgrCiclo = (request,response,next) => {

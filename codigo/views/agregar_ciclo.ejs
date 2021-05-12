@@ -4,7 +4,7 @@
 
 <div class="row">
     <br>
-  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onclick= "enviarJSONs()">
+  <form action="/gestionAdmin/gestionCiclos/agregar-ciclo" method="POST" onsubmit= "enviarJSONs()">
     <div class="row">
         <div class="input-field col s2 m1">
             <p><strong>Fecha:</strong></p>
@@ -102,8 +102,11 @@
     }
 
     const enviarJSONs = () => {
+        let fecha =  new Date (document.getElementById("from").value);
         let data = {
             prograsSel : prograsSel,
+            terapAsig: terapAsig,
+            fecha: fecha,
         };
 
         fetch('/gestionAdmin/gestionCiclos/selProg',{
@@ -114,16 +117,6 @@
             return result.json();
         });
 
-        data = {
-            terapAsig: terapAsig,
-        };
-
-        fetch('/gestionAdmin/gestionCiclos/selTera',{
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body:JSON.stringify(data)
-        }).then(result => {
-            return result.json();
-        });
+        
     }
 </script>

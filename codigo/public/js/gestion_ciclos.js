@@ -69,7 +69,7 @@ let nextWeekTo = new Date(date.setDate(nextWeekFrom.getDate() + 14));
 //Set min date for #from
 let minDateFrom = new Date(document.getElementById("fechaLimite").value);
 //Set min date for #to
-let minDateTo = new Date(date.setDate(nextWeekFrom.getDate() + 1));
+let minDateTo = new Date(document.getElementById("fechaLimite").value);
 
 
 // SET OPTIONS FOR FROM DATEPICKER
