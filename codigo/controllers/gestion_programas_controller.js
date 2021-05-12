@@ -38,6 +38,7 @@ exports.registrarObjetivo = (request, response, next) => {
 };
 
 exports.editarObjetivo  = (request, response, next) => {
+  
   Objetivo.actualizarObjetivo(request.body.idNivel, request.body.idObjetivo,request.body.descripcion)
     .then(() => {
       response.redirect('./' + request.body.idNivel);
@@ -56,6 +57,8 @@ exports.eliminarObjetivo  = (request, response, next) => {
 };
 
 exports.get = (request, response, next) => {
+  const error = request.session.error === undefined ? false : request.session.error;
+  const registro_exitoso = request.session.registro_exitoso === undefined ? false : request.session.registro_exitoso;
   Programa.fetchAll()
     .then(([programas, fieldData]) => {
       Nivel.fetchAll()
@@ -65,6 +68,8 @@ exports.get = (request, response, next) => {
             tituloBarra: 'Programas',
             programas: programas,
             niveles: niveles,
+            error: error,
+            registro_exitoso: registro_exitoso,
             backArrow: { display: 'block', link: '/gestionAdmin' },
             forwArrow: arrows[1],
           });
@@ -76,6 +81,8 @@ exports.get = (request, response, next) => {
     .catch((err) => {
       console.log(err);
     });
+    request.session.error = undefined;
+    request.session.registro_exitoso = undefined;
 };
 
 exports.postNuevoPrograma = (request, response, next) => {
@@ -87,29 +94,59 @@ exports.postNuevoPrograma = (request, response, next) => {
           const nivel = new Nivel(request.body.nivelBase, rows[0].idPrograma);
           nivel.save()
             .then(() => {
+              request.session.registro_exitoso = 'El programa fue registrado correctamente.'
               response.redirect('/gestionAdmin/gestionProgramas');
             })
             .catch((err) => {
               console.log(err);
+              response.redirect('/gestionAdmin/gestionProgramas');
             });
         })
         .catch((err) => {
           console.log(err);
+          response.redirect('/gestionAdmin/gestionProgramas');
         });
     })
     .catch((err) => {
+      request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
       console.log(err);
+      response.redirect('/gestionAdmin/gestionProgramas');
     });
-  console.log('Accion post en gestionProgramas');
 };
 
 exports.editarPrograma  = (request, response, next) => {
-  Programa.editarPrograma(request.body.idPrograma, request.body.nombrePrograma, request.file.path)
-    .then(() => {
-      response.redirect('./')
-    }).catch((err) => {
-      console.log(err);
-    });
+   if(request.body.enImagen === 'on' && request.body.enNombre === 'on'){
+      Programa.editarPrograma(request.body.idPrograma, request.body.nombrePrograma, request.file.path)
+      .then(() => {
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   } else if (request.body.enImagen === undefined && request.body.enNombre === 'on'){
+      Programa.editarProgramaSinImagen(request.body.idPrograma, request.body.nombrePrograma)
+      .then(() => {
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   } else if (request.body.enImagen === 'on' && request.body.enNombre === undefined) {
+      Programa.editarProgramaSinTitulo(request.body.idPrograma, request.file.path)
+      .then(() => {
+        console.log('Entre al tercer if');
+        request.session.registro_exitoso = 'El programa se actualizó correctamente.'
+        response.redirect('/gestionAdmin/gestionProgramas')
+      }).catch((err) => {
+        request.session.error = "Ya existe un programa registrado con el nombre que ingresaste.";
+        console.log(err);
+        response.redirect('/gestionAdmin/gestionProgramas')
+      });
+   }
 }
 
 exports.agregarNivel = (request, response, next) => {

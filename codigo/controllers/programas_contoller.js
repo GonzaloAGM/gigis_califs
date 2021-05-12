@@ -33,10 +33,6 @@ exports.getProgramas = (request, response, next) => {
 };
 
 exports.objetivosParticipantes = (request, response, next) => {
-  console.log("Peticion asincrona recibida");
-  console.log(request.body.grupo_id);
-  console.log(request.body.login_participante);
-
   Participante_Grupo_Objetivo.fetchObjetivosPorParticipante(request.body.grupo_id,request.body.login_participante)
     .then(([objetivos, fieldData]) => {
       Grupo.fetchIdPrograma(request.body.grupo_id)
@@ -55,15 +51,9 @@ exports.objetivosParticipantes = (request, response, next) => {
         console.log(err);
         return response.status(500).json({message: "Internal Server Error"});
     })
-
-  //response.status(200).json({message: "respuesta asincrona"});
-
 };
 
 exports.registroPuntajes = (request, response, next) => {
-  console.log("Peticion asincrona recibida");
-  console.log(request.body[0].login);
-
   for (participante of request.body){
     Participante_Grupo_Objetivo.ActualizarPuntajes(participante.login, participante.idGrupo, participante.idObjetivo, participante.pInicial, participante.pFinal)
       .then(() =>{

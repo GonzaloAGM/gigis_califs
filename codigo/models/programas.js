@@ -47,5 +47,13 @@ module.exports = class Programas {
     static editarPrograma(idPrograma, nombrePrograma, dirImagen) {
         return db.execute('UPDATE programas SET nombrePrograma=?,dirImagen=? WHERE idPrograma=?', [nombrePrograma, dirImagen, idPrograma])
     }
+
+    static editarProgramaSinImagen(idPrograma, nombrePrograma) {
+        return db.execute('UPDATE programas SET nombrePrograma=? WHERE idPrograma=?', [nombrePrograma, idPrograma])
+    }
+
+    static editarProgramaSinTitulo(idPrograma, dirImagen) {
+        return db.execute('UPDATE programas SET dirImagen=? WHERE idPrograma=?', [dirImagen, idPrograma])
+    }
 }
 

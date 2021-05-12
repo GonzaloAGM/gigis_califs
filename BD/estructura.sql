@@ -233,6 +233,9 @@ ALTER TABLE `ciclos`
 ADD CONSTRAINT `CK_fechaInicial_vs_fechaFinal`
 CHECK (fechaInicial < fechaFinal);
 
+ALTER TABLE programas 
+ADD UNIQUE `nombre_unico` (`nombrePrograma`);
+
 CREATE VIEW CalifDatos AS (SELECT
     Punt.login,
     U.nombreUsuario,
