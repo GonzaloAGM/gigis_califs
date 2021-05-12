@@ -3,10 +3,9 @@ const subrouter = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
 
-subrouter.use(bodyParser.urlencoded({ extended: false }))
-subrouter.use(express.static(path.join(__dirname,'..', 'public')));
+subrouter.use(bodyParser.urlencoded({ extended: false }));
 
-const gestionCicloController = require('../controllers/gestion_ciclos_controller')
+const gestionCicloController = require('../controllers/gestion_ciclos_controller');
 const isAuth = require('../util/is-auth.js');
 
 subrouter.get('/inscribir-en-grupo', isAuth, gestionCicloController.getInsGrupo);

@@ -3,10 +3,9 @@ const subrouter = express.Router();
 const path = require('path');
 const bodyParser = require('body-parser');
 
-subrouter.use(bodyParser.urlencoded({ extended: false }))
-subrouter.use(express.static(path.join(__dirname,'..', 'public')));
+subrouter.use(bodyParser.urlencoded({ extended: false }));
 
-const gestionParticController = require('../controllers/gestion_participantes_controller')
+const gestionParticController = require('../controllers/gestion_participantes_controller');
 const isAuth = require('../util/is-auth.js');
 
 subrouter.get('/editar-participante', isAuth, gestionParticController.getEditPartic);

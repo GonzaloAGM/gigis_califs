@@ -25,10 +25,8 @@ const fileStorage = multer.diskStorage({
 subrouter.use(multer({ storage: fileStorage}).single('imagen')); 
 
 subrouter.use(bodyParser.urlencoded({ extended: false }));
-subrouter.use(express.static(path.join(__dirname,'..', 'public')));
-subrouter.use('/uploads/imagenes', express.static(path.join(__dirname,'..', 'uploads')));
 
-const gestionPrograController = require('../controllers/gestion_programas_controller')
+const gestionPrograController = require('../controllers/gestion_programas_controller');
 const isAuth = require('../util/is-auth.js');
 
 subrouter.get('/gestion-nivel-objetivos',isAuth, gestionPrograController.getGpObjetivos);
