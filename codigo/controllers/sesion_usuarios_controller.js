@@ -9,10 +9,10 @@ exports.logout = (request, response, next) => {
 
 exports.getlogin = (request, response, next) => {
     response.render('login', {
-        tituloDeHeader: 'Login',
+        tituloDeHeader: 'Ingresar',
         link: "https://dsagr.org/wp-content/uploads/2016/03/iStock_000066042813_Full.jpg",
         error: request.session.error === undefined ? false : request.session.error,
-        titulo: 'Login'
+        imagen: '/media/gigis_logo_escrito.png'
     });
 };
 
@@ -40,7 +40,7 @@ exports.postlogin = (request, response, next) => {
         })
         .catch(err => {
             console.log(err);
-            request.session.error = 'Error de Comunicacion con el Server';
+            request.session.error = 'Usuario y/o contraseña incorrectos';
             response.redirect('login');
         });
 };
