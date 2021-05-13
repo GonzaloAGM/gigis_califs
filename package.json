@@ -4,7 +4,7 @@
   "description": "Sitio web y base de datos para Gigis Playhouse Mexico",
   "main": "app.js",
   "scripts": {
-    "start":"node .",
+    "start": "node .",
     "startdev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
